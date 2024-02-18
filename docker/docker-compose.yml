@@ -1,0 +1,21 @@
+version: "3.8"
+
+name: formbase
+services:
+  database:
+    image: postgres:15
+    container_name: formbase-database
+    environment:
+      - POSTGRES_USER=formbase
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=formbase
+    ports:
+      - "54321:5432"
+
+  inbucket:
+    image: inbucket/inbucket
+    container_name: formbase-mailserver
+    ports:
+      - 9000:9000
+      - 2500:2500
+      - 1100:1100
