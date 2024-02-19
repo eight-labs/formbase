@@ -30,7 +30,7 @@ export function Posts({ promises }: PostsProps) {
 
       <div className="flex flex-col space-y-2">
         {forms.map((form) => (
-          <Link href={`/form/${form.id}`}>
+          <Link href={`/form/${form.id}`} key={form.id}>
             {/* <pre>{JSON.stringify(form, null, 2)}</pre> */}
             Name: {form.title}
           </Link>
