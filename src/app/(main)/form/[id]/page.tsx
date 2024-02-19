@@ -1,4 +1,4 @@
-import { api } from "@/trpc/server";
+import { api } from "~/trpc/server";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formSubmissions = await api.formData.all.query({ formId: params.id });

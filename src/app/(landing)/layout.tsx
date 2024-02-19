@@ -6,7 +6,7 @@ import { Footer } from "./_components/footer";
 
 export const metadata: Metadata = {
   title: APP_TITLE,
-  description: "A Next.js starter with T3 stack and Lucia auth.",
+  description: "Manage forms with ease",
 };
 
 function LandingPageLayout({ children }: { children: ReactNode }) {
@@ -14,7 +14,6 @@ function LandingPageLayout({ children }: { children: ReactNode }) {
     <>
       <Header />
       {children}
-      <div className="h-20"></div>
       <Footer />
     </>
   );

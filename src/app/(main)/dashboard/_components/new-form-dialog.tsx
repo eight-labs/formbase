@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,8 +12,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+} from "~/components/ui/dialog";
+import { Input } from "~/components/ui/input";
 import {
   Form,
   FormControl,
@@ -21,12 +21,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "~/components/ui/form";
 import { toast } from "sonner";
 import React, { useState } from "react";
-import { api } from "@/trpc/react";
+import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
-import { RouterOutputs } from "@/trpc/shared";
+import { RouterOutputs } from "~/trpc/shared";
 
 type CreateFormDialogProps = {
   setOptimisticForms: (action: {

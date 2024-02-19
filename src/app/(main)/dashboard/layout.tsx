@@ -3,11 +3,13 @@ import { redirects } from "~/lib/constants";
 import { redirect } from "next/navigation";
 import * as React from "react";
 
-interface Props {
+type DashboardLayoutProps = {
   children: React.ReactNode;
-}
+};
 
-export default async function DashboardLayout({ children }: Props) {
+export default async function DashboardLayout({
+  children,
+}: DashboardLayoutProps) {
   const { user } = await validateRequest();
 
   if (!user) redirect(redirects.toLogin);
