@@ -41,7 +41,7 @@ export const formRouter = createTRPCRouter({
     .input(
       z.object({
         title: z.string().min(3).max(255),
-        description: z.string().min(3).max(255),
+        description: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -99,7 +99,7 @@ export const formRouter = createTRPCRouter({
         where: (table, { eq }) => eq(table.userId, ctx.user.id),
         offset: (input.page - 1) * input.perPage,
         limit: input.perPage,
-        orderBy: (table, { desc }) => desc(table.createdAt),
+        // orderBy: (table, { desc }) => desc(table.createdAt),
         columns: {
           id: true,
           title: true,

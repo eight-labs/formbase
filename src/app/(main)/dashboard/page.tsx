@@ -31,15 +31,15 @@ export default async function DashboardPage({ searchParams }: DashboardProps) {
    * @see https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#parallel-data-fetching
    */
   const promises = Promise.all([
-    api.post.myPosts.query({ page }),
+    api.form.userForms.query({}),
     api.stripe.getPlan.query(),
   ]);
 
   return (
     <div className="py-10 md:py-8">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold md:text-4xl">Posts</h1>
-        <p className="text-sm text-muted-foreground">Manage your posts here</p>
+        <h1 className="text-3xl font-bold md:text-4xl">Forms</h1>
+        <p className="text-sm text-muted-foreground">Manage your forms here</p>
       </div>
       <React.Suspense fallback={<PostsSkeleton />}>
         <Posts promises={promises} />
