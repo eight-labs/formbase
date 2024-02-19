@@ -104,6 +104,7 @@ export const forms = createTable(
     description: varchar("description", { length: 255 }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at"),
+    returnUrl: varchar("return_url", { length: 255 }),
   },
   (t) => ({
     userIdx: index("form_user_idx").on(t.userId),

@@ -39,6 +39,7 @@ const FormSchema = z.object({
   name: z.string().min(1, {
     message: "Form title is required.",
   }),
+  returnUrl: z.string().optional(),
 });
 
 export function CreateFormDialog() {
@@ -47,13 +48,13 @@ export function CreateFormDialog() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
+      returnUrl: "",
     },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [isCreatePending, startCreateTransaction] = React.useTransition();
 
-  const { mutateAsync: createNewForm, isLoading: isCreatingNewForm } =
-    api.form.create.useMutation();
+  const { mutateAsync: createNewForm } = api.form.create.useMutation();
 
   const createPost = (data: z.infer<typeof FormSchema>) => {
     startCreateTransaction(async () => {
@@ -63,12 +64,11 @@ export function CreateFormDialog() {
         },
         {
           onSuccess: ({ id }) => {
-            toast.success("Form created");
+            toast.success("New form created");
             router.refresh();
-            // This is a workaround for a bug in navigation because of router.refresh()
+
             setTimeout(() => {
-              //   router.push(`/form/${id}`);
-              router.push(`/dashboard`);
+              router.push(`/form/${id}`);
             }, 100);
           },
           onError: () => {
@@ -107,6 +107,20 @@ export function CreateFormDialog() {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input placeholder="A new form" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="returnUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Return URL</FormLabel>
+                  <FormControl>
+                    <Input placeholder="http://..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -2,28 +2,16 @@ import { env } from "~/env";
 import { api } from "~/trpc/server";
 import { type Metadata } from "next";
 import * as React from "react";
-import { z } from "zod";
-import { Posts } from "./_components/posts";
+import { Forms } from "./_components/forms";
 import { PostsSkeleton } from "./_components/posts-skeleton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-  title: "Posts",
-  description: "Manage your posts here",
+  title: "Forms",
+  description: "Manage your forms here",
 };
 
-type DashboardProps = {
-  searchParams: Record<string, string | string[] | undefined>;
-};
-
-const schema = z.object({
-  page: z.coerce.number().default(1).optional(),
-  perPage: z.coerce.number().default(12).optional(),
-});
-
-export default async function DashboardPage({ searchParams }: DashboardProps) {
-  const { page } = schema.parse(searchParams);
-
+export default async function DashboardPage() {
   /**
    * Passing multiple promises to `Promise.all` to fetch data in parallel to prevent waterfall requests.
    * Passing promises to the `Posts` component to make them hot promises (they can run without being awaited) to prevent waterfall requests.
@@ -42,7 +30,7 @@ export default async function DashboardPage({ searchParams }: DashboardProps) {
         <p className="text-sm text-muted-foreground">Manage your forms here</p>
       </div>
       <React.Suspense fallback={<PostsSkeleton />}>
-        <Posts promises={promises} />
+        <Forms promises={promises} />
       </React.Suspense>
     </div>
   );

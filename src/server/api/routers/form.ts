@@ -111,4 +111,19 @@ export const formRouter = createTRPCRouter({
         },
       }),
     ),
+
+  hasReturiningUrl: protectedProcedure
+    .input(
+      z.object({
+        formId: z.string(),
+      }),
+    )
+    .query(({ ctx, input }) =>
+      ctx.db.query.forms.findFirst({
+        where: (table, { eq }) => eq(table.id, input.formId),
+        columns: {
+          returnUrl: true,
+        },
+      }),
+    ),
 });

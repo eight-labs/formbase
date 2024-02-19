@@ -21,5 +21,5 @@ export async function POST(
     createdAt: new Date(),
   });
 
-  return Response.json({ formData });
+  return Response.redirect(`http://localhost:3000/s/${formId}`, 303);
 }

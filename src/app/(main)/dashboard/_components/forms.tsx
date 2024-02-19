@@ -5,13 +5,13 @@ import * as React from "react";
 import { CreateFormDialog } from "./new-form-dialog";
 import Link from "next/link";
 
-interface PostsProps {
+interface FormsProps {
   promises: Promise<
     [RouterOutputs["form"]["userForms"], RouterOutputs["stripe"]["getPlan"]]
   >;
 }
 
-export function Posts({ promises }: PostsProps) {
+export function Forms({ promises }: FormsProps) {
   /**
    * use is a React Hook that lets you read the value of a resource like a Promise or context.
    * @see https://react.dev/reference/react/use
