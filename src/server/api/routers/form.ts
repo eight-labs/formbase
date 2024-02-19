@@ -40,8 +40,9 @@ export const formRouter = createTRPCRouter({
   create: protectedProcedure
     .input(
       z.object({
-        title: z.string().min(3).max(255),
+        title: z.string().min(1).max(255),
         description: z.string().optional(),
+        returningUrl: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -53,6 +54,7 @@ export const formRouter = createTRPCRouter({
         title: input.title,
         description: input.description,
         updatedAt: new Date(),
+        returnUrl: input.returningUrl,
       });
 
       return { id };

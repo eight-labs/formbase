@@ -40,6 +40,7 @@ const FormSchema = z.object({
     message: "Form title is required.",
   }),
   returnUrl: z.string().optional(),
+  description: z.string().optional(),
 });
 
 export function CreateFormDialog() {
@@ -48,6 +49,7 @@ export function CreateFormDialog() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
+      description: "",
       returnUrl: "",
     },
   });
@@ -61,6 +63,8 @@ export function CreateFormDialog() {
       await createNewForm(
         {
           title: data.name,
+          description: data.description,
+          returningUrl: data.returnUrl,
         },
         {
           onSuccess: ({ id }) => {
@@ -106,7 +110,21 @@ export function CreateFormDialog() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="A new form" {...field} />
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
