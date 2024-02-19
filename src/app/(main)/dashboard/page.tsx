@@ -12,17 +12,17 @@ export const metadata: Metadata = {
   description: "Manage your posts here",
 };
 
-interface Props {
+type DashboardProps = {
   searchParams: Record<string, string | string[] | undefined>;
-}
+};
 
-const schmea = z.object({
+const schema = z.object({
   page: z.coerce.number().default(1).optional(),
   perPage: z.coerce.number().default(12).optional(),
 });
 
-export default async function DashboardPage({ searchParams }: Props) {
-  const { page } = schmea.parse(searchParams);
+export default async function DashboardPage({ searchParams }: DashboardProps) {
+  const { page } = schema.parse(searchParams);
 
   /**
    * Passing multiple promises to `Promise.all` to fetch data in parallel to prevent waterfall requests.

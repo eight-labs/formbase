@@ -38,7 +38,8 @@
     "arctic": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "drizzle-orm": "^0.28.5",
+    "drizzle-orm": "^0.29.3",
+    "json-to-zod": "^1.1.2",
     "lucia": "3.0.0",
     "next": "^14.1.0",
     "next-themes": "^0.2.1",
@@ -58,7 +59,8 @@
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.8.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zod-form-data": "^2.0.2"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.3",
@@ -73,7 +75,7 @@
     "@typescript-eslint/parser": "^6.11.0",
     "autoprefixer": "^10.4.14",
     "dotenv-cli": "^7.3.0",
-    "drizzle-kit": "^0.19.3",
+    "drizzle-kit": "latest",
     "eslint": "^8.54.0",
     "mysql2": "^3.6.1",
     "postcss": "^8.4.31",

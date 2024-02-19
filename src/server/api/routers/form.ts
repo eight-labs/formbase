@@ -1,0 +1,113 @@
+import { forms, posts } from "~/server/db/schema";
+import { eq } from "drizzle-orm";
+import { generateId } from "lucia";
+import { z } from "zod";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
+
+export const formRouter = createTRPCRouter({
+  list: protectedProcedure
+    .input(
+      z.object({
+        page: z.number().int().default(1),
+        perPage: z.number().int().default(12),
+      }),
+    )
+    .query(({ ctx, input }) =>
+      ctx.db.query.forms.findMany({
+        offset: (input.page - 1) * input.perPage,
+        limit: input.perPage,
+        orderBy: (table, { desc }) => desc(table.createdAt),
+        columns: {
+          id: true,
+          title: true,
+          description: true,
+          createdAt: true,
+        },
+        with: { user: { columns: { email: true } } },
+      }),
+    ),
+
+  get: protectedProcedure
+    .input(z.object({ formId: z.string() }))
+    .query(({ ctx, input }) =>
+      ctx.db.query.forms.findFirst({
+        where: (table, { eq, and }) =>
+          and(eq(table.id, input.formId), eq(table.userId, ctx.user.id)),
+        with: { user: { columns: { email: true } } },
+      }),
+    ),
+
+  create: protectedProcedure
+    .input(
+      z.object({
+        title: z.string().min(3).max(255),
+        description: z.string().min(3).max(255),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const id = generateId(15);
+
+      await ctx.db.insert(forms).values({
+        id,
+        userId: ctx.user.id,
+        title: input.title,
+        description: input.description,
+        updatedAt: new Date(),
+        data: {},
+      });
+
+      return { id };
+    }),
+
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        title: z.string().min(3).max(255),
+        description: z.string().min(3).max(255),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .update(forms)
+        .set({
+          title: input.title,
+          description: input.description,
+          updatedAt: new Date(),
+        })
+        .where(eq(posts.id, input.id));
+    }),
+
+  delete: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.delete(forms).where(eq(posts.id, input.id));
+    }),
+
+  userForms: protectedProcedure
+    .input(
+      z.object({
+        page: z.number().int().default(1),
+        perPage: z.number().int().default(12),
+      }),
+    )
+    .query(({ ctx, input }) =>
+      ctx.db.query.posts.findMany({
+        where: (table, { eq }) => eq(table.userId, ctx.user.id),
+        offset: (input.page - 1) * input.perPage,
+        limit: input.perPage,
+        orderBy: (table, { desc }) => desc(table.createdAt),
+        columns: {
+          id: true,
+          title: true,
+          excerpt: true,
+          status: true,
+          createdAt: true,
+        },
+      }),
+    ),
+});

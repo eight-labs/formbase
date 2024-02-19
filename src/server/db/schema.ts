@@ -1,7 +1,7 @@
 import {
   boolean,
-  date,
   index,
+  json,
   serial,
   text,
   timestamp,
@@ -14,7 +14,7 @@ export const users = createTable(
   "users",
   {
     id: varchar("id", { length: 21 }).primaryKey(),
-    githubId: varchar("GITHUB_id", { length: 255 }).unique(),
+    githubId: varchar("github_id", { length: 255 }).unique(),
     email: varchar("email", { length: 255 }).unique().notNull(),
     emailVerified: boolean("email_verified").default(false).notNull(),
     hashedPassword: varchar("hashed_password", { length: 255 }),
@@ -28,7 +28,7 @@ export const users = createTable(
   },
   (t) => ({
     emailIdx: index("email_idx").on(t.email),
-    githubIdx: index("GITHUB_idx").on(t.githubId),
+    githubIdx: index("github_idx").on(t.githubId),
   }),
 );
 
@@ -43,7 +43,7 @@ export const sessions = createTable(
     expiresAt: timestamp("expires_at").notNull(),
   },
   (t) => ({
-    userIdx: index("user_idx").on(t.userId),
+    userIdx: index("sessions_user_idx").on(t.userId),
   }),
 );
 
@@ -57,8 +57,8 @@ export const emailVerificationCodes = createTable(
     expiresAt: timestamp("expires_at").notNull(),
   },
   (t) => ({
-    userIdx: index("user_idx").on(t.userId),
-    emailIdx: index("email_idx").on(t.email),
+    userIdx: index("email_verif_user_idx").on(t.userId),
+    emailIdx: index("email_verif_idx").on(t.email),
   }),
 );
 
@@ -70,7 +70,7 @@ export const passwordResetTokens = createTable(
     expiresAt: timestamp("expires_at").notNull(),
   },
   (t) => ({
-    userIdx: index("user_idx").on(t.userId),
+    userIdx: index("password_reset_user_idx").on(t.userId),
   }),
 );
 
@@ -90,10 +90,60 @@ export const posts = createTable(
     updatedAt: timestamp("updated_at"),
   },
   (t) => ({
-    userIdx: index("user_idx").on(t.userId),
+    userIdx: index("posts_user_idx").on(t.userId),
     createdAtIdx: index("post_created_at_idx").on(t.createdAt),
   }),
 );
+
+export const forms = createTable(
+  "forms",
+  {
+    id: varchar("id", { length: 15 }).primaryKey(),
+    userId: varchar("user_id", { length: 255 }).notNull(),
+    title: varchar("title", { length: 255 }).notNull(),
+    description: varchar("description", { length: 255 }),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at"),
+  },
+  (t) => ({
+    userIdx: index("form_user_idx").on(t.userId),
+    createdAtIdx: index("form_created_at_idx").on(t.createdAt),
+  }),
+);
+
+export const formDatas = createTable(
+  "form_datas",
+  {
+    id: varchar("id", { length: 15 }).primaryKey(),
+    formId: varchar("form_id", { length: 15 }).notNull(),
+    data: json("data").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    formIdx: index("form_idx").on(t.formId),
+    createdAtIdx: index("form_data_created_at_idx").on(t.createdAt),
+  }),
+);
+
+export const userRelations = relations(users, ({ many }) => ({
+  forms: many(forms),
+  posts: many(posts),
+}));
+
+export const formRelations = relations(forms, ({ one, many }) => ({
+  user: one(users, {
+    fields: [forms.userId],
+    references: [users.id],
+  }),
+  formData: many(formDatas),
+}));
+
+export const formDataRelations = relations(formDatas, ({ one }) => ({
+  form: one(forms, {
+    fields: [formDatas.formId],
+    references: [forms.id],
+  }),
+}));
 
 export const postRelations = relations(posts, ({ one }) => ({
   user: one(users, {
