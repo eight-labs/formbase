@@ -53,7 +53,6 @@ export const formRouter = createTRPCRouter({
         title: input.title,
         description: input.description,
         updatedAt: new Date(),
-        data: {},
       });
 
       return { id };
@@ -96,7 +95,7 @@ export const formRouter = createTRPCRouter({
       }),
     )
     .query(({ ctx, input }) =>
-      ctx.db.query.posts.findMany({
+      ctx.db.query.forms.findMany({
         where: (table, { eq }) => eq(table.userId, ctx.user.id),
         offset: (input.page - 1) * input.perPage,
         limit: input.perPage,
@@ -104,9 +103,11 @@ export const formRouter = createTRPCRouter({
         columns: {
           id: true,
           title: true,
-          excerpt: true,
-          status: true,
+          description: true,
           createdAt: true,
+        },
+        with: {
+          formData: true,
         },
       }),
     ),
