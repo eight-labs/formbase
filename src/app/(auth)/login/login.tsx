@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useFormState } from "react-dom";
-import { Input } from "~/components/ui/input";
+import { GitHubLogoIcon } from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -32,7 +32,7 @@ export function Login() {
       <CardContent>
         <Button variant="outline" className="w-full" asChild>
           <Link href="/login/github">
-            <githubLogoIcon className="mr-2 h-5 w-5" />
+            <GitHubLogoIcon className="mr-2 h-5 w-5" />
             Log in with github
           </Link>
         </Button>

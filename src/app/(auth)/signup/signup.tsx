@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import Link from "next/link";
+import { GitHubLogoIcon } from "~/components/icons";
 import { PasswordInput } from "~/components/password-input";
 import { Button } from "~/components/ui/button";
 import {
@@ -30,7 +30,7 @@ export function Signup() {
       <CardContent>
         <Button variant="outline" className="w-full" asChild>
           <Link href="/login/github">
-            <githubLogoIcon className="mr-2 h-5 w-5" />
+            <GitHubLogoIcon className="mr-2 h-5 w-5" />
             Sign up with github
           </Link>
         </Button>
