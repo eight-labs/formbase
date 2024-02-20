@@ -1,8 +1,9 @@
-import { env } from "~/env";
-import { api } from "~/trpc/server";
 import { type Metadata } from "next";
 import * as React from "react";
+import { env } from "~/env";
+import { api } from "~/trpc/server";
 import { Forms } from "./_components/forms";
+import { CreateFormDialog } from "./_components/new-form-dialog";
 import { PostsSkeleton } from "./_components/posts-skeleton";
 
 export const metadata: Metadata = {
@@ -25,9 +26,14 @@ export default async function DashboardPage() {
 
   return (
     <div className="py-10 md:py-8">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold md:text-4xl">Forms</h1>
-        <p className="text-sm text-muted-foreground">Manage your forms here</p>
+      <div className="mb-10 flex w-full items-center justify-between">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-3xl font-bold md:text-4xl">Forms</h1>
+          <p className="text-sm text-muted-foreground">
+            Manage your forms here
+          </p>
+        </div>
+        <CreateFormDialog />
       </div>
       <React.Suspense fallback={<PostsSkeleton />}>
         <Forms promises={promises} />
