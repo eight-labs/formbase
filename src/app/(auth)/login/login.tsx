@@ -12,11 +12,11 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { PasswordInput } from "~/components/password-input";
-import { githubLogoIcon } from "~/components/icons";
 import { APP_TITLE } from "~/lib/constants";
 import { login } from "~/lib/auth/actions";
 import { Label } from "~/components/ui/label";
 import { SubmitButton } from "~/components/submit-button";
+import { Input } from "@/components/ui/input";
 
 export function Login() {
   const [state, formAction] = useFormState(login, null);
