@@ -13,11 +13,11 @@ import { type RouterOutputs } from "@/trpc/shared";
 
 import { DeleteFormDialog } from "./delete-form-dialog";
 
-export function FormCard({
-  form,
-}: {
+type FormCardProp = {
   form: RouterOutputs["form"]["userForms"][number];
-}) {
+};
+
+export function FormCard({ form }: FormCardProp) {
   const handleCopyAction = async () => {
     await navigator.clipboard.writeText(form.id);
     toast("Copied to clipboard", {
@@ -39,7 +39,7 @@ export function FormCard({
               />
             </div>
           </div>
-          <DeleteFormDialog />
+          <DeleteFormDialog formId={form.id} />
         </div>
       </CardHeader>
       <CardContent>
