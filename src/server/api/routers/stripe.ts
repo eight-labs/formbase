@@ -28,7 +28,7 @@ export const stripeRouter = createTRPCRouter({
               ? formatPrice((proPrice.unit_amount ?? 0) / 100, {
                   currency: proPrice.currency,
                 })
-              : formatPrice(0 / 100, { currency: proPrice.currency }),
+              : formatPrice(0, { currency: proPrice.currency }),
         };
       });
     } catch (err) {

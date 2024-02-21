@@ -1,7 +1,7 @@
 import { api } from "~/trpc/server";
-import { Copy } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SubmissionsTable } from "./submissions-table";
+import CopyFormId from "./copy-button";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
@@ -15,12 +15,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
       <div>
         <h1 className="text-3xl font-medium">{form?.title}</h1>
 
-        <div className="mt-2 flex items-center gap-2">
-          <span className="inline-flex items-center rounded-lg bg-muted px-2 py-0.5 text-sm font-medium">
-            {formId}
-          </span>
-          <Copy className="h-4 w-4 text-muted-foreground" />
-        </div>
+        <CopyFormId formId={formId} />
       </div>
 
       <Tabs defaultValue="submissions">

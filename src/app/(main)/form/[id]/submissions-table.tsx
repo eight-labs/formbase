@@ -56,12 +56,14 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
+  if (submissions.length < 1) {
+    return <div>No submissions have been collected for this form!</div>;
+  }
+
   const columns: ColumnDef<FormData["data"]>[] = [
     {
       id: "select",
       header: ({ table }) => {
-        console.log(table.getIsAllPageRowsSelected());
-
         return (
           <Checkbox
             checked={
