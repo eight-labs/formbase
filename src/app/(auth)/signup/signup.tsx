@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useFormState } from "react-dom";
 import { GitHubLogoIcon } from "~/components/icons";
 import { PasswordInput } from "~/components/password-input";
+import { SubmitButton } from "~/components/submit-button";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -12,11 +14,9 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
-import { githubLogoIcon } from "~/components/icons";
-import { APP_TITLE } from "~/lib/constants";
 import { Label } from "~/components/ui/label";
 import { signup } from "~/lib/auth/actions";
-import { SubmitButton } from "~/components/submit-button";
+import { APP_TITLE } from "~/lib/constants";
 
 export function Signup() {
   const [state, formAction] = useFormState(signup, null);
