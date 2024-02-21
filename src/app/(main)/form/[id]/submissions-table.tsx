@@ -7,11 +7,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  CaretSortIcon,
-  ChevronDownIcon,
-  DotsHorizontalIcon,
-} from "@radix-ui/react-icons";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import {
   flexRender,
   getCoreRowModel,
@@ -31,7 +27,6 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -46,8 +41,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { FormData } from "@/server/db/schema";
 
-export function SubmissionsTable({ submissions }: any) {
+type SubmissionsTableProps = {
+  submissions: FormData[];
+};
+
+export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -56,21 +56,25 @@ export function SubmissionsTable({ submissions }: any) {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<FormData["data"]>[] = [
     {
       id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value: any) =>
-            table.toggleAllPageRowsSelected(!!value)
-          }
-          aria-label="Select all"
-        />
-      ),
+      header: ({ table }) => {
+        console.log(table.getIsAllPageRowsSelected());
+
+        return (
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+          />
+        );
+      },
       cell: ({ row }) => (
         <Checkbox
           checked={row.getIsSelected()}
@@ -82,7 +86,7 @@ export function SubmissionsTable({ submissions }: any) {
       enableHiding: false,
     },
 
-    ...Object.keys(submissions[0].data).map((submission: any) => {
+    ...Object.keys(submissions[0]?.data as object).map((submission: any) => {
       return {
         accessorKey: submission,
         header: () => {
@@ -103,8 +107,6 @@ export function SubmissionsTable({ submissions }: any) {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const payment = row.original;
-
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -115,11 +117,7 @@ export function SubmissionsTable({ submissions }: any) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(payment.id)}
-              >
-                Copy payment ID
-              </DropdownMenuItem>
+              <DropdownMenuItem>Copy submission ID</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>View customer</DropdownMenuItem>
               <DropdownMenuItem>View payment details</DropdownMenuItem>
