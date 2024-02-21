@@ -83,12 +83,12 @@ const features = [
 const HomePage = () => {
   return (
     <>
-      <section className="mx-auto grid min-h-[calc(100vh-80px)] items-center">
+      <section className="mx-auto grid min-h-[calc(100vh-75px)] items-center">
         <div className="p-4">
           <h1 className="text-balance text-center text-3xl font-bold md:text-4xl lg:text-5xl">
             Formbase
           </h1>
-          <p className="mb-10 mt-4 text-balance text-center text-muted-foreground md:text-lg lg:text-xl">
+          <p className="mb-8 mt-4 text-balance text-center text-muted-foreground md:text-lg lg:text-xl">
             Simplify the process of collecting and managing form submissions
           </p>
 
@@ -105,7 +105,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className="min-h-[calc(100vh-75px)]">
         <div className="container mx-auto lg:max-w-screen-lg">
           <h1 className="mb-4 text-center text-3xl font-bold md:text-4xl lg:text-5xl">
             <a id="features"></a> Features
