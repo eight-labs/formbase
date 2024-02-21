@@ -70,7 +70,7 @@ export function FormCard({ form }: FormCardProp) {
           </p>
         </div>
         <Link
-          href={`/form/s/${form.id}`}
+          href={`/form/${form.id}`}
           className="text-sm underline underline-offset-2"
         >
           View all
