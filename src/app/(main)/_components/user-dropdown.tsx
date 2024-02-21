@@ -5,7 +5,11 @@ import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
 } from "~/components/ui/dropdown-menu";
 import {
   DropdownMenuTrigger,
@@ -27,6 +31,7 @@ import { ExclamationTriangleIcon } from "~/components/icons";
 import { logout } from "~/lib/auth/actions";
 import { APP_TITLE } from "~/lib/constants";
 import { toast } from "sonner";
+import { useTheme } from "next-themes";
 
 export const UserDropdown = ({
   email,
@@ -37,6 +42,8 @@ export const UserDropdown = ({
   avatar?: string | null;
   className?: string;
 }) => {
+  const { theme, setTheme } = useTheme();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={className}>
@@ -74,6 +81,23 @@ export const UserDropdown = ({
             <Link href="/dashboard/settings">Settings</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem onClick={() => setTheme("light")}>
+                Light
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("dark")}>
+                Dark
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("system")}>
+                System
+              </DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
         <DropdownMenuSeparator />
 
         <DropdownMenuLabel className="p-0">
