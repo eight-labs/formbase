@@ -155,3 +155,9 @@ export const postRelations = relations(posts, ({ one }) => ({
 
 export type Post = typeof posts.$inferSelect;
 export type NewPost = typeof posts.$inferInsert;
+
+export type FormData = typeof formDatas.$inferSelect;
+export type NewFormData = typeof formDatas.$inferInsert;
+
+export type Form = typeof forms.$inferSelect;
+export type NewForm = typeof forms.$inferInsert;
