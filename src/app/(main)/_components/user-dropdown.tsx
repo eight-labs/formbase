@@ -42,7 +42,7 @@ export const UserDropdown = ({
   avatar?: string | null;
   className?: string;
 }) => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
