@@ -1,6 +1,4 @@
-import { CopyIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { toast } from "sonner";
 
 import {
   Card,
@@ -11,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { type RouterOutputs } from "@/trpc/shared";
 
+import { CopyButton } from "@/components/copy-button";
 import { DeleteFormDialog } from "./delete-form-dialog";
 
 type FormCardProp = {
@@ -18,13 +17,6 @@ type FormCardProp = {
 };
 
 export function FormCard({ form }: FormCardProp) {
-  const handleCopyAction = async () => {
-    await navigator.clipboard.writeText(form.id);
-    toast("Copied to clipboard", {
-      icon: <CopyIcon className="h-4 w-4" />,
-    });
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -33,10 +25,7 @@ export function FormCard({ form }: FormCardProp) {
             <CardTitle className="text-lg">{form.title}</CardTitle>
             <div className="flex items-center gap-2">
               <p className="text-sm text-muted-foreground">{form.id}</p>
-              <CopyIcon
-                className="h-4 w-4 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform"
-                onClick={handleCopyAction}
-              />
+              <CopyButton text={form.id} />
             </div>
           </div>
           <DeleteFormDialog formId={form.id} />
