@@ -8,10 +8,36 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { toast } from "sonner";
 
-export function DeleteFormDialog() {
+import { api } from "~/trpc/react";
+
+type DeleteFormDialogProps = {
+  formId: string;
+};
+
+export function DeleteFormDialog({ formId }: DeleteFormDialogProps) {
+  const [open, setOpen] = React.useState(false);
+
+  const router = useRouter();
+  const deleteFormMutation = api.form.delete.useMutation();
+
+  const handleDelete = async () => {
+    deleteFormMutation.mutate(
+      { id: formId },
+      {
+        onSuccess: () => {
+          router.refresh();
+          toast.success("Form deleted successfully");
+        },
+      },
+    );
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="group rounded-md bg-gray-100 p-2 hover:cursor-pointer dark:bg-gray-900">
           <TrashIcon className="h-4 w-4 duration-300 group-hover:text-red-500 dark:text-white" />
@@ -25,10 +51,18 @@ export function DeleteFormDialog() {
           </DialogDescription>
         </DialogHeader>
         <div className="mt-3 flex w-full gap-4">
-          <Button variant="outline" className="w-full">
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => setOpen(false)}
+          >
             Cancel
           </Button>
-          <Button variant="destructive" className="w-full">
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={handleDelete}
+          >
             Delete
           </Button>
         </div>
