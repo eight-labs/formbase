@@ -21,6 +21,7 @@ import {
 import {
   emailVerificationCodes,
   passwordResetTokens,
+  type User,
   users,
 } from "~/server/db/schema";
 import { sendMail } from "~/server/send-mail";
@@ -166,7 +167,7 @@ export async function resendVerificationEmail(): Promise<{
   error?: string;
   success?: boolean;
 }> {
-  const { user } = await validateRequest();
+  const { user } = (await validateRequest()) as { user: User | null };
   if (!user) {
     return redirect(redirects.toLogin);
   }
@@ -201,7 +202,7 @@ export async function verifyEmail(
   if (typeof code !== "string" || code.length !== 8) {
     return { error: "Invalid code" };
   }
-  const { user } = await validateRequest();
+  const { user } = (await validateRequest()) as { user: User | null };
   if (!user) {
     return redirect(redirects.toLogin);
   }

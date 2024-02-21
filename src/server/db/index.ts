@@ -24,7 +24,7 @@ if (env.NODE_ENV === "production") {
 
 export { db };
 
-export const luciaAdapter = new DrizzlePostgreSQLAdapter(
+export const adapter = new DrizzlePostgreSQLAdapter(
   db,
   schema.sessions,
   schema.users,

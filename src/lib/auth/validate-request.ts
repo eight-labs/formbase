@@ -1,7 +1,7 @@
 import { cache } from "react";
 import { cookies } from "next/headers";
-import type { Session, User } from "lucia";
 import { lucia } from "~/lib/auth";
+import type { User, Session } from "lucia";
 
 export const uncachedValidateRequest = async (): Promise<
   { user: User; session: Session } | { user: null; session: null }
@@ -32,6 +32,7 @@ export const uncachedValidateRequest = async (): Promise<
   } catch {
     console.error("Failed to set session cookie");
   }
+
   return result;
 };
 
