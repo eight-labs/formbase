@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { validateRequest } from "~/lib/auth/validate-request";
 import { VerifyCode } from "./verify-code";
 import { redirects } from "~/lib/constants";
+import type { User } from "@/server/db/schema";
 
 export const metadata = {
   title: "Verify Email",
@@ -16,7 +17,7 @@ export const metadata = {
 };
 
 export default async function ForgotPasswordPage() {
-  const { user } = await validateRequest();
+  const { user } = (await validateRequest()) as { user: User | null };
 
   if (!user) redirect(redirects.toLogin);
   if (user.emailVerified) redirect(redirects.afterVerify);

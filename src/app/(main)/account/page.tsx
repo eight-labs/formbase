@@ -1,3 +1,4 @@
+import type { User } from "~/server/db/schema";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "~/components/submit-button";
 import {
@@ -13,7 +14,7 @@ import { validateRequest } from "~/lib/auth/validate-request";
 import { redirects } from "~/lib/constants";
 
 export default async function AccountPage() {
-  const { user } = await validateRequest();
+  const { user } = (await validateRequest()) as { user: User | null };
   if (!user) redirect(redirects.toLogin);
 
   return (

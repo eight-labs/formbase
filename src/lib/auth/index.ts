@@ -1,14 +1,17 @@
 import { Lucia, TimeSpan } from "lucia";
+import type { Adapter } from "lucia";
 import { GitHub } from "arctic";
 import { env } from "~/env.js";
-import { luciaAdapter } from "~/server/db";
-import { type User as DbUser } from "~/server/db/schema";
+import { sessions, users, type User as DbUser } from "@/server/db/schema";
+import { db } from "@/server/db";
+import { webcrypto } from "node:crypto";
+import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 
-// Uncomment the following lines if you are using nodejs 18 or lower. Not required in Node.js 20, CloudFlare Workers, Deno, Bun, and Vercel Edge Functions.
-// import { webcrypto } from "node:crypto";
-// globalThis.crypto = webcrypto as Crypto;
+globalThis.crypto = webcrypto as unknown as Crypto;
 
-export const lucia = new Lucia(luciaAdapter, {
+const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
+
+export const lucia = new Lucia(adapter as unknown as Adapter, {
   getSessionAttributes: (/* attributes */) => {
     return {};
   },
@@ -34,8 +37,8 @@ export const lucia = new Lucia(luciaAdapter, {
 });
 
 export const github = new GitHub(
-  env.GITHUB_CLIENT_ID as string,
-  env.GITHUB_CLIENT_SECRET as string,
+  env.GITHUB_CLIENT_ID,
+  env.GITHUB_CLIENT_SECRET,
   {
     redirectURI: env.NEXT_PUBLIC_APP_URL + "/login/github/callback",
   },

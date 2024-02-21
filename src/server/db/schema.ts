@@ -161,3 +161,5 @@ export type NewFormData = typeof formDatas.$inferInsert;
 
 export type Form = typeof forms.$inferSelect;
 export type NewForm = typeof forms.$inferInsert;
+
+export type Session = typeof sessions.$inferSelect;

@@ -85,24 +85,13 @@ const HomePage = () => {
     <>
       <section className="mx-auto grid min-h-[calc(100vh-80px)] items-center">
         <div className="p-4">
-          <div className="mb-10 flex items-center justify-center gap-3">
-            <NextjsIcon className="h-[52px] w-[52px]" />
-            <PlusIcon className="h-8 w-8" />
-            <LuciaAuth className="h-14 w-14" />
-          </div>
           <h1 className="text-balance text-center text-3xl font-bold md:text-4xl lg:text-5xl">
-            Next.js Lucia Auth Starter Template
+            Formbase
           </h1>
           <p className="mb-10 mt-4 text-balance text-center text-muted-foreground md:text-lg lg:text-xl">
-            A Next.js Authentication starter template (password reset, email
-            validation and oAuth). Includes Lucia, Drizzle, tRPC, Stripe,
-            tailwindcss, shadcn-ui and react-email.
+            Simplify the process of collecting and managing form submissions
           </p>
-          <div className="mb-10">
-            <div className="mx-auto max-w-[430px]">
-              <CopyToClipboard text={"git clone " + githubUrl} />
-            </div>
-          </div>
+
           <div className="flex justify-center gap-4">
             <Button size="lg" variant="outline" asChild>
               <a href={githubUrl}>
