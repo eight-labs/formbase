@@ -93,7 +93,7 @@ export function CreateFormDialog() {
 
   return (
     <Form {...form}>
-      <div className="w-2/3 space-y-6">
+      <div className="space-y-6">
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
             <Button variant="outline">New Form</Button>

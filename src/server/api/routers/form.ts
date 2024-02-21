@@ -1,7 +1,7 @@
-import { forms, posts } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
 import { generateId } from "lucia";
 import { z } from "zod";
+import { forms, posts } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const formRouter = createTRPCRouter({
@@ -86,7 +86,7 @@ export const formRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.delete(forms).where(eq(posts.id, input.id));
+      await ctx.db.delete(forms).where(eq(forms.id, input.id));
     }),
 
   userForms: protectedProcedure

@@ -1,9 +1,9 @@
 "use client";
 
-import { type RouterOutputs } from "~/trpc/shared";
+import { Input } from "@/components/ui/input";
 import * as React from "react";
-import { CreateFormDialog } from "./new-form-dialog";
-import Link from "next/link";
+import { type RouterOutputs } from "~/trpc/shared";
+import { FormCard } from "./form-card";
 
 interface FormsProps {
   promises: Promise<
@@ -26,14 +26,11 @@ export function Forms({ promises }: FormsProps) {
 
   return (
     <div className="space-y-8">
-      <CreateFormDialog />
+      <Input placeholder="Search for your form by name or id" />
 
-      <div className="flex flex-col space-y-2">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {forms.map((form) => (
-          <Link href={`/form/${form.id}`} key={form.id}>
-            {/* <pre>{JSON.stringify(form, null, 2)}</pre> */}
-            Name: {form.title}
-          </Link>
+          <FormCard form={form} key={form.id} />
         ))}
       </div>
     </div>
