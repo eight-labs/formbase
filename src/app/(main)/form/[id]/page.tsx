@@ -26,7 +26,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="submissions" className="my-6">
-          <SubmissionsTable submissions={formSubmissions} />
+          <SubmissionsTable formId={formId} />
         </TabsContent>
         <TabsContent value="setup">Change your password here.</TabsContent>
         <TabsContent value="analytics">Look at your analytics here</TabsContent>

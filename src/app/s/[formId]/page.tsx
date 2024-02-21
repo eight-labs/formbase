@@ -10,8 +10,6 @@ export default async function FormCompletedPage({
 }) {
   const form = await api.form.hasReturiningUrl.query({ formId: params.formId });
 
-  console.log(form);
-
   if (!form) {
     return (
       <div className="container flex h-screen flex-col items-center justify-center gap-3">
