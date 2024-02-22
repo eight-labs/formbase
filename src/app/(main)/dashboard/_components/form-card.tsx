@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { toast } from "sonner";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { RouterOutputs } from "@/trpc/shared";
 
+import { CopyButton } from "@/components/copy-button";
 import { DeleteFormDialog } from "./delete-form-dialog";
 import { CopyIcon } from "lucide-react";
 import {
@@ -21,13 +21,6 @@ type FormCardProp = {
 };
 
 export function FormCard({ form }: FormCardProp) {
-  const handleCopyAction = async () => {
-    await navigator.clipboard.writeText(form.id);
-    toast("Copied to clipboard", {
-      icon: <CopyIcon className="h-4 w-4" />,
-    });
-  };
-
   return (
     <Link href={`/form/${form.id}`} className="text-sm underline-offset-2">
       <Card>
@@ -39,10 +32,7 @@ export function FormCard({ form }: FormCardProp) {
                 <span className="inline-flex items-center rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
                   {form.id}
                 </span>
-                <CopyIcon
-                  className="h-3.5 w-3.5 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform"
-                  onClick={handleCopyAction}
-                />
+                <CopyButton text={form.id} />
               </div>
             </div>
             <DropdownMenu>
