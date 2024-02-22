@@ -1,11 +1,13 @@
+import { webcrypto } from "node:crypto";
+
+import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
+import { GitHub } from "arctic";
 import { Lucia, TimeSpan } from "lucia";
 import type { Adapter } from "lucia";
-import { GitHub } from "arctic";
-import { env } from "~/env.js";
-import { sessions, users, type User as DbUser } from "@/server/db/schema";
+
 import { db } from "@/server/db";
-import { webcrypto } from "node:crypto";
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
+import { type User as DbUser, sessions, users } from "@/server/db/schema";
+import { env } from "~/env.js";
 
 globalThis.crypto = webcrypto as unknown as Crypto;
 

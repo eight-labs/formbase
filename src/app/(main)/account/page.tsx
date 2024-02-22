@@ -1,5 +1,5 @@
-import type { User } from "~/server/db/schema";
 import { redirect } from "next/navigation";
+
 import { SubmitButton } from "~/components/submit-button";
 import {
   Card,
@@ -12,6 +12,7 @@ import {
 import { logout } from "~/lib/auth/actions";
 import { validateRequest } from "~/lib/auth/validate-request";
 import { redirects } from "~/lib/constants";
+import type { User } from "~/server/db/schema";
 
 export default async function AccountPage() {
   const { user } = (await validateRequest()) as { user: User | null };

@@ -1,9 +1,9 @@
+import { Inter } from "next/font/google";
 import { redirect } from "next/navigation";
 import * as React from "react";
+
 import { validateRequest } from "~/lib/auth/validate-request";
 import { redirects } from "~/lib/constants";
-
-import { Inter } from "next/font/google";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;

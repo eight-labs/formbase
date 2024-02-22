@@ -1,4 +1,5 @@
-import { createTransport, type TransportOptions } from "nodemailer";
+import { type TransportOptions, createTransport } from "nodemailer";
+
 import { env } from "~/env";
 import { EMAIL_SENDER } from "~/lib/constants";
 

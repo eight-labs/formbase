@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { CheckIcon } from "~/components/icons";
-
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -13,6 +12,7 @@ import {
 } from "~/components/ui/card";
 import { formatDate } from "~/lib/utils";
 import { type RouterOutputs } from "~/trpc/shared";
+
 import { ManageSubscriptionForm } from "./manage-subscription-form";
 
 interface BillingProps {
