@@ -1,9 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
-
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -13,7 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-import { Input } from "~/components/ui/input";
 import {
   Form,
   FormControl,
@@ -22,18 +23,8 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { toast } from "sonner";
-import React, { useState } from "react";
+import { Input } from "~/components/ui/input";
 import { api } from "~/trpc/react";
-import { useRouter } from "next/navigation";
-import { RouterOutputs } from "~/trpc/shared";
-
-type CreateFormDialogProps = {
-  setOptimisticForms: (action: {
-    action: "add" | "delete" | "update";
-    post: RouterOutputs["form"]["userForms"][number];
-  }) => void;
-};
 
 const FormSchema = z.object({
   name: z.string().min(1, {

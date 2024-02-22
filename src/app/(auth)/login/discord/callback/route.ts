@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { generateId } from "lucia";
+import { nanoid as generateId } from "nanoid";
 import { OAuth2RequestError } from "arctic";
 import { eq } from "drizzle-orm";
 import { github, lucia } from "~/lib/auth";

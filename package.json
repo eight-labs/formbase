@@ -47,6 +47,7 @@
     "json-to-zod": "^1.1.2",
     "lucia": "3.0.0",
     "lucide-react": "^0.335.0",
+    "nanoid": "^5.0.6",
     "next": "^14.1.0",
     "next-themes": "^0.2.1",
     "nodemailer": "^6.9.7",

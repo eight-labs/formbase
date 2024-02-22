@@ -17,8 +17,8 @@ import type {
   VisibilityState,
 } from "@tanstack/react-table";
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "~/components/ui/button";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,7 +26,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "~/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -34,9 +34,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import type { FormData } from "@/server/db/schema";
-import { api } from "@/trpc/react";
+} from "~/components/ui/table";
+import type { FormData } from "~/server/db/schema";
+import { api } from "~/trpc/react";
 
 type SubmissionsTableProps = {
   formId: string;

@@ -72,12 +72,6 @@ const title = {
   lineHeight: "32px",
 };
 
-const formTitleStyle = {
-  ...text,
-  display: "inline",
-  fontWeight: "500",
-};
-
 const button = {
   backgroundColor: "#09090b",
   borderRadius: "4px",

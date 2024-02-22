@@ -5,9 +5,9 @@ import { GitHub } from "arctic";
 import { Lucia, TimeSpan } from "lucia";
 import type { Adapter } from "lucia";
 
-import { db } from "@/server/db";
-import { type User as DbUser, sessions, users } from "@/server/db/schema";
 import { env } from "~/env.js";
+import { db } from "~/server/db";
+import { type User as DbUser, sessions, users } from "~/server/db/schema";
 
 globalThis.crypto = webcrypto as unknown as Crypto;
 

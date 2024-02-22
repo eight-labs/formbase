@@ -11,8 +11,6 @@ import {
 import { validateRequest } from "~/lib/auth/validate-request";
 import { redirects } from "~/lib/constants";
 
-import { VerifyCode } from "./verify-code";
-
 export const metadata = {
   title: "Verify Email",
   description: "Verify Email Page",

@@ -1,15 +1,8 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { type Metadata } from "next";
-import Link from "next/link";
 
 import { PlusIcon } from "~/components/icons";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
 
 import { CopyToClipboard } from "./_components/copy-to-clipboard";
 import {
