@@ -1,5 +1,6 @@
 "use client";
 
+import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
 
@@ -8,14 +9,16 @@ type CopyButtonProps = {
 };
 
 export const CopyButton = ({ text }: CopyButtonProps) => {
+  const [_, copy] = useCopyToClipboard();
   return (
     <Copy
       className="h-4 w-4 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform"
       onClick={async (e) => {
         e.preventDefault();
-        await navigator.clipboard.writeText(text);
-        toast("Copied to clipboard", {
-          icon: <Copy className="h-4 w-4" />,
+        copy(text).then(() => {
+          toast("Copied to clipboard", {
+            icon: <Copy className="h-4 w-4" />,
+          });
         });
       }}
     />
