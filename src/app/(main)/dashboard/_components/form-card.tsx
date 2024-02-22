@@ -66,9 +66,12 @@ export function FormCard({ form }: FormCardProp) {
 
           <p className="text-sm text-muted-foreground">
             Last submission:{" "}
-            {formatDistanceToNow(new Date(form.createdAt), {
-              addSuffix: true,
-            })}
+            {formatDistanceToNow(
+              new Date(form.updatedAt ? form.updatedAt : form.createdAt),
+              {
+                addSuffix: true,
+              },
+            )}
           </p>
         </CardContent>
       </Card>

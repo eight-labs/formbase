@@ -1,4 +1,4 @@
-import { formDatas } from "~/server/db/schema";
+import { formDatas, forms } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
 import { generateId } from "lucia";
 import { z } from "zod";
@@ -27,11 +27,20 @@ export const formDataRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const id = generateId(15);
 
-      await ctx.db.insert(formDatas).values({
-        id,
-        data: input.data,
-        formId: input.formId,
-      });
+      await ctx.db
+        .insert(formDatas)
+        .values({
+          id,
+          data: input.data,
+          formId: input.formId,
+        })
+        .returning();
+
+      await ctx.db
+        .update(forms)
+        .set({ updatedAt: new Date() })
+        .where(eq(forms.id, input.formId))
+        .returning();
 
       return { id };
     }),

@@ -107,6 +107,7 @@ export const formRouter = createTRPCRouter({
           title: true,
           description: true,
           createdAt: true,
+          updatedAt: true,
         },
         with: {
           formData: true,
