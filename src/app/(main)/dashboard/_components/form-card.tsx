@@ -1,22 +1,21 @@
 import Link from "next/link";
-import { toast } from "sonner";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { RouterOutputs } from "@/trpc/shared";
 
-import { DeleteFormDialog } from "./delete-form-dialog";
-import { CopyIcon } from "lucide-react";
+import { CopyButton } from "@/components/copy-button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
 import { api } from "@/trpc/react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { DeleteFormDialog } from "./delete-form-dialog";
 
 type FormCardProp = {
   form: RouterOutputs["form"]["userForms"][number];
@@ -46,10 +45,7 @@ export async function FormCard({ form }: FormCardProp) {
                 <span className="inline-flex items-center rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
                   {form.id}
                 </span>
-                <CopyIcon
-                  className="h-3.5 w-3.5 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform"
-                  onClick={handleCopyAction}
-                />
+                <CopyButton text={form.id} />
               </div>
             </div>
             <DropdownMenu>
@@ -60,7 +56,7 @@ export async function FormCard({ form }: FormCardProp) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => e.preventDefault()}>
                   <DeleteFormDialog formId={form.id} />
                 </DropdownMenuItem>
               </DropdownMenuContent>

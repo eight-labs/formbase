@@ -43,7 +43,7 @@ export function DeleteFormDialog({ formId }: DeleteFormDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div className="group flex items-center gap-2 rounded-md hover:cursor-pointer dark:bg-gray-900">
+        <div className="group flex w-full items-center gap-2 rounded-md hover:cursor-pointer dark:bg-none">
           <TrashIcon className="h-4 w-4 duration-300 group-hover:text-red-500 dark:text-white" />
           <span className="hover:text-red-500">Delete</span>
         </div>

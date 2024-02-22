@@ -1,4 +1,5 @@
 import { api } from "~/trpc/server";
+import { CopyButton } from "@/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SubmissionsTable } from "./submissions-table";
 import CopyFormId from "./copy-button";
@@ -15,7 +16,12 @@ export default async function FormPage({ params }: { params: { id: string } }) {
       <div>
         <h1 className="text-3xl font-medium">{form?.title}</h1>
 
-        <CopyFormId formId={formId} />
+        <div className="mt-2 flex items-center gap-2">
+          <span className="inline-flex items-center rounded-lg bg-muted px-2 py-0.5 text-sm font-medium">
+            {formId}
+          </span>
+          <CopyButton text={formId} />
+        </div>
       </div>
 
       <Tabs defaultValue="submissions">
