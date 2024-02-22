@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   index,
@@ -7,7 +8,6 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
 import { createTable } from "~/server/db/util";
 
 export const users = createTable(
@@ -105,6 +105,9 @@ export const forms = createTable(
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at"),
     returnUrl: varchar("return_url", { length: 255 }),
+    sendEmailForNewSubmissions: boolean("send_email_for_new_submissions")
+      .default(true)
+      .notNull(),
   },
   (t) => ({
     userIdx: index("form_user_idx").on(t.userId),
