@@ -15,6 +15,14 @@ export async function POST(
   const formDataFromRequest = await request.formData();
   const formData = Object.fromEntries(formDataFromRequest);
 
+  const form = await db.query.forms.findFirst({
+    where: (table, { eq }) => eq(table.id, formId),
+  });
+
+  if (!form) {
+    return new Response("Form not found", { status: 404 });
+  }
+
   await db.insert(formDatas).values({
     data: formData,
     formId,
