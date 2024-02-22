@@ -1,8 +1,9 @@
-import Link from "next/link";
-import { APP_TITLE } from "~/lib/constants";
-import { Button } from "~/components/ui/button";
-import { FunctionSquare } from "lucide-react";
 import type { User as LuciaUser } from "lucia";
+import { FunctionSquare } from "lucide-react";
+import Link from "next/link";
+
+import { Button } from "~/components/ui/button";
+import { APP_TITLE } from "~/lib/constants";
 
 const routes = [
   { name: "Home", href: "/" },

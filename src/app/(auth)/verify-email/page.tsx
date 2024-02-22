@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 
-import type { User } from "@/server/db/schema";
 import {
   Card,
   CardContent,
@@ -10,6 +9,9 @@ import {
 } from "~/components/ui/card";
 import { validateRequest } from "~/lib/auth/validate-request";
 import { redirects } from "~/lib/constants";
+import type { User } from "~/server/db/schema";
+
+import { VerifyCode } from "./verify-code";
 
 export const metadata = {
   title: "Verify Email",

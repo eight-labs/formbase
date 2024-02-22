@@ -1,7 +1,9 @@
 "use client";
 
-import * as React from "react";
+import { use } from "react";
+
 import { type RouterOutputs } from "~/trpc/shared";
+
 import { FormCard } from "./form-card";
 
 interface FormsProps {
@@ -15,7 +17,7 @@ export function Forms({ promises }: FormsProps) {
    * use is a React Hook that lets you read the value of a resource like a Promise or context.
    * @see https://react.dev/reference/react/use
    */
-  const [forms, subscriptionPlan] = React.use(promises);
+  const [forms, subscriptionPlan] = use(promises);
 
   /**
    * useOptimistic is a React Hook that lets you show a different state while an async action is underway.

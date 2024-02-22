@@ -1,6 +1,6 @@
-import { Button } from "~/components/ui/button";
-import React from "react";
 import Link from "next/link";
+
+import { Button } from "~/components/ui/button";
 import { api } from "~/trpc/server";
 
 export default async function FormCompletedPage({
