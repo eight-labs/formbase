@@ -1,9 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 
 import * as React from "react";
@@ -42,12 +36,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { FormData } from "@/server/db/schema";
+import { api } from "@/trpc/react";
 
 type SubmissionsTableProps = {
-  submissions: FormData[];
+  formId: string;
 };
 
-export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
+export function SubmissionsTable({ formId }: SubmissionsTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -56,12 +51,18 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
+  const { data: submissions, isLoading } = api.formData.all.useQuery({
+    formId,
+  });
+
+  if (!isLoading && submissions && submissions.length < 0) {
+    return <div>No submissions have been collected for this form!</div>;
+  }
+
   const columns: ColumnDef<FormData["data"]>[] = [
     {
       id: "select",
       header: ({ table }) => {
-        console.log(table.getIsAllPageRowsSelected());
-
         return (
           <Checkbox
             checked={
@@ -86,22 +87,24 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
       enableHiding: false,
     },
 
-    ...Object.keys(submissions[0]?.data as object).map((submission: any) => {
-      return {
-        accessorKey: submission,
-        header: () => {
-          return (
-            <Button variant="ghost" className="px-0 py-0 capitalize">
-              {submission}
-              {/* <CaretSortIcon className="ml-2 h-4 w-4" /> */}
-            </Button>
-          );
-        },
-        cell: ({ row }: any) => (
-          <div className="lowercase">{row.getValue(submission)}</div>
-        ),
-      };
-    }),
+    ...Object.keys(submissions ? (submissions[0]?.data as object) : {}).map(
+      (submission: any) => {
+        return {
+          accessorKey: submission,
+          header: () => {
+            return (
+              <Button variant="ghost" className="px-0 py-0 capitalize">
+                {submission}
+                {/* <CaretSortIcon className="ml-2 h-4 w-4" /> */}
+              </Button>
+            );
+          },
+          cell: ({ row }: any) => (
+            <div className="lowercase">{row.getValue(submission)}</div>
+          ),
+        };
+      },
+    ),
 
     {
       id: "actions",
@@ -129,7 +132,9 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
   ];
 
   const table = useReactTable({
-    data: submissions.map((submission: any) => submission.data),
+    data: submissions
+      ? submissions.map((submission: any) => submission.data)
+      : [],
     columns: columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

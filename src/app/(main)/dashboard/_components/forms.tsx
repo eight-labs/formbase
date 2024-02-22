@@ -26,9 +26,7 @@ export function Forms({ promises }: FormsProps) {
 
   return (
     <div className="space-y-8">
-      <Input placeholder="Search for your form by name or id" />
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {forms.map((form) => (
           <FormCard form={form} key={form.id} />
         ))}

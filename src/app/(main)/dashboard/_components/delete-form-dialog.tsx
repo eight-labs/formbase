@@ -22,15 +22,19 @@ export function DeleteFormDialog({ formId }: DeleteFormDialogProps) {
   const [open, setOpen] = React.useState(false);
 
   const router = useRouter();
-  const deleteFormMutation = api.form.delete.useMutation();
+  const { mutateAsync: deleteForm } = api.form.delete.useMutation();
 
   const handleDelete = async () => {
-    deleteFormMutation.mutate(
-      { id: formId },
+    await deleteForm(
+      {
+        id: formId,
+      },
       {
         onSuccess: () => {
           router.refresh();
-          toast.success("Form deleted successfully");
+          toast.success("Your form has been deleted", {
+            icon: <TrashIcon className="h-4 w-4" />,
+          });
         },
       },
     );
@@ -39,8 +43,9 @@ export function DeleteFormDialog({ formId }: DeleteFormDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div className="group rounded-md bg-gray-100 p-2 hover:cursor-pointer dark:bg-gray-900">
+        <div className="group flex items-center gap-2 rounded-md hover:cursor-pointer dark:bg-gray-900">
           <TrashIcon className="h-4 w-4 duration-300 group-hover:text-red-500 dark:text-white" />
+          <span className="hover:text-red-500">Delete</span>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

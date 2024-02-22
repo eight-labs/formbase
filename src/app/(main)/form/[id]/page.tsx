@@ -1,7 +1,8 @@
+import { api } from "~/trpc/server";
 import { CopyButton } from "@/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { api } from "~/trpc/server";
 import { SubmissionsTable } from "./submissions-table";
+import CopyFormId from "./copy-button";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
@@ -19,7 +20,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           <span className="inline-flex items-center rounded-lg bg-muted px-2 py-0.5 text-sm font-medium">
             {formId}
           </span>
-          <CopyButton text={formId} />
+          <Copy className="h-4 w-4 text-muted-foreground" />
         </div>
       </div>
 
@@ -31,7 +32,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="submissions" className="my-6">
-          <SubmissionsTable submissions={formSubmissions} />
+          <SubmissionsTable formId={formId} />
         </TabsContent>
         <TabsContent value="setup">Change your password here.</TabsContent>
         <TabsContent value="analytics">Look at your analytics here</TabsContent>
