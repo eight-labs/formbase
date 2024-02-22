@@ -1,9 +1,8 @@
 "use client";
 
-import { useCopyToClipboard } from "~/lib/hooks/use-copy-to-clipboard";
 import { Copy } from "lucide-react";
-import React from "react";
 import { toast } from "sonner";
+import { useCopyToClipboard } from "~/lib/hooks/use-copy-to-clipboard";
 
 type CopyFormIdProps = {
   formId: string;

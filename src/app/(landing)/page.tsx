@@ -1,27 +1,25 @@
-import Link from "next/link";
-import { type Metadata } from "next";
-import { PlusIcon } from "~/components/icons";
-import { Button } from "~/components/ui/button";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { CopyToClipboard } from "./_components/copy-to-clipboard";
-import {
-  Drizzle,
-  LuciaAuth,
-  NextjsLight,
-  NextjsDark,
-  ReactJs,
-  ShadcnUi,
-  TRPC,
-  TailwindCss,
-  StripeLogo,
-  ReactEmail,
-} from "./_components/feature-icons";
+import { type Metadata } from "next";
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import {
+  Drizzle,
+  LuciaAuth,
+  NextjsDark,
+  NextjsLight,
+  ReactEmail,
+  ReactJs,
+  ShadcnUi,
+  StripeLogo,
+  TRPC,
+  TailwindCss,
+} from "./_components/feature-icons";
 
 export const metadata: Metadata = {
   title: "Next.js Lucia Auth Starter Template",

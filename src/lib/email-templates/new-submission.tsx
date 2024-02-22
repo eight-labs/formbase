@@ -1,4 +1,3 @@
-import { render } from "@react-email/render";
 import {
   Body,
   Button,
@@ -9,6 +8,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import { render } from "@react-email/render";
 import { APP_TITLE } from "~/lib/constants";
 
 interface Props {
@@ -69,12 +69,6 @@ const title = {
   fontSize: "22px",
   fontWeight: "700",
   lineHeight: "32px",
-};
-
-const formTitleStyle = {
-  ...text,
-  display: "inline",
-  fontWeight: "500",
 };
 
 const button = {

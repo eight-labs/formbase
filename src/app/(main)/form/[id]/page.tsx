@@ -1,11 +1,11 @@
-import { api } from "~/trpc/server";
 import { CopyButton } from "~/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { api } from "~/trpc/server";
 import { SubmissionsTable } from "./submissions-table";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
-  const [form, formSubmissions] = await Promise.all([
+  const [form, _formSubmissions] = await Promise.all([
     api.form.get.query({ formId }),
     api.formData.all.query({ formId }),
   ]);

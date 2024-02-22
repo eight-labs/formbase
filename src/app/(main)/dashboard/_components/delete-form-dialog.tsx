@@ -1,3 +1,7 @@
+import { TrashIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -7,10 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-import { TrashIcon } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { toast } from "sonner";
 
 import { api } from "~/trpc/react";
 

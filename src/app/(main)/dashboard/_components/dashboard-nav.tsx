@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FileTextIcon, CreditCard, GearIcon } from "~/components/icons";
+import { CreditCard, FileTextIcon, GearIcon } from "~/components/icons";
 
 import { cn } from "~/lib/utils";
 
