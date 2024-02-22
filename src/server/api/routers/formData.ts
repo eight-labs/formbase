@@ -1,6 +1,6 @@
 import { formDatas, forms } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
-import { generateId } from "lucia";
+import { nanoid as generateId } from "nanoid";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 

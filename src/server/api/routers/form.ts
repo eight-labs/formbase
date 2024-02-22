@@ -1,5 +1,5 @@
 import { eq, count } from "drizzle-orm";
-import { generateId } from "lucia";
+import { nanoid as generateId } from "nanoid";
 import { z } from "zod";
 import { formDatas, forms, posts } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";

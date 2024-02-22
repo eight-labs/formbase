@@ -1,7 +1,7 @@
-import { renderNewSubmissionEmail } from "@/lib/email-templates/new-submission";
-import { sendMail } from "@/server/send-mail";
+import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
+import { sendMail } from "~/server/send-mail";
 import { eq } from "drizzle-orm";
-import { generateId } from "lucia";
+import { nanoid as generateId } from "nanoid";
 import { db } from "~/server/db";
 import { formDatas, forms } from "~/server/db/schema";
 
