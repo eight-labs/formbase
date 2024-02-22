@@ -4,17 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { RouterOutputs } from "@/trpc/shared";
 
 import { CopyButton } from "@/components/copy-button";
-import { DeleteFormDialog } from "./delete-form-dialog";
-import { CopyIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
+import { DeleteFormDialog } from "./delete-form-dialog";
 
 type FormCardProp = {
   form: RouterOutputs["form"]["userForms"][number];
@@ -43,7 +42,7 @@ export function FormCard({ form }: FormCardProp) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => e.preventDefault()}>
                   <DeleteFormDialog formId={form.id} />
                 </DropdownMenuItem>
               </DropdownMenuContent>
