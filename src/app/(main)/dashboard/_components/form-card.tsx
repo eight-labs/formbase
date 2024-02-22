@@ -16,6 +16,8 @@ import { formatDistanceToNow } from "date-fns";
 import { api } from "@/trpc/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DeleteFormDialog } from "./delete-form-dialog";
+import { toast } from "sonner";
+import { CopyIcon } from "lucide-react";
 
 type FormCardProp = {
   form: RouterOutputs["form"]["userForms"][number];
@@ -26,13 +28,6 @@ export async function FormCard({ form }: FormCardProp) {
     api.form.formSubmissions.useQuery({
       formId: form.id,
     });
-
-  const handleCopyAction = async () => {
-    await navigator.clipboard.writeText(form.id);
-    toast("Copied to clipboard", {
-      icon: <CopyIcon className="h-4 w-4" />,
-    });
-  };
 
   return (
     <Link href={`/form/${form.id}`} className="text-sm underline-offset-2">
