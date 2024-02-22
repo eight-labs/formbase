@@ -1,3 +1,4 @@
+import { renderNewSubmissionEmail } from "@/lib/email-templates/new-submission";
 import { sendMail } from "@/server/send-mail";
 import { eq } from "drizzle-orm";
 import { generateId } from "lucia";
@@ -31,15 +32,14 @@ export async function POST(
     createdAt: new Date(),
   });
 
-  const formInformation = await db
+  await db
     .update(forms)
     .set({ updatedAt: new Date() })
-    .where(eq(forms.id, formId))
-    .returning();
+    .where(eq(forms.id, formId));
 
   // only send the email if the user has enabled it: it is enabled by default
-  if (formInformation[0]!.sendEmailForNewSubmissions) {
-    const userId = formInformation[0]!.userId;
+  if (form.sendEmailForNewSubmissions) {
+    const userId = form.userId;
 
     const user = await db.query.users.findFirst({
       where: (table, { eq }) => eq(table.id, userId),
@@ -47,8 +47,11 @@ export async function POST(
 
     sendMail({
       to: user!.email,
-      subject: `New submission for ${formInformation[0]!.title}`,
-      body: `You have a new submission for your form ${formInformation[0]!.title}`,
+      subject: `New Submission for ${form.title}`,
+      body: renderNewSubmissionEmail({
+        link: `http://localhost:3000/form/${formId}`,
+        formTitle: form.title,
+      }),
     });
   }
 
