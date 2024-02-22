@@ -1,4 +1,3 @@
-import { render } from "@react-email/render";
 import {
   Body,
   Button,
@@ -9,6 +8,8 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import { render } from "@react-email/render";
+
 import { APP_TITLE } from "~/lib/constants";
 
 interface Props {

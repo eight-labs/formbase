@@ -1,22 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import {
-  DropdownMenu,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-} from "~/components/ui/dropdown-menu";
-import {
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-} from "~/components/ui/dropdown-menu";
+import { useTheme } from "next-themes";
+import { useState } from "react";
+import { toast } from "sonner";
+
+import { ExclamationTriangleIcon } from "~/components/icons";
+import { LoadingButton } from "~/components/loading-button";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -26,12 +16,21 @@ import {
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
 import { Button } from "~/components/ui/button";
-import { LoadingButton } from "~/components/loading-button";
-import { ExclamationTriangleIcon } from "~/components/icons";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import { logout } from "~/lib/auth/actions";
 import { APP_TITLE } from "~/lib/constants";
-import { toast } from "sonner";
-import { useTheme } from "next-themes";
 
 export const UserDropdown = ({
   email,
