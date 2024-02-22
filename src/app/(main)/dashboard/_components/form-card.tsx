@@ -32,10 +32,7 @@ export function FormCard({ form }: FormCardProp) {
                 <span className="inline-flex items-center rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
                   {form.id}
                 </span>
-                <CopyIcon
-                  className="h-3.5 w-3.5 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform"
-                  onClick={handleCopyAction}
-                />
+                <CopyButton text={form.id} />
               </div>
             </div>
             <DropdownMenu>
