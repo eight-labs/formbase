@@ -1,7 +1,7 @@
-import { eq } from "drizzle-orm";
+import { eq, sql, count } from "drizzle-orm";
 import { generateId } from "lucia";
 import { z } from "zod";
-import { forms, posts } from "~/server/db/schema";
+import { formDatas, forms, posts } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const formRouter = createTRPCRouter({
@@ -128,5 +128,18 @@ export const formRouter = createTRPCRouter({
           returnUrl: true,
         },
       }),
+    ),
+
+  formSubmissions: protectedProcedure
+    .input(
+      z.object({
+        formId: z.string(),
+      }),
+    )
+    .query(({ ctx, input }) =>
+      ctx.db
+        .select({ count: count(formDatas.data) })
+        .from(formDatas)
+        .where(eq(formDatas.formId, input.formId)),
     ),
 });
