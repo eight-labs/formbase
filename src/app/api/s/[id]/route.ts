@@ -1,7 +1,8 @@
-import { formDatas, forms } from "~/server/db/schema";
-import { db } from "~/server/db";
-import { generateId } from "lucia";
+import { sendMail } from "@/server/send-mail";
 import { eq } from "drizzle-orm";
+import { generateId } from "lucia";
+import { db } from "~/server/db";
+import { formDatas, forms } from "~/server/db/schema";
 
 export async function POST(
   request: Request,
@@ -30,10 +31,26 @@ export async function POST(
     createdAt: new Date(),
   });
 
-  await db
+  const formInformation = await db
     .update(forms)
     .set({ updatedAt: new Date() })
-    .where(eq(forms.id, formId));
+    .where(eq(forms.id, formId))
+    .returning();
+
+  // only send the email if the user has enabled it: it is enabled by default
+  if (formInformation[0]!.sendEmailForNewSubmissions) {
+    const userId = formInformation[0]!.userId;
+
+    const user = await db.query.users.findFirst({
+      where: (table, { eq }) => eq(table.id, userId),
+    });
+
+    sendMail({
+      to: user!.email,
+      subject: `New submission for ${formInformation[0]!.title}`,
+      body: `You have a new submission for your form ${formInformation[0]!.title}`,
+    });
+  }
 
   return Response.redirect(`http://localhost:3000/s/${formId}`, 303);
 }
