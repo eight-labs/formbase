@@ -26,14 +26,6 @@ import { toast } from "sonner";
 import React, { useState } from "react";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
-import { RouterOutputs } from "~/trpc/shared";
-
-type CreateFormDialogProps = {
-  setOptimisticForms: (action: {
-    action: "add" | "delete" | "update";
-    post: RouterOutputs["form"]["userForms"][number];
-  }) => void;
-};
 
 const FormSchema = z.object({
   name: z.string().min(1, {

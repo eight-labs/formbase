@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { UserDropdown } from "~/app/(main)/_components/user-dropdown";
 import { FunctionSquare } from "lucide-react";
-import { APP_TITLE } from "@/lib/constants";
+import { APP_TITLE } from "~/lib/constants";
 import type { User } from "~/server/db/schema";
 
 const routes = [{ name: "Dashboard", href: "/dashboard" }] as const;

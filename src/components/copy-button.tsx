@@ -1,6 +1,6 @@
 "use client";
 
-import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
+import { useCopyToClipboard } from "~/lib/hooks/use-copy-to-clipboard";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
 

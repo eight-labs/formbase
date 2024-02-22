@@ -1,8 +1,7 @@
 import { api } from "~/trpc/server";
-import { CopyButton } from "@/components/copy-button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CopyButton } from "~/components/copy-button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { SubmissionsTable } from "./submissions-table";
-import CopyFormId from "./copy-button";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;

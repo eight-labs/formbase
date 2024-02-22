@@ -2,8 +2,8 @@ import { Lucia, TimeSpan } from "lucia";
 import type { Adapter } from "lucia";
 import { GitHub } from "arctic";
 import { env } from "~/env.js";
-import { sessions, users, type User as DbUser } from "@/server/db/schema";
-import { db } from "@/server/db";
+import { sessions, users, type User as DbUser } from "~/server/db/schema";
+import { db } from "~/server/db";
 import { webcrypto } from "node:crypto";
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 

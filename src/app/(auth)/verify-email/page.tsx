@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { validateRequest } from "~/lib/auth/validate-request";
 import { VerifyCode } from "./verify-code";
 import { redirects } from "~/lib/constants";
-import type { User } from "@/server/db/schema";
+import type { User } from "~/server/db/schema";
 
 export const metadata = {
   title: "Verify Email",

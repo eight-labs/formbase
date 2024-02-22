@@ -1,20 +1,20 @@
 import Link from "next/link";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { RouterOutputs } from "@/trpc/shared";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import type { RouterOutputs } from "~/trpc/shared";
 
-import { CopyButton } from "@/components/copy-button";
-import { Button } from "@/components/ui/button";
+import { CopyButton } from "~/components/copy-button";
+import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "~/components/ui/dropdown-menu";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
-import { api } from "@/trpc/react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { api } from "~/trpc/react";
+import { Skeleton } from "~/components/ui/skeleton";
 import { DeleteFormDialog } from "./delete-form-dialog";
 
 type FormCardProp = {
