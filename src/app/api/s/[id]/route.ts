@@ -1,6 +1,7 @@
-import { formDatas } from "~/server/db/schema";
+import { formDatas, forms } from "~/server/db/schema";
 import { db } from "~/server/db";
 import { generateId } from "lucia";
+import { eq } from "drizzle-orm";
 
 export async function POST(
   request: Request,
@@ -20,6 +21,11 @@ export async function POST(
     id: generateId(15),
     createdAt: new Date(),
   });
+
+  await db
+    .update(forms)
+    .set({ updatedAt: new Date() })
+    .where(eq(forms.id, formId));
 
   return Response.redirect(`http://localhost:3000/s/${formId}`, 303);
 }

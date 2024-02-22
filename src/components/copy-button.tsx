@@ -10,6 +10,7 @@ type CopyButtonProps = {
 
 export const CopyButton = ({ text }: CopyButtonProps) => {
   const [_, copy] = useCopyToClipboard();
+
   return (
     <Copy
       className="h-4 w-4 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform"
