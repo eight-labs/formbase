@@ -1,7 +1,8 @@
-import { validateRequest } from "~/lib/auth/validate-request";
-import { redirects } from "~/lib/constants";
 import { redirect } from "next/navigation";
 import * as React from "react";
+
+import { validateRequest } from "~/lib/auth/validate-request";
+import { redirects } from "~/lib/constants";
 
 interface Props {
   children: React.ReactNode;

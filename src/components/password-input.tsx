@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { EyeOpenIcon, EyeCloseIcon } from "~/components/icons";
+
+import { EyeCloseIcon, EyeOpenIcon } from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import { Input, type InputProps } from "~/components/ui/input";
-
 import { cn } from "~/lib/utils";
 
 const PasswordInputComponent = React.forwardRef<HTMLInputElement, InputProps>(

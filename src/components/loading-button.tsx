@@ -1,9 +1,9 @@
 "use client";
 
 import { forwardRef } from "react";
+
 import { AnimatedSpinner } from "~/components/icons";
 import { Button, type ButtonProps } from "~/components/ui/button";
-
 import { cn } from "~/lib/utils";
 
 export interface LoadingButtonProps extends ButtonProps {

@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { useFormState } from "react-dom";
+
 import { GitHubLogoIcon } from "~/components/icons";
+import { PasswordInput } from "~/components/password-input";
+import { SubmitButton } from "~/components/submit-button";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -11,12 +14,10 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { PasswordInput } from "~/components/password-input";
-import { APP_TITLE } from "~/lib/constants";
-import { login } from "~/lib/auth/actions";
-import { Label } from "~/components/ui/label";
-import { SubmitButton } from "~/components/submit-button";
 import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { login } from "~/lib/auth/actions";
+import { APP_TITLE } from "~/lib/constants";
 
 export function Login() {
   const [state, formAction] = useFormState(login, null);

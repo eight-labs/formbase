@@ -1,0 +1,10 @@
+{
+  // "editor.formatOnSave": true,
+  "eslint.validate": [
+    "typescript"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    // "source.organizeImports": "always"
+  },
+}

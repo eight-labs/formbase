@@ -1,6 +1,7 @@
 import { CopyButton } from "~/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { api } from "~/trpc/server";
+
 import { SubmissionsTable } from "./submissions-table";
 
 export default async function FormPage({ params }: { params: { id: string } }) {

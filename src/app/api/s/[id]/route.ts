@@ -1,9 +1,10 @@
-import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
-import { sendMail } from "~/server/send-mail";
 import { eq } from "drizzle-orm";
 import { nanoid as generateId } from "nanoid";
+
+import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
 import { db } from "~/server/db";
 import { formDatas, forms } from "~/server/db/schema";
+import { sendMail } from "~/server/send-mail";
 
 export async function POST(
   request: Request,

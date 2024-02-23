@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import * as React from "react";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import {
   flexRender,
@@ -16,6 +16,7 @@ import type {
   SortingState,
   VisibilityState,
 } from "@tanstack/react-table";
+import * as React from "react";
 
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";

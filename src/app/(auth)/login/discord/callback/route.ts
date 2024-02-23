@@ -1,10 +1,11 @@
-import { cookies } from "next/headers";
-import { nanoid as generateId } from "nanoid";
 import { OAuth2RequestError } from "arctic";
 import { eq } from "drizzle-orm";
+import { nanoid as generateId } from "nanoid";
+import { cookies } from "next/headers";
+
 import { github, lucia } from "~/lib/auth";
-import { db } from "~/server/db";
 import { redirects } from "~/lib/constants";
+import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
 
 export async function GET(request: Request): Promise<Response> {
