@@ -138,7 +138,12 @@ export function CreateFormDialog() {
             />
 
             <DialogFooter>
-              <Button onClick={form.handleSubmit(onSubmit)}>Create Form</Button>
+              <Button
+                onClick={form.handleSubmit(onSubmit)}
+                className="mt-2 w-full"
+              >
+                Create Form
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
