@@ -92,7 +92,12 @@ export function CreateFormDialog() {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Create Form</DialogTitle>
+              <DialogTitle>
+                Create Form
+                <p className="text-sm text-muted-foreground">
+                  Start receiving submissions
+                </p>
+              </DialogTitle>
             </DialogHeader>
 
             <FormField
@@ -100,7 +105,12 @@ export function CreateFormDialog() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>
+                    Name
+                    <p className="text-sm text-muted-foreground">
+                      How you want to call your form
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -114,7 +124,12 @@ export function CreateFormDialog() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>
+                    Description
+                    <p className="text-sm text-muted-foreground">
+                      Describe your form
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -128,7 +143,12 @@ export function CreateFormDialog() {
               name="returnUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Return URL</FormLabel>
+                  <FormLabel>
+                    Return URL
+                    <p className="text-sm text-muted-foreground">
+                      Where to redirect after submission
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="http://..." {...field} />
                   </FormControl>
@@ -138,7 +158,12 @@ export function CreateFormDialog() {
             />
 
             <DialogFooter>
-              <Button onClick={form.handleSubmit(onSubmit)}>Create Form</Button>
+              <Button
+                onClick={form.handleSubmit(onSubmit)}
+                className="mt-2 w-full"
+              >
+                Create Form
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
