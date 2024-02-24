@@ -51,10 +51,7 @@ const frameworksToDisplay = [
 
 const SetupPage = async ({ formId }: { formId: string }) => {
   const htmlCodeToRenderInForm = await codeToHtml(
-    htmlCodeToDisplay.replace(
-      "replaceMe",
-      "http://localhost:3000/s/9cf6qr2slij789c",
-    ),
+    htmlCodeToDisplay.replace("replaceMe", `http://localhost:3000/s/${formId}`),
     {
       lang: "html",
       theme: "vitesse-dark",
