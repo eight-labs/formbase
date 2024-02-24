@@ -94,6 +94,7 @@
     "postcss": "^8.4.31",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.7",
+    "shiki": "^1.1.7",
     "tailwindcss": "^3.3.5",
     "tsx": "^4.7.0",
     "typescript": "^5.1.6"
