@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { api } from "~/trpc/server";
 
 import { SubmissionsTable } from "./submissions-table";
+import SetupPage from "../_components/setup-tab";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
@@ -34,7 +35,9 @@ export default async function FormPage({ params }: { params: { id: string } }) {
         <TabsContent value="submissions" className="my-6">
           <SubmissionsTable formId={formId} />
         </TabsContent>
-        <TabsContent value="setup">Change your password here.</TabsContent>
+        <TabsContent value="setup">
+          <SetupPage formId={params.id} />
+        </TabsContent>
         <TabsContent value="analytics">Look at your analytics here</TabsContent>
         <TabsContent value="settings">Edit your form here</TabsContent>
       </Tabs>
