@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface FlattenedObject {
   [key: string]: any;
 }
@@ -8,7 +9,7 @@ export const flattenObject = (
 ): FlattenedObject => {
   let flattenedObj: FlattenedObject = {};
 
-  for (let key in obj) {
+  for (const key in obj) {
     if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
       const nestedObj = flattenObject(obj[key], `${parentKey}${key}.`);
       flattenedObj = { ...flattenedObj, ...nestedObj };

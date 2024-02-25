@@ -1,6 +1,6 @@
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
@@ -19,7 +19,7 @@ type DeleteFormDialogProps = {
 };
 
 export function DeleteFormDialog({ formId }: DeleteFormDialogProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const router = useRouter();
   const { mutateAsync: deleteForm } = api.form.delete.useMutation();
