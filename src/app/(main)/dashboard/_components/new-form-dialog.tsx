@@ -75,8 +75,6 @@ export function CreateFormDialog() {
   };
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("data", data);
-
     createPost(data);
 
     setShowDialog(false);

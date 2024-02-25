@@ -1,7 +1,8 @@
-import { formDatas, forms } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
 import { nanoid as generateId } from "nanoid";
 import { z } from "zod";
+import { flattenObject } from "~/lib/flatten-object";
+import { formDatas, forms } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const formDataRouter = createTRPCRouter({
@@ -77,10 +78,13 @@ export const formDataRouter = createTRPCRouter({
         formId: z.string(),
       }),
     )
-    .query(({ ctx, input }) =>
-      ctx.db.query.formDatas.findMany({
+    .query(async ({ ctx, input }) => {
+      const formData = await ctx.db.query.formDatas.findMany({
         where: (table, { eq }) => eq(table.formId, input.formId),
-        // orderBy: (table, { desc }) => desc(table.createdAt),
-      }),
-    ),
+      });
+
+      return formData.map((data) => {
+        return { ...flattenObject(data), data: data.data };
+      });
+    }),
 });
