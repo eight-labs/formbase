@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+} from "@tanstack/react-table";
 import {
   flexRender,
   getCoreRowModel,
@@ -9,12 +15,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import type {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
 } from "@tanstack/react-table";
 import * as React from "react";
 
@@ -37,13 +37,17 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import type { FormData } from "~/server/db/schema";
-import { api } from "~/trpc/react";
 
 type SubmissionsTableProps = {
+  formKeys: string;
   formId: string;
+  submissions: any; // FIXME: take care of this
 };
 
-export function SubmissionsTable({ formId }: SubmissionsTableProps) {
+export function SubmissionsTable({
+  submissions,
+  formKeys,
+}: SubmissionsTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -51,14 +55,7 @@ export function SubmissionsTable({ formId }: SubmissionsTableProps) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-
-  const { data: submissions, isLoading } = api.formData.all.useQuery({
-    formId,
-  });
-
-  if (!isLoading && submissions && submissions.length < 0) {
-    return <div>No submissions have been collected for this form!</div>;
-  }
+  const formKeysArray = formKeys.split("~?").filter((key) => key.length > 0);
 
   const columns: ColumnDef<FormData["data"]>[] = [
     {
@@ -88,24 +85,29 @@ export function SubmissionsTable({ formId }: SubmissionsTableProps) {
       enableHiding: false,
     },
 
-    ...Object.keys(submissions ? (submissions[0]?.data as object) : {}).map(
-      (submission: any) => {
-        return {
-          accessorKey: submission,
-          header: () => {
-            return (
-              <Button variant="ghost" className="px-0 py-0 capitalize">
-                {submission}
-                {/* <CaretSortIcon className="ml-2 h-4 w-4" /> */}
-              </Button>
-            );
-          },
-          cell: ({ row }: any) => (
-            <div className="lowercase">{row.getValue(submission)}</div>
-          ),
-        };
-      },
-    ),
+    ...formKeysArray.map((submission: any) => {
+      return {
+        accessorKey: submission,
+        header: () => {
+          return (
+            <Button
+              variant="ghost"
+              className="px-0 py-0 capitalize hover:bg-transparent"
+            >
+              {submission}
+              <CaretSortIcon className="ml-2 h-4 w-4" />
+            </Button>
+          );
+        },
+        cell: ({ row }: any) => {
+          return (
+            <div className="lowercase">
+              {row.original[`data.${submission}`]}
+            </div>
+          );
+        },
+      };
+    }),
 
     {
       id: "actions",
@@ -133,9 +135,7 @@ export function SubmissionsTable({ formId }: SubmissionsTableProps) {
   ];
 
   const table = useReactTable({
-    data: submissions
-      ? submissions.map((submission: any) => submission.data)
-      : [],
+    data: submissions,
     columns: columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

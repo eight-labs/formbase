@@ -33,6 +33,7 @@ const FormSchema = z.object({
   }),
   returnUrl: z.string().optional(),
   description: z.string().optional(),
+  keys: z.string(),
 });
 
 export function CreateFormDialog() {
@@ -43,6 +44,7 @@ export function CreateFormDialog() {
       name: "",
       description: "",
       returnUrl: "",
+      keys: "",
     },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -57,6 +59,7 @@ export function CreateFormDialog() {
           title: data.name,
           description: data.description,
           returningUrl: data.returnUrl,
+          keys: "",
         },
         {
           onSuccess: ({ id }) => {
@@ -76,8 +79,6 @@ export function CreateFormDialog() {
   };
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("data", data);
-
     createPost(data);
 
     setShowDialog(false);

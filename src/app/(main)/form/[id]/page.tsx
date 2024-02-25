@@ -6,7 +6,7 @@ import { SubmissionsTable } from "./submissions-table";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
-  const [form, _formSubmissions] = await Promise.all([
+  const [form, formSubmissions] = await Promise.all([
     api.form.get.query({ formId }),
     api.formData.all.query({ formId }),
   ]);
@@ -32,7 +32,15 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="submissions" className="my-6">
-          <SubmissionsTable formId={formId} />
+          {formSubmissions.length < 1 && form?.keys === "" ? (
+            <div>No form submissions</div>
+          ) : (
+            <SubmissionsTable
+              formKeys={form?.keys || ""}
+              formId={formId}
+              submissions={formSubmissions}
+            />
+          )}
         </TabsContent>
         <TabsContent value="setup">Change your password here.</TabsContent>
         <TabsContent value="analytics">Look at your analytics here</TabsContent>

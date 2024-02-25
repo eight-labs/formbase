@@ -22,6 +22,10 @@ export async function POST(
     where: (table, { eq }) => eq(table.id, formId),
   });
 
+  const formDataKeys = Object.keys(formData);
+  const formKeys = form?.keys?.split("~?") || [];
+  const updatedKeys = [...new Set([...formKeys, ...formDataKeys])].join("~?");
+
   if (!form) {
     return new Response("Form not found", { status: 404 });
   }
@@ -35,7 +39,10 @@ export async function POST(
 
   await db
     .update(forms)
-    .set({ updatedAt: new Date() })
+    .set({
+      updatedAt: new Date(),
+      keys: updatedKeys,
+    })
     .where(eq(forms.id, formId));
 
   // only send the email if the user has enabled it: it is enabled by default
