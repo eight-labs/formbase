@@ -1,9 +1,9 @@
-import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
-import { sendMail } from "~/server/send-mail";
 import { eq } from "drizzle-orm";
 import { nanoid as generateId } from "nanoid";
+import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
 import { db } from "~/server/db";
 import { formDatas, forms } from "~/server/db/schema";
+import { sendMail } from "~/server/send-mail";
 
 export async function POST(
   request: Request,
@@ -21,6 +21,10 @@ export async function POST(
     where: (table, { eq }) => eq(table.id, formId),
   });
 
+  const formDataKeys = Object.keys(formData);
+  const formKeys = form?.keys?.split("~?").filter((key) => key !== '""') || [];
+  const updatedKeys = [...new Set([...formKeys, ...formDataKeys])].join("~?");
+
   if (!form) {
     return new Response("Form not found", { status: 404 });
   }
@@ -34,7 +38,10 @@ export async function POST(
 
   await db
     .update(forms)
-    .set({ updatedAt: new Date() })
+    .set({
+      updatedAt: new Date(),
+      keys: updatedKeys,
+    })
     .where(eq(forms.id, formId));
 
   // only send the email if the user has enabled it: it is enabled by default

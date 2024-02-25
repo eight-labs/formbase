@@ -38,11 +38,15 @@ import {
 import type { FormData } from "~/server/db/schema";
 
 type SubmissionsTableProps = {
+  formKeys: string;
   formId: string;
   submissions: any; // FIXME: take care of this
 };
 
-export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
+export function SubmissionsTable({
+  submissions,
+  formKeys,
+}: SubmissionsTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -50,6 +54,12 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  const formKeysArray = formKeys.split("~?").filter((key) => key !== '""');
+
+  formKeysArray.forEach((key) => {
+    console.log(key.length);
+  });
 
   const columns: ColumnDef<FormData["data"]>[] = [
     {
@@ -79,7 +89,9 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
       enableHiding: false,
     },
 
-    ...Object.keys(submissions[0]?.data).map((submission: any) => {
+    ...formKeysArray.map((submission: any) => {
+      console.log("a", submission);
+
       return {
         accessorKey: submission,
         header: () => {
@@ -87,9 +99,6 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
             <Button
               variant="ghost"
               className="px-0 py-0 capitalize hover:bg-transparent"
-              onClick={() => {
-                console.log("sort by", submission);
-              }}
             >
               {submission}
               <CaretSortIcon className="ml-2 h-4 w-4" />
@@ -149,6 +158,8 @@ export function SubmissionsTable({ submissions }: SubmissionsTableProps) {
       rowSelection,
     },
   });
+
+  console.log(formKeysArray);
 
   return (
     <div className="mt-6 w-full">

@@ -31,10 +31,14 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="submissions" className="my-6">
-          {!formSubmissions ? (
-            <div>Loading</div>
+          {formSubmissions.length < 1 && form?.keys === "" ? (
+            <div>No form submissions</div>
           ) : (
-            <SubmissionsTable formId={formId} submissions={formSubmissions} />
+            <SubmissionsTable
+              formKeys={form?.keys || ""}
+              formId={formId}
+              submissions={formSubmissions}
+            />
           )}
         </TabsContent>
         <TabsContent value="setup">Change your password here.</TabsContent>
