@@ -22,7 +22,7 @@ export async function POST(
   });
 
   const formDataKeys = Object.keys(formData);
-  const formKeys = form?.keys?.split("~?").filter((key) => key !== '""') || [];
+  const formKeys = form?.keys?.split("~?") || [];
   const updatedKeys = [...new Set([...formKeys, ...formDataKeys])].join("~?");
 
   if (!form) {

@@ -54,12 +54,7 @@ export function SubmissionsTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-
-  const formKeysArray = formKeys.split("~?").filter((key) => key !== '""');
-
-  formKeysArray.forEach((key) => {
-    console.log(key.length);
-  });
+  const formKeysArray = formKeys.split("~?").filter((key) => key.length > 0);
 
   const columns: ColumnDef<FormData["data"]>[] = [
     {
@@ -90,8 +85,6 @@ export function SubmissionsTable({
     },
 
     ...formKeysArray.map((submission: any) => {
-      console.log("a", submission);
-
       return {
         accessorKey: submission,
         header: () => {
@@ -158,8 +151,6 @@ export function SubmissionsTable({
       rowSelection,
     },
   });
-
-  console.log(formKeysArray);
 
   return (
     <div className="mt-6 w-full">

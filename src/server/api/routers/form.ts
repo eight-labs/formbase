@@ -1,4 +1,4 @@
-import { eq, count } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 import { nanoid as generateId } from "nanoid";
 import { z } from "zod";
 import { formDatas, forms, posts } from "~/server/db/schema";
@@ -43,6 +43,7 @@ export const formRouter = createTRPCRouter({
         title: z.string().min(1).max(255),
         description: z.string().optional(),
         returningUrl: z.string().optional(),
+        keys: z.string(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -55,6 +56,7 @@ export const formRouter = createTRPCRouter({
         description: input.description,
         updatedAt: new Date(),
         returnUrl: input.returningUrl,
+        keys: "",
       });
 
       return { id };
