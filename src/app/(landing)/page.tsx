@@ -1,6 +1,7 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { type Metadata } from "next";
 import Link from "next/link";
+
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -8,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+
 import {
   Drizzle,
   LuciaAuth,

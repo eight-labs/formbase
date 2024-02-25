@@ -8,6 +8,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
+
 import { createTable } from "~/server/db/util";
 
 export const users = createTable(

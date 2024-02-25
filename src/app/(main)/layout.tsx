@@ -1,9 +1,11 @@
-import { type ReactNode } from "react";
 import { redirect } from "next/navigation";
-import { Header } from "./_components/header";
+import { type ReactNode } from "react";
+
 import { validateRequest } from "~/lib/auth/validate-request";
 import { redirects } from "~/lib/constants";
 import type { User } from "~/server/db/schema";
+
+import { Header } from "./_components/header";
 
 const MainLayout = async ({ children }: { children: ReactNode }) => {
   const { user } = (await validateRequest()) as { user: User | null };

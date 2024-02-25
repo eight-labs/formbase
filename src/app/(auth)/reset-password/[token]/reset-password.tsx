@@ -3,9 +3,10 @@
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "sonner";
+
 import { ExclamationTriangleIcon } from "~/components/icons";
-import { SubmitButton } from "~/components/submit-button";
 import { PasswordInput } from "~/components/password-input";
+import { SubmitButton } from "~/components/submit-button";
 import { Label } from "~/components/ui/label";
 import { resetPassword } from "~/lib/auth/actions";
 

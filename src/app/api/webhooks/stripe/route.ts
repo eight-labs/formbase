@@ -1,12 +1,11 @@
+import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
-
 import type Stripe from "stripe";
 
 import { env } from "~/env";
 import { stripe } from "~/lib/stripe";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
-import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   const body = await req.text();

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CreditCard, FileTextIcon, GearIcon } from "~/components/icons";
 
+import { CreditCard, FileTextIcon, GearIcon } from "~/components/icons";
 import { cn } from "~/lib/utils";
 
 const items = [
