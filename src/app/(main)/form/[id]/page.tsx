@@ -2,6 +2,7 @@ import { CopyButton } from "~/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { api } from "~/trpc/server";
 
+import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
 import { SubmissionsTable } from "./submissions-table";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
@@ -35,11 +36,23 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           {formSubmissions.length < 1 && form?.keys === "" ? (
             <div>No form submissions</div>
           ) : (
-            <SubmissionsTable
-              formKeys={form?.keys || ""}
-              formId={formId}
-              submissions={formSubmissions}
-            />
+            <>
+              <div className="flex w-full items-center justify-between">
+                <span className="text-muted-foreground">
+                  Total submissions: {formSubmissions.length}
+                </span>
+                <ExportSubmissionsDropDownButton
+                  submissions={formSubmissions}
+                  formKeys={form?.keys || ""}
+                  formTitle={form?.title || ""}
+                />
+              </div>
+              <SubmissionsTable
+                formKeys={form?.keys || ""}
+                formId={formId}
+                submissions={formSubmissions}
+              />
+            </>
           )}
         </TabsContent>
         <TabsContent value="setup">Change your password here.</TabsContent>
