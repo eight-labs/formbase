@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   boolean,
   index,
+  integer,
   json,
   serial,
   text,
@@ -15,7 +16,7 @@ export const users = createTable(
   "users",
   {
     id: varchar("id", { length: 21 }).primaryKey(),
-    githubId: varchar("github_id", { length: 255 }).unique(),
+    githubId: integer("github_id").unique(),
     email: varchar("email", { length: 255 }).unique().notNull(),
     emailVerified: boolean("email_verified").default(false).notNull(),
     hashedPassword: varchar("hashed_password", { length: 255 }),
