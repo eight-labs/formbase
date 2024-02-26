@@ -109,7 +109,7 @@ export const forms = createTable(
     sendEmailForNewSubmissions: boolean("send_email_for_new_submissions")
       .default(true)
       .notNull(),
-    keys: varchar("keys").notNull(),
+    keys: text("keys").array().notNull(),
   },
   (t) => ({
     userIdx: index("form_user_idx").on(t.userId),
