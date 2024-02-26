@@ -58,7 +58,7 @@ export const formRouter = createTRPCRouter({
         description: input.description,
         updatedAt: new Date(),
         returnUrl: input.returningUrl,
-        keys: "",
+        keys: [""],
       });
 
       return { id };
