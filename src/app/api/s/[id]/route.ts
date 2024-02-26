@@ -23,8 +23,8 @@ export async function POST(
   });
 
   const formDataKeys = Object.keys(formData);
-  const formKeys = form?.keys?.split("~?") || [];
-  const updatedKeys = [...new Set([...formKeys, ...formDataKeys])].join("~?");
+  const formKeys = form?.keys || [];
+  const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
 
   if (!form) {
     return new Response("Form not found", { status: 404 });

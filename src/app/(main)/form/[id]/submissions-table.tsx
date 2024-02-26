@@ -39,7 +39,7 @@ import {
 import type { FormData } from "~/server/db/schema";
 
 type SubmissionsTableProps = {
-  formKeys: string;
+  formKeys: string[];
   formId: string;
   submissions: any; // FIXME: take care of this
 };
@@ -55,7 +55,7 @@ export function SubmissionsTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-  const formKeysArray = formKeys.split("~?").filter((key) => key.length > 0);
+  const formKeysArray = formKeys.filter((key) => key.length > 0);
 
   const columns: ColumnDef<FormData["data"]>[] = [
     {
