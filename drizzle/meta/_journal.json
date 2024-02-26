@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1708948029465,
+      "tag": "0000_dry_exiles",
+      "breakpoints": true
+    }
+  ]
+}
