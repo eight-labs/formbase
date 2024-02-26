@@ -45,7 +45,7 @@ export const formRouter = createTRPCRouter({
         title: z.string().min(1).max(255),
         description: z.string().optional(),
         returningUrl: z.string().optional(),
-        keys: z.string(),
+        keys: z.array(z.string()).optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
