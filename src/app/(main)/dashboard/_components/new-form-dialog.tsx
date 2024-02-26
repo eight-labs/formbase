@@ -33,7 +33,7 @@ const FormSchema = z.object({
   }),
   returnUrl: z.string().optional(),
   description: z.string().optional(),
-  keys: z.string(),
+  keys: z.array(z.string()).optional(),
 });
 
 export function CreateFormDialog() {
@@ -44,7 +44,7 @@ export function CreateFormDialog() {
       name: "",
       description: "",
       returnUrl: "",
-      keys: "",
+      keys: [""],
     },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -59,7 +59,7 @@ export function CreateFormDialog() {
           title: data.name,
           description: data.description,
           returningUrl: data.returnUrl,
-          keys: "",
+          keys: [],
         },
         {
           onSuccess: ({ id }) => {
