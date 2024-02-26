@@ -24,9 +24,8 @@ import {
 } from "./_components/feature-icons";
 
 export const metadata: Metadata = {
-  title: "Next.js Lucia Auth Starter Template",
-  description:
-    "A Next.js starter template with nextjs and Lucia auth. Includes drizzle, trpc, react-email, tailwindcss and shadcn-ui",
+  title: "Formbase",
+  description: "Manage forms with ease",
 };
 
 const githubUrl = "https://github.com/eight-labs/formbase";

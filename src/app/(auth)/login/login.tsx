@@ -34,7 +34,7 @@ export function Login() {
         <Button variant="outline" className="w-full" asChild>
           <Link href="/login/github">
             <GitHubLogoIcon className="mr-2 h-5 w-5" />
-            Log in with github
+            Log in with Github
           </Link>
         </Button>
         <div className="my-2 flex items-center">
