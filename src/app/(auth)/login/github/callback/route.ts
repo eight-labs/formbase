@@ -12,7 +12,7 @@ export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
-  const storedState = cookies().get("GITHUB_oauth_state")?.value ?? null;
+  const storedState = cookies().get("github_oauth_state")?.value ?? null;
 
   if (!code || !state || !storedState || state !== storedState) {
     return new Response(null, {
@@ -23,15 +23,26 @@ export async function GET(request: Request): Promise<Response> {
 
   try {
     const tokens = await github.validateAuthorizationCode(code);
-
-    const githubUserRes = await fetch("https://github.com/api/users/@me", {
+    const githubUserResponse = await fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`,
       },
     });
-    const githubUser = (await githubUserRes.json()) as githubUser;
 
-    if (!githubUser.email || !githubUser.verified) {
+    const githubUser = (await githubUserResponse.json()) as GitHubProfile;
+
+    const emailResponse = await fetch("https://api.github.com/user/emails", {
+      headers: {
+        Authorization: `Bearer ${tokens.accessToken}`,
+      },
+    });
+
+    const githubUserEmails = await emailResponse.json();
+    const primaryEmail = githubUserEmails.find(
+      (email: { primary: boolean }) => email.primary,
+    );
+
+    if (!primaryEmail.email || !primaryEmail.verified) {
       return new Response(
         JSON.stringify({
           error: "Your github account must have a verified email address.",
@@ -39,26 +50,23 @@ export async function GET(request: Request): Promise<Response> {
         { status: 400, headers: { Location: redirects.toLogin } },
       );
     }
+
     const existingUser = await db.query.users.findFirst({
       where: (table, { eq, or }) =>
         or(
           eq(table.githubId, githubUser.id),
-          eq(table.email, githubUser.email!),
+          eq(table.email, primaryEmail.email),
         ),
     });
-
-    const avatar = githubUser.avatar
-      ? `https://cdn.githubapp.com/avatars/${githubUser.id}/${githubUser.avatar}.webp`
-      : null;
 
     if (!existingUser) {
       const userId = generateId(21);
       await db.insert(users).values({
         id: userId,
-        email: githubUser.email,
+        email: primaryEmail.email,
         emailVerified: true,
         githubId: githubUser.id,
-        avatar,
+        avatar: githubUser.avatar_url,
       });
       const session = await lucia.createSession(userId, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
@@ -75,17 +83,18 @@ export async function GET(request: Request): Promise<Response> {
 
     if (
       existingUser.githubId !== githubUser.id ||
-      existingUser.avatar !== avatar
+      existingUser.avatar !== githubUser.avatar_url
     ) {
       await db
         .update(users)
         .set({
           githubId: githubUser.id,
           emailVerified: true,
-          avatar,
+          avatar: githubUser.avatar_url,
         })
         .where(eq(users.id, existingUser.id));
     }
+
     const session = await lucia.createSession(existingUser.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     cookies().set(
@@ -93,6 +102,7 @@ export async function GET(request: Request): Promise<Response> {
       sessionCookie.value,
       sessionCookie.attributes,
     );
+
     return new Response(null, {
       status: 302,
       headers: { Location: redirects.afterLogin },
@@ -112,15 +122,51 @@ export async function GET(request: Request): Promise<Response> {
   }
 }
 
-interface githubUser {
-  id: string;
-  username: string;
-  avatar: string | null;
-  banner: string | null;
-  global_name: string | null;
-  banner_color: string | null;
-  mfa_enabled: boolean;
-  locale: string;
+export interface GitHubProfile {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_id: string | null;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: string;
+  site_admin: boolean;
+  name: string | null;
+  company: string | null;
+  blog: string | null;
+  location: string | null;
   email: string | null;
-  verified: boolean;
+  hireable: boolean | null;
+  bio: string | null;
+  twitter_username?: string | null;
+  public_repos: number;
+  public_gists: number;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+  private_gists?: number;
+  total_private_repos?: number;
+  owned_private_repos?: number;
+  disk_usage?: number;
+  suspended_at?: string | null;
+  collaborators?: number;
+  two_factor_authentication: boolean;
+  plan?: {
+    collaborators: number;
+    name: string;
+    space: number;
+    private_repos: number;
+  };
+  [claim: string]: unknown;
 }

@@ -33,7 +33,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="submissions" className="my-6">
-          {formSubmissions.length < 1 && form?.keys === "" ? (
+          {formSubmissions.length < 1 && form?.keys && form.keys.length < 2 ? (
             <div>No form submissions</div>
           ) : (
             <>

@@ -9,7 +9,7 @@
     "db:push": "drizzle-kit push:pg",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev",
-    "d": "bun docker:start && bun db:push && bun dev",
+    "d": "bun docker:start && bun db:generate && bun db:push && bun dev",
     "start": "next start",
     "lint": "next lint",
     "docker:start": "docker-compose -f ./docker/docker-compose.yml up -d",
