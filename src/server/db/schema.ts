@@ -16,6 +16,7 @@ export const users = createTable(
   {
     id: text("id").primaryKey(),
     githubId: integer("github_id").unique(),
+    name: text("name"),
     email: text("email").unique().notNull(),
     emailVerified: boolean("email_verified").default(false).notNull(),
     hashedPassword: text("hashed_password"),

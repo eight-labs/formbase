@@ -1,0 +1,1 @@
+ALTER TABLE "formbase_users" ADD COLUMN "name" text;

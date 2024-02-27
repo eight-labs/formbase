@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Manage your account settings",
 };
 
-export default async function BillingPage() {
+export default async function SettingsPage() {
   const { user } = await validateRequest();
 
   if (!user) {
@@ -29,7 +29,7 @@ export default async function BillingPage() {
         </p>
       </div>
       <Separator />
-      <ProfileForm />
+      <ProfileForm user={user} />
     </div>
   );
 }
