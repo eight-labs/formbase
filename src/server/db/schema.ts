@@ -125,6 +125,7 @@ export const formDatas = createTable(
     formId: varchar("form_id", { length: 15 }).notNull(),
     data: json("data").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
+    country: varchar("country").notNull().default("Unknown"),
   },
   (t) => ({
     formIdx: index("form_idx").on(t.formId),
