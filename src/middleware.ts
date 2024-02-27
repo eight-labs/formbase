@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   const path = request.nextUrl.pathname;
   const url = request.nextUrl as unknown as URL;
 
-  if (path.match("^/s/([a-zA-Z0-9]+)$")) {
+  if (path.match("^/s/([a-zA-Z0-9_-]+)$")) {
     const subpath = path.split("/")[path.split("/").length - 1];
 
     return NextResponse.rewrite(new URL(`/api/s/${subpath}`, url));
