@@ -11,6 +11,8 @@ services:
       - POSTGRES_DB=formbase
     ports:
       - "54321:5432"
+    volumes:
+      - formbase-db:/var/lib/postgresql/data
 
   inbucket:
     image: inbucket/inbucket
@@ -19,3 +21,9 @@ services:
       - 9000:9000
       - 2500:2500
       - 1100:1100
+    volumes:
+      - formbase-mail:/data
+
+volumes:
+  formbase-db:
+  formbase-mail:

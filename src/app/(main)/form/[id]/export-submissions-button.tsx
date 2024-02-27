@@ -14,14 +14,15 @@ import {
 
 export function ExportSubmissionsDropDownButton({
   submissions,
-  formKeys,
+  formKeys: formKeysArray,
   formTitle,
 }: {
   submissions: unknown[];
-  formKeys: string;
+  // formKeys: string;
+  formKeys: string[];
   formTitle: string;
 }) {
-  const formKeysArray = formKeys.split("~?").filter((key) => key.length > 0);
+  // const formKeysArray = formKeys.split("~?").filter((key) => key.length > 0);
 
   const handleLinkElementCreationAndClick = (
     content: string,
