@@ -95,16 +95,12 @@ export function SubmissionsTable({
               className="px-0 py-0 capitalize hover:bg-transparent"
             >
               {submission}
-              <CaretSortIcon className="ml-2 h-4 w-4" />
+              {/* <CaretSortIcon className="ml-2 h-4 w-4" /> */}
             </Button>
           );
         },
         cell: ({ row }: any) => {
-          return (
-            <div className="lowercase">
-              {row.original[`data.${submission}`]}
-            </div>
-          );
+          return <div>{row.original[`data.${submission}`]}</div>;
         },
       };
     }),
