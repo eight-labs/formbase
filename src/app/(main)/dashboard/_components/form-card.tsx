@@ -22,10 +22,12 @@ type FormCardProp = {
 };
 
 export async function FormCard({ form }: FormCardProp) {
-  const { data, isLoading: isLoadingFormSubmissionsCount } =
+  const { data: submissions, isLoading: isLoadingFormSubmissionsCount } =
     api.form.formSubmissions.useQuery({
       formId: form.id,
     });
+
+  console.log();
 
   return (
     <Link href={`/form/${form.id}`} className="text-sm underline-offset-2">
@@ -62,19 +64,23 @@ export async function FormCard({ form }: FormCardProp) {
             <Skeleton className="h-3 w-[100px]" />
           ) : (
             <p className="mb-1 text-sm text-muted-foreground">
-              {(data && data[0]?.count) ?? 0} submissions
+              {(submissions && submissions[0]?.count) ?? 0} submissions
             </p>
           )}
 
-          <p className="text-sm text-muted-foreground">
-            Last submission:{" "}
-            {formatDistanceToNow(
-              new Date(form.updatedAt ? form.updatedAt : form.createdAt),
-              {
-                addSuffix: true,
-              },
-            )}
-          </p>
+          {submissions && submissions[0]?.count === 0 ? (
+            <></>
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              Last submission:{" "}
+              {formatDistanceToNow(
+                new Date(form.updatedAt ? form.updatedAt : form.createdAt),
+                {
+                  addSuffix: true,
+                },
+              )}
+            </p>
+          )}
         </CardContent>
       </Card>
     </Link>
