@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowDownToLine } from "lucide-react";
+import { ArrowDownToLine, FileDown } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -56,6 +57,10 @@ export function ExportSubmissionsDropDownButton({
       csvContent,
       `${formTitle}_submissions.csv`,
     );
+
+    toast("Submissions exported as CSV", {
+      icon: <FileDown className="h-4 w-4" />,
+    });
   };
 
   const handleDownloadAsJSON = () => {
@@ -69,6 +74,10 @@ export function ExportSubmissionsDropDownButton({
       `data:application/json;charset=utf-8,${jsonContent}`,
       `${formTitle}_submissions.json`,
     );
+
+    toast("Submissions exported as JSON", {
+      icon: <FileDown className="h-4 w-4" />,
+    });
   };
 
   return (
