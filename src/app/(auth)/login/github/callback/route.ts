@@ -63,6 +63,7 @@ export async function GET(request: Request): Promise<Response> {
       const userId = generateId(21);
       await db.insert(users).values({
         id: userId,
+        name: githubUser.name,
         email: primaryEmail.email,
         emailVerified: true,
         githubId: githubUser.id,

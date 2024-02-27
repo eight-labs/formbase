@@ -33,7 +33,7 @@ export default async function BillingPage() {
   return (
     <div className="grid gap-8 py-10 md:py-8">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold md:text-4xl">Billing</h1>
+        <h1 className="text-3xl font-medium">Billing</h1>
         <p className="text-sm text-muted-foreground">
           Manage your billing and subscription
         </p>
