@@ -1,5 +1,5 @@
 import { count, eq } from "drizzle-orm";
-import { nanoid as generateId } from "nanoid";
+import { generateId } from "~/lib/utils/generate-id";
 import { z } from "zod";
 
 import { formDatas, forms } from "~/server/db/schema";

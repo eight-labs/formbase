@@ -138,7 +138,7 @@ export function CreateFormDialog() {
                 <FormItem className="space-y-0.5">
                   <FormLabel>Return URL</FormLabel>
                   <FormDescription className="text-[11px]">
-                    Where Should Users be Redirected After Form Submission?
+                    Where should users be redirected after form submission?
                   </FormDescription>
                   <FormControl>
                     <Input placeholder="http://..." {...field} />
