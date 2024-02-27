@@ -86,7 +86,11 @@ export const formDataRouter = createTRPCRouter({
       });
 
       return formData.map((data) => {
-        return { ...flattenObject(data), data: data.data };
+        return {
+          ...flattenObject(data),
+          data: data.data,
+          country: data.country,
+        };
       });
     }),
 });
