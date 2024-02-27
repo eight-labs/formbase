@@ -29,8 +29,8 @@ export default async function FormPage({ params }: { params: { id: string } }) {
       <Tabs defaultValue="submissions">
         <TabsList>
           <TabsTrigger value="submissions">Submissions</TabsTrigger>
-          <TabsTrigger value="setup">Setup</TabsTrigger>
-          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          {/* <TabsTrigger value="setup">Setup</TabsTrigger> */}
+          {/* <TabsTrigger value="analytics">Analytics</TabsTrigger> */}
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="submissions" className="my-6">
@@ -56,8 +56,8 @@ export default async function FormPage({ params }: { params: { id: string } }) {
             </>
           )}
         </TabsContent>
-        <TabsContent value="setup">Change your password here.</TabsContent>
-        <TabsContent value="analytics">Look at your analytics here</TabsContent>
+        {/* <TabsContent value="setup">Change your password here.</TabsContent> */}
+        {/* <TabsContent value="analytics">Look at your analytics here</TabsContent> */}
         <TabsContent value="settings">Edit your form here</TabsContent>
       </Tabs>
     </div>

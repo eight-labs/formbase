@@ -103,7 +103,7 @@ export function CreateFormDialog() {
               render={({ field }) => (
                 <FormItem className="space-y-0.5">
                   <FormLabel>Name</FormLabel>
-                  <FormDescription className="text-xs">
+                  <FormDescription className="text-[11px]">
                     How you want to call your form?
                   </FormDescription>
                   <FormControl>
@@ -119,8 +119,8 @@ export function CreateFormDialog() {
               name="description"
               render={({ field }) => (
                 <FormItem className="space-y-0.5">
-                  <FormLabel className="mb-0">Description</FormLabel>
-                  <FormDescription className="text-xs">
+                  <FormLabel>Description</FormLabel>
+                  <FormDescription className="text-[11px]">
                     Describe your form
                   </FormDescription>
                   <FormControl>
@@ -136,11 +136,8 @@ export function CreateFormDialog() {
               name="returnUrl"
               render={({ field }) => (
                 <FormItem className="space-y-0.5">
-                  <FormLabel>
-                    Return URL
-                    <p className="text-sm text-muted-foreground"></p>
-                  </FormLabel>
-                  <FormDescription className="text-xs">
+                  <FormLabel>Return URL</FormLabel>
+                  <FormDescription className="text-[11px]">
                     Where Should Users be Redirected After Form Submission?
                   </FormDescription>
                   <FormControl>

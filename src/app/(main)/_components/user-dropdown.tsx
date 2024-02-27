@@ -82,7 +82,9 @@ export const UserDropdown = ({
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger className="cursor-pointer text-muted-foreground">
+            Theme
+          </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
               <DropdownMenuItem onClick={() => setTheme("light")}>
