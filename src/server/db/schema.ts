@@ -75,27 +75,6 @@ export const passwordResetTokens = createTable(
   }),
 );
 
-export const posts = createTable(
-  "posts",
-  {
-    id: text("id").primaryKey(),
-    userId: text("user_id").notNull(),
-    title: text("title").notNull(),
-    excerpt: text("excerpt").notNull(),
-    content: text("content").notNull(),
-    status: text("status", { enum: ["draft", "published"] })
-      .default("draft")
-      .notNull(),
-    tags: text("tags"),
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at"),
-  },
-  (t) => ({
-    userIdx: index("posts_user_idx").on(t.userId),
-    createdAtIdx: index("post_created_at_idx").on(t.createdAt),
-  }),
-);
-
 export const forms = createTable(
   "forms",
   {
@@ -133,7 +112,6 @@ export const formDatas = createTable(
 
 export const userRelations = relations(users, ({ many }) => ({
   forms: many(forms),
-  posts: many(posts),
 }));
 
 export const formRelations = relations(forms, ({ one, many }) => ({
@@ -150,16 +128,6 @@ export const formDataRelations = relations(formDatas, ({ one }) => ({
     references: [forms.id],
   }),
 }));
-
-export const postRelations = relations(posts, ({ one }) => ({
-  user: one(users, {
-    fields: [posts.userId],
-    references: [users.id],
-  }),
-}));
-
-export type Post = typeof posts.$inferSelect;
-export type NewPost = typeof posts.$inferInsert;
 
 export type FormData = typeof formDatas.$inferSelect;
 export type NewFormData = typeof formDatas.$inferInsert;
