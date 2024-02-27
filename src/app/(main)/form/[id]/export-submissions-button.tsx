@@ -76,10 +76,10 @@ export function ExportSubmissionsDropDownButton({
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
           <ArrowDownToLine className="mr-2 h-4 w-4" />
-          Export Submissions
+          Export
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={handleDownloadAsCSV}>
             Export as CSV
