@@ -19,6 +19,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -93,25 +94,18 @@ export function CreateFormDialog() {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>
-                Create Form
-                <p className="text-sm text-muted-foreground">
-                  Start receiving submissions
-                </p>
-              </DialogTitle>
+              <DialogTitle>Create New Form</DialogTitle>
             </DialogHeader>
 
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Name
-                    <p className="text-sm text-muted-foreground">
-                      How you want to call your form
-                    </p>
-                  </FormLabel>
+                <FormItem className="space-y-0.5">
+                  <FormLabel>Name</FormLabel>
+                  <FormDescription className="text-xs">
+                    How you want to call your form?
+                  </FormDescription>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -124,13 +118,11 @@ export function CreateFormDialog() {
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Description
-                    <p className="text-sm text-muted-foreground">
-                      Describe your form
-                    </p>
-                  </FormLabel>
+                <FormItem className="space-y-0.5">
+                  <FormLabel className="mb-0">Description</FormLabel>
+                  <FormDescription className="text-xs">
+                    Describe your form
+                  </FormDescription>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -143,13 +135,14 @@ export function CreateFormDialog() {
               control={form.control}
               name="returnUrl"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="space-y-0.5">
                   <FormLabel>
                     Return URL
-                    <p className="text-sm text-muted-foreground">
-                      Where to redirect after submission
-                    </p>
+                    <p className="text-sm text-muted-foreground"></p>
                   </FormLabel>
+                  <FormDescription className="text-xs">
+                    Where Should Users be Redirected After Form Submission?
+                  </FormDescription>
                   <FormControl>
                     <Input placeholder="http://..." {...field} />
                   </FormControl>
