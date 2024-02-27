@@ -18,7 +18,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
         <h1 className="text-3xl font-medium">{form?.title}</h1>
 
         <div className="mt-2 flex items-center gap-2">
-          <span className="inline-flex items-center rounded-lg bg-muted px-2 py-0.5 text-sm font-medium">
+          <span className="bg-muted inline-flex items-center rounded-lg px-2 py-0.5 text-sm font-medium">
             {formId}
           </span>
           <CopyButton text={formId} />
@@ -43,12 +43,12 @@ export default async function FormPage({ params }: { params: { id: string } }) {
                 </span>
                 <ExportSubmissionsDropDownButton
                   submissions={formSubmissions}
-                  formKeys={form?.keys || ""}
+                  formKeys={form?.keys || []}
                   formTitle={form?.title || ""}
                 />
               </div>
               <SubmissionsTable
-                formKeys={form?.keys || ""}
+                formKeys={form?.keys || []}
                 formId={formId}
                 submissions={formSubmissions}
               />
