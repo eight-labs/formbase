@@ -66,6 +66,7 @@
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
+    "ts-pattern": "^5.0.8",
     "vaul": "^0.8.0",
     "zod": "^3.22.4",
     "zod-form-data": "^2.0.2"

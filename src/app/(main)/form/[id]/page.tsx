@@ -4,6 +4,7 @@ import { api } from "~/trpc/server";
 
 import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
 import { SubmissionsTable } from "./submissions-table";
+import { EmptyFormState } from "../../dashboard/_components/empty-state";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
@@ -18,7 +19,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
         <h1 className="text-3xl font-medium">{form?.title}</h1>
 
         <div className="mt-2 flex items-center gap-2">
-          <span className="bg-muted inline-flex items-center rounded-lg px-2 py-0.5 text-sm font-medium">
+          <span className="inline-flex items-center rounded-lg bg-muted px-2 py-0.5 text-sm font-medium">
             {formId}
           </span>
           <CopyButton text={formId} />
@@ -34,7 +35,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
         </TabsList>
         <TabsContent value="submissions" className="my-6">
           {formSubmissions.length < 1 && form?.keys && form.keys.length < 2 ? (
-            <div>No form submissions</div>
+            <EmptyFormState status="submission" />
           ) : (
             <>
               <div className="flex w-full items-center justify-between">

@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -49,7 +49,7 @@ export function CreateFormDialog() {
     },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
-  const [isCreatePending, startCreateTransaction] = React.useTransition();
+  const [isCreatePending, startCreateTransaction] = useTransition();
 
   const { mutateAsync: createNewForm } = api.form.create.useMutation();
 

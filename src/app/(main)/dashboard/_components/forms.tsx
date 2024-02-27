@@ -28,14 +28,14 @@ export function Forms({ promises }: FormsProps) {
 
   return (
     <div className="space-y-8">
-      {forms.length < 0 ? (
+      {forms.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {forms.map((form) => (
             <FormCard form={form} key={form.id} />
           ))}
         </div>
       ) : (
-        <EmptyFormState />
+        <EmptyFormState status="form" />
       )}
     </div>
   );
