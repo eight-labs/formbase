@@ -7,7 +7,6 @@ import {
   serial,
   text,
   timestamp,
-  varchar,
 } from "drizzle-orm/pg-core";
 
 import { createTable } from "~/server/db/util";
@@ -15,15 +14,15 @@ import { createTable } from "~/server/db/util";
 export const users = createTable(
   "users",
   {
-    id: varchar("id", { length: 21 }).primaryKey(),
+    id: text("id").primaryKey(),
     githubId: integer("github_id").unique(),
-    email: varchar("email", { length: 255 }).unique().notNull(),
+    email: text("email").unique().notNull(),
     emailVerified: boolean("email_verified").default(false).notNull(),
-    hashedPassword: varchar("hashed_password", { length: 255 }),
-    avatar: varchar("avatar", { length: 255 }),
-    stripeSubscriptionId: varchar("stripe_subscription_id", { length: 191 }),
-    stripePriceId: varchar("stripe_price_id", { length: 191 }),
-    stripeCustomerId: varchar("stripe_customer_id", { length: 191 }),
+    hashedPassword: text("hashed_password"),
+    avatar: text("avatar"),
+    stripeSubscriptionId: text("stripe_subscription_id"),
+    stripePriceId: text("stripe_price_id"),
+    stripeCustomerId: text("stripe_customer_id"),
     stripeCurrentPeriodEnd: timestamp("stripe_current_period_end"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at"),
@@ -40,8 +39,8 @@ export type NewUser = typeof users.$inferInsert;
 export const sessions = createTable(
   "sessions",
   {
-    id: varchar("id", { length: 255 }).primaryKey(),
-    userId: varchar("user_id", { length: 21 }).notNull(),
+    id: text("id").primaryKey(),
+    userId: text("user_id").notNull(),
     expiresAt: timestamp("expires_at").notNull(),
   },
   (t) => ({
@@ -53,9 +52,9 @@ export const emailVerificationCodes = createTable(
   "email_verification_codes",
   {
     id: serial("id").primaryKey(),
-    userId: varchar("user_id", { length: 21 }).unique().notNull(),
-    email: varchar("email", { length: 255 }).notNull(),
-    code: varchar("code", { length: 8 }).notNull(),
+    userId: text("user_id").unique().notNull(),
+    email: text("email").notNull(),
+    code: text("code").notNull(),
     expiresAt: timestamp("expires_at").notNull(),
   },
   (t) => ({
@@ -67,8 +66,8 @@ export const emailVerificationCodes = createTable(
 export const passwordResetTokens = createTable(
   "password_reset_tokens",
   {
-    id: varchar("id", { length: 40 }).primaryKey(),
-    userId: varchar("user_id", { length: 21 }).notNull(),
+    id: text("id").primaryKey(),
+    userId: text("user_id").notNull(),
     expiresAt: timestamp("expires_at").notNull(),
   },
   (t) => ({
@@ -79,15 +78,15 @@ export const passwordResetTokens = createTable(
 export const posts = createTable(
   "posts",
   {
-    id: varchar("id", { length: 15 }).primaryKey(),
-    userId: varchar("user_id", { length: 255 }).notNull(),
-    title: varchar("title", { length: 255 }).notNull(),
-    excerpt: varchar("excerpt", { length: 255 }).notNull(),
+    id: text("id").primaryKey(),
+    userId: text("user_id").notNull(),
+    title: text("title").notNull(),
+    excerpt: text("excerpt").notNull(),
     content: text("content").notNull(),
-    status: varchar("status", { length: 10, enum: ["draft", "published"] })
+    status: text("status", { enum: ["draft", "published"] })
       .default("draft")
       .notNull(),
-    tags: varchar("tags", { length: 255 }),
+    tags: text("tags"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at"),
   },
@@ -100,13 +99,13 @@ export const posts = createTable(
 export const forms = createTable(
   "forms",
   {
-    id: varchar("id", { length: 15 }).primaryKey(),
-    userId: varchar("user_id", { length: 255 }).notNull(),
-    title: varchar("title", { length: 255 }).notNull(),
-    description: varchar("description", { length: 255 }),
+    id: text("id").primaryKey(),
+    userId: text("user_id").notNull(),
+    title: text("title").notNull(),
+    description: text("description"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at"),
-    returnUrl: varchar("return_url", { length: 255 }),
+    returnUrl: text("return_url"),
     sendEmailForNewSubmissions: boolean("send_email_for_new_submissions")
       .default(true)
       .notNull(),
@@ -121,8 +120,8 @@ export const forms = createTable(
 export const formDatas = createTable(
   "form_datas",
   {
-    id: varchar("id", { length: 15 }).primaryKey(),
-    formId: varchar("form_id", { length: 15 }).notNull(),
+    id: text("id").primaryKey(),
+    formId: text("form_id").notNull(),
     data: json("data").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
   },

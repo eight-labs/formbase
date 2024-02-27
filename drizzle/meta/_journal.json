@@ -15,6 +15,20 @@
       "when": 1708950487746,
       "tag": "0001_tearful_celestials",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709064566383,
+      "tag": "0002_light_senator_kelly",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1709064805848,
+      "tag": "0003_rapid_quasimodo",
+      "breakpoints": true
     }
   ]
 }
