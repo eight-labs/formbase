@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { nanoid as generateId } from "nanoid";
 
 import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
+import { getCountryFromIp } from "~/lib/get-country-from-ip";
 import { db } from "~/server/db";
 import { formDatas, forms } from "~/server/db/schema";
 import { sendMail } from "~/server/send-mail";
@@ -35,6 +36,7 @@ export async function POST(
     formId,
     id: generateId(15),
     createdAt: new Date(),
+    country: await getCountryFromIp(request),
   });
 
   await db

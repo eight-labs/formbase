@@ -109,6 +109,15 @@ export function SubmissionsTable({
       };
     }),
 
+    // add a column for showing the country the submission was made from
+    {
+      accessorKey: "countryCode",
+      header: "Country",
+      cell: ({ row }: any) => {
+        return <div>{row.original.country}</div>;
+      },
+    },
+
     {
       id: "actions",
       enableHiding: false,
