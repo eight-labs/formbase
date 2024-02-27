@@ -69,7 +69,10 @@ export async function FormCard({ form }: FormCardProp) {
           )}
 
           {submissions && submissions[0]?.count === 0 ? (
-            <></>
+            <p className="text-sm text-muted-foreground">
+              {" "}
+              Last submission: None yet
+            </p>
           ) : (
             <p className="text-sm text-muted-foreground">
               Last submission:{" "}
