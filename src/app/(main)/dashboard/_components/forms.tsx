@@ -4,6 +4,7 @@ import { use } from "react";
 
 import { type RouterOutputs } from "~/trpc/shared";
 
+import { EmptyFormState } from "./empty-state";
 import { FormCard } from "./form-card";
 
 interface FormsProps {
@@ -27,11 +28,15 @@ export function Forms({ promises }: FormsProps) {
 
   return (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {forms.map((form) => (
-          <FormCard form={form} key={form.id} />
-        ))}
-      </div>
+      {forms.length < 0 ? (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {forms.map((form) => (
+            <FormCard form={form} key={form.id} />
+          ))}
+        </div>
+      ) : (
+        <EmptyFormState />
+      )}
     </div>
   );
 }

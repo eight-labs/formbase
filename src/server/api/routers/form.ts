@@ -2,7 +2,7 @@ import { count, eq } from "drizzle-orm";
 import { nanoid as generateId } from "nanoid";
 import { z } from "zod";
 
-import { formDatas, forms, posts } from "~/server/db/schema";
+import { formDatas, forms } from "~/server/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -80,7 +80,7 @@ export const formRouter = createTRPCRouter({
           description: input.description,
           updatedAt: new Date(),
         })
-        .where(eq(posts.id, input.id));
+        .where(eq(forms.id, input.id));
     }),
 
   delete: protectedProcedure

@@ -6,7 +6,7 @@ import { api } from "~/trpc/server";
 
 import { Forms } from "./_components/forms";
 import { CreateFormDialog } from "./_components/new-form-dialog";
-import { PostsSkeleton } from "./_components/posts-skeleton";
+import { FormsSkeleton } from "./_components/posts-skeleton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -38,7 +38,7 @@ export default async function DashboardPage() {
         <CreateFormDialog />
       </div>
 
-      <React.Suspense fallback={<PostsSkeleton />}>
+      <React.Suspense fallback={<FormsSkeleton />}>
         <Forms promises={promises} />
       </React.Suspense>
     </div>
