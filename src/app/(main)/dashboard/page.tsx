@@ -27,7 +27,7 @@ export default async function DashboardPage() {
   ]);
 
   return (
-    <div className="py-10 md:py-8">
+    <div className="py-2 md:py-8">
       <div className="mb-10 flex w-full items-end justify-between">
         <div className="flex flex-col gap-1">
           <h1 className="text-3xl font-medium">Forms</h1>
