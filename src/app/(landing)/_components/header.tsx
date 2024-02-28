@@ -19,7 +19,7 @@ export const Header = ({ user }: LandingHeaderProps) => {
 
   return (
     <header className="py-4">
-      <div className="container flex items-center gap-2 p-0">
+      <div className="container flex items-center gap-2 px-4 md:p-0">
         <Link
           className="text flex items-center justify-center font-medium"
           href={isLoggedIn ? "/dashboard" : "/"}
