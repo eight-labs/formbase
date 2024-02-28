@@ -1,7 +1,7 @@
 import { count, eq } from "drizzle-orm";
-import { generateId } from "~/lib/utils/generate-id";
 import { z } from "zod";
 
+import { generateId } from "~/lib/utils/generate-id";
 import { formDatas, forms } from "~/server/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -68,8 +68,9 @@ export const formRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
-        title: z.string().min(3).max(255),
-        description: z.string().min(3).max(255),
+        title: z.string().min(3).max(255).optional(),
+        description: z.string().min(3).max(255).optional(),
+        enableSubmissions: z.boolean().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -79,6 +80,7 @@ export const formRouter = createTRPCRouter({
           title: input.title,
           description: input.description,
           updatedAt: new Date(),
+          enableSubmissions: input.enableSubmissions,
         })
         .where(eq(forms.id, input.id));
     }),

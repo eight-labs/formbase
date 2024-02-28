@@ -90,6 +90,8 @@ export const forms = createTable(
       .default(true)
       .notNull(),
     keys: text("keys").array().notNull(),
+    enableSubmissions: boolean("enable_submissions").default(true).notNull(),
+    enableRetention: boolean("enable_retention").default(true).notNull(),
   },
   (t) => ({
     userIdx: index("form_user_idx").on(t.userId),

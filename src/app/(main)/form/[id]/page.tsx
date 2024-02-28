@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { api } from "~/trpc/server";
 
 import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
+import { FormSettings } from "./form-settings";
 import { SubmissionsTable } from "./submissions-table";
 import { EmptyFormState } from "../../dashboard/_components/empty-state";
 
@@ -58,7 +59,9 @@ export default async function FormPage({ params }: { params: { id: string } }) {
         </TabsContent>
         {/* <TabsContent value="setup">Change your password here.</TabsContent> */}
         {/* <TabsContent value="analytics">Look at your analytics here</TabsContent> */}
-        <TabsContent value="settings">Edit your form here</TabsContent>
+        <TabsContent value="settings" className="my-6">
+          <FormSettings form={form} />
+        </TabsContent>
       </Tabs>
     </div>
   );
