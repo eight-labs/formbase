@@ -1,4 +1,5 @@
 import { eq } from "drizzle-orm";
+import { userAgent } from "next/server";
 
 import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
 import { generateId } from "~/lib/utils/generate-id";
@@ -11,16 +12,42 @@ export async function POST(
   { params }: { params: { id: string } },
 ) {
   if (!params.id) {
-    return Response.redirect("/", 303);
+    return new Response("Form ID is required", { status: 400 });
   }
 
   const formId = params.id;
-  const formDataFromRequest = await request.formData();
-  const formData = Object.fromEntries(formDataFromRequest);
-
   const form = await db.query.forms.findFirst({
     where: (table, { eq }) => eq(table.id, formId),
   });
+
+  let formDataFromRequest;
+  let source;
+
+  try {
+    formDataFromRequest = await request.formData();
+    source = "formData";
+  } catch (error) {
+    const errorJSON = error as unknown as Error;
+
+    if (
+      errorJSON.name === "TypeError" &&
+      errorJSON.message.includes("FormData")
+    ) {
+      formDataFromRequest = await request.json();
+      source = "json";
+
+      if (!formDataFromRequest) {
+        return new Response("Invalid form data", { status: 400 });
+      }
+    }
+  }
+
+  const formData =
+    source === "formData"
+      ? Object.fromEntries(formDataFromRequest)
+      : formDataFromRequest;
+
+  const { browser } = userAgent(request);
 
   const formDataKeys = Object.keys(formData);
   const formKeys = form?.keys || [];
@@ -30,22 +57,23 @@ export async function POST(
     return new Response("Form not found", { status: 404 });
   }
 
-  await db.insert(formDatas).values({
-    data: formData,
-    formId,
-    id: generateId(15),
-    createdAt: new Date(),
+  await db.transaction(async (tx) => {
+    await tx.insert(formDatas).values({
+      data: formData,
+      formId,
+      id: generateId(15),
+      createdAt: new Date(),
+    });
+
+    await tx
+      .update(forms)
+      .set({
+        updatedAt: new Date(),
+        keys: updatedKeys,
+      })
+      .where(eq(forms.id, formId));
   });
 
-  await db
-    .update(forms)
-    .set({
-      updatedAt: new Date(),
-      keys: updatedKeys,
-    })
-    .where(eq(forms.id, formId));
-
-  // only send the email if the user has enabled it: it is enabled by default
   if (form.sendEmailForNewSubmissions) {
     const userId = form.userId;
 
@@ -60,6 +88,14 @@ export async function POST(
         link: `http://localhost:3000/form/${formId}`,
         formTitle: form.title,
       }),
+    });
+  }
+
+  if (!browser.name) {
+    return Response.json({
+      formId,
+      message: "Submission successful",
+      data: formData,
     });
   }
 
