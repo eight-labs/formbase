@@ -1,4 +1,5 @@
 import { eq } from "drizzle-orm";
+import { userAgent } from "next/server";
 
 import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
 import { generateId } from "~/lib/utils/generate-id";
@@ -15,12 +16,38 @@ export async function POST(
   }
 
   const formId = params.id;
-  const formDataFromRequest = await request.formData();
-  const formData = Object.fromEntries(formDataFromRequest);
-
   const form = await db.query.forms.findFirst({
     where: (table, { eq }) => eq(table.id, formId),
   });
+
+  let formDataFromRequest;
+  let source;
+
+  try {
+    formDataFromRequest = await request.formData();
+    source = "formData";
+  } catch (error) {
+    const errorJSON = error as unknown as Error;
+
+    if (
+      errorJSON.name === "TypeError" &&
+      errorJSON.message.includes("FormData")
+    ) {
+      formDataFromRequest = await request.json();
+      source = "json";
+
+      if (!formDataFromRequest) {
+        return new Response("Invalid form data", { status: 400 });
+      }
+    }
+  }
+
+  const formData =
+    source === "formData"
+      ? Object.fromEntries(formDataFromRequest)
+      : formDataFromRequest;
+
+  const { browser } = userAgent(request);
 
   const formDataKeys = Object.keys(formData);
   const formKeys = form?.keys || [];
@@ -45,7 +72,6 @@ export async function POST(
     })
     .where(eq(forms.id, formId));
 
-  // only send the email if the user has enabled it: it is enabled by default
   if (form.sendEmailForNewSubmissions) {
     const userId = form.userId;
 
@@ -60,6 +86,14 @@ export async function POST(
         link: `http://localhost:3000/form/${formId}`,
         formTitle: form.title,
       }),
+    });
+  }
+
+  if (!browser.name) {
+    return Response.json({
+      formId,
+      message: "Submission successful",
+      data: formData,
     });
   }
 
