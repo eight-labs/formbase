@@ -1,0 +1,6 @@
+# Form Retention
+# How long we should keep the form for the user
+# Accept JSON Responses and not just Form Data
+# different response based of terminal or browser
+
+add option to send email notifications in user settings
