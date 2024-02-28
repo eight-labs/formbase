@@ -18,7 +18,7 @@
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe --latest"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.3.2",
+    "@hookform/resolvers": "^3.3.4",
     "@lucia-auth/adapter-drizzle": "1.0.0-beta.6",
     "@planetscale/database": "^1.11.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -28,8 +28,10 @@
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-radio-group": "^1.1.3",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tabs": "^1.0.4",
     "@react-email/components": "^0.0.12",
     "@react-email/render": "^0.0.10",
@@ -57,7 +59,7 @@
     "postgres": "^3.4.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.49.0",
+    "react-hook-form": "^7.50.1",
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "rehype-raw": "^7.0.0",
