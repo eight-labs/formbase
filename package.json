@@ -12,6 +12,7 @@
     "d": "bun docker:start && bun db:generate && bun db:push && bun dev",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "docker:start": "docker-compose -f ./docker/docker-compose.yml up -d",
     "typecheck": "tsc --noEmit",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe --latest"

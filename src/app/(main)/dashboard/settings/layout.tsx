@@ -22,7 +22,7 @@ interface SettingsLayoutProps {
 
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
-    <div className="grid gap-8 py-10 md:py-8">
+    <div className="grid gap-8 py-3 md:py-8">
       <div className="mb-4">
         <h1 className="text-3xl font-medium">Settings</h1>
         <p className="text-sm text-muted-foreground">

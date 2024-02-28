@@ -17,7 +17,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-medium">{form?.title}</h1>
+        <h1 className="text-2xl font-medium md:text-3xl">{form?.title}</h1>
 
         <div className="mt-2 flex items-center gap-2">
           <span className="inline-flex items-center rounded-lg bg-muted px-2 py-0.5 text-sm font-medium">
