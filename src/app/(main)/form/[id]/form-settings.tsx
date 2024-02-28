@@ -63,6 +63,7 @@ export function FormSettings({ form }: FormSettingsProps) {
     try {
       await deleteForm({ id: form.id });
 
+      //   revalidatePath("/dashboard");
       router.push("/dashboard");
 
       toast("Your form has been deleted", {
