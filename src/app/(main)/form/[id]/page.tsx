@@ -33,14 +33,14 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           {/* <TabsTrigger value="analytics">Analytics</TabsTrigger> */}
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
-        <TabsContent value="submissions" className="my-6">
+        <TabsContent value="submissions" className="my-4">
           {formSubmissions.length < 1 && form?.keys && form.keys.length < 2 ? (
             <EmptyFormState status="submission" />
           ) : (
             <>
               <div className="flex w-full items-center justify-between">
                 <span className="text-muted-foreground">
-                  Total submissions: {formSubmissions.length}
+                  Total Submissions: {formSubmissions.length}
                 </span>
                 <ExportSubmissionsDropDownButton
                   submissions={formSubmissions}

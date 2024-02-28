@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { nanoid as generateId } from "nanoid";
+import { generateId } from "~/lib/utils/generate-id";
 
 import { renderNewSubmissionEmail } from "~/lib/email-templates/new-submission";
 import { db } from "~/server/db";

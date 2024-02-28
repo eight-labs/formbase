@@ -1,10 +1,10 @@
 import { OAuth2RequestError } from "arctic";
 import { eq } from "drizzle-orm";
-import { nanoid as generateId } from "nanoid";
 import { cookies } from "next/headers";
 
 import { github, lucia } from "~/lib/auth";
 import { redirects } from "~/lib/constants";
+import { generateId } from "~/lib/utils/generate-id";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
 
