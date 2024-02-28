@@ -12,7 +12,7 @@ export async function POST(
   { params }: { params: { id: string } },
 ) {
   if (!params.id) {
-    return Response.redirect("/", 303);
+    return new Response("Form ID is required", { status: 400 });
   }
 
   const formId = params.id;
@@ -57,20 +57,22 @@ export async function POST(
     return new Response("Form not found", { status: 404 });
   }
 
-  await db.insert(formDatas).values({
-    data: formData,
-    formId,
-    id: generateId(15),
-    createdAt: new Date(),
-  });
+  await db.transaction(async (tx) => {
+    await tx.insert(formDatas).values({
+      data: formData,
+      formId,
+      id: generateId(15),
+      createdAt: new Date(),
+    });
 
-  await db
-    .update(forms)
-    .set({
-      updatedAt: new Date(),
-      keys: updatedKeys,
-    })
-    .where(eq(forms.id, formId));
+    await tx
+      .update(forms)
+      .set({
+        updatedAt: new Date(),
+        keys: updatedKeys,
+      })
+      .where(eq(forms.id, formId));
+  });
 
   if (form.sendEmailForNewSubmissions) {
     const userId = form.userId;
