@@ -22,6 +22,8 @@ import { Switch } from "~/components/ui/switch";
 import { api } from "~/trpc/react";
 import { type RouterOutputs } from "~/trpc/shared";
 
+import { refreshDashboardAfterDeletion } from "../_actions/refresh-dashboard-after-deletion";
+
 const formNameSchema = z.object({
   name: z.string().min(1).optional(),
 });
@@ -58,21 +60,22 @@ export function FormSettings({ form }: FormSettingsProps) {
 
   const { mutateAsync: deleteForm, isLoading: isDeletingForm } =
     api.form.delete.useMutation({
-      onSuccess() {
-        return utils.form.invalidate();
+      async onSuccess() {
+        utils.form.invalidate();
+
+        // router.refresh();
+        await refreshDashboardAfterDeletion();
+        router.push("/dashboard");
+
+        toast("Your form has been deleted", {
+          icon: <FolderX className="h-4 w-4" />,
+        });
       },
     });
 
   const handleDeleteForm = async () => {
     try {
       await deleteForm({ id: form.id });
-
-      //   revalidatePath("/dashboard");
-      router.push("/dashboard");
-
-      toast("Your form has been deleted", {
-        icon: <FolderX className="h-4 w-4" />,
-      });
     } catch (e) {
       console.log(e);
 
