@@ -1,8 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FolderPen, FolderX } from "lucide-react";
-import { revalidatePath } from "next/cache";
+import { BellRing, FolderPen, FolderX } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -35,9 +34,14 @@ const enableRetentionSchema = z.object({
   enableRetention: z.boolean().default(true).optional(),
 });
 
+const enableNotificationsSchema = z.object({
+  enableNotifications: z.boolean().default(true).optional(),
+});
+
 type FormNameSchema = z.infer<typeof formNameSchema>;
 type EnableFormSubmissionsSchema = z.infer<typeof enableFormSubmissionsSchema>;
 type EnableSubmissionsRetentionSchema = z.infer<typeof enableRetentionSchema>;
+type EnableFormNotificationsSchema = z.infer<typeof enableNotificationsSchema>;
 
 type FormSettingsProps = {
   form: RouterOutputs["form"]["get"];
@@ -86,6 +90,11 @@ export function FormSettings({ form }: FormSettingsProps) {
       <EnableFormSubmissions
         formId={form.id}
         enableSubmissions={form.enableSubmissions}
+      />
+
+      <EnableFormNotifications
+        formId={form.id}
+        enableNotifications={form.enableEmailNotifications}
       />
 
       <div className="flex flex-row items-center justify-between rounded-lg border p-4">
@@ -243,6 +252,86 @@ const EnableFormSubmissions = ({
                   field.onChange(isChecked);
                   handleEnableSubmissionsRetentionSubmit({
                     enableFormSubmissions: isChecked,
+                  });
+                }}
+                disabled={isUpdatingForm}
+              />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    </Form>
+  );
+};
+const EnableFormNotifications = ({
+  formId,
+  enableNotifications,
+}: {
+  formId: string;
+  enableNotifications: boolean;
+}) => {
+  const router = useRouter();
+
+  const enableNotificationsForm = useForm<EnableFormNotificationsSchema>({
+    resolver: zodResolver(enableNotificationsSchema),
+    defaultValues: {
+      enableNotifications: enableNotifications,
+    },
+  });
+
+  const { mutateAsync: updateForm, isLoading: isUpdatingForm } =
+    api.form.update.useMutation();
+
+  async function handleEnableSubmissionsNotifications(
+    data: EnableFormNotificationsSchema,
+  ) {
+    try {
+      await updateForm({
+        id: formId,
+        enableNotifications: data.enableNotifications,
+      });
+
+      toast(
+        data.enableNotifications
+          ? "You will now receive email notifications for new submissions"
+          : "You will no longer receive email notifications for new submissions",
+        {
+          icon: <BellRing className="h-4 w-4" />,
+        },
+      );
+
+      router.refresh();
+    } catch {
+      toast("Failed to update form", {
+        description: "Please try again later",
+        icon: <BellRing className="h-4 w-4" />,
+      });
+    }
+  }
+
+  return (
+    <Form {...enableNotificationsForm}>
+      <FormField
+        control={enableNotificationsForm.control}
+        name="enableNotifications"
+        render={({ field }) => (
+          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+            <div className="space-y-0.5">
+              <FormLabel className="text-base">
+                Enable Form Submission Notifications
+              </FormLabel>
+              <FormDescription>
+                Turn off this option to prevent your form from sending you email
+                notifications for new submissions
+              </FormDescription>
+            </div>
+            <FormControl>
+              <Switch
+                checked={field.value}
+                onCheckedChange={(isChecked) => {
+                  field.onChange(isChecked);
+                  handleEnableSubmissionsNotifications({
+                    enableNotifications: isChecked,
                   });
                 }}
                 disabled={isUpdatingForm}

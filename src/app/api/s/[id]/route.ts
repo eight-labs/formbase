@@ -74,7 +74,7 @@ export async function POST(
       .where(eq(forms.id, formId));
   });
 
-  if (form.sendEmailForNewSubmissions) {
+  if (form.enableEmailNotifications) {
     const userId = form.userId;
 
     const user = await db.query.users.findFirst({

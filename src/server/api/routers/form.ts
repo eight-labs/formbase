@@ -71,6 +71,7 @@ export const formRouter = createTRPCRouter({
         title: z.string().min(3).max(255).optional(),
         description: z.string().min(3).max(255).optional(),
         enableSubmissions: z.boolean().optional(),
+        enableNotifications: z.boolean().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -81,6 +82,7 @@ export const formRouter = createTRPCRouter({
           description: input.description,
           updatedAt: new Date(),
           enableSubmissions: input.enableSubmissions,
+          enableEmailNotifications: input.enableNotifications,
         })
         .where(eq(forms.id, input.id));
     }),
