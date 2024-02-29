@@ -27,8 +27,6 @@ export async function FormCard({ form }: FormCardProp) {
       formId: form.id,
     });
 
-  console.log();
-
   return (
     <Link href={`/form/${form.id}`} className="text-sm underline-offset-2">
       <Card>

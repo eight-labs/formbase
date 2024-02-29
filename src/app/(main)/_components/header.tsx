@@ -11,7 +11,7 @@ export const Header = ({ user }: { user: User }) => {
   const isLoggedIn = user !== null;
 
   return (
-    <header className="sticky top-0 border-b bg-background/80 py-2">
+    <header className="top-0 border-b py-2">
       <div className="container flex items-center gap-2 px-2 py-2 lg:px-4">
         <Link
           className="text flex items-center justify-center font-medium"
