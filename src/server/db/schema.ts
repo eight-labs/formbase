@@ -86,7 +86,7 @@ export const forms = createTable(
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at"),
     returnUrl: text("return_url"),
-    sendEmailForNewSubmissions: boolean("send_email_for_new_submissions")
+    enableEmailNotifications: boolean("send_email_for_new_submissions")
       .default(true)
       .notNull(),
     keys: text("keys").array().notNull(),

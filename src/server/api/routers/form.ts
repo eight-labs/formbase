@@ -82,7 +82,7 @@ export const formRouter = createTRPCRouter({
           description: input.description,
           updatedAt: new Date(),
           enableSubmissions: input.enableSubmissions,
-          sendEmailForNewSubmissions: input.enableNotifications,
+          enableEmailNotifications: input.enableNotifications,
         })
         .where(eq(forms.id, input.id));
     }),
