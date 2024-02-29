@@ -94,7 +94,7 @@ export function FormSettings({ form }: FormSettingsProps) {
 
       <EnableFormNotifications
         formId={form.id}
-        enableNotifications={form.sendEmailForNewSubmissions}
+        enableNotifications={form.enableEmailNotifications}
       />
 
       <div className="flex flex-row items-center justify-between rounded-lg border p-4">
