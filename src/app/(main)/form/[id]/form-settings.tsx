@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { BellRing, FolderPen, FolderX } from "lucide-react";
+import { BellRing, ExternalLink, FolderPen, FolderX } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,6 +28,10 @@ const formNameSchema = z.object({
   name: z.string().min(1).optional(),
 });
 
+const formReturnUrlSchema = z.object({
+  returnUrl: z.string().url().optional(),
+});
+
 const enableFormSubmissionsSchema = z.object({
   enableFormSubmissions: z.boolean().default(true).optional(),
 });
@@ -44,6 +48,7 @@ type FormNameSchema = z.infer<typeof formNameSchema>;
 type EnableFormSubmissionsSchema = z.infer<typeof enableFormSubmissionsSchema>;
 type EnableSubmissionsRetentionSchema = z.infer<typeof enableRetentionSchema>;
 type EnableFormNotificationsSchema = z.infer<typeof enableNotificationsSchema>;
+type FormReturnUrlSchema = z.infer<typeof formReturnUrlSchema>;
 
 type FormSettingsProps = {
   form: RouterOutputs["form"]["get"];
@@ -89,6 +94,8 @@ export function FormSettings({ form }: FormSettingsProps) {
   return (
     <div className="space-y-4">
       <FormName formId={form.id} name={form.title} />
+
+      <ReturnUrlForm formId={form.id} returnUrl={form.returnUrl?.toString()} />
 
       <EnableFormSubmissions
         formId={form.id}
@@ -168,9 +175,88 @@ const FormName = ({ formId, name }: { formId: string; name: string }) => {
               </div>
               <FormControl>
                 <div className="flex gap-2">
-                  <Input className="w-[250px]" {...field} />
+                  <Input className="w-[250px]" {...field} min={1} />
                   <Button
                     loading={isUpdatingFormName}
+                    type="submit"
+                    variant="default"
+                  >
+                    Save
+                  </Button>
+                </div>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+      </form>
+    </Form>
+  );
+};
+const ReturnUrlForm = ({
+  formId,
+  returnUrl,
+}: {
+  formId: string;
+  returnUrl: string | undefined;
+}) => {
+  const router = useRouter();
+
+  const formReturnUrl = useForm<FormReturnUrlSchema>({
+    resolver: zodResolver(formReturnUrlSchema),
+    defaultValues: {
+      returnUrl,
+    },
+  });
+
+  const {
+    mutateAsync: updateFormReturnURL,
+    isLoading: isUpdatingFormReturnURL,
+  } = api.form.update.useMutation();
+
+  async function handleReturnURLSubmit(data: FormReturnUrlSchema) {
+    try {
+      await updateFormReturnURL({
+        id: formId,
+        returnUrl: data.returnUrl,
+      });
+
+      toast("Your form name has been updated", {
+        icon: <ExternalLink className="h-4 w-4" />,
+      });
+
+      router.refresh();
+    } catch {
+      toast("Failed to update form name", {
+        description: "Please try again later",
+        icon: <ExternalLink className="h-4 w-4" />,
+      });
+    }
+  }
+
+  return (
+    <Form {...formReturnUrl}>
+      <form onSubmit={formReturnUrl.handleSubmit(handleReturnURLSubmit)}>
+        <FormField
+          control={formReturnUrl.control}
+          name="returnUrl"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+              <div className="space-y-0.5">
+                <FormLabel className="text-base">Return URL</FormLabel>
+                <FormDescription>
+                  URL where users will be redirected after submitting the form
+                </FormDescription>
+              </div>
+              <FormControl>
+                <div className="flex gap-2">
+                  <Input
+                    className="w-[250px]"
+                    {...field}
+                    placeholder="Enter return url here"
+                    type="url"
+                  />
+                  <Button
+                    loading={isUpdatingFormReturnURL}
                     type="submit"
                     variant="default"
                   >
