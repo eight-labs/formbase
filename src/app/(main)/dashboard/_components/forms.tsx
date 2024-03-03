@@ -20,10 +20,6 @@ export function Forms({ promises }: FormsProps) {
    */
   const [forms, subscriptionPlan] = use(promises);
 
-  console.log(forms);
-
-  console.log(forms[0]?.formData.length);
-
   /**
    * useOptimistic is a React Hook that lets you show a different state while an async action is underway.
    * It accepts some state as an argument and returns a copy of that state that can be different during the duration of an async action such as a network request.
