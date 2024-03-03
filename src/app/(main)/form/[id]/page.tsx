@@ -2,6 +2,7 @@ import { CopyButton } from "~/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { api } from "~/trpc/server";
 
+import FormAnalytics from "./analytics";
 import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
 import { FormSettings } from "./form-settings";
 import { SubmissionsTable } from "./submissions-table";
@@ -32,6 +33,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
           <TabsTrigger value="submissions">Submissions</TabsTrigger>
           {/* <TabsTrigger value="setup">Setup</TabsTrigger> */}
           {/* <TabsTrigger value="analytics">Analytics</TabsTrigger> */}
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="submissions" className="my-4">
@@ -61,6 +63,9 @@ export default async function FormPage({ params }: { params: { id: string } }) {
         {/* <TabsContent value="analytics">Look at your analytics here</TabsContent> */}
         <TabsContent value="settings" className="my-6">
           <FormSettings form={form} />
+        </TabsContent>
+        <TabsContent value="analytics">
+          <FormAnalytics formSubmissions={formSubmissions} />
         </TabsContent>
       </Tabs>
     </div>
