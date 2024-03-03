@@ -36,6 +36,7 @@
     "@react-email/components": "^0.0.12",
     "@react-email/render": "^0.0.10",
     "@t3-oss/env-nextjs": "^0.7.1",
+    "@tailus/themer": "^0.0.4",
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-table": "^8.12.0",
     "@trpc/client": "^10.43.6",
@@ -99,6 +100,7 @@
     "postcss": "^8.4.31",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.7",
+    "shiki": "^1.1.7",
     "tailwindcss": "^3.3.5",
     "tsx": "^4.7.0",
     "typescript": "^5.1.6"

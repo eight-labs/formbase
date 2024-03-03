@@ -5,6 +5,7 @@ import { validateRequest } from "~/lib/auth/validate-request";
 import { APP_TITLE } from "~/lib/constants";
 
 import { Header } from "./_components/header";
+import { SiteFooter } from "./_components/site-footer";
 
 export const metadata: Metadata = {
   title: APP_TITLE,
@@ -15,10 +16,12 @@ async function LandingPageLayout({ children }: { children: ReactNode }) {
   const { user } = await validateRequest();
 
   return (
-    <>
+    <div className="bg-white dark:bg-black">
       <Header user={user} />
       {children}
-    </>
+
+      <SiteFooter />
+    </div>
   );
 }
 
