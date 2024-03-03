@@ -31,7 +31,13 @@ export function Forms({ promises }: FormsProps) {
       {forms.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {forms.map((form) => (
-            <FormCard form={form} key={form.id} />
+            <FormCard
+              form={form}
+              key={form.id}
+              submissionsCount={form.formData.length}
+              updatedAt={form.updatedAt}
+              createdAt={form.createdAt}
+            />
           ))}
         </div>
       ) : (

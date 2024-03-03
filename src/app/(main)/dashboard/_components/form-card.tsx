@@ -11,22 +11,23 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { Skeleton } from "~/components/ui/skeleton";
-import { api } from "~/trpc/react";
 import type { RouterOutputs } from "~/trpc/shared";
 
 import { DeleteFormDialog } from "./delete-form-dialog";
 
 type FormCardProp = {
   form: RouterOutputs["form"]["userForms"][number];
+  submissionsCount: number;
+  updatedAt: Date | null;
+  createdAt: Date;
 };
 
-export async function FormCard({ form }: FormCardProp) {
-  const { data: submissions, isLoading: isLoadingFormSubmissionsCount } =
-    api.form.formSubmissions.useQuery({
-      formId: form.id,
-    });
-
+export async function FormCard({
+  form,
+  submissionsCount,
+  createdAt,
+  updatedAt,
+}: FormCardProp) {
   return (
     <Link href={`/form/${form.id}`} className="text-sm underline-offset-2">
       <Card>
@@ -58,15 +59,11 @@ export async function FormCard({ form }: FormCardProp) {
         </CardHeader>
 
         <CardContent>
-          {isLoadingFormSubmissionsCount ? (
-            <Skeleton className="h-3 w-[100px]" />
-          ) : (
-            <p className="mb-1 text-sm text-muted-foreground">
-              {(submissions && submissions[0]?.count) ?? 0} submissions
-            </p>
-          )}
+          <p className="mb-1 text-sm text-muted-foreground">
+            {submissionsCount} submissions
+          </p>
 
-          {submissions && submissions[0]?.count === 0 ? (
+          {submissionsCount === 0 ? (
             <p className="text-sm text-muted-foreground">
               {" "}
               Last submission: None yet
@@ -74,12 +71,9 @@ export async function FormCard({ form }: FormCardProp) {
           ) : (
             <p className="text-sm text-muted-foreground">
               Last submission:{" "}
-              {formatDistanceToNow(
-                new Date(form.updatedAt ? form.updatedAt : form.createdAt),
-                {
-                  addSuffix: true,
-                },
-              )}
+              {formatDistanceToNow(new Date(updatedAt || createdAt), {
+                addSuffix: true,
+              })}
             </p>
           )}
         </CardContent>
