@@ -33,7 +33,7 @@ export const Header = ({ user }: LandingHeaderProps) => {
                     <li>
                       <Link
                         href={href}
-                        className="hover:text-primary-600 dark:hover:text-primary-400 block transition md:px-4"
+                        className="block transition hover:text-primary-600 dark:hover:text-primary-400 md:px-4"
                       >
                         <span>{name}</span>
                       </Link>

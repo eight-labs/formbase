@@ -10,902 +10,899 @@ const githubUrl = "https://github.com/eight-labs/formbase";
 const HomePage = async () => {
   return (
     <div className="space-y-32">
-      <section className="relative">
-        <div className="relative pt-24 lg:pt-28">
-          <div className="mx-auto max-w-7xl px-6 md:px-12">
-            <div className="text-center sm:mx-auto sm:w-10/12 lg:mr-auto lg:mt-0 lg:w-4/5">
-              <a
-                href={githubUrl}
-                target="_blank"
-                className="group mx-auto flex w-fit items-center justify-between gap-2 rounded-[--annonce-border-radius] border border-[--ui-light-border-color] p-1 transition duration-200 hover:border-[--ui-light-border-hover-color] dark:border-[--ui-dark-border-color] dark:hover:border-[--ui-dark-border-hover-color]"
-              >
-                <span className="flex gap-3 pl-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Star us on GitHub
-                  <div className="flex items-center -space-x-3 transition-transform duration-300 group-hover:-translate-x-1">
-                    <span className="h-[1.5px] w-2.5 origin-left -translate-x-px translate-y-[-0.3px] scale-x-0 rounded bg-gray-950 opacity-0 transition duration-300 group-hover:scale-x-100 group-hover:opacity-100 dark:bg-white"></span>
+      <section className="relative bg-[url('/images/hero-pattern_light.svg')] dark:bg-[url('/images/hero-pattern_dark.svg')]">
+        <div className="bg-gradient-to-b from-transparent via-transparent to-white dark:to-black">
+          <div className="relative pt-24 lg:pt-28">
+            <div className="mx-auto max-w-7xl px-6 md:px-12">
+              <div className="text-center sm:mx-auto sm:w-10/12 lg:mr-auto lg:mt-0 lg:w-4/5">
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  className="group mx-auto flex w-fit items-center justify-between gap-2 rounded-[--annonce-border-radius] border border-[--ui-light-border-color] p-1 transition duration-200 hover:border-[--ui-light-border-hover-color] dark:border-[--ui-dark-border-color] dark:hover:border-[--ui-dark-border-hover-color]"
+                >
+                  <span className="flex gap-3 pl-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Star us on GitHub
+                    <div className="flex items-center -space-x-3 transition-transform duration-300 group-hover:-translate-x-1">
+                      <span className="h-[1.5px] w-2.5 origin-left -translate-x-px translate-y-[-0.3px] scale-x-0 rounded bg-gray-950 opacity-0 transition duration-300 group-hover:scale-x-100 group-hover:opacity-100 dark:bg-white"></span>
+                      <svg
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="size-4 -translate-x-2 text-gray-950 transition duration-300 group-hover:translate-x-px dark:text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9 5l7 7-7 7"
+                        ></path>
+                      </svg>
+                    </div>
+                  </span>
+                </a>
+                <h1 className="mt-8 text-wrap text-4xl font-semibold text-gray-950 dark:text-white md:text-5xl xl:text-6xl xl:[line-height:1.125]">
+                  An API for your HTML form
+                </h1>
+                <p className="mx-auto mt-8 hidden max-w-3xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
+                  A form-handling service filled with features like validation,
+                  and notifications that can be integrated to manage any form,
+                  directly in your HTML.
+                </p>
+                <p className="mx-auto mt-6 max-w-2xl text-wrap text-gray-700 dark:text-gray-300 sm:hidden">
+                  Highly customizable components for building modern websites
+                  and applications, with your personnal spark.
+                </p>
+                <div className="mt-8 flex flex-col items-center justify-center gap-4">
+                  <div className="rounded-[calc(var(--btn-border-radius)+4px)] border bg-gray-950/5 p-1 dark:border-white/10 dark:bg-white/5">
+                    <a
+                      href="/dashboard"
+                      className="group relative z-[1] flex h-11 items-center justify-center gap-1.5 rounded-[--btn-border-radius] border border-primary-600 bg-primary-500 px-4 text-base text-white shadow-md shadow-primary-200 *:select-none before:absolute before:inset-0 before:rounded-[calc(var(--btn-border-radius)-1px)] before:border before:border-primary-500 before:bg-gradient-to-b before:from-primary-600 hover:bg-primary-600 active:bg-primary-700 disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950/40 disabled:*:text-gray-300 *:disabled:opacity-20 disabled:before:border-transparent disabled:before:bg-gray-100 disabled:before:from-transparent dark:border-0 dark:bg-primary-600 dark:shadow-primary-500/10 dark:before:border-0 dark:before:border-t dark:before:border-primary-400 dark:before:shadow-inner dark:before:shadow-white/10 dark:hover:bg-primary-700 dark:active:bg-primary-800 dark:active:before:from-primary-700 dark:disabled:border dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white disabled:dark:*:text-gray-700 dark:disabled:before:bg-gray-900 dark:disabled:before:from-gray-900 dark:disabled:before:shadow-none [&>*:not(.sr-only)]:relative"
+                    >
+                      <svg
+                        width="16px"
+                        height="16px"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="relative size-5 text-white"
+                      >
+                        <path
+                          className="stroke-white"
+                          d="M8 15C12.8747 15 15 12.949 15 8C15 12.949 17.1104 15 22 15C17.1104 15 15 17.1104 15 22C15 17.1104 12.8747 15 8 15Z"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M2 6.5C5.13376 6.5 6.5 5.18153 6.5 2C6.5 5.18153 7.85669 6.5 11 6.5C7.85669 6.5 6.5 7.85669 6.5 11C6.5 7.85669 5.13376 6.5 2 6.5Z"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                          className="stroke-white"
+                        ></path>
+                      </svg>
+
+                      <span className="text-nowrap">Get Started</span>
+                    </a>
+                  </div>
+                  <button className="group hidden h-9 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3 text-base text-gray-800 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-gray-300 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative">
+                    <span className="text-sm">Learn more</span>
                     <svg
-                      aria-hidden="true"
+                      className="-mr-1"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="size-4 -translate-x-2 text-gray-950 transition duration-300 group-hover:translate-x-px dark:text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 48 48"
                     >
                       <path
+                        fill="none"
+                        stroke="currentColor"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        d="M9 5l7 7-7 7"
+                        stroke-width="4"
+                        d="m19 12l12 12l-12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="mx-auto max-w-6xl px-6 text-gray-500">
+          <div className="relative">
+            <div className="relative z-10 grid grid-cols-6 gap-3">
+              <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
+                <div>
+                  <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
+                    <svg
+                      className="m-auto h-fit w-20 fill-primary-500 stroke-[4px]"
+                      viewBox="0 0 256 256"
+                      xmlns="http://www.w3.org/2000/svg"
+                      strokeWidth="0.9"
+                      stroke="currentColor"
+                    >
+                      <path
+                        className="text-primary-500"
+                        d="M148,224a4.0002,4.0002,0,0,1-4,4H112a4,4,0,0,1,0-8h32A4.0002,4.0002,0,0,1,148,224Zm71.05176-67.29443-12.36328,55.63232a11.92889,11.92889,0,0,1-7.72657,8.71533,11.93627,11.93627,0,0,1-11.48339-1.94775L158.59656,196H97.40344l-28.882,23.10547a11.93943,11.93943,0,0,1-7.47363,2.63769,12.05968,12.05968,0,0,1-4.00976-.68994,11.92889,11.92889,0,0,1-7.72657-8.71533L36.94824,156.70508a12.0757,12.0757,0,0,1,2.49512-10.28516l30.441-36.53027a118.54694,118.54694,0,0,1,7.92029-35.83643c11.82129-30.43994,33.77539-50.29052,42.665-57.4126a12.05721,12.05721,0,0,1,15.05566.04981c10.89941,8.855,30.86914,28.0918,42.15332,57.437A120.30232,120.30232,0,0,1,185.49,109.13965l31.06665,37.27978A12.07776,12.07776,0,0,1,219.05176,156.70557ZM98.32422,188h59.32812c50.49219-91.62646-7.93457-149.47168-27.17187-165.10059a3.96141,3.96141,0,0,0-5.00879-.01513v.00049C105.9668,38.50928,46.75,96.34375,98.32422,188Zm-7.47852,3.00049c-13.05664-23.46094-20.08032-46.35938-21.0542-68.502L45.58984,151.541a4.02645,4.02645,0,0,0-.833,3.42773l12.36328,55.63379a3.99987,3.99987,0,0,0,6.40332,2.25586ZM210.41016,151.541l-24.70911-29.65088c-.79761,22.3247-7.66272,45.42187-20.57,69.09179l27.34546,21.87647a3.99886,3.99886,0,0,0,6.40235-2.25586l12.36425-55.63281A4.02774,4.02774,0,0,0,210.41016,151.541ZM128,104a8,8,0,1,0-8-8A8.00917,8.00917,0,0,0,128,104Z"
                       ></path>
                     </svg>
                   </div>
-                </span>
-              </a>
-              <h1 className="mt-8 text-wrap text-4xl font-semibold text-gray-950 dark:text-white md:text-5xl xl:text-6xl xl:[line-height:1.125]">
-                An API for your HTML form
-              </h1>
-              <p className="mx-auto mt-8 hidden max-w-3xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
-                A form-handling service filled with features like validation,
-                and notifications that can be integrated to manage any form,
-                directly in your HTML.
-              </p>
-              <p className="mx-auto mt-6 max-w-2xl text-wrap text-gray-700 dark:text-gray-300 sm:hidden">
-                Highly customizable components for building modern websites and
-                applications, with your personnal spark.
-              </p>
-              <div className="mt-8 flex flex-col items-center justify-center gap-4">
-                <div className="rounded-[calc(var(--btn-border-radius)+4px)] border bg-gray-950/5 p-1 dark:border-white/10 dark:bg-white/5">
-                  <a
-                    href="/dashboard"
-                    className="dark:shadow-primary-500/10 border-primary-600 bg-primary-500 shadow-primary-200 before:border-primary-500 before:from-primary-600 hover:bg-primary-600 active:bg-primary-700 dark:bg-primary-600 dark:before:border-primary-400 dark:hover:bg-primary-700 dark:active:bg-primary-800 dark:active:before:from-primary-700 group relative z-[1] flex h-11 items-center justify-center gap-1.5 rounded-[--btn-border-radius] border px-4 text-base text-white shadow-md *:select-none before:absolute before:inset-0 before:rounded-[calc(var(--btn-border-radius)-1px)] before:border before:bg-gradient-to-b disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950/40 disabled:*:text-gray-300 *:disabled:opacity-20 disabled:before:border-transparent disabled:before:bg-gray-100 disabled:before:from-transparent dark:border-0 dark:before:border-0 dark:before:border-t dark:before:shadow-inner dark:before:shadow-white/10 dark:disabled:border dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white disabled:dark:*:text-gray-700 dark:disabled:before:bg-gray-900 dark:disabled:before:from-gray-900 dark:disabled:before:shadow-none [&>*:not(.sr-only)]:relative"
-                  >
+                  <div className="relative z-10 mt-6 space-y-2 text-center">
+                    <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
+                      Zero Configuration Setup
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      Create a form and start accepting submissions instantly
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
+                <div>
+                  <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                     <svg
-                      width="16px"
-                      height="16px"
+                      className="m-auto h-fit w-20"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="relative size-5 text-white"
                     >
                       <path
-                        className="stroke-white"
-                        d="M8 15C12.8747 15 15 12.949 15 8C15 12.949 17.1104 15 22 15C17.1104 15 15 17.1104 15 22C15 17.1104 12.8747 15 8 15Z"
-                        stroke-width="1.5"
-                        stroke-linejoin="round"
-                      ></path>
-                      <path
-                        d="M2 6.5C5.13376 6.5 6.5 5.18153 6.5 2C6.5 5.18153 7.85669 6.5 11 6.5C7.85669 6.5 6.5 7.85669 6.5 11C6.5 7.85669 5.13376 6.5 2 6.5Z"
-                        stroke-width="1.5"
-                        stroke-linejoin="round"
-                        className="stroke-white"
+                        d="M13 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.0799 21 8.2 21H12M13 3L19 9M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M19 9V10M21 15.21C20.9318 15.2141 20.7357 15.21 20.6667 15.21C19.6422 15.21 18.7077 14.7524 18 14C17.2923 14.7524 16.3578 15.2099 15.3333 15.2099C15.2643 15.2099 15.0684 15.2141 15.0002 15.21C15.0002 15.21 15 15.9855 15 16.3979C15 18.6121 16.2748 20.4725 18 21C19.7252 20.4725 21 18.6121 21 16.3979C21 15.9855 21 15.21 21 15.21Z"
+                        stroke="currentColor"
+                        strokeWidth="1.128"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-primary-500"
                       ></path>
                     </svg>
-
-                    <span className="text-nowrap">Get Started</span>
-                  </a>
+                  </div>
+                  <div className="relative z-10 mt-6 space-y-2 text-center">
+                    <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
+                      Spam Protection
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      Safeguard your forms against unwanted spam
+                    </p>
+                  </div>
                 </div>
-                <button className="group hidden h-9 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3 text-base text-gray-800 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-gray-300 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative">
-                  <span className="text-sm">Learn more</span>
+              </div>
+              <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
+                <div>
+                  <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
+                    <svg
+                      className="m-auto h-fit w-24 stroke-[1px]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20.7639 12H10.0556M3 8.00003H5.5M4 12H5.5M4.5 16H5.5M9.96153 12.4896L9.07002 15.4486C8.73252 16.5688 8.56376 17.1289 8.70734 17.4633C8.83199 17.7537 9.08656 17.9681 9.39391 18.0415C9.74792 18.1261 10.2711 17.8645 11.3175 17.3413L19.1378 13.4311C20.059 12.9705 20.5197 12.7402 20.6675 12.4285C20.7961 12.1573 20.7961 11.8427 20.6675 11.5715C20.5197 11.2598 20.059 11.0295 19.1378 10.5689L11.3068 6.65342C10.2633 6.13168 9.74156 5.87081 9.38789 5.95502C9.0808 6.02815 8.82627 6.24198 8.70128 6.53184C8.55731 6.86569 8.72427 7.42461 9.05819 8.54246L9.96261 11.5701C10.0137 11.7411 10.0392 11.8266 10.0493 11.9137C10.0583 11.991 10.0582 12.069 10.049 12.1463C10.0387 12.2334 10.013 12.3188 9.96153 12.4896Z"
+                        stroke="currentColor"
+                        strokeWidth="1.128"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-primary-500"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div className="relative z-10 mt-6 space-y-2 text-center">
+                    <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
+                      Email Auto Response
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      Set up automatic response emails to users after they
+                      submit a form
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
+                <div className="grid sm:grid-cols-2">
+                  <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
+                    <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        className="m-auto size-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5"
+                          stroke-width="0.648"
+                          stroke-linecap="round"
+                        ></path>
+                        <circle
+                          cx="19"
+                          cy="5"
+                          r="3"
+                          stroke-width="0.648"
+                        ></circle>
+                        <path
+                          d="M7 14H16"
+                          stroke-width="0.648"
+                          stroke-linecap="round"
+                        ></path>
+                        <path
+                          d="M7 17.5H13"
+                          stroke-width="0.648"
+                          stroke-linecap="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="space-y-2">
+                      <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
+                        Email Notifications
+                      </h2>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        Receive real-time notifications whenever your form
+                        receives a new entry.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative -mb-[calc(var(--card-padding)+1px)] -mr-[calc(var(--card-padding)+1px)] mt-6 h-fit rounded-tl-[calc(var(--card-border-radius)-0.5rem)] border py-2 dark:border-white/10 dark:bg-white/5 sm:ml-6 sm:mt-auto">
+                    <div className="absolute left-3 top-2 flex gap-1">
+                      <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
+                      <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
+                      <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
+                    </div>
+
+                    <svg
+                      width="576"
+                      height="172"
+                      viewBox="0 0 576 172"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        className="text-primary-600 dark:text-primary-500"
+                        d="M51 43H37C35.8954 43 35 43.8954 35 45V59C35 60.1046 35.8954 61 37 61H51C52.1046 61 53 60.1046 53 59V45C53 43.8954 52.1046 43 51 43Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        className="text-primary-600 dark:text-primary-500"
+                        d="M41 57C43 57 43.8 56 43.8 54.2V50C43.8 48 44.8 46.7 47 47"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M41 51.2H46.7"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        className="text-primary-600 dark:text-primary-500"
+                      />
+                      <path
+                        d="M32.4602 92.9091H34.2756L37.9062 99.0199H38.0597L41.6903 92.9091H43.5057L38.7756 100.605V106H37.1903V100.605L32.4602 92.9091ZM47.9513 106.205C47.065 106.205 46.2873 105.994 45.6183 105.572C44.9535 105.15 44.4336 104.56 44.0586 103.801C43.6879 103.043 43.5025 102.156 43.5025 101.142C43.5025 100.119 43.6879 99.2266 44.0586 98.4638C44.4336 97.701 44.9535 97.1087 45.6183 96.6868C46.2873 96.2649 47.065 96.054 47.9513 96.054C48.8377 96.054 49.6133 96.2649 50.2781 96.6868C50.9471 97.1087 51.467 97.701 51.8377 98.4638C52.2127 99.2266 52.4002 100.119 52.4002 101.142C52.4002 102.156 52.2127 103.043 51.8377 103.801C51.467 104.56 50.9471 105.15 50.2781 105.572C49.6133 105.994 48.8377 106.205 47.9513 106.205ZM47.9513 104.849C48.6246 104.849 49.1786 104.677 49.6133 104.332C50.0479 103.987 50.3697 103.533 50.5785 102.97C50.7873 102.408 50.8917 101.798 50.8917 101.142C50.8917 100.486 50.7873 99.8743 50.5785 99.3075C50.3697 98.7408 50.0479 98.2827 49.6133 97.9332C49.1786 97.5838 48.6246 97.4091 47.9513 97.4091C47.2781 97.4091 46.7241 97.5838 46.2894 97.9332C45.8548 98.2827 45.533 98.7408 45.3242 99.3075C45.1154 99.8743 45.011 100.486 45.011 101.142C45.011 101.798 45.1154 102.408 45.3242 102.97C45.533 103.533 45.8548 103.987 46.2894 104.332C46.7241 104.677 47.2781 104.849 47.9513 104.849ZM60.8904 101.986V96.1818H62.399V106H60.8904V104.338H60.7882C60.5581 104.837 60.2001 105.261 59.7143 105.61C59.2285 105.955 58.6149 106.128 57.8734 106.128C57.2598 106.128 56.7143 105.994 56.237 105.725C55.7598 105.452 55.3848 105.043 55.112 104.498C54.8393 103.948 54.7029 103.256 54.7029 102.42V96.1818H56.2115V102.318C56.2115 103.034 56.4118 103.605 56.8123 104.031C57.2172 104.457 57.7328 104.67 58.3592 104.67C58.7342 104.67 59.1156 104.575 59.5034 104.383C59.8954 104.191 60.2235 103.897 60.4877 103.501C60.7562 103.104 60.8904 102.599 60.8904 101.986ZM65.1619 106V96.1818H66.6193V97.6648H66.7216C66.9006 97.179 67.2244 96.7848 67.6932 96.4822C68.1619 96.1797 68.6903 96.0284 69.2784 96.0284C69.3892 96.0284 69.5277 96.0305 69.6939 96.0348C69.8601 96.0391 69.9858 96.0455 70.071 96.054V97.5881C70.0199 97.5753 69.9027 97.5561 69.7195 97.5305C69.5405 97.5007 69.3509 97.4858 69.1506 97.4858C68.6733 97.4858 68.2472 97.5859 67.8722 97.7862C67.5014 97.9822 67.2074 98.255 66.9901 98.6044C66.777 98.9496 66.6705 99.3437 66.6705 99.7869V106H65.1619ZM81.2939 96.1818V97.4602H76.0012V96.1818H81.2939ZM77.5865 106V94.8267C77.5865 94.2642 77.7186 93.7955 77.9828 93.4205C78.247 93.0455 78.59 92.7642 79.0119 92.5767C79.4338 92.3892 79.8791 92.2955 80.3478 92.2955C80.7186 92.2955 81.0211 92.3253 81.2555 92.3849C81.4899 92.4446 81.6646 92.5 81.7797 92.5511L81.345 93.8551C81.2683 93.8295 81.1618 93.7976 81.0254 93.7592C80.8933 93.7209 80.7186 93.7017 80.5012 93.7017C80.0027 93.7017 79.6426 93.8274 79.421 94.0788C79.2037 94.3303 79.095 94.6989 79.095 95.1847V106H77.5865ZM86.9924 106.205C86.106 106.205 85.3283 105.994 84.6593 105.572C83.9945 105.15 83.4746 104.56 83.0996 103.801C82.7289 103.043 82.5435 102.156 82.5435 101.142C82.5435 100.119 82.7289 99.2266 83.0996 98.4638C83.4746 97.701 83.9945 97.1087 84.6593 96.6868C85.3283 96.2649 86.106 96.054 86.9924 96.054C87.8787 96.054 88.6543 96.2649 89.3191 96.6868C89.9881 97.1087 90.508 97.701 90.8787 98.4638C91.2537 99.2266 91.4412 100.119 91.4412 101.142C91.4412 102.156 91.2537 103.043 90.8787 103.801C90.508 104.56 89.9881 105.15 89.3191 105.572C88.6543 105.994 87.8787 106.205 86.9924 106.205ZM86.9924 104.849C87.6657 104.849 88.2196 104.677 88.6543 104.332C89.089 103.987 89.4107 103.533 89.6195 102.97C89.8283 102.408 89.9327 101.798 89.9327 101.142C89.9327 100.486 89.8283 99.8743 89.6195 99.3075C89.4107 98.7408 89.089 98.2827 88.6543 97.9332C88.2196 97.5838 87.6657 97.4091 86.9924 97.4091C86.3191 97.4091 85.7651 97.5838 85.3304 97.9332C84.8958 98.2827 84.574 98.7408 84.3652 99.3075C84.1564 99.8743 84.052 100.486 84.052 101.142C84.052 101.798 84.1564 102.408 84.3652 102.97C84.574 103.533 84.8958 103.987 85.3304 104.332C85.7651 104.677 86.3191 104.849 86.9924 104.849ZM93.744 106V96.1818H95.2013V97.6648H95.3036C95.4826 97.179 95.8065 96.7848 96.2752 96.4822C96.744 96.1797 97.2724 96.0284 97.8604 96.0284C97.9712 96.0284 98.1097 96.0305 98.2759 96.0348C98.4421 96.0391 98.5678 96.0455 98.6531 96.054V97.5881C98.6019 97.5753 98.4847 97.5561 98.3015 97.5305C98.1225 97.5007 97.9329 97.4858 97.7326 97.4858C97.2553 97.4858 96.8292 97.5859 96.4542 97.7862C96.0835 97.9822 95.7894 98.255 95.5721 98.6044C95.359 98.9496 95.2525 99.3437 95.2525 99.7869V106H93.744ZM100.441 106V96.1818H101.899V97.7159H102.026C102.231 97.1918 102.561 96.7848 103.017 96.495C103.473 96.201 104.021 96.054 104.66 96.054C105.308 96.054 105.847 96.201 106.277 96.495C106.712 96.7848 107.051 97.1918 107.294 97.7159H107.396C107.647 97.2088 108.024 96.8061 108.527 96.5078C109.03 96.2053 109.633 96.054 110.336 96.054C111.214 96.054 111.932 96.3288 112.49 96.8786C113.048 97.424 113.328 98.2741 113.328 99.429V106H111.819V99.429C111.819 98.7045 111.621 98.1868 111.225 97.8757C110.828 97.5646 110.362 97.4091 109.825 97.4091C109.134 97.4091 108.6 97.6179 108.22 98.0355C107.841 98.4489 107.651 98.973 107.651 99.608V106H106.117V99.2756C106.117 98.7173 105.936 98.2678 105.574 97.9268C105.212 97.5817 104.745 97.4091 104.174 97.4091C103.782 97.4091 103.416 97.5135 103.075 97.7223C102.738 97.9311 102.465 98.2209 102.257 98.5916C102.052 98.9581 101.95 99.3821 101.95 99.8636V106H100.441ZM123.814 106L120.119 92.9091H122.67L125.028 102.529H125.15L127.668 92.9091H129.988L132.513 102.536H132.628L134.987 92.9091H137.537L133.843 106H131.503L128.883 96.8146H128.78L126.153 106H123.814ZM140.903 106.198C140.281 106.198 139.72 106.087 139.222 105.866C138.727 105.64 138.335 105.308 138.046 104.869C137.76 104.43 137.617 103.888 137.617 103.245C137.617 102.691 137.72 102.233 137.924 101.871C138.129 101.509 138.408 101.219 138.762 101.001C139.115 100.784 139.514 100.62 139.957 100.509C140.404 100.394 140.867 100.311 141.344 100.26C141.919 100.2 142.386 100.147 142.744 100.1C143.102 100.049 143.362 99.9723 143.524 99.87C143.69 99.7635 143.773 99.5994 143.773 99.3778V99.3395C143.773 98.858 143.63 98.4851 143.345 98.2209C143.059 97.9567 142.648 97.8246 142.111 97.8246C141.544 97.8246 141.095 97.9482 140.762 98.1953C140.434 98.4425 140.213 98.7344 140.097 99.071L137.937 98.7642C138.107 98.1676 138.389 97.669 138.781 97.2685C139.173 96.8636 139.652 96.5611 140.219 96.3608C140.786 96.1562 141.412 96.054 142.098 96.054C142.571 96.054 143.042 96.1094 143.511 96.2202C143.98 96.331 144.408 96.5142 144.796 96.7699C145.183 97.0213 145.494 97.3643 145.729 97.799C145.968 98.2337 146.087 98.777 146.087 99.429V106H143.862V104.651H143.786C143.645 104.924 143.447 105.18 143.191 105.418C142.94 105.653 142.622 105.842 142.239 105.987C141.86 106.128 141.414 106.198 140.903 106.198ZM141.504 104.498C141.968 104.498 142.371 104.406 142.712 104.223C143.053 104.036 143.315 103.788 143.498 103.482C143.686 103.175 143.779 102.84 143.779 102.478V101.321C143.707 101.381 143.583 101.436 143.409 101.487C143.238 101.538 143.046 101.583 142.833 101.621C142.62 101.66 142.409 101.694 142.2 101.724C141.992 101.754 141.811 101.779 141.657 101.8C141.312 101.847 141.003 101.924 140.73 102.031C140.458 102.137 140.242 102.286 140.085 102.478C139.927 102.665 139.848 102.908 139.848 103.207C139.848 103.633 140.004 103.955 140.315 104.172C140.626 104.389 141.022 104.498 141.504 104.498ZM148.414 106V96.1818H150.727V106H148.414ZM149.577 94.7884C149.21 94.7884 148.895 94.6669 148.631 94.424C148.367 94.1768 148.235 93.8807 148.235 93.5355C148.235 93.1861 148.367 92.8899 148.631 92.647C148.895 92.3999 149.21 92.2763 149.577 92.2763C149.948 92.2763 150.263 92.3999 150.523 92.647C150.787 92.8899 150.919 93.1861 150.919 93.5355C150.919 93.8807 150.787 94.1768 150.523 94.424C150.263 94.6669 149.948 94.7884 149.577 94.7884ZM158.01 96.1818V97.9716H152.365V96.1818H158.01ZM153.759 93.8295H156.073V103.047C156.073 103.358 156.12 103.597 156.213 103.763C156.311 103.925 156.439 104.036 156.597 104.095C156.755 104.155 156.929 104.185 157.121 104.185C157.266 104.185 157.398 104.174 157.517 104.153C157.641 104.131 157.735 104.112 157.799 104.095L158.189 105.904C158.065 105.947 157.888 105.994 157.658 106.045C157.432 106.096 157.155 106.126 156.827 106.134C156.248 106.151 155.725 106.064 155.261 105.872C154.797 105.676 154.428 105.374 154.155 104.964C153.887 104.555 153.755 104.044 153.759 103.43V93.8295ZM162.47 92.9091V106H160.156V92.9091H162.47ZM164.849 106V96.1818H167.163V106H164.849ZM166.012 94.7884C165.646 94.7884 165.331 94.6669 165.066 94.424C164.802 94.1768 164.67 93.8807 164.67 93.5355C164.67 93.1861 164.802 92.8899 165.066 92.647C165.331 92.3999 165.646 92.2763 166.012 92.2763C166.383 92.2763 166.699 92.3999 166.958 92.647C167.223 92.8899 167.355 93.1861 167.355 93.5355C167.355 93.8807 167.223 94.1768 166.958 94.424C166.699 94.6669 166.383 94.7884 166.012 94.7884ZM177.302 98.777L175.193 99.0071C175.133 98.794 175.029 98.5938 174.88 98.4062C174.735 98.2188 174.539 98.0675 174.292 97.9524C174.045 97.8374 173.742 97.7798 173.384 97.7798C172.903 97.7798 172.498 97.8842 172.17 98.093C171.846 98.3018 171.686 98.5724 171.69 98.9048C171.686 99.1903 171.79 99.4226 172.003 99.6016C172.221 99.7805 172.579 99.9276 173.077 100.043L174.752 100.401C175.681 100.601 176.371 100.918 176.823 101.353C177.279 101.788 177.509 102.357 177.513 103.06C177.509 103.678 177.328 104.223 176.97 104.696C176.616 105.165 176.124 105.531 175.493 105.795C174.863 106.06 174.138 106.192 173.32 106.192C172.118 106.192 171.151 105.94 170.418 105.438C169.685 104.93 169.248 104.225 169.108 103.322L171.364 103.104C171.466 103.548 171.684 103.882 172.016 104.108C172.349 104.334 172.781 104.447 173.314 104.447C173.863 104.447 174.305 104.334 174.637 104.108C174.974 103.882 175.142 103.603 175.142 103.271C175.142 102.989 175.033 102.757 174.816 102.574C174.603 102.391 174.27 102.25 173.819 102.152L172.144 101.8C171.202 101.604 170.506 101.274 170.054 100.81C169.602 100.341 169.378 99.7486 169.383 99.0327C169.378 98.4276 169.542 97.9034 169.875 97.4602C170.211 97.0128 170.678 96.6676 171.275 96.4247C171.876 96.1776 172.568 96.054 173.352 96.054C174.503 96.054 175.408 96.299 176.069 96.7891C176.733 97.2791 177.145 97.9418 177.302 98.777ZM184.324 96.1818V97.9716H178.68V96.1818H184.324ZM180.073 93.8295H182.387V103.047C182.387 103.358 182.434 103.597 182.528 103.763C182.626 103.925 182.754 104.036 182.911 104.095C183.069 104.155 183.244 104.185 183.436 104.185C183.58 104.185 183.713 104.174 183.832 104.153C183.955 104.131 184.049 104.112 184.113 104.095L184.503 105.904C184.379 105.947 184.203 105.994 183.972 106.045C183.747 106.096 183.47 106.126 183.142 106.134C182.562 106.151 182.04 106.064 181.575 105.872C181.111 105.676 180.742 105.374 180.47 104.964C180.201 104.555 180.069 104.044 180.073 103.43V93.8295ZM193.022 100.094V106H191.513V92.9091H193.022V97.7159H193.15C193.38 97.2088 193.725 96.8061 194.185 96.5078C194.65 96.2053 195.268 96.054 196.039 96.054C196.708 96.054 197.294 96.1882 197.797 96.4567C198.3 96.7209 198.69 97.1278 198.967 97.6776C199.248 98.223 199.388 98.9176 199.388 99.7614V106H197.88V99.8636C197.88 99.0838 197.678 98.4808 197.273 98.0547C196.872 97.6243 196.316 97.4091 195.604 97.4091C195.11 97.4091 194.667 97.5135 194.275 97.7223C193.887 97.9311 193.58 98.2358 193.354 98.6364C193.133 99.0369 193.022 99.5227 193.022 100.094ZM205.037 106.23C204.415 106.23 203.851 106.113 203.344 105.879C202.836 105.64 202.434 105.297 202.135 104.849C201.837 104.398 201.688 103.852 201.688 103.213C201.688 102.651 201.799 102.195 202.02 101.845C202.242 101.491 202.538 101.214 202.909 101.014C203.28 100.814 203.689 100.665 204.136 100.567C204.588 100.464 205.042 100.384 205.498 100.324C206.094 100.247 206.578 100.19 206.949 100.151C207.324 100.109 207.596 100.038 207.767 99.9403C207.942 99.8423 208.029 99.6719 208.029 99.429V99.3778C208.029 98.7472 207.856 98.2571 207.511 97.9077C207.17 97.5582 206.653 97.3835 205.958 97.3835C205.238 97.3835 204.673 97.5412 204.264 97.8565C203.855 98.1719 203.567 98.5085 203.401 98.8665L201.969 98.3551C202.225 97.7585 202.566 97.294 202.992 96.9616C203.422 96.625 203.891 96.3906 204.398 96.2585C204.91 96.1222 205.412 96.054 205.907 96.054C206.222 96.054 206.584 96.0923 206.993 96.169C207.407 96.2415 207.805 96.3928 208.189 96.6229C208.577 96.853 208.898 97.2003 209.154 97.6648C209.41 98.1293 209.537 98.7514 209.537 99.5312V106H208.029V104.67H207.952C207.85 104.884 207.68 105.112 207.441 105.354C207.202 105.597 206.885 105.804 206.488 105.974C206.092 106.145 205.608 106.23 205.037 106.23ZM205.268 104.875C205.864 104.875 206.367 104.758 206.776 104.523C207.189 104.289 207.501 103.987 207.709 103.616C207.922 103.245 208.029 102.855 208.029 102.446V101.065C207.965 101.142 207.824 101.212 207.607 101.276C207.394 101.336 207.147 101.389 206.866 101.436C206.589 101.479 206.318 101.517 206.054 101.551C205.794 101.581 205.583 101.607 205.421 101.628C205.029 101.679 204.662 101.762 204.322 101.877C203.985 101.988 203.712 102.156 203.503 102.382C203.299 102.604 203.197 102.906 203.197 103.29C203.197 103.814 203.39 104.21 203.778 104.479C204.17 104.743 204.667 104.875 205.268 104.875ZM219.245 98.3807L217.89 98.7642C217.805 98.5384 217.679 98.3189 217.513 98.1058C217.351 97.8885 217.13 97.7095 216.848 97.5689C216.567 97.4283 216.207 97.358 215.768 97.358C215.167 97.358 214.667 97.4964 214.266 97.7734C213.87 98.0462 213.672 98.3935 213.672 98.8153C213.672 99.1903 213.808 99.4865 214.081 99.7038C214.353 99.9212 214.779 100.102 215.359 100.247L216.816 100.605C217.694 100.818 218.348 101.144 218.779 101.583C219.209 102.018 219.424 102.578 219.424 103.264C219.424 103.827 219.262 104.33 218.939 104.773C218.619 105.216 218.172 105.565 217.596 105.821C217.021 106.077 216.352 106.205 215.589 106.205C214.588 106.205 213.759 105.987 213.103 105.553C212.446 105.118 212.031 104.483 211.856 103.648L213.288 103.29C213.424 103.818 213.682 104.214 214.061 104.479C214.445 104.743 214.946 104.875 215.564 104.875C216.267 104.875 216.825 104.726 217.238 104.428C217.656 104.125 217.865 103.763 217.865 103.341C217.865 103 217.745 102.714 217.507 102.484C217.268 102.25 216.902 102.075 216.407 101.96L214.771 101.577C213.872 101.364 213.211 101.033 212.789 100.586C212.372 100.134 212.163 99.5696 212.163 98.892C212.163 98.3381 212.319 97.848 212.63 97.4219C212.945 96.9957 213.373 96.6612 213.914 96.4183C214.46 96.1754 215.078 96.054 215.768 96.054C216.74 96.054 217.502 96.267 218.056 96.6932C218.615 97.1193 219.011 97.6818 219.245 98.3807ZM33.3807 128V118.182H34.8381V119.665H34.9403C35.1193 119.179 35.4432 118.785 35.9119 118.482C36.3807 118.18 36.9091 118.028 37.4972 118.028C37.608 118.028 37.7464 118.031 37.9126 118.035C38.0788 118.039 38.2045 118.045 38.2898 118.054V119.588C38.2386 119.575 38.1214 119.556 37.9382 119.531C37.7592 119.501 37.5696 119.486 37.3693 119.486C36.892 119.486 36.4659 119.586 36.0909 119.786C35.7202 119.982 35.4261 120.255 35.2088 120.604C34.9957 120.95 34.8892 121.344 34.8892 121.787V128H33.3807ZM43.8956 128.205C42.9496 128.205 42.1335 127.996 41.4474 127.578C40.7656 127.156 40.2393 126.568 39.8686 125.814C39.5021 125.055 39.3189 124.173 39.3189 123.168C39.3189 122.162 39.5021 121.276 39.8686 120.509C40.2393 119.737 40.755 119.136 41.4155 118.706C42.0803 118.271 42.8558 118.054 43.7422 118.054C44.2536 118.054 44.7585 118.139 45.2571 118.31C45.7557 118.48 46.2095 118.757 46.6186 119.141C47.0277 119.52 47.3537 120.023 47.5966 120.649C47.8395 121.276 47.9609 122.047 47.9609 122.963V123.602H40.3928V122.298H46.4268C46.4268 121.744 46.3161 121.25 46.0945 120.815C45.8771 120.381 45.5661 120.038 45.1612 119.786C44.7607 119.535 44.2876 119.409 43.7422 119.409C43.1413 119.409 42.6214 119.558 42.1825 119.857C41.7479 120.151 41.4134 120.534 41.179 121.007C40.9446 121.48 40.8274 121.987 40.8274 122.528V123.398C40.8274 124.139 40.9553 124.768 41.2109 125.283C41.4709 125.795 41.831 126.185 42.2912 126.453C42.7514 126.717 43.2862 126.849 43.8956 126.849C44.2919 126.849 44.6499 126.794 44.9695 126.683C45.2933 126.568 45.5724 126.398 45.8068 126.172C46.0412 125.942 46.2223 125.656 46.3501 125.315L47.8075 125.724C47.6541 126.219 47.3963 126.653 47.0341 127.028C46.6719 127.399 46.2244 127.689 45.6918 127.898C45.1591 128.102 44.5604 128.205 43.8956 128.205ZM54.2443 128.205C53.3239 128.205 52.5313 127.987 51.8665 127.553C51.2017 127.118 50.6903 126.519 50.3324 125.756C49.9744 124.994 49.7955 124.122 49.7955 123.142C49.7955 122.145 49.9787 121.265 50.3452 120.502C50.7159 119.735 51.2315 119.136 51.892 118.706C52.5568 118.271 53.3324 118.054 54.2188 118.054C54.9091 118.054 55.5312 118.182 56.0852 118.438C56.6392 118.693 57.093 119.051 57.4467 119.511C57.8004 119.972 58.0199 120.509 58.1051 121.122H56.5966C56.4815 120.675 56.2259 120.278 55.8295 119.933C55.4375 119.584 54.9091 119.409 54.2443 119.409C53.6563 119.409 53.1406 119.562 52.6974 119.869C52.2585 120.172 51.9155 120.6 51.6683 121.154C51.4254 121.704 51.304 122.349 51.304 123.091C51.304 123.849 51.4233 124.51 51.6619 125.072C51.9048 125.635 52.2457 126.072 52.6847 126.383C53.1278 126.694 53.6477 126.849 54.2443 126.849C54.6364 126.849 54.9922 126.781 55.3118 126.645C55.6314 126.509 55.902 126.312 56.1236 126.057C56.3452 125.801 56.5028 125.494 56.5966 125.136H58.1051C58.0199 125.716 57.8089 126.238 57.4723 126.702C57.1399 127.163 56.6989 127.529 56.1491 127.802C55.6037 128.07 54.9688 128.205 54.2443 128.205ZM64.4268 128.205C63.4808 128.205 62.6648 127.996 61.9787 127.578C61.2969 127.156 60.7706 126.568 60.3999 125.814C60.0334 125.055 59.8501 124.173 59.8501 123.168C59.8501 122.162 60.0334 121.276 60.3999 120.509C60.7706 119.737 61.2862 119.136 61.9467 118.706C62.6115 118.271 63.3871 118.054 64.2734 118.054C64.7848 118.054 65.2898 118.139 65.7884 118.31C66.2869 118.48 66.7408 118.757 67.1499 119.141C67.5589 119.52 67.8849 120.023 68.1278 120.649C68.3707 121.276 68.4922 122.047 68.4922 122.963V123.602H60.924V122.298H66.9581C66.9581 121.744 66.8473 121.25 66.6257 120.815C66.4084 120.381 66.0973 120.038 65.6925 119.786C65.2919 119.535 64.8189 119.409 64.2734 119.409C63.6726 119.409 63.1527 119.558 62.7138 119.857C62.2791 120.151 61.9446 120.534 61.7102 121.007C61.4759 121.48 61.3587 121.987 61.3587 122.528V123.398C61.3587 124.139 61.4865 124.768 61.7422 125.283C62.0021 125.795 62.3622 126.185 62.8224 126.453C63.2827 126.717 63.8175 126.849 64.4268 126.849C64.8232 126.849 65.1811 126.794 65.5007 126.683C65.8246 126.568 66.1037 126.398 66.3381 126.172C66.5724 125.942 66.7536 125.656 66.8814 125.315L68.3388 125.724C68.1854 126.219 67.9276 126.653 67.5653 127.028C67.2031 127.399 66.7557 127.689 66.223 127.898C65.6903 128.102 65.0916 128.205 64.4268 128.205ZM70.7869 128V118.182H72.2955V128H70.7869ZM71.554 116.545C71.2599 116.545 71.0064 116.445 70.7933 116.245C70.5845 116.045 70.4801 115.804 70.4801 115.523C70.4801 115.241 70.5845 115.001 70.7933 114.8C71.0064 114.6 71.2599 114.5 71.554 114.5C71.848 114.5 72.0994 114.6 72.3082 114.8C72.5213 115.001 72.6278 115.241 72.6278 115.523C72.6278 115.804 72.5213 116.045 72.3082 116.245C72.0994 116.445 71.848 116.545 71.554 116.545ZM83.0868 118.182L79.4561 128H77.9221L74.2914 118.182H75.9277L78.638 126.006H78.7402L81.4505 118.182H83.0868ZM88.8429 128.205C87.8968 128.205 87.0808 127.996 86.3947 127.578C85.7129 127.156 85.1866 126.568 84.8159 125.814C84.4494 125.055 84.2662 124.173 84.2662 123.168C84.2662 122.162 84.4494 121.276 84.8159 120.509C85.1866 119.737 85.7022 119.136 86.3627 118.706C87.0275 118.271 87.8031 118.054 88.6895 118.054C89.2008 118.054 89.7058 118.139 90.2044 118.31C90.7029 118.48 91.1568 118.757 91.5659 119.141C91.975 119.52 92.301 120.023 92.5439 120.649C92.7868 121.276 92.9082 122.047 92.9082 122.963V123.602H85.34V122.298H91.3741C91.3741 121.744 91.2633 121.25 91.0417 120.815C90.8244 120.381 90.5133 120.038 90.1085 119.786C89.7079 119.535 89.2349 119.409 88.6895 119.409C88.0886 119.409 87.5687 119.558 87.1298 119.857C86.6951 120.151 86.3606 120.534 86.1262 121.007C85.8919 121.48 85.7747 121.987 85.7747 122.528V123.398C85.7747 124.139 85.9025 124.768 86.1582 125.283C86.4181 125.795 86.7782 126.185 87.2385 126.453C87.6987 126.717 88.2335 126.849 88.8429 126.849C89.2392 126.849 89.5971 126.794 89.9167 126.683C90.2406 126.568 90.5197 126.398 90.7541 126.172C90.9885 125.942 91.1696 125.656 91.2974 125.315L92.7548 125.724C92.6014 126.219 92.3436 126.653 91.9814 127.028C91.6191 127.399 91.1717 127.689 90.639 127.898C90.1064 128.102 89.5076 128.205 88.8429 128.205ZM98.9103 128.205C98.0922 128.205 97.3699 127.998 96.7434 127.585C96.117 127.167 95.627 126.579 95.2733 125.82C94.9196 125.058 94.7427 124.156 94.7427 123.116C94.7427 122.085 94.9196 121.19 95.2733 120.432C95.627 119.673 96.1191 119.087 96.7498 118.674C97.3805 118.261 98.1092 118.054 98.9359 118.054C99.5751 118.054 100.08 118.161 100.451 118.374C100.826 118.582 101.111 118.821 101.307 119.089C101.508 119.354 101.663 119.571 101.774 119.741H101.902V114.909H103.41V128H101.953V126.491H101.774C101.663 126.67 101.506 126.896 101.301 127.169C101.096 127.437 100.805 127.678 100.425 127.891C100.046 128.1 99.541 128.205 98.9103 128.205ZM99.1149 126.849C99.72 126.849 100.231 126.692 100.649 126.376C101.067 126.057 101.384 125.616 101.601 125.053C101.819 124.487 101.927 123.832 101.927 123.091C101.927 122.358 101.821 121.717 101.608 121.167C101.395 120.613 101.079 120.183 100.662 119.876C100.244 119.565 99.7285 119.409 99.1149 119.409C98.4757 119.409 97.943 119.573 97.5169 119.901C97.095 120.225 96.7775 120.666 96.5645 121.224C96.3556 121.778 96.2512 122.401 96.2512 123.091C96.2512 123.79 96.3578 124.425 96.5708 124.996C96.7882 125.562 97.1078 126.014 97.5297 126.351C97.9558 126.683 98.4842 126.849 99.1149 126.849ZM114.334 128.23C113.712 128.23 113.148 128.113 112.64 127.879C112.133 127.64 111.731 127.297 111.432 126.849C111.134 126.398 110.985 125.852 110.985 125.213C110.985 124.651 111.096 124.195 111.317 123.845C111.539 123.491 111.835 123.214 112.206 123.014C112.577 122.814 112.986 122.665 113.433 122.567C113.885 122.464 114.339 122.384 114.795 122.324C115.391 122.247 115.875 122.19 116.246 122.151C116.621 122.109 116.893 122.038 117.064 121.94C117.238 121.842 117.326 121.672 117.326 121.429V121.378C117.326 120.747 117.153 120.257 116.808 119.908C116.467 119.558 115.949 119.384 115.255 119.384C114.535 119.384 113.97 119.541 113.561 119.857C113.152 120.172 112.864 120.509 112.698 120.866L111.266 120.355C111.522 119.759 111.863 119.294 112.289 118.962C112.719 118.625 113.188 118.391 113.695 118.259C114.206 118.122 114.709 118.054 115.204 118.054C115.519 118.054 115.881 118.092 116.29 118.169C116.704 118.241 117.102 118.393 117.486 118.623C117.873 118.853 118.195 119.2 118.451 119.665C118.706 120.129 118.834 120.751 118.834 121.531V128H117.326V126.67H117.249C117.147 126.884 116.976 127.112 116.738 127.354C116.499 127.597 116.182 127.804 115.785 127.974C115.389 128.145 114.905 128.23 114.334 128.23ZM114.564 126.875C115.161 126.875 115.664 126.758 116.073 126.523C116.486 126.289 116.797 125.987 117.006 125.616C117.219 125.245 117.326 124.855 117.326 124.446V123.065C117.262 123.142 117.121 123.212 116.904 123.276C116.691 123.336 116.444 123.389 116.162 123.436C115.885 123.479 115.615 123.517 115.351 123.551C115.091 123.581 114.88 123.607 114.718 123.628C114.326 123.679 113.959 123.762 113.618 123.877C113.282 123.988 113.009 124.156 112.8 124.382C112.596 124.604 112.493 124.906 112.493 125.29C112.493 125.814 112.687 126.21 113.075 126.479C113.467 126.743 113.964 126.875 114.564 126.875ZM133.605 120.381L132.25 120.764C132.164 120.538 132.039 120.319 131.873 120.106C131.711 119.888 131.489 119.71 131.208 119.569C130.926 119.428 130.566 119.358 130.127 119.358C129.527 119.358 129.026 119.496 128.625 119.773C128.229 120.046 128.031 120.393 128.031 120.815C128.031 121.19 128.167 121.487 128.44 121.704C128.713 121.921 129.139 122.102 129.718 122.247L131.176 122.605C132.054 122.818 132.708 123.144 133.138 123.583C133.569 124.018 133.784 124.578 133.784 125.264C133.784 125.827 133.622 126.33 133.298 126.773C132.978 127.216 132.531 127.565 131.956 127.821C131.38 128.077 130.711 128.205 129.949 128.205C128.947 128.205 128.118 127.987 127.462 127.553C126.806 127.118 126.39 126.483 126.216 125.648L127.647 125.29C127.784 125.818 128.042 126.214 128.421 126.479C128.804 126.743 129.305 126.875 129.923 126.875C130.626 126.875 131.184 126.726 131.598 126.428C132.015 126.125 132.224 125.763 132.224 125.341C132.224 125 132.105 124.714 131.866 124.484C131.627 124.25 131.261 124.075 130.767 123.96L129.13 123.577C128.231 123.364 127.571 123.033 127.149 122.586C126.731 122.134 126.522 121.57 126.522 120.892C126.522 120.338 126.678 119.848 126.989 119.422C127.304 118.996 127.733 118.661 128.274 118.418C128.819 118.175 129.437 118.054 130.127 118.054C131.099 118.054 131.862 118.267 132.416 118.693C132.974 119.119 133.37 119.682 133.605 120.381ZM142.242 123.986V118.182H143.751V128H142.242V126.338H142.14C141.91 126.837 141.552 127.261 141.066 127.61C140.58 127.955 139.966 128.128 139.225 128.128C138.611 128.128 138.066 127.994 137.589 127.725C137.111 127.452 136.736 127.043 136.464 126.498C136.191 125.948 136.055 125.256 136.055 124.42V118.182H137.563V124.318C137.563 125.034 137.763 125.605 138.164 126.031C138.569 126.457 139.084 126.67 139.711 126.67C140.086 126.67 140.467 126.575 140.855 126.383C141.247 126.191 141.575 125.897 141.839 125.501C142.108 125.104 142.242 124.599 142.242 123.986ZM146.718 128V114.909H148.227V119.741H148.354C148.465 119.571 148.619 119.354 148.815 119.089C149.015 118.821 149.3 118.582 149.671 118.374C150.046 118.161 150.553 118.054 151.192 118.054C152.019 118.054 152.748 118.261 153.379 118.674C154.009 119.087 154.501 119.673 154.855 120.432C155.209 121.19 155.386 122.085 155.386 123.116C155.386 124.156 155.209 125.058 154.855 125.82C154.501 126.579 154.011 127.167 153.385 127.585C152.759 127.998 152.036 128.205 151.218 128.205C150.587 128.205 150.082 128.1 149.703 127.891C149.324 127.678 149.032 127.437 148.827 127.169C148.623 126.896 148.465 126.67 148.354 126.491H148.175V128H146.718ZM148.201 123.091C148.201 123.832 148.31 124.487 148.527 125.053C148.744 125.616 149.062 126.057 149.479 126.376C149.897 126.692 150.408 126.849 151.013 126.849C151.644 126.849 152.17 126.683 152.592 126.351C153.018 126.014 153.338 125.562 153.551 124.996C153.768 124.425 153.877 123.79 153.877 123.091C153.877 122.401 153.771 121.778 153.558 121.224C153.349 120.666 153.031 120.225 152.605 119.901C152.183 119.573 151.653 119.409 151.013 119.409C150.4 119.409 149.884 119.565 149.467 119.876C149.049 120.183 148.734 120.613 148.521 121.167C148.308 121.717 148.201 122.358 148.201 123.091ZM157.693 128V118.182H159.151V119.716H159.278C159.483 119.192 159.813 118.785 160.269 118.495C160.725 118.201 161.273 118.054 161.912 118.054C162.56 118.054 163.099 118.201 163.529 118.495C163.964 118.785 164.303 119.192 164.545 119.716H164.648C164.899 119.209 165.276 118.806 165.779 118.508C166.282 118.205 166.885 118.054 167.588 118.054C168.466 118.054 169.184 118.329 169.742 118.879C170.3 119.424 170.58 120.274 170.58 121.429V128H169.071V121.429C169.071 120.705 168.873 120.187 168.477 119.876C168.08 119.565 167.614 119.409 167.077 119.409C166.386 119.409 165.852 119.618 165.472 120.036C165.093 120.449 164.903 120.973 164.903 121.608V128H163.369V121.276C163.369 120.717 163.188 120.268 162.826 119.927C162.464 119.582 161.997 119.409 161.426 119.409C161.034 119.409 160.668 119.513 160.327 119.722C159.99 119.931 159.717 120.221 159.509 120.592C159.304 120.958 159.202 121.382 159.202 121.864V128H157.693ZM173.338 128V118.182H174.846V128H173.338ZM174.105 116.545C173.811 116.545 173.557 116.445 173.344 116.245C173.135 116.045 173.031 115.804 173.031 115.523C173.031 115.241 173.135 115.001 173.344 114.8C173.557 114.6 173.811 114.5 174.105 114.5C174.399 114.5 174.65 114.6 174.859 114.8C175.072 115.001 175.179 115.241 175.179 115.523C175.179 115.804 175.072 116.045 174.859 116.245C174.65 116.445 174.399 116.545 174.105 116.545ZM184.564 120.381L183.209 120.764C183.123 120.538 182.998 120.319 182.831 120.106C182.67 119.888 182.448 119.71 182.167 119.569C181.885 119.428 181.525 119.358 181.086 119.358C180.486 119.358 179.985 119.496 179.584 119.773C179.188 120.046 178.99 120.393 178.99 120.815C178.99 121.19 179.126 121.487 179.399 121.704C179.672 121.921 180.098 122.102 180.677 122.247L182.135 122.605C183.013 122.818 183.667 123.144 184.097 123.583C184.528 124.018 184.743 124.578 184.743 125.264C184.743 125.827 184.581 126.33 184.257 126.773C183.937 127.216 183.49 127.565 182.915 127.821C182.339 128.077 181.67 128.205 180.907 128.205C179.906 128.205 179.077 127.987 178.421 127.553C177.765 127.118 177.349 126.483 177.175 125.648L178.606 125.29C178.743 125.818 179.001 126.214 179.38 126.479C179.763 126.743 180.264 126.875 180.882 126.875C181.585 126.875 182.143 126.726 182.557 126.428C182.974 126.125 183.183 125.763 183.183 125.341C183.183 125 183.064 124.714 182.825 124.484C182.586 124.25 182.22 124.075 181.726 123.96L180.089 123.577C179.19 123.364 178.53 123.033 178.108 122.586C177.69 122.134 177.481 121.57 177.481 120.892C177.481 120.338 177.637 119.848 177.948 119.422C178.263 118.996 178.692 118.661 179.233 118.418C179.778 118.175 180.396 118.054 181.086 118.054C182.058 118.054 182.821 118.267 183.375 118.693C183.933 119.119 184.329 119.682 184.564 120.381ZM193.968 120.381L192.613 120.764C192.528 120.538 192.402 120.319 192.236 120.106C192.074 119.888 191.852 119.71 191.571 119.569C191.29 119.428 190.93 119.358 190.491 119.358C189.89 119.358 189.389 119.496 188.989 119.773C188.592 120.046 188.394 120.393 188.394 120.815C188.394 121.19 188.531 121.487 188.803 121.704C189.076 121.921 189.502 122.102 190.082 122.247L191.539 122.605C192.417 122.818 193.071 123.144 193.501 123.583C193.932 124.018 194.147 124.578 194.147 125.264C194.147 125.827 193.985 126.33 193.661 126.773C193.342 127.216 192.894 127.565 192.319 127.821C191.744 128.077 191.075 128.205 190.312 128.205C189.31 128.205 188.482 127.987 187.825 127.553C187.169 127.118 186.754 126.483 186.579 125.648L188.011 125.29C188.147 125.818 188.405 126.214 188.784 126.479C189.168 126.743 189.668 126.875 190.286 126.875C190.989 126.875 191.548 126.726 191.961 126.428C192.379 126.125 192.587 125.763 192.587 125.341C192.587 125 192.468 124.714 192.229 124.484C191.991 124.25 191.624 124.075 191.13 123.96L189.494 123.577C188.594 123.364 187.934 123.033 187.512 122.586C187.094 122.134 186.886 121.57 186.886 120.892C186.886 120.338 187.041 119.848 187.352 119.422C187.668 118.996 188.096 118.661 188.637 118.418C189.183 118.175 189.8 118.054 190.491 118.054C191.462 118.054 192.225 118.267 192.779 118.693C193.337 119.119 193.734 119.682 193.968 120.381ZM196.418 128V118.182H197.926V128H196.418ZM197.185 116.545C196.891 116.545 196.637 116.445 196.424 116.245C196.215 116.045 196.111 115.804 196.111 115.523C196.111 115.241 196.215 115.001 196.424 114.8C196.637 114.6 196.891 114.5 197.185 114.5C197.479 114.5 197.73 114.6 197.939 114.8C198.152 115.001 198.259 115.241 198.259 115.523C198.259 115.804 198.152 116.045 197.939 116.245C197.73 116.445 197.479 116.545 197.185 116.545ZM204.678 128.205C203.792 128.205 203.014 127.994 202.345 127.572C201.68 127.15 201.16 126.56 200.785 125.801C200.414 125.043 200.229 124.156 200.229 123.142C200.229 122.119 200.414 121.227 200.785 120.464C201.16 119.701 201.68 119.109 202.345 118.687C203.014 118.265 203.792 118.054 204.678 118.054C205.564 118.054 206.34 118.265 207.005 118.687C207.674 119.109 208.194 119.701 208.564 120.464C208.939 121.227 209.127 122.119 209.127 123.142C209.127 124.156 208.939 125.043 208.564 125.801C208.194 126.56 207.674 127.15 207.005 127.572C206.34 127.994 205.564 128.205 204.678 128.205ZM204.678 126.849C205.351 126.849 205.905 126.677 206.34 126.332C206.775 125.987 207.096 125.533 207.305 124.97C207.514 124.408 207.618 123.798 207.618 123.142C207.618 122.486 207.514 121.874 207.305 121.308C207.096 120.741 206.775 120.283 206.34 119.933C205.905 119.584 205.351 119.409 204.678 119.409C204.005 119.409 203.451 119.584 203.016 119.933C202.581 120.283 202.26 120.741 202.051 121.308C201.842 121.874 201.738 122.486 201.738 123.142C201.738 123.798 201.842 124.408 202.051 124.97C202.26 125.533 202.581 125.987 203.016 126.332C203.451 126.677 204.005 126.849 204.678 126.849ZM212.938 122.094V128H211.43V118.182H212.887V119.716H213.015C213.245 119.217 213.594 118.817 214.063 118.514C214.532 118.207 215.137 118.054 215.878 118.054C216.543 118.054 217.125 118.19 217.623 118.463C218.122 118.732 218.51 119.141 218.787 119.69C219.064 120.236 219.202 120.926 219.202 121.761V128H217.694V121.864C217.694 121.092 217.493 120.491 217.093 120.061C216.692 119.626 216.143 119.409 215.444 119.409C214.962 119.409 214.532 119.513 214.153 119.722C213.778 119.931 213.481 120.236 213.264 120.636C213.047 121.037 212.938 121.523 212.938 122.094Z"
+                        fill="currentColor"
+                        className="fill-primary-600 text-primary-600 dark:fill-primary-500 dark:text-primary-500"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
+                <div className="grid h-full sm:grid-cols-2">
+                  <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
+                    <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
+                      <svg
+                        className="m-auto size-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                      >
+                        <g fill="none">
+                          <path
+                            stroke="currentColor"
+                            d="M9 6a3 3 0 1 0 6 0a3 3 0 0 0-6 0zm-4.562 7.902a3 3 0 1 0 3 5.195a3 3 0 0 0-3-5.196zm15.124 0a2.999 2.999 0 1 1-2.998 5.194a2.999 2.999 0 0 1 2.998-5.194z"
+                          />
+                          <path
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                            d="M9.003 6.125a2.993 2.993 0 0 1 .175-1.143a8.507 8.507 0 0 0-5.031 4.766a8.5 8.5 0 0 0-.502 4.817a3 3 0 0 1 .902-.723a7.498 7.498 0 0 1 4.456-7.717m5.994 0a7.499 7.499 0 0 1 4.456 7.717a2.998 2.998 0 0 1 .902.723a8.5 8.5 0 0 0-5.533-9.583a3 3 0 0 1 .175 1.143m2.536 13.328a3.002 3.002 0 0 1-1.078-.42a7.501 7.501 0 0 1-8.91 0l-.107.065a3 3 0 0 1-.971.355a8.5 8.5 0 0 0 11.066 0"
+                            clip-rule="evenodd"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                    <div className="space-y-2">
+                      <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
+                        Teams
+                      </h2>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        Build a team and work together seamlessly on forms.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative mt-6 before:absolute before:inset-0 before:mx-auto before:w-px before:bg-[--ui-light-border-color] dark:before:bg-[--ui-dark-border-color] sm:-my-[--card-padding] sm:-mr-[--card-padding]">
+                    <div className="relative flex h-full flex-col justify-center space-y-6 py-6">
+                      <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
+                        <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
+                          Duncan
+                        </span>
+                        <div className="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
+                          <img
+                            className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
+                            src="https://pbs.twimg.com/profile_images/1740764353408753664/uPGbBhm0_400x400.jpg"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <div className="relative ml-[calc(50%-1rem)] flex items-center gap-2">
+                        <div className="size-8 ring-4 ring-white dark:ring-[--card-dark-bg]">
+                          <img
+                            className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
+                            src="https://pbs.twimg.com/profile_images/1762988905081479168/KCAnOoLb_400x400.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
+                          Kelvin
+                        </span>
+                      </div>
+                      <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
+                        <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
+                          Aikins
+                        </span>
+                        <div className="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
+                          <img
+                            className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
+                            src="https://pbs.twimg.com/profile_images/1756282891833647104/0erRCEo2_400x400.jpg"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="mx-auto max-w-6xl px-6 text-gray-500">
+          <div className="text-center">
+            <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
+              Integrate with the tools you love
+            </h2>
+            <p className="mt-6 text-gray-700 dark:text-gray-300">
+              Out-of-the-box integrations with popular third-party services like
+              Zapier.
+            </p>
+          </div>
+          <div className="relative -mx-6 mt-12 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
+            <div className="mx-auto flex w-fit gap-3">
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 128 128"
+                >
+                  <path
+                    fill="#38bdf8"
+                    d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597c6.398-8.531 13.867-11.73 22.398-9.597c4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602c-6.399 8.536-13.867 11.735-22.399 9.602c-4.87-1.215-8.347-4.746-12.207-8.66c-6.27-6.367-13.53-13.738-29.394-13.738M32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66c6.274 6.367 13.536 13.738 29.395 13.738c17.066 0 27.73-8.53 32-25.597c-6.399 8.531-13.867 11.73-22.399 9.597c-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64m0 0"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 128 128"
+                >
+                  <path
+                    className="text-[#014847] dark:text-white"
+                    fill="currentColor"
+                    d="M80.46 82.605h-8.777l-.734-.733V61.326c0-3.656-1.436-6.489-5.844-6.588c-2.269-.06-4.864 0-7.638.11l-.416.425v26.589l-.733.733H47.54l-.733-.733V46.764l.733-.733h19.753c7.677 0 13.899 6.22 13.899 13.898v21.943z"
+                  />
+                  <path
+                    className="text-[#05bdba]"
+                    fill="currentColor"
+                    d="M58.942 119.902v-26.33l.733-.734h8.797l.733.733v26.331l-.733.733h-8.796zm0-84.838V8.734L59.675 8h8.797l.733.733v26.331l-.733.733h-8.796zm68.335 34.385H92.169l-.733-.733V59.92l.733-.733h35.108l.733.733v8.797zm-91.436 0H.733L0 68.716V59.92l.733-.733h35.108l.733.733v8.797zm-8.49-35.633v-1.209l6.034-6.033h1.208l9.223 9.223v6.39l-.852.852h-6.39zm7.242 68.235h-1.208l-6.033-6.033v-1.209l9.223-9.222h6.39l.851.851v6.39z"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.98em"
+                  height="1em"
+                  viewBox="0 0 256 263"
+                >
+                  <defs>
+                    <linearGradient
+                      id="logosSupabaseIcon0"
+                      x1="20.862%"
+                      x2="63.426%"
+                      y1="20.687%"
+                      y2="44.071%"
+                    >
+                      <stop offset="0%" stop-color="#249361" />
+                      <stop offset="100%" stop-color="#3ecf8e" />
+                    </linearGradient>
+                    <linearGradient
+                      id="logosSupabaseIcon1"
+                      x1="1.991%"
+                      x2="21.403%"
+                      y1="-13.158%"
+                      y2="34.708%"
+                    >
+                      <stop offset="0%" />
+                      <stop offset="100%" stop-opacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    fill="url(#logosSupabaseIcon0)"
+                    d="M149.602 258.579c-6.718 8.46-20.338 3.824-20.5-6.977l-2.367-157.984h106.229c19.24 0 29.971 22.223 18.007 37.292z"
+                  />
+                  <path
+                    fill="url(#logosSupabaseIcon1)"
+                    fill-opacity="0.2"
+                    d="M149.602 258.579c-6.718 8.46-20.338 3.824-20.5-6.977l-2.367-157.984h106.229c19.24 0 29.971 22.223 18.007 37.292z"
+                  />
+                  <path
+                    fill="#3ecf8e"
+                    d="M106.399 4.37c6.717-8.461 20.338-3.826 20.5 6.976l1.037 157.984H23.037c-19.241 0-29.973-22.223-18.008-37.292z"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.75em"
+                  height="1em"
+                  viewBox="0 0 384 512"
+                >
+                  <path
+                    fill="#635bff"
+                    d="M155.3 154.6c0-22.3 18.6-30.9 48.4-30.9c43.4 0 98.5 13.3 141.9 36.7V26.1C298.3 7.2 251.1 0 203.8 0C88.1 0 11 60.4 11 161.4c0 157.9 216.8 132.3 216.8 200.4c0 26.4-22.9 34.9-54.7 34.9c-47.2 0-108.2-19.5-156.1-45.5v128.5a396.09 396.09 0 0 0 156 32.4c118.6 0 200.3-51 200.3-153.6c0-170.2-218-139.7-218-203.9"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="mx-auto my-3 flex w-fit gap-3">
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.73em"
+                  height="1em"
+                  viewBox="0 0 256 351"
+                >
+                  <defs>
+                    <filter
+                      id="logosFirebase0"
+                      width="200%"
+                      height="200%"
+                      x="-50%"
+                      y="-50%"
+                      filterUnits="objectBoundingBox"
+                    >
+                      <feGaussianBlur
+                        in="SourceAlpha"
+                        result="shadowBlurInner1"
+                        stdDeviation="17.5"
+                      />
+                      <feOffset
+                        in="shadowBlurInner1"
+                        result="shadowOffsetInner1"
+                      />
+                      <feComposite
+                        in="shadowOffsetInner1"
+                        in2="SourceAlpha"
+                        k2="-1"
+                        k3="1"
+                        operator="arithmetic"
+                        result="shadowInnerInner1"
+                      />
+                      <feColorMatrix
+                        in="shadowInnerInner1"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
+                      />
+                    </filter>
+                    <filter
+                      id="logosFirebase1"
+                      width="200%"
+                      height="200%"
+                      x="-50%"
+                      y="-50%"
+                      filterUnits="objectBoundingBox"
+                    >
+                      <feGaussianBlur
+                        in="SourceAlpha"
+                        result="shadowBlurInner1"
+                        stdDeviation="3.5"
+                      />
+                      <feOffset
+                        dx="1"
+                        dy="-9"
+                        in="shadowBlurInner1"
+                        result="shadowOffsetInner1"
+                      />
+                      <feComposite
+                        in="shadowOffsetInner1"
+                        in2="SourceAlpha"
+                        k2="-1"
+                        k3="1"
+                        operator="arithmetic"
+                        result="shadowInnerInner1"
+                      />
+                      <feColorMatrix
+                        in="shadowInnerInner1"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"
+                      />
+                    </filter>
+                    <path
+                      id="logosFirebase2"
+                      d="m1.253 280.732l1.605-3.131l99.353-188.518l-44.15-83.475C54.392-1.283 45.074.474 43.87 8.188z"
+                    />
+                    <path
+                      id="logosFirebase3"
+                      d="m134.417 148.974l32.039-32.812l-32.039-61.007c-3.042-5.791-10.433-6.398-13.443-.59l-17.705 34.109l-.53 1.744z"
+                    />
+                  </defs>
+                  <path
+                    fill="#ffc24a"
+                    d="m0 282.998l2.123-2.972L102.527 89.512l.212-2.017L58.48 4.358C54.77-2.606 44.33-.845 43.114 6.951z"
+                  />
+                  <use
+                    fill="#ffa712"
+                    fill-rule="evenodd"
+                    href="#logosFirebase2"
+                  />
+                  <use filter="url(#logosFirebase0)" href="#logosFirebase2" />
+                  <path
+                    fill="#f4bd62"
+                    d="m135.005 150.38l32.955-33.75l-32.965-62.93c-3.129-5.957-11.866-5.975-14.962 0L102.42 87.287v2.86z"
+                  />
+                  <use
+                    fill="#ffa50e"
+                    fill-rule="evenodd"
+                    href="#logosFirebase3"
+                  />
+                  <use filter="url(#logosFirebase1)" href="#logosFirebase3" />
+                  <path
+                    fill="#f6820c"
+                    d="m0 282.998l.962-.968l3.496-1.42l128.477-128l1.628-4.431l-32.05-61.074z"
+                  />
+                  <path
+                    fill="#fde068"
+                    d="m139.121 347.551l116.275-64.847l-33.204-204.495c-1.039-6.398-8.888-8.927-13.468-4.34L0 282.998l115.608 64.548a24.126 24.126 0 0 0 23.513.005"
+                  />
+                  <path
+                    fill="#fcca3f"
+                    d="M254.354 282.16L221.402 79.218c-1.03-6.35-7.558-8.977-12.103-4.424L1.29 282.6l114.339 63.908a23.943 23.943 0 0 0 23.334.006z"
+                  />
+                  <path
+                    fill="#eeab37"
+                    d="M139.12 345.64a24.126 24.126 0 0 1-23.512-.005L.931 282.015l-.93.983l115.607 64.548a24.126 24.126 0 0 0 23.513.005l116.275-64.847l-.285-1.752z"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.88em"
+                  height="1em"
+                  viewBox="0 0 256 292"
+                >
+                  <path
+                    fill="#95bf46"
+                    d="M223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357a19614 19614 0 0 0-23.383-1.743s-15.507-15.395-17.209-17.099c-1.703-1.703-5.029-1.185-6.32-.805c-.19.056-3.388 1.043-8.678 2.68c-5.18-14.906-14.322-28.604-30.405-28.604c-.444 0-.901.018-1.358.044C129.31 3.407 123.644.779 118.75.779c-37.465 0-55.364 46.835-60.976 70.635c-14.558 4.511-24.9 7.718-26.221 8.133c-8.126 2.549-8.383 2.805-9.45 10.462C21.3 95.806.038 260.235.038 260.235l165.678 31.042l89.77-19.42S223.973 58.8 223.775 57.34M156.49 40.848l-14.019 4.339c.005-.988.01-1.96.01-3.023c0-9.264-1.286-16.723-3.349-22.636c8.287 1.04 13.806 10.469 17.358 21.32m-27.638-19.483c2.304 5.773 3.802 14.058 3.802 25.238c0 .572-.005 1.095-.01 1.624c-9.117 2.824-19.024 5.89-28.953 8.966c5.575-21.516 16.025-31.908 25.161-35.828m-11.131-10.537c1.617 0 3.246.549 4.805 1.622c-12.007 5.65-24.877 19.88-30.312 48.297l-22.886 7.088C75.694 46.16 90.81 10.828 117.72 10.828"
+                  />
+                  <path
+                    fill="#5e8e3e"
+                    d="M221.237 54.983a19614 19614 0 0 0-23.383-1.743s-15.507-15.395-17.209-17.099c-.637-.634-1.496-.959-2.394-1.099l-12.527 256.233l89.762-19.418S223.972 58.8 223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357"
+                  />
+                  <path
+                    fill="#fff"
+                    d="m135.242 104.585l-11.069 32.926s-9.698-5.176-21.586-5.176c-17.428 0-18.305 10.937-18.305 13.693c0 15.038 39.2 20.8 39.2 56.024c0 27.713-17.577 45.558-41.277 45.558c-28.44 0-42.984-17.7-42.984-17.7l7.615-25.16s14.95 12.835 27.565 12.835c8.243 0 11.596-6.49 11.596-11.232c0-19.616-32.16-20.491-32.16-52.724c0-27.129 19.472-53.382 58.778-53.382c15.145 0 22.627 4.338 22.627 4.338"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 128 128"
+                >
+                  <path
+                    fill="#0080ff"
+                    d="M64.142 102.96H39.24V78.522h24.903ZM39.24 122.131H20.373v-19.173H39.24Zm-18.866-19.173H4.53V87.167h15.843Zm43.394 24.814v-24.814c26.41 0 46.784-25.94 36.597-53.388c-3.775-10.15-11.694-18.42-22.26-22.181c-27.167-9.772-53.2 10.527-53.2 36.468H0c0-41.354 40.37-74.064 84.52-60.53c19.242 6.017 34.334 21.055 40.37 40.23c13.581 43.985-19.245 84.214-61.123 84.214Zm0 0"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    fill="#744c9e"
+                    d="M128 0C57.308 0 0 57.307 0 128s57.308 128 128 128c70.693 0 128-57.307 128-128S198.693 0 128 0M27.504 129.334l99.161 99.162c-54.45-.71-98.452-44.71-99.161-99.162m122.992 96.65l-120.48-120.48C40.234 60.824 80.223 27.487 128 27.487c33.397 0 62.985 16.293 81.263 41.36l-13.917 12.279C180.52 59.864 155.886 45.949 128 45.949c-35.505 0-65.74 22.552-77.169 54.113L155.94 205.169c25.525-9.243 45.156-30.79 51.73-57.477h-43.566V128h64.41c0 47.778-33.336 87.767-78.017 97.983"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.81em"
+                  height="1em"
+                  viewBox="0 0 256 317"
+                >
+                  <defs>
+                    <linearGradient
+                      id="logosFlutter0"
+                      x1="3.952%"
+                      x2="75.897%"
+                      y1="26.993%"
+                      y2="52.919%"
+                    >
+                      <stop offset="0%" />
+                      <stop offset="100%" stop-opacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    fill="#47c5fb"
+                    d="M157.666.001L.001 157.666l48.8 48.8L255.268.001zm-1.099 145.396l-84.418 84.418l48.984 49.716l48.71-48.71l85.425-85.424z"
+                  />
+                  <path
+                    fill="#00569e"
+                    d="m121.133 279.531l37.082 37.082h97.052l-85.425-85.792z"
+                  />
+                  <path
+                    fill="#00b5f8"
+                    d="m71.6 230.364l48.801-48.801l49.441 49.258l-48.709 48.71z"
+                  />
+                  <path
+                    fill="url(#logosFlutter0)"
+                    fill-opacity="0.8"
+                    d="m121.133 279.531l40.56-13.459l4.029-31.131z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="mx-auto flex w-fit gap-3">
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.95em"
+                  height="1em"
+                  viewBox="0 0 256 271"
+                >
+                  <defs>
+                    <linearGradient
+                      id="logosAngularIcon0"
+                      x1="25.071%"
+                      x2="96.132%"
+                      y1="90.929%"
+                      y2="55.184%"
+                    >
+                      <stop offset="0%" stop-color="#e40035" />
+                      <stop offset="24%" stop-color="#f60a48" />
+                      <stop offset="35.2%" stop-color="#f20755" />
+                      <stop offset="49.4%" stop-color="#dc087d" />
+                      <stop offset="74.5%" stop-color="#9717e7" />
+                      <stop offset="100%" stop-color="#6c00f5" />
+                    </linearGradient>
+                    <linearGradient
+                      id="logosAngularIcon1"
+                      x1="21.863%"
+                      x2="68.367%"
+                      y1="12.058%"
+                      y2="68.21%"
+                    >
+                      <stop offset="0%" stop-color="#ff31d9" />
+                      <stop
+                        offset="100%"
+                        stop-color="#ff5be1"
+                        stop-opacity="0"
+                      />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    fill="url(#logosAngularIcon0)"
+                    d="m256 45.179l-9.244 145.158L158.373 0zm-61.217 187.697l-66.782 38.105l-66.784-38.105L74.8 199.958h106.4zM128.001 72.249l34.994 85.076h-69.99zM9.149 190.337L0 45.179L97.627 0z"
+                  />
+                  <path
+                    fill="url(#logosAngularIcon1)"
+                    d="m256 45.179l-9.244 145.158L158.373 0zm-61.217 187.697l-66.782 38.105l-66.784-38.105L74.8 199.958h106.4zM128.001 72.249l34.994 85.076h-69.99zM9.149 190.337L0 45.179L97.627 0z"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.12em"
+                  height="1em"
+                  viewBox="0 0 256 229"
+                >
+                  <path
+                    fill="#0066da"
+                    d="m19.354 196.034l11.29 19.5c2.346 4.106 5.718 7.332 9.677 9.678c11.34-14.394 19.232-25.44 23.68-33.137c4.513-7.811 10.06-20.03 16.641-36.655c-17.736-2.335-31.176-3.502-40.32-3.502c-8.777 0-22.217 1.167-40.322 3.502c0 4.545 1.173 9.09 3.519 13.196z"
+                  />
+                  <path
+                    fill="#ea4335"
+                    d="M215.681 225.212c3.96-2.346 7.332-5.572 9.677-9.677l4.692-8.064l22.434-38.855a26.566 26.566 0 0 0 3.518-13.196c-18.21-2.335-31.625-3.502-40.247-3.502c-9.266 0-22.682 1.167-40.248 3.502c6.503 16.716 11.977 28.935 16.422 36.655c4.483 7.789 12.4 18.834 23.752 33.137"
+                  />
+                  <path
+                    fill="#00832d"
+                    d="M128.001 73.311c13.12-15.845 22.162-28.064 27.125-36.655c3.997-6.918 8.396-17.964 13.196-33.137C164.363 1.173 159.818 0 155.126 0h-54.25C96.184 0 91.64 1.32 87.68 3.519c6.106 17.402 11.288 29.787 15.544 37.154c4.704 8.142 12.963 19.021 24.777 32.638"
+                  />
+                  <path
+                    fill="#2684fc"
+                    d="M175.36 155.42H80.642l-40.32 69.792c3.958 2.346 8.503 3.519 13.195 3.519h148.968c4.692 0 9.238-1.32 13.196-3.52z"
+                  />
+                  <path
+                    fill="#00ac47"
+                    d="M128.001 73.311L87.681 3.52c-3.96 2.346-7.332 5.571-9.678 9.677L3.519 142.224A26.567 26.567 0 0 0 0 155.42h80.642z"
+                  />
+                  <path
+                    fill="#ffba00"
+                    d="m215.242 77.71l-37.243-64.514c-2.345-4.106-5.718-7.331-9.677-9.677l-40.32 69.792l47.358 82.109h80.496c0-4.546-1.173-9.09-3.519-13.196z"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.56em"
+                  height="1em"
+                  viewBox="0 0 256 165"
+                >
+                  <path
+                    fill="#0364b8"
+                    d="m154.66 110.682l52.842-50.534c-10.976-42.8-54.57-68.597-97.37-57.62a80.003 80.003 0 0 0-46.952 33.51c.817-.02 91.48 74.644 91.48 74.644"
+                  />
+                  <path
+                    fill="#0078d4"
+                    d="m97.618 45.552l-.002.009a63.683 63.683 0 0 0-33.619-9.543c-.274 0-.544.017-.818.02C27.852 36.476-.432 65.47.005 100.798a63.97 63.97 0 0 0 11.493 35.798l79.165-9.915l60.694-48.94z"
+                  />
+                  <path
+                    fill="#1490df"
+                    d="M207.502 60.148a52.595 52.595 0 0 0-3.51-.131a51.81 51.81 0 0 0-20.61 4.254l-.002-.005l-32.022 13.475l35.302 43.607l63.11 15.341c13.62-25.283 4.164-56.82-21.12-70.44a52 52 0 0 0-21.148-6.1z"
+                  />
+                  <path
+                    fill="#28a8ea"
+                    d="M11.498 136.596a63.908 63.908 0 0 0 52.5 27.417h139.994a51.986 51.986 0 0 0 45.778-27.323l-98.413-58.95z"
+                  />
+                </svg>
+              </div>
+              <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/5 dark:before:to-transparent dark:before:shadow-gray-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.13em"
+                  height="1em"
+                  viewBox="0 0 256 228"
+                >
+                  <path
+                    fill="#00d8ff"
+                    d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844m-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14m-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193M87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94M50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979m12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887m110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322m-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18M82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147m37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486m52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565m-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722m22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3M128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="mx-auto max-w-6xl px-6 text-gray-500">
+          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-0 lg:grid-cols-5 lg:gap-24">
+            <div className="lg:col-span-2">
+              <div className="md:pr-6 lg:pr-0">
+                <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
+                  How Formbase Works
+                </h2>
+              </div>
+              <ul className="mt-8 divide-y divide-[--ui-light-border-color] border-y border-[--ui-light-border-color] text-gray-700 *:flex *:items-center *:gap-3 *:py-3 dark:divide-[--ui-dark-border-color] dark:border-[--ui-dark-border-color] dark:text-gray-300">
+                <li>
                   <svg
-                    className="-mr-1"
+                    className="size-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <g fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m7 9l5 3.5L17 9"
+                      />
+                      <path d="M2 17V7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z" />
+                    </g>
+                  </svg>
+                  Create your form
+                </li>
+                <li>
+                  <svg
+                    className="size-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M8 9.5A1.25 1.25 0 1 0 8 12a1.25 1.25 0 0 0 0-2.5m4 0a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5m2.75 1.25a1.25 1.25 0 1 1 2.5 0a1.25 1.25 0 0 1-2.5 0"
+                    />
+                    <path
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      d="M16.1 4.593a50.577 50.577 0 0 0-8.098-.04l-.193.015A4.93 4.93 0 0 0 3.25 9.483V18a.75.75 0 0 0 1.105.66l3.91-2.101a1.25 1.25 0 0 1 .593-.149h8.976c1.132 0 2.102-.81 2.305-1.923c.412-2.257.444-4.567.096-6.835l-.102-.669a2.666 2.666 0 0 0-2.408-2.252zM8.116 6.049a49.078 49.078 0 0 1 7.858.038l1.624.139c.536.046.972.453 1.053.985l.103.668a19.165 19.165 0 0 1-.09 6.339a.843.843 0 0 1-.829.692H8.858a2.75 2.75 0 0 0-1.302.328L4.75 16.746V9.483a3.43 3.43 0 0 1 3.171-3.42z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Get your form endpoint
+                </li>
+                <li>
+                  <svg
+                    className="size-5"
                     xmlns="http://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
-                    viewBox="0 0 48 48"
+                    viewBox="0 0 14 14"
                   >
                     <path
                       fill="none"
                       stroke="currentColor"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="4"
-                      d="m19 12l12 12l-12 12"
+                      d="M.5 7.08h2.19a.52.52 0 0 0 .45-.27l1.8-3.6a.49.49 0 0 1 .49-.27a.48.48 0 0 1 .43.35l2.23 7.42a.5.5 0 0 0 .46.36a.5.5 0 0 0 .45-.32l1.37-3.35a.51.51 0 0 1 .47-.32h2.66"
                     />
                   </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div>
-          <div className="mx-auto max-w-6xl px-6 text-gray-500">
-            <div className="relative">
-              <div className="relative z-10 grid grid-cols-6 gap-3">
-                <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
-                  <div>
-                    <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
-                      <svg
-                        className="fill-primary-500 m-auto h-fit w-20 stroke-[4px]"
-                        viewBox="0 0 256 256"
-                        xmlns="http://www.w3.org/2000/svg"
-                        strokeWidth="0.9"
-                        stroke="currentColor"
-                      >
-                        <path
-                          className="text-primary-500"
-                          d="M148,224a4.0002,4.0002,0,0,1-4,4H112a4,4,0,0,1,0-8h32A4.0002,4.0002,0,0,1,148,224Zm71.05176-67.29443-12.36328,55.63232a11.92889,11.92889,0,0,1-7.72657,8.71533,11.93627,11.93627,0,0,1-11.48339-1.94775L158.59656,196H97.40344l-28.882,23.10547a11.93943,11.93943,0,0,1-7.47363,2.63769,12.05968,12.05968,0,0,1-4.00976-.68994,11.92889,11.92889,0,0,1-7.72657-8.71533L36.94824,156.70508a12.0757,12.0757,0,0,1,2.49512-10.28516l30.441-36.53027a118.54694,118.54694,0,0,1,7.92029-35.83643c11.82129-30.43994,33.77539-50.29052,42.665-57.4126a12.05721,12.05721,0,0,1,15.05566.04981c10.89941,8.855,30.86914,28.0918,42.15332,57.437A120.30232,120.30232,0,0,1,185.49,109.13965l31.06665,37.27978A12.07776,12.07776,0,0,1,219.05176,156.70557ZM98.32422,188h59.32812c50.49219-91.62646-7.93457-149.47168-27.17187-165.10059a3.96141,3.96141,0,0,0-5.00879-.01513v.00049C105.9668,38.50928,46.75,96.34375,98.32422,188Zm-7.47852,3.00049c-13.05664-23.46094-20.08032-46.35938-21.0542-68.502L45.58984,151.541a4.02645,4.02645,0,0,0-.833,3.42773l12.36328,55.63379a3.99987,3.99987,0,0,0,6.40332,2.25586ZM210.41016,151.541l-24.70911-29.65088c-.79761,22.3247-7.66272,45.42187-20.57,69.09179l27.34546,21.87647a3.99886,3.99886,0,0,0,6.40235-2.25586l12.36425-55.63281A4.02774,4.02774,0,0,0,210.41016,151.541ZM128,104a8,8,0,1,0-8-8A8.00917,8.00917,0,0,0,128,104Z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="relative z-10 mt-6 space-y-2 text-center">
-                      <h2 className="group-hover:text-secondary-950 text-lg font-medium text-gray-800 transition dark:text-white">
-                        Zero Configuration Setup
-                      </h2>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        Create a form and start accepting submissions instantly
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
-                  <div>
-                    <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
-                      <svg
-                        className="m-auto h-fit w-20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M13 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.0799 21 8.2 21H12M13 3L19 9M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M19 9V10M21 15.21C20.9318 15.2141 20.7357 15.21 20.6667 15.21C19.6422 15.21 18.7077 14.7524 18 14C17.2923 14.7524 16.3578 15.2099 15.3333 15.2099C15.2643 15.2099 15.0684 15.2141 15.0002 15.21C15.0002 15.21 15 15.9855 15 16.3979C15 18.6121 16.2748 20.4725 18 21C19.7252 20.4725 21 18.6121 21 16.3979C21 15.9855 21 15.21 21 15.21Z"
-                          stroke="currentColor"
-                          strokeWidth="1.128"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="text-primary-500"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="relative z-10 mt-6 space-y-2 text-center">
-                      <h2 className="group-hover:text-secondary-950 text-lg font-medium text-gray-800 transition dark:text-white">
-                        Spam Protection
-                      </h2>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        Safeguard your forms against unwanted spam
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
-                  <div>
-                    <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
-                      <svg
-                        className="m-auto h-fit w-24 stroke-[1px]"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M20.7639 12H10.0556M3 8.00003H5.5M4 12H5.5M4.5 16H5.5M9.96153 12.4896L9.07002 15.4486C8.73252 16.5688 8.56376 17.1289 8.70734 17.4633C8.83199 17.7537 9.08656 17.9681 9.39391 18.0415C9.74792 18.1261 10.2711 17.8645 11.3175 17.3413L19.1378 13.4311C20.059 12.9705 20.5197 12.7402 20.6675 12.4285C20.7961 12.1573 20.7961 11.8427 20.6675 11.5715C20.5197 11.2598 20.059 11.0295 19.1378 10.5689L11.3068 6.65342C10.2633 6.13168 9.74156 5.87081 9.38789 5.95502C9.0808 6.02815 8.82627 6.24198 8.70128 6.53184C8.55731 6.86569 8.72427 7.42461 9.05819 8.54246L9.96261 11.5701C10.0137 11.7411 10.0392 11.8266 10.0493 11.9137C10.0583 11.991 10.0582 12.069 10.049 12.1463C10.0387 12.2334 10.013 12.3188 9.96153 12.4896Z"
-                          stroke="currentColor"
-                          strokeWidth="1.128"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="text-primary-500"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="relative z-10 mt-6 space-y-2 text-center">
-                      <h2 className="group-hover:text-secondary-950 text-lg font-medium text-gray-800 transition dark:text-white">
-                        Email Auto Response
-                      </h2>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        Set up automatic response emails to users after they
-                        submit a form
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
-                  <div className="grid sm:grid-cols-2">
-                    <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
-                      <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          className="m-auto size-6"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5"
-                            stroke-width="0.648"
-                            stroke-linecap="round"
-                          ></path>
-                          <circle
-                            cx="19"
-                            cy="5"
-                            r="3"
-                            stroke-width="0.648"
-                          ></circle>
-                          <path
-                            d="M7 14H16"
-                            stroke-width="0.648"
-                            stroke-linecap="round"
-                          ></path>
-                          <path
-                            d="M7 17.5H13"
-                            stroke-width="0.648"
-                            stroke-linecap="round"
-                          ></path>
-                        </svg>
-                      </div>
-                      <div className="space-y-2">
-                        <h2 className="group-hover:text-secondary-950 text-lg font-medium text-gray-800 transition dark:text-white">
-                          Email Notifications
-                        </h2>
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Receive real-time notifications whenever your form
-                          receives a new entry.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="relative -mb-[calc(var(--card-padding)+1px)] -mr-[calc(var(--card-padding)+1px)] mt-6 h-fit rounded-tl-[calc(var(--card-border-radius)-0.5rem)] border py-2 dark:border-white/10 dark:bg-white/5 sm:ml-6 sm:mt-auto">
-                      <div className="absolute left-3 top-2 flex gap-1">
-                        <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
-                        <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
-                        <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
-                      </div>
-
-                      <svg
-                        width="576"
-                        height="172"
-                        viewBox="0 0 576 172"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          className="text-primary-600 dark:text-primary-500"
-                          d="M51 43H37C35.8954 43 35 43.8954 35 45V59C35 60.1046 35.8954 61 37 61H51C52.1046 61 53 60.1046 53 59V45C53 43.8954 52.1046 43 51 43Z"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          className="text-primary-600 dark:text-primary-500"
-                          d="M41 57C43 57 43.8 56 43.8 54.2V50C43.8 48 44.8 46.7 47 47"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M41 51.2H46.7"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          className="text-primary-600 dark:text-primary-500"
-                        />
-                        <path
-                          d="M32.4602 92.9091H34.2756L37.9062 99.0199H38.0597L41.6903 92.9091H43.5057L38.7756 100.605V106H37.1903V100.605L32.4602 92.9091ZM47.9513 106.205C47.065 106.205 46.2873 105.994 45.6183 105.572C44.9535 105.15 44.4336 104.56 44.0586 103.801C43.6879 103.043 43.5025 102.156 43.5025 101.142C43.5025 100.119 43.6879 99.2266 44.0586 98.4638C44.4336 97.701 44.9535 97.1087 45.6183 96.6868C46.2873 96.2649 47.065 96.054 47.9513 96.054C48.8377 96.054 49.6133 96.2649 50.2781 96.6868C50.9471 97.1087 51.467 97.701 51.8377 98.4638C52.2127 99.2266 52.4002 100.119 52.4002 101.142C52.4002 102.156 52.2127 103.043 51.8377 103.801C51.467 104.56 50.9471 105.15 50.2781 105.572C49.6133 105.994 48.8377 106.205 47.9513 106.205ZM47.9513 104.849C48.6246 104.849 49.1786 104.677 49.6133 104.332C50.0479 103.987 50.3697 103.533 50.5785 102.97C50.7873 102.408 50.8917 101.798 50.8917 101.142C50.8917 100.486 50.7873 99.8743 50.5785 99.3075C50.3697 98.7408 50.0479 98.2827 49.6133 97.9332C49.1786 97.5838 48.6246 97.4091 47.9513 97.4091C47.2781 97.4091 46.7241 97.5838 46.2894 97.9332C45.8548 98.2827 45.533 98.7408 45.3242 99.3075C45.1154 99.8743 45.011 100.486 45.011 101.142C45.011 101.798 45.1154 102.408 45.3242 102.97C45.533 103.533 45.8548 103.987 46.2894 104.332C46.7241 104.677 47.2781 104.849 47.9513 104.849ZM60.8904 101.986V96.1818H62.399V106H60.8904V104.338H60.7882C60.5581 104.837 60.2001 105.261 59.7143 105.61C59.2285 105.955 58.6149 106.128 57.8734 106.128C57.2598 106.128 56.7143 105.994 56.237 105.725C55.7598 105.452 55.3848 105.043 55.112 104.498C54.8393 103.948 54.7029 103.256 54.7029 102.42V96.1818H56.2115V102.318C56.2115 103.034 56.4118 103.605 56.8123 104.031C57.2172 104.457 57.7328 104.67 58.3592 104.67C58.7342 104.67 59.1156 104.575 59.5034 104.383C59.8954 104.191 60.2235 103.897 60.4877 103.501C60.7562 103.104 60.8904 102.599 60.8904 101.986ZM65.1619 106V96.1818H66.6193V97.6648H66.7216C66.9006 97.179 67.2244 96.7848 67.6932 96.4822C68.1619 96.1797 68.6903 96.0284 69.2784 96.0284C69.3892 96.0284 69.5277 96.0305 69.6939 96.0348C69.8601 96.0391 69.9858 96.0455 70.071 96.054V97.5881C70.0199 97.5753 69.9027 97.5561 69.7195 97.5305C69.5405 97.5007 69.3509 97.4858 69.1506 97.4858C68.6733 97.4858 68.2472 97.5859 67.8722 97.7862C67.5014 97.9822 67.2074 98.255 66.9901 98.6044C66.777 98.9496 66.6705 99.3437 66.6705 99.7869V106H65.1619ZM81.2939 96.1818V97.4602H76.0012V96.1818H81.2939ZM77.5865 106V94.8267C77.5865 94.2642 77.7186 93.7955 77.9828 93.4205C78.247 93.0455 78.59 92.7642 79.0119 92.5767C79.4338 92.3892 79.8791 92.2955 80.3478 92.2955C80.7186 92.2955 81.0211 92.3253 81.2555 92.3849C81.4899 92.4446 81.6646 92.5 81.7797 92.5511L81.345 93.8551C81.2683 93.8295 81.1618 93.7976 81.0254 93.7592C80.8933 93.7209 80.7186 93.7017 80.5012 93.7017C80.0027 93.7017 79.6426 93.8274 79.421 94.0788C79.2037 94.3303 79.095 94.6989 79.095 95.1847V106H77.5865ZM86.9924 106.205C86.106 106.205 85.3283 105.994 84.6593 105.572C83.9945 105.15 83.4746 104.56 83.0996 103.801C82.7289 103.043 82.5435 102.156 82.5435 101.142C82.5435 100.119 82.7289 99.2266 83.0996 98.4638C83.4746 97.701 83.9945 97.1087 84.6593 96.6868C85.3283 96.2649 86.106 96.054 86.9924 96.054C87.8787 96.054 88.6543 96.2649 89.3191 96.6868C89.9881 97.1087 90.508 97.701 90.8787 98.4638C91.2537 99.2266 91.4412 100.119 91.4412 101.142C91.4412 102.156 91.2537 103.043 90.8787 103.801C90.508 104.56 89.9881 105.15 89.3191 105.572C88.6543 105.994 87.8787 106.205 86.9924 106.205ZM86.9924 104.849C87.6657 104.849 88.2196 104.677 88.6543 104.332C89.089 103.987 89.4107 103.533 89.6195 102.97C89.8283 102.408 89.9327 101.798 89.9327 101.142C89.9327 100.486 89.8283 99.8743 89.6195 99.3075C89.4107 98.7408 89.089 98.2827 88.6543 97.9332C88.2196 97.5838 87.6657 97.4091 86.9924 97.4091C86.3191 97.4091 85.7651 97.5838 85.3304 97.9332C84.8958 98.2827 84.574 98.7408 84.3652 99.3075C84.1564 99.8743 84.052 100.486 84.052 101.142C84.052 101.798 84.1564 102.408 84.3652 102.97C84.574 103.533 84.8958 103.987 85.3304 104.332C85.7651 104.677 86.3191 104.849 86.9924 104.849ZM93.744 106V96.1818H95.2013V97.6648H95.3036C95.4826 97.179 95.8065 96.7848 96.2752 96.4822C96.744 96.1797 97.2724 96.0284 97.8604 96.0284C97.9712 96.0284 98.1097 96.0305 98.2759 96.0348C98.4421 96.0391 98.5678 96.0455 98.6531 96.054V97.5881C98.6019 97.5753 98.4847 97.5561 98.3015 97.5305C98.1225 97.5007 97.9329 97.4858 97.7326 97.4858C97.2553 97.4858 96.8292 97.5859 96.4542 97.7862C96.0835 97.9822 95.7894 98.255 95.5721 98.6044C95.359 98.9496 95.2525 99.3437 95.2525 99.7869V106H93.744ZM100.441 106V96.1818H101.899V97.7159H102.026C102.231 97.1918 102.561 96.7848 103.017 96.495C103.473 96.201 104.021 96.054 104.66 96.054C105.308 96.054 105.847 96.201 106.277 96.495C106.712 96.7848 107.051 97.1918 107.294 97.7159H107.396C107.647 97.2088 108.024 96.8061 108.527 96.5078C109.03 96.2053 109.633 96.054 110.336 96.054C111.214 96.054 111.932 96.3288 112.49 96.8786C113.048 97.424 113.328 98.2741 113.328 99.429V106H111.819V99.429C111.819 98.7045 111.621 98.1868 111.225 97.8757C110.828 97.5646 110.362 97.4091 109.825 97.4091C109.134 97.4091 108.6 97.6179 108.22 98.0355C107.841 98.4489 107.651 98.973 107.651 99.608V106H106.117V99.2756C106.117 98.7173 105.936 98.2678 105.574 97.9268C105.212 97.5817 104.745 97.4091 104.174 97.4091C103.782 97.4091 103.416 97.5135 103.075 97.7223C102.738 97.9311 102.465 98.2209 102.257 98.5916C102.052 98.9581 101.95 99.3821 101.95 99.8636V106H100.441ZM123.814 106L120.119 92.9091H122.67L125.028 102.529H125.15L127.668 92.9091H129.988L132.513 102.536H132.628L134.987 92.9091H137.537L133.843 106H131.503L128.883 96.8146H128.78L126.153 106H123.814ZM140.903 106.198C140.281 106.198 139.72 106.087 139.222 105.866C138.727 105.64 138.335 105.308 138.046 104.869C137.76 104.43 137.617 103.888 137.617 103.245C137.617 102.691 137.72 102.233 137.924 101.871C138.129 101.509 138.408 101.219 138.762 101.001C139.115 100.784 139.514 100.62 139.957 100.509C140.404 100.394 140.867 100.311 141.344 100.26C141.919 100.2 142.386 100.147 142.744 100.1C143.102 100.049 143.362 99.9723 143.524 99.87C143.69 99.7635 143.773 99.5994 143.773 99.3778V99.3395C143.773 98.858 143.63 98.4851 143.345 98.2209C143.059 97.9567 142.648 97.8246 142.111 97.8246C141.544 97.8246 141.095 97.9482 140.762 98.1953C140.434 98.4425 140.213 98.7344 140.097 99.071L137.937 98.7642C138.107 98.1676 138.389 97.669 138.781 97.2685C139.173 96.8636 139.652 96.5611 140.219 96.3608C140.786 96.1562 141.412 96.054 142.098 96.054C142.571 96.054 143.042 96.1094 143.511 96.2202C143.98 96.331 144.408 96.5142 144.796 96.7699C145.183 97.0213 145.494 97.3643 145.729 97.799C145.968 98.2337 146.087 98.777 146.087 99.429V106H143.862V104.651H143.786C143.645 104.924 143.447 105.18 143.191 105.418C142.94 105.653 142.622 105.842 142.239 105.987C141.86 106.128 141.414 106.198 140.903 106.198ZM141.504 104.498C141.968 104.498 142.371 104.406 142.712 104.223C143.053 104.036 143.315 103.788 143.498 103.482C143.686 103.175 143.779 102.84 143.779 102.478V101.321C143.707 101.381 143.583 101.436 143.409 101.487C143.238 101.538 143.046 101.583 142.833 101.621C142.62 101.66 142.409 101.694 142.2 101.724C141.992 101.754 141.811 101.779 141.657 101.8C141.312 101.847 141.003 101.924 140.73 102.031C140.458 102.137 140.242 102.286 140.085 102.478C139.927 102.665 139.848 102.908 139.848 103.207C139.848 103.633 140.004 103.955 140.315 104.172C140.626 104.389 141.022 104.498 141.504 104.498ZM148.414 106V96.1818H150.727V106H148.414ZM149.577 94.7884C149.21 94.7884 148.895 94.6669 148.631 94.424C148.367 94.1768 148.235 93.8807 148.235 93.5355C148.235 93.1861 148.367 92.8899 148.631 92.647C148.895 92.3999 149.21 92.2763 149.577 92.2763C149.948 92.2763 150.263 92.3999 150.523 92.647C150.787 92.8899 150.919 93.1861 150.919 93.5355C150.919 93.8807 150.787 94.1768 150.523 94.424C150.263 94.6669 149.948 94.7884 149.577 94.7884ZM158.01 96.1818V97.9716H152.365V96.1818H158.01ZM153.759 93.8295H156.073V103.047C156.073 103.358 156.12 103.597 156.213 103.763C156.311 103.925 156.439 104.036 156.597 104.095C156.755 104.155 156.929 104.185 157.121 104.185C157.266 104.185 157.398 104.174 157.517 104.153C157.641 104.131 157.735 104.112 157.799 104.095L158.189 105.904C158.065 105.947 157.888 105.994 157.658 106.045C157.432 106.096 157.155 106.126 156.827 106.134C156.248 106.151 155.725 106.064 155.261 105.872C154.797 105.676 154.428 105.374 154.155 104.964C153.887 104.555 153.755 104.044 153.759 103.43V93.8295ZM162.47 92.9091V106H160.156V92.9091H162.47ZM164.849 106V96.1818H167.163V106H164.849ZM166.012 94.7884C165.646 94.7884 165.331 94.6669 165.066 94.424C164.802 94.1768 164.67 93.8807 164.67 93.5355C164.67 93.1861 164.802 92.8899 165.066 92.647C165.331 92.3999 165.646 92.2763 166.012 92.2763C166.383 92.2763 166.699 92.3999 166.958 92.647C167.223 92.8899 167.355 93.1861 167.355 93.5355C167.355 93.8807 167.223 94.1768 166.958 94.424C166.699 94.6669 166.383 94.7884 166.012 94.7884ZM177.302 98.777L175.193 99.0071C175.133 98.794 175.029 98.5938 174.88 98.4062C174.735 98.2188 174.539 98.0675 174.292 97.9524C174.045 97.8374 173.742 97.7798 173.384 97.7798C172.903 97.7798 172.498 97.8842 172.17 98.093C171.846 98.3018 171.686 98.5724 171.69 98.9048C171.686 99.1903 171.79 99.4226 172.003 99.6016C172.221 99.7805 172.579 99.9276 173.077 100.043L174.752 100.401C175.681 100.601 176.371 100.918 176.823 101.353C177.279 101.788 177.509 102.357 177.513 103.06C177.509 103.678 177.328 104.223 176.97 104.696C176.616 105.165 176.124 105.531 175.493 105.795C174.863 106.06 174.138 106.192 173.32 106.192C172.118 106.192 171.151 105.94 170.418 105.438C169.685 104.93 169.248 104.225 169.108 103.322L171.364 103.104C171.466 103.548 171.684 103.882 172.016 104.108C172.349 104.334 172.781 104.447 173.314 104.447C173.863 104.447 174.305 104.334 174.637 104.108C174.974 103.882 175.142 103.603 175.142 103.271C175.142 102.989 175.033 102.757 174.816 102.574C174.603 102.391 174.27 102.25 173.819 102.152L172.144 101.8C171.202 101.604 170.506 101.274 170.054 100.81C169.602 100.341 169.378 99.7486 169.383 99.0327C169.378 98.4276 169.542 97.9034 169.875 97.4602C170.211 97.0128 170.678 96.6676 171.275 96.4247C171.876 96.1776 172.568 96.054 173.352 96.054C174.503 96.054 175.408 96.299 176.069 96.7891C176.733 97.2791 177.145 97.9418 177.302 98.777ZM184.324 96.1818V97.9716H178.68V96.1818H184.324ZM180.073 93.8295H182.387V103.047C182.387 103.358 182.434 103.597 182.528 103.763C182.626 103.925 182.754 104.036 182.911 104.095C183.069 104.155 183.244 104.185 183.436 104.185C183.58 104.185 183.713 104.174 183.832 104.153C183.955 104.131 184.049 104.112 184.113 104.095L184.503 105.904C184.379 105.947 184.203 105.994 183.972 106.045C183.747 106.096 183.47 106.126 183.142 106.134C182.562 106.151 182.04 106.064 181.575 105.872C181.111 105.676 180.742 105.374 180.47 104.964C180.201 104.555 180.069 104.044 180.073 103.43V93.8295ZM193.022 100.094V106H191.513V92.9091H193.022V97.7159H193.15C193.38 97.2088 193.725 96.8061 194.185 96.5078C194.65 96.2053 195.268 96.054 196.039 96.054C196.708 96.054 197.294 96.1882 197.797 96.4567C198.3 96.7209 198.69 97.1278 198.967 97.6776C199.248 98.223 199.388 98.9176 199.388 99.7614V106H197.88V99.8636C197.88 99.0838 197.678 98.4808 197.273 98.0547C196.872 97.6243 196.316 97.4091 195.604 97.4091C195.11 97.4091 194.667 97.5135 194.275 97.7223C193.887 97.9311 193.58 98.2358 193.354 98.6364C193.133 99.0369 193.022 99.5227 193.022 100.094ZM205.037 106.23C204.415 106.23 203.851 106.113 203.344 105.879C202.836 105.64 202.434 105.297 202.135 104.849C201.837 104.398 201.688 103.852 201.688 103.213C201.688 102.651 201.799 102.195 202.02 101.845C202.242 101.491 202.538 101.214 202.909 101.014C203.28 100.814 203.689 100.665 204.136 100.567C204.588 100.464 205.042 100.384 205.498 100.324C206.094 100.247 206.578 100.19 206.949 100.151C207.324 100.109 207.596 100.038 207.767 99.9403C207.942 99.8423 208.029 99.6719 208.029 99.429V99.3778C208.029 98.7472 207.856 98.2571 207.511 97.9077C207.17 97.5582 206.653 97.3835 205.958 97.3835C205.238 97.3835 204.673 97.5412 204.264 97.8565C203.855 98.1719 203.567 98.5085 203.401 98.8665L201.969 98.3551C202.225 97.7585 202.566 97.294 202.992 96.9616C203.422 96.625 203.891 96.3906 204.398 96.2585C204.91 96.1222 205.412 96.054 205.907 96.054C206.222 96.054 206.584 96.0923 206.993 96.169C207.407 96.2415 207.805 96.3928 208.189 96.6229C208.577 96.853 208.898 97.2003 209.154 97.6648C209.41 98.1293 209.537 98.7514 209.537 99.5312V106H208.029V104.67H207.952C207.85 104.884 207.68 105.112 207.441 105.354C207.202 105.597 206.885 105.804 206.488 105.974C206.092 106.145 205.608 106.23 205.037 106.23ZM205.268 104.875C205.864 104.875 206.367 104.758 206.776 104.523C207.189 104.289 207.501 103.987 207.709 103.616C207.922 103.245 208.029 102.855 208.029 102.446V101.065C207.965 101.142 207.824 101.212 207.607 101.276C207.394 101.336 207.147 101.389 206.866 101.436C206.589 101.479 206.318 101.517 206.054 101.551C205.794 101.581 205.583 101.607 205.421 101.628C205.029 101.679 204.662 101.762 204.322 101.877C203.985 101.988 203.712 102.156 203.503 102.382C203.299 102.604 203.197 102.906 203.197 103.29C203.197 103.814 203.39 104.21 203.778 104.479C204.17 104.743 204.667 104.875 205.268 104.875ZM219.245 98.3807L217.89 98.7642C217.805 98.5384 217.679 98.3189 217.513 98.1058C217.351 97.8885 217.13 97.7095 216.848 97.5689C216.567 97.4283 216.207 97.358 215.768 97.358C215.167 97.358 214.667 97.4964 214.266 97.7734C213.87 98.0462 213.672 98.3935 213.672 98.8153C213.672 99.1903 213.808 99.4865 214.081 99.7038C214.353 99.9212 214.779 100.102 215.359 100.247L216.816 100.605C217.694 100.818 218.348 101.144 218.779 101.583C219.209 102.018 219.424 102.578 219.424 103.264C219.424 103.827 219.262 104.33 218.939 104.773C218.619 105.216 218.172 105.565 217.596 105.821C217.021 106.077 216.352 106.205 215.589 106.205C214.588 106.205 213.759 105.987 213.103 105.553C212.446 105.118 212.031 104.483 211.856 103.648L213.288 103.29C213.424 103.818 213.682 104.214 214.061 104.479C214.445 104.743 214.946 104.875 215.564 104.875C216.267 104.875 216.825 104.726 217.238 104.428C217.656 104.125 217.865 103.763 217.865 103.341C217.865 103 217.745 102.714 217.507 102.484C217.268 102.25 216.902 102.075 216.407 101.96L214.771 101.577C213.872 101.364 213.211 101.033 212.789 100.586C212.372 100.134 212.163 99.5696 212.163 98.892C212.163 98.3381 212.319 97.848 212.63 97.4219C212.945 96.9957 213.373 96.6612 213.914 96.4183C214.46 96.1754 215.078 96.054 215.768 96.054C216.74 96.054 217.502 96.267 218.056 96.6932C218.615 97.1193 219.011 97.6818 219.245 98.3807ZM33.3807 128V118.182H34.8381V119.665H34.9403C35.1193 119.179 35.4432 118.785 35.9119 118.482C36.3807 118.18 36.9091 118.028 37.4972 118.028C37.608 118.028 37.7464 118.031 37.9126 118.035C38.0788 118.039 38.2045 118.045 38.2898 118.054V119.588C38.2386 119.575 38.1214 119.556 37.9382 119.531C37.7592 119.501 37.5696 119.486 37.3693 119.486C36.892 119.486 36.4659 119.586 36.0909 119.786C35.7202 119.982 35.4261 120.255 35.2088 120.604C34.9957 120.95 34.8892 121.344 34.8892 121.787V128H33.3807ZM43.8956 128.205C42.9496 128.205 42.1335 127.996 41.4474 127.578C40.7656 127.156 40.2393 126.568 39.8686 125.814C39.5021 125.055 39.3189 124.173 39.3189 123.168C39.3189 122.162 39.5021 121.276 39.8686 120.509C40.2393 119.737 40.755 119.136 41.4155 118.706C42.0803 118.271 42.8558 118.054 43.7422 118.054C44.2536 118.054 44.7585 118.139 45.2571 118.31C45.7557 118.48 46.2095 118.757 46.6186 119.141C47.0277 119.52 47.3537 120.023 47.5966 120.649C47.8395 121.276 47.9609 122.047 47.9609 122.963V123.602H40.3928V122.298H46.4268C46.4268 121.744 46.3161 121.25 46.0945 120.815C45.8771 120.381 45.5661 120.038 45.1612 119.786C44.7607 119.535 44.2876 119.409 43.7422 119.409C43.1413 119.409 42.6214 119.558 42.1825 119.857C41.7479 120.151 41.4134 120.534 41.179 121.007C40.9446 121.48 40.8274 121.987 40.8274 122.528V123.398C40.8274 124.139 40.9553 124.768 41.2109 125.283C41.4709 125.795 41.831 126.185 42.2912 126.453C42.7514 126.717 43.2862 126.849 43.8956 126.849C44.2919 126.849 44.6499 126.794 44.9695 126.683C45.2933 126.568 45.5724 126.398 45.8068 126.172C46.0412 125.942 46.2223 125.656 46.3501 125.315L47.8075 125.724C47.6541 126.219 47.3963 126.653 47.0341 127.028C46.6719 127.399 46.2244 127.689 45.6918 127.898C45.1591 128.102 44.5604 128.205 43.8956 128.205ZM54.2443 128.205C53.3239 128.205 52.5313 127.987 51.8665 127.553C51.2017 127.118 50.6903 126.519 50.3324 125.756C49.9744 124.994 49.7955 124.122 49.7955 123.142C49.7955 122.145 49.9787 121.265 50.3452 120.502C50.7159 119.735 51.2315 119.136 51.892 118.706C52.5568 118.271 53.3324 118.054 54.2188 118.054C54.9091 118.054 55.5312 118.182 56.0852 118.438C56.6392 118.693 57.093 119.051 57.4467 119.511C57.8004 119.972 58.0199 120.509 58.1051 121.122H56.5966C56.4815 120.675 56.2259 120.278 55.8295 119.933C55.4375 119.584 54.9091 119.409 54.2443 119.409C53.6563 119.409 53.1406 119.562 52.6974 119.869C52.2585 120.172 51.9155 120.6 51.6683 121.154C51.4254 121.704 51.304 122.349 51.304 123.091C51.304 123.849 51.4233 124.51 51.6619 125.072C51.9048 125.635 52.2457 126.072 52.6847 126.383C53.1278 126.694 53.6477 126.849 54.2443 126.849C54.6364 126.849 54.9922 126.781 55.3118 126.645C55.6314 126.509 55.902 126.312 56.1236 126.057C56.3452 125.801 56.5028 125.494 56.5966 125.136H58.1051C58.0199 125.716 57.8089 126.238 57.4723 126.702C57.1399 127.163 56.6989 127.529 56.1491 127.802C55.6037 128.07 54.9688 128.205 54.2443 128.205ZM64.4268 128.205C63.4808 128.205 62.6648 127.996 61.9787 127.578C61.2969 127.156 60.7706 126.568 60.3999 125.814C60.0334 125.055 59.8501 124.173 59.8501 123.168C59.8501 122.162 60.0334 121.276 60.3999 120.509C60.7706 119.737 61.2862 119.136 61.9467 118.706C62.6115 118.271 63.3871 118.054 64.2734 118.054C64.7848 118.054 65.2898 118.139 65.7884 118.31C66.2869 118.48 66.7408 118.757 67.1499 119.141C67.5589 119.52 67.8849 120.023 68.1278 120.649C68.3707 121.276 68.4922 122.047 68.4922 122.963V123.602H60.924V122.298H66.9581C66.9581 121.744 66.8473 121.25 66.6257 120.815C66.4084 120.381 66.0973 120.038 65.6925 119.786C65.2919 119.535 64.8189 119.409 64.2734 119.409C63.6726 119.409 63.1527 119.558 62.7138 119.857C62.2791 120.151 61.9446 120.534 61.7102 121.007C61.4759 121.48 61.3587 121.987 61.3587 122.528V123.398C61.3587 124.139 61.4865 124.768 61.7422 125.283C62.0021 125.795 62.3622 126.185 62.8224 126.453C63.2827 126.717 63.8175 126.849 64.4268 126.849C64.8232 126.849 65.1811 126.794 65.5007 126.683C65.8246 126.568 66.1037 126.398 66.3381 126.172C66.5724 125.942 66.7536 125.656 66.8814 125.315L68.3388 125.724C68.1854 126.219 67.9276 126.653 67.5653 127.028C67.2031 127.399 66.7557 127.689 66.223 127.898C65.6903 128.102 65.0916 128.205 64.4268 128.205ZM70.7869 128V118.182H72.2955V128H70.7869ZM71.554 116.545C71.2599 116.545 71.0064 116.445 70.7933 116.245C70.5845 116.045 70.4801 115.804 70.4801 115.523C70.4801 115.241 70.5845 115.001 70.7933 114.8C71.0064 114.6 71.2599 114.5 71.554 114.5C71.848 114.5 72.0994 114.6 72.3082 114.8C72.5213 115.001 72.6278 115.241 72.6278 115.523C72.6278 115.804 72.5213 116.045 72.3082 116.245C72.0994 116.445 71.848 116.545 71.554 116.545ZM83.0868 118.182L79.4561 128H77.9221L74.2914 118.182H75.9277L78.638 126.006H78.7402L81.4505 118.182H83.0868ZM88.8429 128.205C87.8968 128.205 87.0808 127.996 86.3947 127.578C85.7129 127.156 85.1866 126.568 84.8159 125.814C84.4494 125.055 84.2662 124.173 84.2662 123.168C84.2662 122.162 84.4494 121.276 84.8159 120.509C85.1866 119.737 85.7022 119.136 86.3627 118.706C87.0275 118.271 87.8031 118.054 88.6895 118.054C89.2008 118.054 89.7058 118.139 90.2044 118.31C90.7029 118.48 91.1568 118.757 91.5659 119.141C91.975 119.52 92.301 120.023 92.5439 120.649C92.7868 121.276 92.9082 122.047 92.9082 122.963V123.602H85.34V122.298H91.3741C91.3741 121.744 91.2633 121.25 91.0417 120.815C90.8244 120.381 90.5133 120.038 90.1085 119.786C89.7079 119.535 89.2349 119.409 88.6895 119.409C88.0886 119.409 87.5687 119.558 87.1298 119.857C86.6951 120.151 86.3606 120.534 86.1262 121.007C85.8919 121.48 85.7747 121.987 85.7747 122.528V123.398C85.7747 124.139 85.9025 124.768 86.1582 125.283C86.4181 125.795 86.7782 126.185 87.2385 126.453C87.6987 126.717 88.2335 126.849 88.8429 126.849C89.2392 126.849 89.5971 126.794 89.9167 126.683C90.2406 126.568 90.5197 126.398 90.7541 126.172C90.9885 125.942 91.1696 125.656 91.2974 125.315L92.7548 125.724C92.6014 126.219 92.3436 126.653 91.9814 127.028C91.6191 127.399 91.1717 127.689 90.639 127.898C90.1064 128.102 89.5076 128.205 88.8429 128.205ZM98.9103 128.205C98.0922 128.205 97.3699 127.998 96.7434 127.585C96.117 127.167 95.627 126.579 95.2733 125.82C94.9196 125.058 94.7427 124.156 94.7427 123.116C94.7427 122.085 94.9196 121.19 95.2733 120.432C95.627 119.673 96.1191 119.087 96.7498 118.674C97.3805 118.261 98.1092 118.054 98.9359 118.054C99.5751 118.054 100.08 118.161 100.451 118.374C100.826 118.582 101.111 118.821 101.307 119.089C101.508 119.354 101.663 119.571 101.774 119.741H101.902V114.909H103.41V128H101.953V126.491H101.774C101.663 126.67 101.506 126.896 101.301 127.169C101.096 127.437 100.805 127.678 100.425 127.891C100.046 128.1 99.541 128.205 98.9103 128.205ZM99.1149 126.849C99.72 126.849 100.231 126.692 100.649 126.376C101.067 126.057 101.384 125.616 101.601 125.053C101.819 124.487 101.927 123.832 101.927 123.091C101.927 122.358 101.821 121.717 101.608 121.167C101.395 120.613 101.079 120.183 100.662 119.876C100.244 119.565 99.7285 119.409 99.1149 119.409C98.4757 119.409 97.943 119.573 97.5169 119.901C97.095 120.225 96.7775 120.666 96.5645 121.224C96.3556 121.778 96.2512 122.401 96.2512 123.091C96.2512 123.79 96.3578 124.425 96.5708 124.996C96.7882 125.562 97.1078 126.014 97.5297 126.351C97.9558 126.683 98.4842 126.849 99.1149 126.849ZM114.334 128.23C113.712 128.23 113.148 128.113 112.64 127.879C112.133 127.64 111.731 127.297 111.432 126.849C111.134 126.398 110.985 125.852 110.985 125.213C110.985 124.651 111.096 124.195 111.317 123.845C111.539 123.491 111.835 123.214 112.206 123.014C112.577 122.814 112.986 122.665 113.433 122.567C113.885 122.464 114.339 122.384 114.795 122.324C115.391 122.247 115.875 122.19 116.246 122.151C116.621 122.109 116.893 122.038 117.064 121.94C117.238 121.842 117.326 121.672 117.326 121.429V121.378C117.326 120.747 117.153 120.257 116.808 119.908C116.467 119.558 115.949 119.384 115.255 119.384C114.535 119.384 113.97 119.541 113.561 119.857C113.152 120.172 112.864 120.509 112.698 120.866L111.266 120.355C111.522 119.759 111.863 119.294 112.289 118.962C112.719 118.625 113.188 118.391 113.695 118.259C114.206 118.122 114.709 118.054 115.204 118.054C115.519 118.054 115.881 118.092 116.29 118.169C116.704 118.241 117.102 118.393 117.486 118.623C117.873 118.853 118.195 119.2 118.451 119.665C118.706 120.129 118.834 120.751 118.834 121.531V128H117.326V126.67H117.249C117.147 126.884 116.976 127.112 116.738 127.354C116.499 127.597 116.182 127.804 115.785 127.974C115.389 128.145 114.905 128.23 114.334 128.23ZM114.564 126.875C115.161 126.875 115.664 126.758 116.073 126.523C116.486 126.289 116.797 125.987 117.006 125.616C117.219 125.245 117.326 124.855 117.326 124.446V123.065C117.262 123.142 117.121 123.212 116.904 123.276C116.691 123.336 116.444 123.389 116.162 123.436C115.885 123.479 115.615 123.517 115.351 123.551C115.091 123.581 114.88 123.607 114.718 123.628C114.326 123.679 113.959 123.762 113.618 123.877C113.282 123.988 113.009 124.156 112.8 124.382C112.596 124.604 112.493 124.906 112.493 125.29C112.493 125.814 112.687 126.21 113.075 126.479C113.467 126.743 113.964 126.875 114.564 126.875ZM133.605 120.381L132.25 120.764C132.164 120.538 132.039 120.319 131.873 120.106C131.711 119.888 131.489 119.71 131.208 119.569C130.926 119.428 130.566 119.358 130.127 119.358C129.527 119.358 129.026 119.496 128.625 119.773C128.229 120.046 128.031 120.393 128.031 120.815C128.031 121.19 128.167 121.487 128.44 121.704C128.713 121.921 129.139 122.102 129.718 122.247L131.176 122.605C132.054 122.818 132.708 123.144 133.138 123.583C133.569 124.018 133.784 124.578 133.784 125.264C133.784 125.827 133.622 126.33 133.298 126.773C132.978 127.216 132.531 127.565 131.956 127.821C131.38 128.077 130.711 128.205 129.949 128.205C128.947 128.205 128.118 127.987 127.462 127.553C126.806 127.118 126.39 126.483 126.216 125.648L127.647 125.29C127.784 125.818 128.042 126.214 128.421 126.479C128.804 126.743 129.305 126.875 129.923 126.875C130.626 126.875 131.184 126.726 131.598 126.428C132.015 126.125 132.224 125.763 132.224 125.341C132.224 125 132.105 124.714 131.866 124.484C131.627 124.25 131.261 124.075 130.767 123.96L129.13 123.577C128.231 123.364 127.571 123.033 127.149 122.586C126.731 122.134 126.522 121.57 126.522 120.892C126.522 120.338 126.678 119.848 126.989 119.422C127.304 118.996 127.733 118.661 128.274 118.418C128.819 118.175 129.437 118.054 130.127 118.054C131.099 118.054 131.862 118.267 132.416 118.693C132.974 119.119 133.37 119.682 133.605 120.381ZM142.242 123.986V118.182H143.751V128H142.242V126.338H142.14C141.91 126.837 141.552 127.261 141.066 127.61C140.58 127.955 139.966 128.128 139.225 128.128C138.611 128.128 138.066 127.994 137.589 127.725C137.111 127.452 136.736 127.043 136.464 126.498C136.191 125.948 136.055 125.256 136.055 124.42V118.182H137.563V124.318C137.563 125.034 137.763 125.605 138.164 126.031C138.569 126.457 139.084 126.67 139.711 126.67C140.086 126.67 140.467 126.575 140.855 126.383C141.247 126.191 141.575 125.897 141.839 125.501C142.108 125.104 142.242 124.599 142.242 123.986ZM146.718 128V114.909H148.227V119.741H148.354C148.465 119.571 148.619 119.354 148.815 119.089C149.015 118.821 149.3 118.582 149.671 118.374C150.046 118.161 150.553 118.054 151.192 118.054C152.019 118.054 152.748 118.261 153.379 118.674C154.009 119.087 154.501 119.673 154.855 120.432C155.209 121.19 155.386 122.085 155.386 123.116C155.386 124.156 155.209 125.058 154.855 125.82C154.501 126.579 154.011 127.167 153.385 127.585C152.759 127.998 152.036 128.205 151.218 128.205C150.587 128.205 150.082 128.1 149.703 127.891C149.324 127.678 149.032 127.437 148.827 127.169C148.623 126.896 148.465 126.67 148.354 126.491H148.175V128H146.718ZM148.201 123.091C148.201 123.832 148.31 124.487 148.527 125.053C148.744 125.616 149.062 126.057 149.479 126.376C149.897 126.692 150.408 126.849 151.013 126.849C151.644 126.849 152.17 126.683 152.592 126.351C153.018 126.014 153.338 125.562 153.551 124.996C153.768 124.425 153.877 123.79 153.877 123.091C153.877 122.401 153.771 121.778 153.558 121.224C153.349 120.666 153.031 120.225 152.605 119.901C152.183 119.573 151.653 119.409 151.013 119.409C150.4 119.409 149.884 119.565 149.467 119.876C149.049 120.183 148.734 120.613 148.521 121.167C148.308 121.717 148.201 122.358 148.201 123.091ZM157.693 128V118.182H159.151V119.716H159.278C159.483 119.192 159.813 118.785 160.269 118.495C160.725 118.201 161.273 118.054 161.912 118.054C162.56 118.054 163.099 118.201 163.529 118.495C163.964 118.785 164.303 119.192 164.545 119.716H164.648C164.899 119.209 165.276 118.806 165.779 118.508C166.282 118.205 166.885 118.054 167.588 118.054C168.466 118.054 169.184 118.329 169.742 118.879C170.3 119.424 170.58 120.274 170.58 121.429V128H169.071V121.429C169.071 120.705 168.873 120.187 168.477 119.876C168.08 119.565 167.614 119.409 167.077 119.409C166.386 119.409 165.852 119.618 165.472 120.036C165.093 120.449 164.903 120.973 164.903 121.608V128H163.369V121.276C163.369 120.717 163.188 120.268 162.826 119.927C162.464 119.582 161.997 119.409 161.426 119.409C161.034 119.409 160.668 119.513 160.327 119.722C159.99 119.931 159.717 120.221 159.509 120.592C159.304 120.958 159.202 121.382 159.202 121.864V128H157.693ZM173.338 128V118.182H174.846V128H173.338ZM174.105 116.545C173.811 116.545 173.557 116.445 173.344 116.245C173.135 116.045 173.031 115.804 173.031 115.523C173.031 115.241 173.135 115.001 173.344 114.8C173.557 114.6 173.811 114.5 174.105 114.5C174.399 114.5 174.65 114.6 174.859 114.8C175.072 115.001 175.179 115.241 175.179 115.523C175.179 115.804 175.072 116.045 174.859 116.245C174.65 116.445 174.399 116.545 174.105 116.545ZM184.564 120.381L183.209 120.764C183.123 120.538 182.998 120.319 182.831 120.106C182.67 119.888 182.448 119.71 182.167 119.569C181.885 119.428 181.525 119.358 181.086 119.358C180.486 119.358 179.985 119.496 179.584 119.773C179.188 120.046 178.99 120.393 178.99 120.815C178.99 121.19 179.126 121.487 179.399 121.704C179.672 121.921 180.098 122.102 180.677 122.247L182.135 122.605C183.013 122.818 183.667 123.144 184.097 123.583C184.528 124.018 184.743 124.578 184.743 125.264C184.743 125.827 184.581 126.33 184.257 126.773C183.937 127.216 183.49 127.565 182.915 127.821C182.339 128.077 181.67 128.205 180.907 128.205C179.906 128.205 179.077 127.987 178.421 127.553C177.765 127.118 177.349 126.483 177.175 125.648L178.606 125.29C178.743 125.818 179.001 126.214 179.38 126.479C179.763 126.743 180.264 126.875 180.882 126.875C181.585 126.875 182.143 126.726 182.557 126.428C182.974 126.125 183.183 125.763 183.183 125.341C183.183 125 183.064 124.714 182.825 124.484C182.586 124.25 182.22 124.075 181.726 123.96L180.089 123.577C179.19 123.364 178.53 123.033 178.108 122.586C177.69 122.134 177.481 121.57 177.481 120.892C177.481 120.338 177.637 119.848 177.948 119.422C178.263 118.996 178.692 118.661 179.233 118.418C179.778 118.175 180.396 118.054 181.086 118.054C182.058 118.054 182.821 118.267 183.375 118.693C183.933 119.119 184.329 119.682 184.564 120.381ZM193.968 120.381L192.613 120.764C192.528 120.538 192.402 120.319 192.236 120.106C192.074 119.888 191.852 119.71 191.571 119.569C191.29 119.428 190.93 119.358 190.491 119.358C189.89 119.358 189.389 119.496 188.989 119.773C188.592 120.046 188.394 120.393 188.394 120.815C188.394 121.19 188.531 121.487 188.803 121.704C189.076 121.921 189.502 122.102 190.082 122.247L191.539 122.605C192.417 122.818 193.071 123.144 193.501 123.583C193.932 124.018 194.147 124.578 194.147 125.264C194.147 125.827 193.985 126.33 193.661 126.773C193.342 127.216 192.894 127.565 192.319 127.821C191.744 128.077 191.075 128.205 190.312 128.205C189.31 128.205 188.482 127.987 187.825 127.553C187.169 127.118 186.754 126.483 186.579 125.648L188.011 125.29C188.147 125.818 188.405 126.214 188.784 126.479C189.168 126.743 189.668 126.875 190.286 126.875C190.989 126.875 191.548 126.726 191.961 126.428C192.379 126.125 192.587 125.763 192.587 125.341C192.587 125 192.468 124.714 192.229 124.484C191.991 124.25 191.624 124.075 191.13 123.96L189.494 123.577C188.594 123.364 187.934 123.033 187.512 122.586C187.094 122.134 186.886 121.57 186.886 120.892C186.886 120.338 187.041 119.848 187.352 119.422C187.668 118.996 188.096 118.661 188.637 118.418C189.183 118.175 189.8 118.054 190.491 118.054C191.462 118.054 192.225 118.267 192.779 118.693C193.337 119.119 193.734 119.682 193.968 120.381ZM196.418 128V118.182H197.926V128H196.418ZM197.185 116.545C196.891 116.545 196.637 116.445 196.424 116.245C196.215 116.045 196.111 115.804 196.111 115.523C196.111 115.241 196.215 115.001 196.424 114.8C196.637 114.6 196.891 114.5 197.185 114.5C197.479 114.5 197.73 114.6 197.939 114.8C198.152 115.001 198.259 115.241 198.259 115.523C198.259 115.804 198.152 116.045 197.939 116.245C197.73 116.445 197.479 116.545 197.185 116.545ZM204.678 128.205C203.792 128.205 203.014 127.994 202.345 127.572C201.68 127.15 201.16 126.56 200.785 125.801C200.414 125.043 200.229 124.156 200.229 123.142C200.229 122.119 200.414 121.227 200.785 120.464C201.16 119.701 201.68 119.109 202.345 118.687C203.014 118.265 203.792 118.054 204.678 118.054C205.564 118.054 206.34 118.265 207.005 118.687C207.674 119.109 208.194 119.701 208.564 120.464C208.939 121.227 209.127 122.119 209.127 123.142C209.127 124.156 208.939 125.043 208.564 125.801C208.194 126.56 207.674 127.15 207.005 127.572C206.34 127.994 205.564 128.205 204.678 128.205ZM204.678 126.849C205.351 126.849 205.905 126.677 206.34 126.332C206.775 125.987 207.096 125.533 207.305 124.97C207.514 124.408 207.618 123.798 207.618 123.142C207.618 122.486 207.514 121.874 207.305 121.308C207.096 120.741 206.775 120.283 206.34 119.933C205.905 119.584 205.351 119.409 204.678 119.409C204.005 119.409 203.451 119.584 203.016 119.933C202.581 120.283 202.26 120.741 202.051 121.308C201.842 121.874 201.738 122.486 201.738 123.142C201.738 123.798 201.842 124.408 202.051 124.97C202.26 125.533 202.581 125.987 203.016 126.332C203.451 126.677 204.005 126.849 204.678 126.849ZM212.938 122.094V128H211.43V118.182H212.887V119.716H213.015C213.245 119.217 213.594 118.817 214.063 118.514C214.532 118.207 215.137 118.054 215.878 118.054C216.543 118.054 217.125 118.19 217.623 118.463C218.122 118.732 218.51 119.141 218.787 119.69C219.064 120.236 219.202 120.926 219.202 121.761V128H217.694V121.864C217.694 121.092 217.493 120.491 217.093 120.061C216.692 119.626 216.143 119.409 215.444 119.409C214.962 119.409 214.532 119.513 214.153 119.722C213.778 119.931 213.481 120.236 213.264 120.636C213.047 121.037 212.938 121.523 212.938 122.094Z"
-                          fill="currentColor"
-                          className="fill-primary-600 dark:fill-primary-500 text-primary-600 dark:text-primary-500"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
-                  <div className="grid h-full sm:grid-cols-2">
-                    <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
-                      <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
-                        <svg
-                          className="m-auto size-6"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 24 24"
-                        >
-                          <g fill="none">
-                            <path
-                              stroke="currentColor"
-                              d="M9 6a3 3 0 1 0 6 0a3 3 0 0 0-6 0zm-4.562 7.902a3 3 0 1 0 3 5.195a3 3 0 0 0-3-5.196zm15.124 0a2.999 2.999 0 1 1-2.998 5.194a2.999 2.999 0 0 1 2.998-5.194z"
-                            />
-                            <path
-                              fill="currentColor"
-                              fill-rule="evenodd"
-                              d="M9.003 6.125a2.993 2.993 0 0 1 .175-1.143a8.507 8.507 0 0 0-5.031 4.766a8.5 8.5 0 0 0-.502 4.817a3 3 0 0 1 .902-.723a7.498 7.498 0 0 1 4.456-7.717m5.994 0a7.499 7.499 0 0 1 4.456 7.717a2.998 2.998 0 0 1 .902.723a8.5 8.5 0 0 0-5.533-9.583a3 3 0 0 1 .175 1.143m2.536 13.328a3.002 3.002 0 0 1-1.078-.42a7.501 7.501 0 0 1-8.91 0l-.107.065a3 3 0 0 1-.971.355a8.5 8.5 0 0 0 11.066 0"
-                              clip-rule="evenodd"
-                            />
-                          </g>
-                        </svg>
-                      </div>
-                      <div className="space-y-2">
-                        <h2 className="group-hover:text-secondary-950 text-lg font-medium text-gray-800 transition dark:text-white">
-                          Teams
-                        </h2>
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Build a team and work together seamlessly on forms.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="relative mt-6 before:absolute before:inset-0 before:mx-auto before:w-px before:bg-[--ui-light-border-color] dark:before:bg-[--ui-dark-border-color] sm:-my-[--card-padding] sm:-mr-[--card-padding]">
-                      <div className="relative flex h-full flex-col justify-center space-y-6 py-6">
-                        <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
-                          <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
-                            Duncan
-                          </span>
-                          <div className="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
-                            <img
-                              className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
-                              src="https://pbs.twimg.com/profile_images/1740764353408753664/uPGbBhm0_400x400.jpg"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                        <div className="relative ml-[calc(50%-1rem)] flex items-center gap-2">
-                          <div className="size-8 ring-4 ring-white dark:ring-[--card-dark-bg]">
-                            <img
-                              className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
-                              src="https://pbs.twimg.com/profile_images/1762988905081479168/KCAnOoLb_400x400.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
-                            Kelvin
-                          </span>
-                        </div>
-                        <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
-                          <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
-                            Aikins
-                          </span>
-                          <div className="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
-                            <img
-                              className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
-                              src="https://pbs.twimg.com/profile_images/1756282891833647104/0erRCEo2_400x400.jpg"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div>
-          <div className="mx-auto max-w-6xl px-6 text-gray-500">
-            <div className="text-center">
-              <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
-                Integrate with the tools you love
-              </h2>
-              <p className="mt-6 text-gray-700 dark:text-gray-300">
-                Out-of-the-box integrations with popular third-party services
-                like Zapier.
-              </p>
-            </div>
-            <div className="relative -mx-6 mt-12 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
-              <div className="mx-auto flex w-fit gap-3">
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+                  Add to your website
+                </li>
+                <li>
                   <svg
+                    className="size-5"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 128 128"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
                   >
                     <path
-                      fill="#38bdf8"
-                      d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597c6.398-8.531 13.867-11.73 22.398-9.597c4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602c-6.399 8.536-13.867 11.735-22.399 9.602c-4.87-1.215-8.347-4.746-12.207-8.66c-6.27-6.367-13.53-13.738-29.394-13.738M32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66c6.274 6.367 13.536 13.738 29.395 13.738c17.066 0 27.73-8.53 32-25.597c-6.399 8.531-13.867 11.73-22.399 9.597c-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64m0 0"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 128 128"
-                  >
-                    <path
-                      className="text-[#014847] dark:text-white"
                       fill="currentColor"
-                      d="M80.46 82.605h-8.777l-.734-.733V61.326c0-3.656-1.436-6.489-5.844-6.588c-2.269-.06-4.864 0-7.638.11l-.416.425v26.589l-.733.733H47.54l-.733-.733V46.764l.733-.733h19.753c7.677 0 13.899 6.22 13.899 13.898v21.943z"
-                    />
-                    <path
-                      className="text-[#05bdba]"
-                      fill="currentColor"
-                      d="M58.942 119.902v-26.33l.733-.734h8.797l.733.733v26.331l-.733.733h-8.796zm0-84.838V8.734L59.675 8h8.797l.733.733v26.331l-.733.733h-8.796zm68.335 34.385H92.169l-.733-.733V59.92l.733-.733h35.108l.733.733v8.797zm-91.436 0H.733L0 68.716V59.92l.733-.733h35.108l.733.733v8.797zm-8.49-35.633v-1.209l6.034-6.033h1.208l9.223 9.223v6.39l-.852.852h-6.39zm7.242 68.235h-1.208l-6.033-6.033v-1.209l9.223-9.222h6.39l.851.851v6.39z"
+                      d="m6.75 21l-.25-2.2l2.85-7.85q.375.35.813.588t.937.362l-2.75 7.55zm10.5 0l-1.6-1.55l-2.75-7.55q.5-.125.938-.363t.812-.587l2.85 7.85zM12 11q-1.25 0-2.125-.875T9 8q0-.975.563-1.737T11 5.2V3h2v2.2q.875.3 1.438 1.063T15 8q0 1.25-.875 2.125T12 11m0-2q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9"
                     />
                   </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.98em"
-                    height="1em"
-                    viewBox="0 0 256 263"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="logosSupabaseIcon0"
-                        x1="20.862%"
-                        x2="63.426%"
-                        y1="20.687%"
-                        y2="44.071%"
-                      >
-                        <stop offset="0%" stop-color="#249361" />
-                        <stop offset="100%" stop-color="#3ecf8e" />
-                      </linearGradient>
-                      <linearGradient
-                        id="logosSupabaseIcon1"
-                        x1="1.991%"
-                        x2="21.403%"
-                        y1="-13.158%"
-                        y2="34.708%"
-                      >
-                        <stop offset="0%" />
-                        <stop offset="100%" stop-opacity="0" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      fill="url(#logosSupabaseIcon0)"
-                      d="M149.602 258.579c-6.718 8.46-20.338 3.824-20.5-6.977l-2.367-157.984h106.229c19.24 0 29.971 22.223 18.007 37.292z"
-                    />
-                    <path
-                      fill="url(#logosSupabaseIcon1)"
-                      fill-opacity="0.2"
-                      d="M149.602 258.579c-6.718 8.46-20.338 3.824-20.5-6.977l-2.367-157.984h106.229c19.24 0 29.971 22.223 18.007 37.292z"
-                    />
-                    <path
-                      fill="#3ecf8e"
-                      d="M106.399 4.37c6.717-8.461 20.338-3.826 20.5 6.976l1.037 157.984H23.037c-19.241 0-29.973-22.223-18.008-37.292z"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.75em"
-                    height="1em"
-                    viewBox="0 0 384 512"
-                  >
-                    <path
-                      fill="#635bff"
-                      d="M155.3 154.6c0-22.3 18.6-30.9 48.4-30.9c43.4 0 98.5 13.3 141.9 36.7V26.1C298.3 7.2 251.1 0 203.8 0C88.1 0 11 60.4 11 161.4c0 157.9 216.8 132.3 216.8 200.4c0 26.4-22.9 34.9-54.7 34.9c-47.2 0-108.2-19.5-156.1-45.5v128.5a396.09 396.09 0 0 0 156 32.4c118.6 0 200.3-51 200.3-153.6c0-170.2-218-139.7-218-203.9"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="mx-auto my-3 flex w-fit gap-3">
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.73em"
-                    height="1em"
-                    viewBox="0 0 256 351"
-                  >
-                    <defs>
-                      <filter
-                        id="logosFirebase0"
-                        width="200%"
-                        height="200%"
-                        x="-50%"
-                        y="-50%"
-                        filterUnits="objectBoundingBox"
-                      >
-                        <feGaussianBlur
-                          in="SourceAlpha"
-                          result="shadowBlurInner1"
-                          stdDeviation="17.5"
-                        />
-                        <feOffset
-                          in="shadowBlurInner1"
-                          result="shadowOffsetInner1"
-                        />
-                        <feComposite
-                          in="shadowOffsetInner1"
-                          in2="SourceAlpha"
-                          k2="-1"
-                          k3="1"
-                          operator="arithmetic"
-                          result="shadowInnerInner1"
-                        />
-                        <feColorMatrix
-                          in="shadowInnerInner1"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
-                        />
-                      </filter>
-                      <filter
-                        id="logosFirebase1"
-                        width="200%"
-                        height="200%"
-                        x="-50%"
-                        y="-50%"
-                        filterUnits="objectBoundingBox"
-                      >
-                        <feGaussianBlur
-                          in="SourceAlpha"
-                          result="shadowBlurInner1"
-                          stdDeviation="3.5"
-                        />
-                        <feOffset
-                          dx="1"
-                          dy="-9"
-                          in="shadowBlurInner1"
-                          result="shadowOffsetInner1"
-                        />
-                        <feComposite
-                          in="shadowOffsetInner1"
-                          in2="SourceAlpha"
-                          k2="-1"
-                          k3="1"
-                          operator="arithmetic"
-                          result="shadowInnerInner1"
-                        />
-                        <feColorMatrix
-                          in="shadowInnerInner1"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"
-                        />
-                      </filter>
-                      <path
-                        id="logosFirebase2"
-                        d="m1.253 280.732l1.605-3.131l99.353-188.518l-44.15-83.475C54.392-1.283 45.074.474 43.87 8.188z"
-                      />
-                      <path
-                        id="logosFirebase3"
-                        d="m134.417 148.974l32.039-32.812l-32.039-61.007c-3.042-5.791-10.433-6.398-13.443-.59l-17.705 34.109l-.53 1.744z"
-                      />
-                    </defs>
-                    <path
-                      fill="#ffc24a"
-                      d="m0 282.998l2.123-2.972L102.527 89.512l.212-2.017L58.48 4.358C54.77-2.606 44.33-.845 43.114 6.951z"
-                    />
-                    <use
-                      fill="#ffa712"
-                      fill-rule="evenodd"
-                      href="#logosFirebase2"
-                    />
-                    <use filter="url(#logosFirebase0)" href="#logosFirebase2" />
-                    <path
-                      fill="#f4bd62"
-                      d="m135.005 150.38l32.955-33.75l-32.965-62.93c-3.129-5.957-11.866-5.975-14.962 0L102.42 87.287v2.86z"
-                    />
-                    <use
-                      fill="#ffa50e"
-                      fill-rule="evenodd"
-                      href="#logosFirebase3"
-                    />
-                    <use filter="url(#logosFirebase1)" href="#logosFirebase3" />
-                    <path
-                      fill="#f6820c"
-                      d="m0 282.998l.962-.968l3.496-1.42l128.477-128l1.628-4.431l-32.05-61.074z"
-                    />
-                    <path
-                      fill="#fde068"
-                      d="m139.121 347.551l116.275-64.847l-33.204-204.495c-1.039-6.398-8.888-8.927-13.468-4.34L0 282.998l115.608 64.548a24.126 24.126 0 0 0 23.513.005"
-                    />
-                    <path
-                      fill="#fcca3f"
-                      d="M254.354 282.16L221.402 79.218c-1.03-6.35-7.558-8.977-12.103-4.424L1.29 282.6l114.339 63.908a23.943 23.943 0 0 0 23.334.006z"
-                    />
-                    <path
-                      fill="#eeab37"
-                      d="M139.12 345.64a24.126 24.126 0 0 1-23.512-.005L.931 282.015l-.93.983l115.607 64.548a24.126 24.126 0 0 0 23.513.005l116.275-64.847l-.285-1.752z"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.88em"
-                    height="1em"
-                    viewBox="0 0 256 292"
-                  >
-                    <path
-                      fill="#95bf46"
-                      d="M223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357a19614 19614 0 0 0-23.383-1.743s-15.507-15.395-17.209-17.099c-1.703-1.703-5.029-1.185-6.32-.805c-.19.056-3.388 1.043-8.678 2.68c-5.18-14.906-14.322-28.604-30.405-28.604c-.444 0-.901.018-1.358.044C129.31 3.407 123.644.779 118.75.779c-37.465 0-55.364 46.835-60.976 70.635c-14.558 4.511-24.9 7.718-26.221 8.133c-8.126 2.549-8.383 2.805-9.45 10.462C21.3 95.806.038 260.235.038 260.235l165.678 31.042l89.77-19.42S223.973 58.8 223.775 57.34M156.49 40.848l-14.019 4.339c.005-.988.01-1.96.01-3.023c0-9.264-1.286-16.723-3.349-22.636c8.287 1.04 13.806 10.469 17.358 21.32m-27.638-19.483c2.304 5.773 3.802 14.058 3.802 25.238c0 .572-.005 1.095-.01 1.624c-9.117 2.824-19.024 5.89-28.953 8.966c5.575-21.516 16.025-31.908 25.161-35.828m-11.131-10.537c1.617 0 3.246.549 4.805 1.622c-12.007 5.65-24.877 19.88-30.312 48.297l-22.886 7.088C75.694 46.16 90.81 10.828 117.72 10.828"
-                    />
-                    <path
-                      fill="#5e8e3e"
-                      d="M221.237 54.983a19614 19614 0 0 0-23.383-1.743s-15.507-15.395-17.209-17.099c-.637-.634-1.496-.959-2.394-1.099l-12.527 256.233l89.762-19.418S223.972 58.8 223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357"
-                    />
-                    <path
-                      fill="#fff"
-                      d="m135.242 104.585l-11.069 32.926s-9.698-5.176-21.586-5.176c-17.428 0-18.305 10.937-18.305 13.693c0 15.038 39.2 20.8 39.2 56.024c0 27.713-17.577 45.558-41.277 45.558c-28.44 0-42.984-17.7-42.984-17.7l7.615-25.16s14.95 12.835 27.565 12.835c8.243 0 11.596-6.49 11.596-11.232c0-19.616-32.16-20.491-32.16-52.724c0-27.129 19.472-53.382 58.778-53.382c15.145 0 22.627 4.338 22.627 4.338"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 128 128"
-                  >
-                    <path
-                      fill="#0080ff"
-                      d="M64.142 102.96H39.24V78.522h24.903ZM39.24 122.131H20.373v-19.173H39.24Zm-18.866-19.173H4.53V87.167h15.843Zm43.394 24.814v-24.814c26.41 0 46.784-25.94 36.597-53.388c-3.775-10.15-11.694-18.42-22.26-22.181c-27.167-9.772-53.2 10.527-53.2 36.468H0c0-41.354 40.37-74.064 84.52-60.53c19.242 6.017 34.334 21.055 40.37 40.23c13.581 43.985-19.245 84.214-61.123 84.214Zm0 0"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 256 256"
-                  >
-                    <path
-                      fill="#744c9e"
-                      d="M128 0C57.308 0 0 57.307 0 128s57.308 128 128 128c70.693 0 128-57.307 128-128S198.693 0 128 0M27.504 129.334l99.161 99.162c-54.45-.71-98.452-44.71-99.161-99.162m122.992 96.65l-120.48-120.48C40.234 60.824 80.223 27.487 128 27.487c33.397 0 62.985 16.293 81.263 41.36l-13.917 12.279C180.52 59.864 155.886 45.949 128 45.949c-35.505 0-65.74 22.552-77.169 54.113L155.94 205.169c25.525-9.243 45.156-30.79 51.73-57.477h-43.566V128h64.41c0 47.778-33.336 87.767-78.017 97.983"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.81em"
-                    height="1em"
-                    viewBox="0 0 256 317"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="logosFlutter0"
-                        x1="3.952%"
-                        x2="75.897%"
-                        y1="26.993%"
-                        y2="52.919%"
-                      >
-                        <stop offset="0%" />
-                        <stop offset="100%" stop-opacity="0" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      fill="#47c5fb"
-                      d="M157.666.001L.001 157.666l48.8 48.8L255.268.001zm-1.099 145.396l-84.418 84.418l48.984 49.716l48.71-48.71l85.425-85.424z"
-                    />
-                    <path
-                      fill="#00569e"
-                      d="m121.133 279.531l37.082 37.082h97.052l-85.425-85.792z"
-                    />
-                    <path
-                      fill="#00b5f8"
-                      d="m71.6 230.364l48.801-48.801l49.441 49.258l-48.709 48.71z"
-                    />
-                    <path
-                      fill="url(#logosFlutter0)"
-                      fill-opacity="0.8"
-                      d="m121.133 279.531l40.56-13.459l4.029-31.131z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="mx-auto flex w-fit gap-3">
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.95em"
-                    height="1em"
-                    viewBox="0 0 256 271"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="logosAngularIcon0"
-                        x1="25.071%"
-                        x2="96.132%"
-                        y1="90.929%"
-                        y2="55.184%"
-                      >
-                        <stop offset="0%" stop-color="#e40035" />
-                        <stop offset="24%" stop-color="#f60a48" />
-                        <stop offset="35.2%" stop-color="#f20755" />
-                        <stop offset="49.4%" stop-color="#dc087d" />
-                        <stop offset="74.5%" stop-color="#9717e7" />
-                        <stop offset="100%" stop-color="#6c00f5" />
-                      </linearGradient>
-                      <linearGradient
-                        id="logosAngularIcon1"
-                        x1="21.863%"
-                        x2="68.367%"
-                        y1="12.058%"
-                        y2="68.21%"
-                      >
-                        <stop offset="0%" stop-color="#ff31d9" />
-                        <stop
-                          offset="100%"
-                          stop-color="#ff5be1"
-                          stop-opacity="0"
-                        />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      fill="url(#logosAngularIcon0)"
-                      d="m256 45.179l-9.244 145.158L158.373 0zm-61.217 187.697l-66.782 38.105l-66.784-38.105L74.8 199.958h106.4zM128.001 72.249l34.994 85.076h-69.99zM9.149 190.337L0 45.179L97.627 0z"
-                    />
-                    <path
-                      fill="url(#logosAngularIcon1)"
-                      d="m256 45.179l-9.244 145.158L158.373 0zm-61.217 187.697l-66.782 38.105l-66.784-38.105L74.8 199.958h106.4zM128.001 72.249l34.994 85.076h-69.99zM9.149 190.337L0 45.179L97.627 0z"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1.12em"
-                    height="1em"
-                    viewBox="0 0 256 229"
-                  >
-                    <path
-                      fill="#0066da"
-                      d="m19.354 196.034l11.29 19.5c2.346 4.106 5.718 7.332 9.677 9.678c11.34-14.394 19.232-25.44 23.68-33.137c4.513-7.811 10.06-20.03 16.641-36.655c-17.736-2.335-31.176-3.502-40.32-3.502c-8.777 0-22.217 1.167-40.322 3.502c0 4.545 1.173 9.09 3.519 13.196z"
-                    />
-                    <path
-                      fill="#ea4335"
-                      d="M215.681 225.212c3.96-2.346 7.332-5.572 9.677-9.677l4.692-8.064l22.434-38.855a26.566 26.566 0 0 0 3.518-13.196c-18.21-2.335-31.625-3.502-40.247-3.502c-9.266 0-22.682 1.167-40.248 3.502c6.503 16.716 11.977 28.935 16.422 36.655c4.483 7.789 12.4 18.834 23.752 33.137"
-                    />
-                    <path
-                      fill="#00832d"
-                      d="M128.001 73.311c13.12-15.845 22.162-28.064 27.125-36.655c3.997-6.918 8.396-17.964 13.196-33.137C164.363 1.173 159.818 0 155.126 0h-54.25C96.184 0 91.64 1.32 87.68 3.519c6.106 17.402 11.288 29.787 15.544 37.154c4.704 8.142 12.963 19.021 24.777 32.638"
-                    />
-                    <path
-                      fill="#2684fc"
-                      d="M175.36 155.42H80.642l-40.32 69.792c3.958 2.346 8.503 3.519 13.195 3.519h148.968c4.692 0 9.238-1.32 13.196-3.52z"
-                    />
-                    <path
-                      fill="#00ac47"
-                      d="M128.001 73.311L87.681 3.52c-3.96 2.346-7.332 5.571-9.678 9.677L3.519 142.224A26.567 26.567 0 0 0 0 155.42h80.642z"
-                    />
-                    <path
-                      fill="#ffba00"
-                      d="m215.242 77.71l-37.243-64.514c-2.345-4.106-5.718-7.331-9.677-9.677l-40.32 69.792l47.358 82.109h80.496c0-4.546-1.173-9.09-3.519-13.196z"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1.56em"
-                    height="1em"
-                    viewBox="0 0 256 165"
-                  >
-                    <path
-                      fill="#0364b8"
-                      d="m154.66 110.682l52.842-50.534c-10.976-42.8-54.57-68.597-97.37-57.62a80.003 80.003 0 0 0-46.952 33.51c.817-.02 91.48 74.644 91.48 74.644"
-                    />
-                    <path
-                      fill="#0078d4"
-                      d="m97.618 45.552l-.002.009a63.683 63.683 0 0 0-33.619-9.543c-.274 0-.544.017-.818.02C27.852 36.476-.432 65.47.005 100.798a63.97 63.97 0 0 0 11.493 35.798l79.165-9.915l60.694-48.94z"
-                    />
-                    <path
-                      fill="#1490df"
-                      d="M207.502 60.148a52.595 52.595 0 0 0-3.51-.131a51.81 51.81 0 0 0-20.61 4.254l-.002-.005l-32.022 13.475l35.302 43.607l63.11 15.341c13.62-25.283 4.164-56.82-21.12-70.44a52 52 0 0 0-21.148-6.1z"
-                    />
-                    <path
-                      fill="#28a8ea"
-                      d="M11.498 136.596a63.908 63.908 0 0 0 52.5 27.417h139.994a51.986 51.986 0 0 0 45.778-27.323l-98.413-58.95z"
-                    />
-                  </svg>
-                </div>
-                <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/5 dark:before:to-transparent dark:before:shadow-gray-950">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1.13em"
-                    height="1em"
-                    viewBox="0 0 256 228"
-                  >
-                    <path
-                      fill="#00d8ff"
-                      d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844m-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14m-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193M87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94M50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979m12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887m110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322m-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18M82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147m37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486m52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565m-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722m22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3M128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86"
-                    />
-                  </svg>
-                </div>
-              </div>
+                  Start receiving submissions
+                </li>
+              </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div>
-          <div className="mx-auto max-w-6xl px-6 text-gray-500">
-            <div className="grid items-center gap-12 md:grid-cols-2 md:gap-0 lg:grid-cols-5 lg:gap-24">
-              <div className="lg:col-span-2">
-                <div className="md:pr-6 lg:pr-0">
-                  <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
-                    How Formbase Works
-                  </h2>
-                </div>
-                <ul className="mt-8 divide-y divide-[--ui-light-border-color] border-y border-[--ui-light-border-color] text-gray-700 *:flex *:items-center *:gap-3 *:py-3 dark:divide-[--ui-dark-border-color] dark:border-[--ui-dark-border-color] dark:text-gray-300">
-                  <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <g fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="m7 9l5 3.5L17 9"
-                        />
-                        <path d="M2 17V7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z" />
-                      </g>
-                    </svg>
-                    Create your form
-                  </li>
-                  <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M8 9.5A1.25 1.25 0 1 0 8 12a1.25 1.25 0 0 0 0-2.5m4 0a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5m2.75 1.25a1.25 1.25 0 1 1 2.5 0a1.25 1.25 0 0 1-2.5 0"
-                      />
-                      <path
-                        fill="currentColor"
-                        fill-rule="evenodd"
-                        d="M16.1 4.593a50.577 50.577 0 0 0-8.098-.04l-.193.015A4.93 4.93 0 0 0 3.25 9.483V18a.75.75 0 0 0 1.105.66l3.91-2.101a1.25 1.25 0 0 1 .593-.149h8.976c1.132 0 2.102-.81 2.305-1.923c.412-2.257.444-4.567.096-6.835l-.102-.669a2.666 2.666 0 0 0-2.408-2.252zM8.116 6.049a49.078 49.078 0 0 1 7.858.038l1.624.139c.536.046.972.453 1.053.985l.103.668a19.165 19.165 0 0 1-.09 6.339a.843.843 0 0 1-.829.692H8.858a2.75 2.75 0 0 0-1.302.328L4.75 16.746V9.483a3.43 3.43 0 0 1 3.171-3.42z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    Get your form endpoint
-                  </li>
-                  <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 14 14"
-                    >
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M.5 7.08h2.19a.52.52 0 0 0 .45-.27l1.8-3.6a.49.49 0 0 1 .49-.27a.48.48 0 0 1 .43.35l2.23 7.42a.5.5 0 0 0 .46.36a.5.5 0 0 0 .45-.32l1.37-3.35a.51.51 0 0 1 .47-.32h2.66"
-                      />
-                    </svg>
-                    Add to your website
-                  </li>
-                  <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="m6.75 21l-.25-2.2l2.85-7.85q.375.35.813.588t.937.362l-2.75 7.55zm10.5 0l-1.6-1.55l-2.75-7.55q.5-.125.938-.363t.812-.587l2.85 7.85zM12 11q-1.25 0-2.125-.875T9 8q0-.975.563-1.737T11 5.2V3h2v2.2q.875.3 1.438 1.063T15 8q0 1.25-.875 2.125T12 11m0-2q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9"
-                      />
-                    </svg>
-                    Start receiving submissions
-                  </li>
-                </ul>
+            <div className="overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
+              <div className="flex gap-2 px-[--card-padding] py-6 pb-0 *:size-2.5 *:rounded-full">
+                <div className="bg-[#0a0a0a] dark:bg-[#fafafa]"></div>
+                <div className="bg-[#737373]"></div>
+                <div className="bg-[#d4d4d4] dark:bg-[#404040]"></div>
               </div>
-              <div className="overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
-                <div className="flex gap-2 px-[--card-padding] py-6 pb-0 *:size-2.5 *:rounded-full">
-                  <div className="bg-[#0a0a0a] dark:bg-[#fafafa]"></div>
-                  <div className="bg-[#737373]"></div>
-                  <div className="bg-[#d4d4d4] dark:bg-[#404040]"></div>
-                </div>
-                <div>
-                  <div className="py-4">
-                    <pre className="px-[--card-padding]">
-                      <code className="font-mono text-sm">
-                        {`<form
+              <div>
+                <div className="py-4">
+                  <pre className="px-[--card-padding]">
+                    <code className="font-mono text-sm">
+                      {`<form
   action="https://formbase.dev/s/[your-form-id]" method="POST"
   enctype="multipart/form-data"
 >
@@ -915,9 +912,8 @@ const HomePage = async () => {
 
   <button type="submit">Submit</button>
 </form>`}
-                      </code>
-                    </pre>
-                  </div>
+                    </code>
+                  </pre>
                 </div>
               </div>
             </div>
