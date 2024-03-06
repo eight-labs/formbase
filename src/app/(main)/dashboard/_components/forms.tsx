@@ -18,7 +18,7 @@ export function Forms({ promises }: FormsProps) {
    * use is a React Hook that lets you read the value of a resource like a Promise or context.
    * @see https://react.dev/reference/react/use
    */
-  const [forms, subscriptionPlan] = use(promises);
+  const [forms, _subscriptionPlan] = use(promises);
 
   /**
    * useOptimistic is a React Hook that lets you show a different state while an async action is underway.

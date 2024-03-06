@@ -1,3 +1,4 @@
+import { themer } from "@tailus/themer";
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -9,27 +10,43 @@ export default {
       center: true,
       padding: "2rem",
       screens: {
-        lg: "1000px",
+        lg: "1024px",
       },
     },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
-      colors: {
+
+      colors: ({ colors }) => ({
+        primary: {
+          ...colors.zinc,
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          ...colors.lime,
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        accent: {
+          ...colors.pink,
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        success: colors.lime,
+        danger: colors.red,
+        warning: colors.yellow,
+        info: colors.blue,
+        gray: colors.zinc,
+        white: colors.white,
+        black: colors.black,
+        transparent: colors.transparent,
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -37,10 +54,6 @@ export default {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -50,7 +63,8 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-      },
+      }),
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -70,8 +84,25 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      gradientColorStopPositions: {
+        5: "5%",
+      },
     },
   },
 
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    themer({
+      radius: "smoothest",
+      background: "lighter",
+      border: "light",
+      padding: "large",
+      components: {
+        button: {
+          rounded: "2xl",
+        },
+      },
+    }),
+  ],
 } satisfies Config;

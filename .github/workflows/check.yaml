@@ -29,6 +29,7 @@ jobs:
           SMTP_USER: user
           SMTP_PASSWORD: password
           NEXT_PUBLIC_APP_URL: http://localhost:3000
+          ALLOW_SIGNIN_SIGNUP: true
           GITHUB_CLIENT_ID: client_id
           GITHUB_CLIENT_SECRET: client_secret
           STRIPE_API_KEY: stripe_api_key

@@ -46,7 +46,7 @@ const enableNotificationsSchema = z.object({
 
 type FormNameSchema = z.infer<typeof formNameSchema>;
 type EnableFormSubmissionsSchema = z.infer<typeof enableFormSubmissionsSchema>;
-type EnableSubmissionsRetentionSchema = z.infer<typeof enableRetentionSchema>;
+type _EnableSubmissionsRetentionSchema = z.infer<typeof enableRetentionSchema>;
 type EnableFormNotificationsSchema = z.infer<typeof enableNotificationsSchema>;
 type FormReturnUrlSchema = z.infer<typeof formReturnUrlSchema>;
 
