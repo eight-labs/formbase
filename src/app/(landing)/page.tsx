@@ -342,6 +342,8 @@ const HomePage = async () => {
                             className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
                             src="https://pbs.twimg.com/profile_images/1740764353408753664/uPGbBhm0_400x400.jpg"
                             alt="Duncan"
+                            width={28}
+                            height={28}
                           />
                         </div>
                       </div>
@@ -351,6 +353,8 @@ const HomePage = async () => {
                             className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
                             src="https://pbs.twimg.com/profile_images/1762988905081479168/KCAnOoLb_400x400.jpg"
                             alt="Kelvin"
+                            width={28}
+                            height={28}
                           />
                         </div>
                         <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
@@ -366,6 +370,8 @@ const HomePage = async () => {
                             className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
                             src="https://pbs.twimg.com/profile_images/1756282891833647104/0erRCEo2_400x400.jpg"
                             alt="Aikins"
+                            width={28}
+                            height={28}
                           />
                         </div>
                       </div>
