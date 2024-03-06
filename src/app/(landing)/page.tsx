@@ -43,7 +43,7 @@ const HomePage = async () => {
                     </div>
                   </span>
                 </a>
-                <h1 className="mt-8 text-wrap text-4xl font-semibold text-gray-950 dark:text-white md:text-5xl xl:text-6xl xl:[line-height:1.125]">
+                <h1 className="mt-8 inline-block text-wrap bg-gradient-to-b from-white/5 via-black to-black bg-clip-text text-4xl font-semibold text-transparent dark:from-black dark:via-white dark:to-white md:text-5xl xl:text-6xl xl:[line-height:1.125]">
                   An API for your HTML form
                 </h1>
                 <p className="mx-auto mt-8 hidden max-w-3xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
@@ -145,6 +145,9 @@ const HomePage = async () => {
               </div>
               <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
                 <div>
+                  <div className="absolute right-3 top-3 mx-auto mb-2 w-fit cursor-pointer rounded-[--annonce-border-radius] border border-[--ui-light-border-color] px-3 py-px text-sm font-medium text-gray-700 transition duration-200 hover:border-[--ui-light-border-hover-color] dark:border-[--ui-dark-border-color] dark:text-gray-300 dark:hover:border-[--ui-dark-border-hover-color]">
+                    Soon
+                  </div>
                   <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                     <svg
                       className="m-auto h-fit w-20"
@@ -174,6 +177,9 @@ const HomePage = async () => {
               </div>
               <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] sm:col-span-3 lg:col-span-2">
                 <div>
+                  <div className="absolute right-3 top-3 mx-auto mb-2 w-fit cursor-pointer rounded-[--annonce-border-radius] border border-[--ui-light-border-color] px-3 py-px text-sm font-medium text-gray-700 transition duration-200 hover:border-[--ui-light-border-hover-color] dark:border-[--ui-dark-border-color] dark:text-gray-300 dark:hover:border-[--ui-dark-border-hover-color]">
+                    Soon
+                  </div>
                   <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                     <svg
                       className="m-auto h-fit w-24 stroke-[1px]"
@@ -298,6 +304,9 @@ const HomePage = async () => {
               </div>
               <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
                 <div className="grid h-full sm:grid-cols-2">
+                  <div className="absolute right-3 top-3 mx-auto mb-2 w-fit cursor-pointer rounded-[--annonce-border-radius] border border-[--ui-light-border-color] px-3 py-px text-sm font-medium text-gray-700 transition duration-200 hover:border-[--ui-light-border-hover-color] dark:border-[--ui-dark-border-color] dark:text-gray-300 dark:hover:border-[--ui-dark-border-hover-color]">
+                    Soon
+                  </div>
                   <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
                     <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                       <svg
@@ -378,17 +387,21 @@ const HomePage = async () => {
       </section>
 
       <section>
+        <div className="mx-auto mb-2 w-fit cursor-pointer rounded-[--annonce-border-radius] border border-[--ui-light-border-color] px-3 py-px text-sm font-medium text-gray-700 transition duration-200 hover:border-[--ui-light-border-hover-color] dark:border-[--ui-dark-border-color] dark:text-gray-300 dark:hover:border-[--ui-dark-border-hover-color]">
+          Soon
+        </div>
+
         <div className="mx-auto max-w-6xl px-6 text-gray-500">
           <div className="text-center">
             <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
               Integrate with the tools you love
             </h2>
-            <p className="mt-6 text-gray-700 dark:text-gray-300">
+            <p className="mt-4 text-gray-700 dark:text-gray-300">
               Out-of-the-box integrations with popular third-party services like
               Zapier, Notion, and more.
             </p>
           </div>
-          <div className="relative -mx-6 mt-12 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
+          <div className="relative -mx-6 mt-10 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
             <div className="mx-auto flex w-fit gap-3">
               <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
                 <svg
