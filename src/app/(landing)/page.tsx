@@ -1,10 +1,4 @@
 import { Code, ListPlus, MousePointerSquare, Server } from "lucide-react";
-import { type Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Formbase",
-  description: "Your form backend API.",
-};
 
 const githubUrl = "https://github.com/eight-labs/formbase";
 
