@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import type {
   ColumnDef,
   ColumnFiltersState,
@@ -36,12 +36,15 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import type { FormData } from "~/server/db/schema";
 
 type SubmissionsTableProps = {
   formKeys: string[];
   formId: string;
   submissions: any; // FIXME: take care of this
+};
+
+type FormDataType = {
+  [key: string]: string;
 };
 
 export function SubmissionsTable({
@@ -57,7 +60,7 @@ export function SubmissionsTable({
   const [rowSelection, setRowSelection] = React.useState({});
   const formKeysArray = formKeys.filter((key) => key.length > 0);
 
-  const columns: ColumnDef<FormData["data"]>[] = [
+  const columns: ColumnDef<FormDataType>[] = [
     {
       id: "select",
       header: ({ table }) => {
@@ -87,7 +90,12 @@ export function SubmissionsTable({
 
     ...formKeysArray.map((submission: any) => {
       return {
-        accessorKey: submission,
+        accessorKey: submission as string,
+        sortingFn: (a: any, b: any) => {
+          const valueA = a.original.data[submission] as string;
+          const valueB = b.original.data[submission] as string;
+          return valueA.localeCompare(valueB);
+        },
         header: () => {
           return (
             <Button
@@ -95,7 +103,7 @@ export function SubmissionsTable({
               className="px-0 py-0 capitalize hover:bg-transparent"
             >
               {submission}
-              {/* <CaretSortIcon className="ml-2 h-4 w-4" /> */}
+              <CaretSortIcon className="ml-2 h-4 w-4" />
             </Button>
           );
         },
@@ -141,6 +149,7 @@ export function SubmissionsTable({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    enableSortingRemoval: false,
     state: {
       sorting,
       columnFilters,
@@ -158,7 +167,10 @@ export function SubmissionsTable({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      onClick={header.column.getToggleSortingHandler()}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
