@@ -41,10 +41,10 @@ const HomePage = async () => {
                 <h1 className="mt-4 inline-block text-wrap bg-gradient-to-b text-4xl font-semibold dark:from-black dark:text-white sm:mt-6 sm:from-white/5 sm:via-black sm:to-black sm:bg-clip-text sm:text-transparent sm:dark:via-white md:text-5xl xl:text-6xl xl:[line-height:1.125]">
                   A Backend for your HTML form
                 </h1>
-                <p className="mx-auto mt-4  max-w-3xl text-wrap text-base text-gray-700 dark:text-gray-300 sm:mt-6 sm:text-lg">
-                  A form-handling service filled with features like validation,
-                  and notifications that can be integrated to manage any form,
-                  directly in your HTML.
+                <p className="mx-auto mt-4  max-w-3xl text-wrap text-base text-gray-700 dark:text-gray-300 sm:text-lg">
+                  Streamline your workflow with effortless form handling,
+                  automated notifications, secure file uploads, and seamless
+                  integrations.
                 </p>
 
                 <div className="mt-8 flex flex-col items-center justify-center gap-4">
