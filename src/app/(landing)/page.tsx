@@ -10,7 +10,7 @@ const githubUrl = "https://github.com/eight-labs/formbase";
 
 const HomePage = async () => {
   return (
-    <div className="space-y-32">
+    <div className=" space-y-20 md:space-y-32">
       <section className="relative bg-[url('/images/hero-pattern_light.svg')] dark:bg-[url('/images/hero-pattern_dark.svg')]">
         <div className="bg-gradient-to-b from-transparent via-transparent to-white dark:to-black">
           <div className="relative pt-24 lg:pt-28">
@@ -401,7 +401,7 @@ const HomePage = async () => {
               Zapier, Notion, and more.
             </p>
           </div>
-          <div className="relative -mx-6 mt-10 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
+          <div className="relative mt-10 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
             <div className="mx-auto flex w-fit gap-3">
               <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
                 <svg
