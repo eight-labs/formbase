@@ -7,9 +7,9 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn(className)}>
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-          <FunctionSquare className="mr-2 h-5 w-5" />{" "}
+      <div className="mx-4 flex items-center justify-between  py-10 sm:container sm:flex-col md:h-24 md:flex-row md:py-0">
+        <div className="flex items-center gap-4 px-8 sm:flex-col md:flex-row md:gap-2 md:px-0">
+          <FunctionSquare className="h-5 w-5 sm:mr-2" />
           <p className="text-center text-sm leading-loose md:text-left">
             Built by{" "}
             <a

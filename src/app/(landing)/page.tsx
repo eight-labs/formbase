@@ -21,14 +21,14 @@ const HomePage = async () => {
                   target="_blank"
                   className="group mx-auto flex w-fit items-center justify-between gap-2 rounded-[--annonce-border-radius] border border-[--ui-light-border-color] p-1 transition duration-200 hover:border-[--ui-light-border-hover-color] dark:border-[--ui-dark-border-color] dark:hover:border-[--ui-dark-border-hover-color]"
                 >
-                  <span className="flex gap-3 pl-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="flex gap-3 pl-2  text-xs font-medium text-gray-700 dark:text-gray-300 sm:text-sm">
                     Star us on GitHub
                     <div className="flex items-center -space-x-3 transition-transform duration-300 group-hover:-translate-x-1">
-                      <span className="h-[1.5px] w-2.5 origin-left -translate-x-px translate-y-[-0.3px] scale-x-0 rounded bg-gray-950 opacity-0 transition duration-300 group-hover:scale-x-100 group-hover:opacity-100 dark:bg-white"></span>
+                      <span className="h-[1.2px] w-2 origin-left -translate-x-[3px] scale-x-0  rounded bg-gray-950 opacity-0 transition duration-300 group-hover:scale-x-100 group-hover:opacity-100 dark:bg-white sm:h-[1.5px] sm:w-2.5 sm:-translate-x-px sm:-translate-y-[0.3px]"></span>
                       <svg
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
-                        className="size-4 -translate-x-2 text-gray-950 transition duration-300 group-hover:translate-x-px dark:text-white"
+                        className=" size-3 -translate-x-2 text-gray-950 transition duration-300 group-hover:translate-x-px dark:text-white sm:size-4"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -43,18 +43,15 @@ const HomePage = async () => {
                     </div>
                   </span>
                 </a>
-                <h1 className="mt-8 inline-block text-wrap bg-gradient-to-b from-white/5 via-black to-black bg-clip-text text-4xl font-semibold text-transparent dark:from-black dark:via-white dark:to-white md:text-5xl xl:text-6xl xl:[line-height:1.125]">
-                  An API for your HTML form
+                <h1 className="mt-4 inline-block text-wrap bg-gradient-to-b text-4xl font-semibold dark:from-black dark:text-white sm:mt-6 sm:from-white/5 sm:via-black sm:to-black sm:bg-clip-text sm:text-transparent sm:dark:via-white md:text-5xl xl:text-6xl xl:[line-height:1.125]">
+                  A Backend for your HTML form
                 </h1>
-                <p className="mx-auto mt-8 hidden max-w-3xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
+                <p className="mx-auto mt-4  max-w-3xl text-wrap text-base text-gray-700 dark:text-gray-300 sm:mt-6 sm:text-lg">
                   A form-handling service filled with features like validation,
                   and notifications that can be integrated to manage any form,
                   directly in your HTML.
                 </p>
-                <p className="mx-auto mt-6 max-w-2xl text-wrap text-gray-700 dark:text-gray-300 sm:hidden">
-                  Highly customizable components for building modern websites
-                  and applications, with your personnal spark.
-                </p>
+
                 <div className="mt-8 flex flex-col items-center justify-center gap-4">
                   <div className="rounded-[calc(var(--btn-border-radius)+4px)] border bg-gray-950/5 p-1 dark:border-white/10 dark:bg-white/5">
                     <a
@@ -121,7 +118,7 @@ const HomePage = async () => {
                 <div>
                   <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                     <svg
-                      className="m-auto h-fit w-20 fill-primary-500 stroke-[4px]"
+                      className="m-auto w-20 fill-primary-500 stroke-[4px]"
                       viewBox="0 0 256 256"
                       xmlns="http://www.w3.org/2000/svg"
                       strokeWidth="0.9"
@@ -150,7 +147,7 @@ const HomePage = async () => {
                   </div>
                   <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                     <svg
-                      className="m-auto h-fit w-20"
+                      className="m-auto  w-20"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +179,7 @@ const HomePage = async () => {
                   </div>
                   <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                     <svg
-                      className="m-auto h-fit w-24 stroke-[1px]"
+                      className="m-auto w-24 stroke-[1px]"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -401,7 +398,7 @@ const HomePage = async () => {
               Zapier, Notion, and more.
             </p>
           </div>
-          <div className="relative mt-10 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
+          <div className="relative -ml-4 mt-10 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
             <div className="mx-auto flex w-fit gap-3">
               <div className="relative mx-auto flex size-20 rounded-[--card-border-radius] border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
                 <svg
@@ -617,14 +614,14 @@ const HomePage = async () => {
       </section>
 
       <section>
-        <div className="pb-36">
+        <div className="pb-16  sm:pb-36">
           <div className="mx-auto max-w-6xl px-6 text-gray-500">
             <div className="text-center">
-              <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
+              <h2 className="text-2xl font-semibold text-gray-950 dark:text-white sm:text-3xl">
                 Proudly Open Source
               </h2>
 
-              <p className="mx-auto mt-4 hidden max-w-3xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
+              <p className="mx-auto mt-2 max-w-3xl text-wrap text-base text-gray-700 dark:text-gray-300 sm:mt-4 sm:text-lg">
                 Formbase is open source and powered by open source software.
                 <br /> The code is available on{" "}
                 <a
