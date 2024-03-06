@@ -1,4 +1,5 @@
 import { Code, ListPlus, MousePointerSquare, Server } from "lucide-react";
+import Image from "next/image";
 
 const githubUrl = "https://github.com/eight-labs/formbase";
 
@@ -337,19 +338,19 @@ const HomePage = async () => {
                           Duncan
                         </span>
                         <div className="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
-                          <img
+                          <Image
                             className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
                             src="https://pbs.twimg.com/profile_images/1740764353408753664/uPGbBhm0_400x400.jpg"
-                            alt=""
+                            alt="Duncan"
                           />
                         </div>
                       </div>
                       <div className="relative ml-[calc(50%-1rem)] flex items-center gap-2">
                         <div className="size-8 ring-4 ring-white dark:ring-[--card-dark-bg]">
-                          <img
+                          <Image
                             className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
                             src="https://pbs.twimg.com/profile_images/1762988905081479168/KCAnOoLb_400x400.jpg"
-                            alt=""
+                            alt="Kelvin"
                           />
                         </div>
                         <span className="block h-fit rounded-md border px-2 py-1 text-xs shadow-sm dark:border-white/5 dark:bg-gray-800 dark:text-white">
@@ -361,10 +362,10 @@ const HomePage = async () => {
                           Aikins
                         </span>
                         <div className="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
-                          <img
+                          <Image
                             className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
                             src="https://pbs.twimg.com/profile_images/1756282891833647104/0erRCEo2_400x400.jpg"
-                            alt=""
+                            alt="Aikins"
                           />
                         </div>
                       </div>

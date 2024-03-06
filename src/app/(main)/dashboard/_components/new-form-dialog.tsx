@@ -49,7 +49,7 @@ export function CreateFormDialog() {
     },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
-  const [isCreatePending, startCreateTransaction] = useTransition();
+  const [_isCreatePending, startCreateTransaction] = useTransition();
 
   const { mutateAsync: createNewForm } = api.form.create.useMutation();
 

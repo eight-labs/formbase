@@ -1,7 +1,5 @@
 import { type Metadata } from "next";
 
-import { validateRequest } from "~/lib/auth/validate-request";
-
 import { SidebarNav } from "./sidebar-nav";
 
 export const metadata: Metadata = {
