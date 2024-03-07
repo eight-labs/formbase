@@ -22,6 +22,7 @@ import { Switch } from "~/components/ui/switch";
 import { api } from "~/trpc/react";
 import { type RouterOutputs } from "~/trpc/shared";
 
+import { DeleteFormDialog } from "../../dashboard/_components/delete-form-dialog";
 import { refreshDashboardAfterDeletion } from "../_actions/refresh-dashboard-after-deletion";
 
 const formNameSchema = z.object({
@@ -61,34 +62,9 @@ export function FormSettings({ form }: FormSettingsProps) {
     return null;
   }
 
-  const utils = api.useUtils();
-
-  const { mutateAsync: deleteForm, isLoading: isDeletingForm } =
-    api.form.delete.useMutation({
-      async onSuccess() {
-        utils.form.invalidate();
-
-        // router.refresh();
-        await refreshDashboardAfterDeletion();
-        router.push("/dashboard");
-
-        toast("Your form has been deleted", {
-          icon: <FolderX className="h-4 w-4" />,
-        });
-      },
-    });
-
-  const handleDeleteForm = async () => {
-    try {
-      await deleteForm({ id: form.id });
-    } catch (e) {
-      console.log(e);
-
-      toast("Failed to delete form", {
-        description: "Please try again later",
-        icon: <FolderX className="h-4 w-4" />,
-      });
-    }
+  const redirectToDashboard = async () => {
+    await refreshDashboardAfterDeletion();
+    router.push("/dashboard");
   };
 
   return (
@@ -114,15 +90,13 @@ export function FormSettings({ form }: FormSettingsProps) {
             Delete your form with all your submissions
           </p>
         </div>
-        {/* TODO: Dialog to Confirm Deleting */}
-        <Button
-          type="button"
-          loading={isDeletingForm}
-          variant="destructive"
-          onClick={handleDeleteForm}
-        >
-          Delete Form
-        </Button>
+        <div>
+          <DeleteFormDialog
+            formId={form.id}
+            showTrashIcon={false}
+            onSuccessfulDelete={redirectToDashboard}
+          />
+        </div>
       </div>
     </div>
   );
