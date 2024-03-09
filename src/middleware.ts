@@ -8,7 +8,7 @@ import { env } from "~/env";
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   if (request.method === "GET") {
     if (
-      env.ALLOW_SIGNIN_SIGNUP === "true" &&
+      env.ALLOW_SIGNIN_SIGNUP === "false" &&
       request.nextUrl.pathname !== "/"
     ) {
       return NextResponse.redirect(new URL("/", request.url));
