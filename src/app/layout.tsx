@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 
 import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/sonner";
@@ -47,6 +48,11 @@ export default function RootLayout({
           <TRPCReactProvider>{children}</TRPCReactProvider>
           <Toaster />
         </ThemeProvider>
+        <Script
+          async
+          src="https://analytics.duncan.land/script.js"
+          data-website-id="dbe896ca-3b40-4a3d-8072-25ad8c165ed6"
+        />
       </body>
     </html>
   );
