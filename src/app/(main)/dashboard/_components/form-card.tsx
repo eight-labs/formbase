@@ -13,7 +13,7 @@ import {
 } from "~/components/ui/dropdown-menu";
 import type { RouterOutputs } from "~/trpc/shared";
 
-import { DeleteFormDialog } from "../../form/delete-form-dialog";
+import { DeleteFormDialog } from "../../form/[id]/delete-form-dialog";
 
 type FormCardProp = {
   form: RouterOutputs["form"]["userForms"][number];

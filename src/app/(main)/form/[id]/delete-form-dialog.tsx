@@ -16,13 +16,11 @@ import { api } from "~/trpc/react";
 
 type DeleteFormDialogProps = {
   formId: string;
-  showTrashIcon?: boolean;
   onSuccessfulDelete?: () => void;
 };
 
 export function DeleteFormDialog({
   formId,
-  showTrashIcon,
   onSuccessfulDelete,
 }: DeleteFormDialogProps) {
   const [open, setOpen] = useState(false);

@@ -16,8 +16,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Trash2 } from "lucide-react";
+import { Trash2, TrashIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import * as React from "react";
+import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
@@ -35,6 +37,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { api } from "~/trpc/react";
 
 type SubmissionsTableProps = {
   formKeys: string[];
@@ -50,6 +53,8 @@ export function SubmissionsTable({
   submissions,
   formKeys,
 }: SubmissionsTableProps) {
+  const router = useRouter();
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -58,6 +63,30 @@ export function SubmissionsTable({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const formKeysArray = formKeys.filter((key) => key.length > 0);
+
+  const { mutateAsync: deleteFormSubmission } =
+    api.formData.delete.useMutation();
+
+  const handleFormSubmissionDelete = async ({
+    submissionId,
+  }: {
+    submissionId: string;
+  }) => {
+    await deleteFormSubmission(
+      {
+        id: submissionId,
+      },
+      {
+        onSuccess: () => {
+          router.refresh();
+
+          toast.success("Submission has been deleted", {
+            icon: <TrashIcon className="h-4 w-4" />,
+          });
+        },
+      },
+    );
+  };
 
   const columns: ColumnDef<FormDataType>[] = [
     {
@@ -152,7 +181,9 @@ export function SubmissionsTable({
       id: "actions",
       enableHiding: false,
       size: 20,
-      cell: () => {
+      cell: ({ row }) => {
+        const submissionId = row.original.id as string;
+
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -162,7 +193,10 @@ export function SubmissionsTable({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[1rem] p-0">
-              <DropdownMenuItem className="focus:bg-destructive/5 focus:text-destructive-foreground">
+              <DropdownMenuItem
+                className="focus:bg-destructive/5 focus:text-destructive-foreground"
+                onClick={() => handleFormSubmissionDelete({ submissionId })}
+              >
                 <span className="flex items-center gap-2 p-1 py-0.5 text-destructive">
                   <Trash2 className="size-4 " />
                   Delete
