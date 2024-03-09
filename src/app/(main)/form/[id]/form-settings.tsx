@@ -22,8 +22,8 @@ import { Switch } from "~/components/ui/switch";
 import { api } from "~/trpc/react";
 import { type RouterOutputs } from "~/trpc/shared";
 
+import { DeleteFormDialog } from "./delete-form-dialog";
 import { refreshDashboardAfterDeletion } from "../_actions/refresh-dashboard-after-deletion";
-import { DeleteFormDialog } from "../delete-form-dialog";
 
 const formNameSchema = z.object({
   name: z.string().min(1).optional(),
@@ -93,7 +93,6 @@ export function FormSettings({ form }: FormSettingsProps) {
         <div>
           <DeleteFormDialog
             formId={form.id}
-            showTrashIcon={false}
             onSuccessfulDelete={redirectToDashboard}
           />
         </div>
