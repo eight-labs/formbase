@@ -114,6 +114,27 @@ export function SubmissionsTable({
     }),
 
     {
+      accessorKey: "createdAt",
+      header: "Created At",
+      cell: ({ row }: any) => {
+        const date = new Date(row.original.createdAt);
+        const dateString = date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+
+        const timeString = date.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        });
+
+        return <div>{dateString + ", " + timeString}</div>;
+      },
+    },
+
+    {
       id: "actions",
       enableHiding: false,
       cell: () => {

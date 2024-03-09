@@ -85,8 +85,6 @@ export const formDataRouter = createTRPCRouter({
         where: (table, { eq }) => eq(table.formId, input.formId),
       });
 
-      return formData.map((data) => {
-        return { ...flattenObject(data), data: data.data };
-      });
+      return formData.map((data) => ({ ...flattenObject(data), ...data }));
     }),
 });
