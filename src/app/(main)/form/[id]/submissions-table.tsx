@@ -16,6 +16,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Trash2 } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "~/components/ui/button";
@@ -24,8 +25,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import {
@@ -115,7 +114,22 @@ export function SubmissionsTable({
 
     {
       accessorKey: "createdAt",
-      header: "Created At",
+      header: () => {
+        return (
+          <Button
+            variant="ghost"
+            className="px-0 py-0 capitalize hover:bg-transparent"
+          >
+            Created At
+            <CaretSortIcon className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      sortingFn: (a: any, b: any) => {
+        const dateA = new Date(a.original.createdAt);
+        const dateB = new Date(b.original.createdAt);
+        return dateA.getTime() - dateB.getTime();
+      },
       cell: ({ row }: any) => {
         const date = new Date(row.original.createdAt);
         const dateString = date.toLocaleDateString("en-US", {
@@ -137,6 +151,7 @@ export function SubmissionsTable({
     {
       id: "actions",
       enableHiding: false,
+      size: 20,
       cell: () => {
         return (
           <DropdownMenu>
@@ -146,12 +161,13 @@ export function SubmissionsTable({
                 <DotsHorizontalIcon className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem>Copy submission ID</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>View customer</DropdownMenuItem>
-              <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuContent className="min-w-[1rem] p-0">
+              <DropdownMenuItem className="focus:bg-destructive/5 focus:text-destructive-foreground">
+                <span className="flex items-center gap-2 p-1 py-0.5 text-destructive">
+                  <Trash2 className="size-4 " />
+                  Delete
+                </span>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
