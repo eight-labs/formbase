@@ -1,2 +1,0 @@
-ALTER TABLE "formbase_forms" ADD COLUMN "enable_submissions" boolean DEFAULT true NOT NULL;--> statement-breakpoint
-ALTER TABLE "formbase_forms" ADD COLUMN "enable_retention" boolean DEFAULT true NOT NULL;

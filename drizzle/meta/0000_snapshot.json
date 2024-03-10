@@ -1,5 +1,5 @@
 {
-  "id": "9fb5f106-cdd4-407f-ae01-cec39606c1a1",
+  "id": "68957d80-a735-4311-a193-07eb69cfdc8a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -16,19 +16,19 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "varchar(21)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "code": {
           "name": "code",
-          "type": "varchar(8)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -73,13 +73,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(15)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "form_id": {
           "name": "form_id",
-          "type": "varchar(15)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -123,25 +123,25 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(15)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "user_id": {
           "name": "user_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "title": {
           "name": "title",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "description": {
           "name": "description",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -160,7 +160,7 @@
         },
         "return_url": {
           "name": "return_url",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -173,9 +173,23 @@
         },
         "keys": {
           "name": "keys",
-          "type": "varchar",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": true
+        },
+        "enable_submissions": {
+          "name": "enable_submissions",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "enable_retention": {
+          "name": "enable_retention",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
         }
       },
       "indexes": {
@@ -204,13 +218,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(40)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "user_id": {
           "name": "user_id",
-          "type": "varchar(21)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -234,100 +248,19 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "formbase_posts": {
-      "name": "formbase_posts",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(15)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "title": {
-          "name": "title",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "excerpt": {
-          "name": "excerpt",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "content": {
-          "name": "content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "status": {
-          "name": "status",
-          "type": "varchar(10)",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'draft'"
-        },
-        "tags": {
-          "name": "tags",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "posts_user_idx": {
-          "name": "posts_user_idx",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": false
-        },
-        "post_created_at_idx": {
-          "name": "post_created_at_idx",
-          "columns": [
-            "created_at"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
     "formbase_sessions": {
       "name": "formbase_sessions",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "user_id": {
           "name": "user_id",
-          "type": "varchar(21)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -357,19 +290,25 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(21)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "github_id": {
           "name": "github_id",
-          "type": "varchar(255)",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "email": {
           "name": "email",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -382,31 +321,31 @@
         },
         "hashed_password": {
           "name": "hashed_password",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "avatar": {
           "name": "avatar",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "stripe_subscription_id": {
           "name": "stripe_subscription_id",
-          "type": "varchar(191)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "stripe_price_id": {
           "name": "stripe_price_id",
-          "type": "varchar(191)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "stripe_customer_id": {
           "name": "stripe_customer_id",
-          "type": "varchar(191)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },

@@ -1,1 +1,0 @@
-ALTER TABLE "formbase_forms" ALTER COLUMN "keys" SET DATA TYPE text[];

@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1708948029465,
-      "tag": "0000_dry_exiles",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1708950487746,
-      "tag": "0001_tearful_celestials",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1709064566383,
-      "tag": "0002_light_senator_kelly",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1709064805848,
-      "tag": "0003_rapid_quasimodo",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1709064914091,
-      "tag": "0004_many_marvel_boy",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1709070879334,
-      "tag": "0005_pale_william_stryker",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1709111678392,
-      "tag": "0006_sharp_may_parker",
+      "when": 1710042143399,
+      "tag": "0000_large_zzzax",
       "breakpoints": true
     }
   ]
