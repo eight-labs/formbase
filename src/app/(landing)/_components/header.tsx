@@ -46,7 +46,7 @@ export const Header = ({ user }: LandingHeaderProps) => {
                 </div>
 
                 <>
-                  {env.ALLOW_SIGNIN_SIGNUP === "true" ? null : (
+                  {env.ALLOW_SIGNIN_SIGNUP === "false" ? null : (
                     <>
                       {isLoggedIn ? (
                         <Link
