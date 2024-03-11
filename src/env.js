@@ -23,6 +23,7 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: z.string().trim().min(1),
     STRIPE_PRO_MONTHLY_PLAN_ID: z.string().trim().min(1),
     ALLOW_SIGNIN_SIGNUP: z.string().trim().min(1),
+    UMAMI_TRACKING_ID: z.string().optional(),
   },
 
   /**
@@ -53,6 +54,7 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRO_MONTHLY_PLAN_ID: process.env.STRIPE_PRO_MONTHLY_PLAN_ID,
     ALLOW_SIGNIN_SIGNUP: process.env.ALLOW_SIGNIN_SIGNUP,
+    UMAMI_TRACKING_ID: process.env.UMAMI_TRACKING_ID,
     // Client-side env vars
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },

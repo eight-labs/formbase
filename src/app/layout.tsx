@@ -5,6 +5,7 @@ import Script from "next/script";
 
 import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/sonner";
+import { env } from "~/env";
 import { APP_TITLE } from "~/lib/constants";
 import { fontSans } from "~/lib/fonts";
 import { cn } from "~/lib/utils";
@@ -48,11 +49,13 @@ export default function RootLayout({
           <TRPCReactProvider>{children}</TRPCReactProvider>
           <Toaster />
         </ThemeProvider>
-        <Script
-          async
-          src="https://analytics.duncan.land/script.js"
-          data-website-id="dbe896ca-3b40-4a3d-8072-25ad8c165ed6"
-        />
+        {env.UMAMI_TRACKING_ID && (
+          <Script
+            async
+            src="https://analytics.duncan.land/script.js"
+            data-website-id={env.UMAMI_TRACKING_ID}
+          />
+        )}
       </body>
     </html>
   );
