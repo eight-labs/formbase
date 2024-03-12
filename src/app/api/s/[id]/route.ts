@@ -6,11 +6,7 @@ import { generateId } from "~/lib/utils/generate-id";
 import { db } from "~/server/db";
 import { formDatas, forms } from "~/server/db/schema";
 import { sendMail } from "~/server/send-mail";
-import {
-  assignFileOrImage,
-  uploadFile,
-  uploadFileFromBlob,
-} from "~/server/upload-file";
+import { assignFileOrImage, uploadFileFromBlob } from "~/server/upload-file";
 
 export async function POST(
   request: Request,
