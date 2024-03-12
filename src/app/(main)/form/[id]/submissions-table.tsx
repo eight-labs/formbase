@@ -16,8 +16,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { EyeIcon, FileIcon, Trash2, TrashIcon } from "lucide-react";
-import Image from "next/image";
+import { Trash2, TrashIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { toast } from "sonner";
