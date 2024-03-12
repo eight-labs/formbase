@@ -145,7 +145,6 @@ export function SubmissionsTable({
             const fileName = formatFileName(fileUrl);
             return (
               <div className="flex items-center">
-                {fileKey === "file" && <FileIcon size={20} className="mr-2" />}
                 <a
                   href={fileUrl}
                   target="_blank"
