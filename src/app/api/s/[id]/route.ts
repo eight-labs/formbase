@@ -6,6 +6,7 @@ import { generateId } from "~/lib/utils/generate-id";
 import { db } from "~/server/db";
 import { formDatas, forms } from "~/server/db/schema";
 import { sendMail } from "~/server/send-mail";
+import { uploadFile } from "~/server/upload-file";
 
 export async function POST(
   request: Request,
@@ -48,6 +49,25 @@ export async function POST(
       : formDataFromRequest;
 
   const { browser } = userAgent(request);
+
+  if (formData.image) {
+    const file = formData.image;
+
+    if (file instanceof Blob) {
+      const stream = file.stream();
+      const reader = stream.getReader();
+      const chunks = [];
+      let result = await reader.read();
+      while (!result.done) {
+        chunks.push(result.value);
+        result = await reader.read();
+      }
+      const buffer = Buffer.concat(chunks);
+
+      const imageUrl = await uploadFile(buffer, file.type);
+      formData.image = imageUrl;
+    }
+  }
 
   const formDataKeys = Object.keys(formData);
   const formKeys = form?.keys || [];
