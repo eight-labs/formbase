@@ -3,6 +3,10 @@ import { Client } from "minio";
 import { env } from "~/env";
 import { generateId } from "~/lib/utils/generate-id";
 
+type FormData = {
+  [key: string]: Blob | string;
+};
+
 const minio = new Client({
   endPoint: env.MINIO_ENDPOINT,
   port: env.MINIO_PORT,
@@ -42,5 +46,31 @@ export async function uploadFile(fileBuffer: Buffer, mimetype: string) {
   } catch (error) {
     console.error("Failed to upload file:", error);
     throw new Error("Failed to upload file");
+  }
+}
+
+export async function uploadFileFromBlob(blob: Blob): Promise<string> {
+  const response = new Response(blob);
+  const buffer = await response.arrayBuffer();
+  return uploadFile(Buffer.from(buffer), blob.type);
+}
+
+export function assignFileOrImage(
+  formData: FormData,
+  key: string,
+  fileUrl: string,
+): void {
+  let isImage = false;
+  if (formData[key] instanceof Blob) {
+    isImage = formData[key]?.type.startsWith("image/");
+  }
+  const field = isImage ? "image" : "file";
+
+  if (!formData[field]) {
+    formData[field] = fileUrl;
+  }
+
+  if (key !== "file" && key !== "image") {
+    delete formData[key];
   }
 }
