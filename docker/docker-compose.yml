@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=formbase
     ports:
-      - "54321:5432"
+      - "5432:5432"
     volumes:
       - formbase-db:/var/lib/postgresql/data
 
@@ -24,6 +24,21 @@ services:
     volumes:
       - formbase-mail:/data
 
+  minio:
+    image: minio/minio
+    container_name: formbase_minio
+    ports:
+      - 9002:9002
+      - 9001:9001
+    volumes:
+      - minio:/data
+    environment:
+      MINIO_ROOT_USER: formbase
+      MINIO_ROOT_PASSWORD: password
+    entrypoint: sh
+    command: -c 'mkdir -p /data/formbase && minio server /data --console-address ":9001" --address ":9002"'
+
 volumes:
   formbase-db:
   formbase-mail:
+  minio:
