@@ -1,7 +1,7 @@
 <h1 align="center">Formbase</h1>
 
 <p align="center">
-  An open-source formbackend for form handling, notifications, secure file uploads, and integrations.
+  An open-source form backend for form handling, notifications, secure file uploads, and integrations.
 </p>
 
 <p align="center">
