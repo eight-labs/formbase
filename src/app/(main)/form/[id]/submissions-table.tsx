@@ -41,6 +41,8 @@ import {
 import { formatFileName } from "~/lib/utils";
 import { api } from "~/trpc/react";
 
+import { ImagePreviewDialog } from "./image-preview-dialog";
+
 type SubmissionsTableProps = {
   formKeys: string[];
   formId: string;
@@ -153,15 +155,7 @@ export function SubmissionsTable({
                   {fileName}
                 </a>
                 {fileKey === "image" && (
-                  <div
-                    className="relative h-8 w-8 overflow-hidden rounded-full border"
-                    style={{ backgroundImage: `url(${fileUrl})` }}
-                    onClick={() => window.open(fileUrl, "_blank")}
-                  >
-                    <div className="absolute inset-0 flex cursor-pointer items-center justify-center backdrop-blur-sm hover:backdrop-blur-lg">
-                      <EyeIcon size={15} />
-                    </div>
-                  </div>
+                  <ImagePreviewDialog fileName={fileName} imageUrl={fileUrl} />
                 )}
               </div>
             );
