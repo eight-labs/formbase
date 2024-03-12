@@ -139,8 +139,7 @@ export function SubmissionsTable({
             if (!data[submission]) {
               return null;
             }
-            const fileKey = row.original.data.image ? "image" : "file";
-            const fileUrl = row.original.data[fileKey];
+            const fileUrl = data[submission];
             const fileName = formatFileName(fileUrl);
             return (
               <div className="flex items-center">
@@ -152,7 +151,7 @@ export function SubmissionsTable({
                 >
                   {fileName}
                 </a>
-                {fileKey === "image" && (
+                {submission === "image" && (
                   <ImagePreviewDialog fileName={fileName} imageUrl={fileUrl} />
                 )}
               </div>
