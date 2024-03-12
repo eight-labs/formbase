@@ -50,22 +50,18 @@ export async function POST(
 
   const { browser } = userAgent(request);
 
-  if (formData.image) {
-    const file = formData.image;
-
-    if (file instanceof Blob) {
-      const stream = file.stream();
-      const reader = stream.getReader();
-      const chunks = [];
-      let result = await reader.read();
-      while (!result.done) {
-        chunks.push(result.value);
-        result = await reader.read();
-      }
-      const buffer = Buffer.concat(chunks);
-
-      const imageUrl = await uploadFile(buffer, file.type);
-      formData.image = imageUrl;
+  if (formData.file instanceof Blob) {
+    const chunks = [];
+    for await (const chunk of formData.file.stream()) {
+      chunks.push(chunk);
+    }
+    const buffer = Buffer.concat(chunks);
+    const fileUrl = await uploadFile(buffer, formData.file.type);
+    if (formData.file.type.startsWith("image/")) {
+      formData.image = fileUrl;
+      delete formData.file;
+    } else {
+      formData.file = fileUrl;
     }
   }
 
