@@ -1,3 +1,5 @@
+import path from "path";
+
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -54,4 +56,13 @@ export function formatPrice(
 
 export function absoluteUrl(path: string) {
   return `${env.NEXT_PUBLIC_APP_URL}${path}`;
+}
+
+export function formatFileName(fileUrl: string) {
+  const parsedUrl = new URL(fileUrl);
+  const parsedPath = path.parse(parsedUrl.pathname);
+
+  const displayName = `${parsedPath.name}${parsedPath.ext}`;
+
+  return displayName;
 }

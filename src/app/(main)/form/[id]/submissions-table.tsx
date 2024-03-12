@@ -16,7 +16,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Trash2, TrashIcon } from "lucide-react";
+import { EyeIcon, FileIcon, Trash2, TrashIcon } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { toast } from "sonner";
@@ -37,6 +38,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { formatFileName } from "~/lib/utils";
 import { api } from "~/trpc/react";
 
 type SubmissionsTableProps = {
@@ -117,13 +119,57 @@ export function SubmissionsTable({
     },
 
     ...formKeysArray.map((submission: any) => {
+      if (submission === "image" || submission === "file") {
+        return {
+          accessorKey: submission as string,
+          header: () => {
+            return (
+              <Button
+                variant="ghost"
+                className="px-0 py-0 capitalize hover:bg-transparent"
+              >
+                {submission}
+                <CaretSortIcon className="ml-2 h-4 w-4" />
+              </Button>
+            );
+          },
+          cell: ({ row }: any) => {
+            const data = row.original.data;
+            if (!data[submission]) {
+              return null;
+            }
+            const fileKey = row.original.data.image ? "image" : "file";
+            const fileUrl = row.original.data[fileKey];
+            const fileName = formatFileName(fileUrl);
+            return (
+              <div className="flex items-center">
+                {fileKey === "file" && <FileIcon size={20} className="mr-2" />}
+                <a
+                  href={fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mr-2 underline hover:no-underline"
+                >
+                  {fileName}
+                </a>
+                {fileKey === "image" && (
+                  <div
+                    className="relative h-8 w-8 overflow-hidden rounded-full border"
+                    style={{ backgroundImage: `url(${fileUrl})` }}
+                    onClick={() => window.open(fileUrl, "_blank")}
+                  >
+                    <div className="absolute inset-0 flex cursor-pointer items-center justify-center backdrop-blur-sm hover:backdrop-blur-lg">
+                      <EyeIcon size={15} />
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          },
+        };
+      }
       return {
         accessorKey: submission as string,
-        sortingFn: (a: any, b: any) => {
-          const valueA = a.original.data[submission] as string;
-          const valueB = b.original.data[submission] as string;
-          return valueA.localeCompare(valueB);
-        },
         header: () => {
           return (
             <Button
@@ -136,7 +182,7 @@ export function SubmissionsTable({
           );
         },
         cell: ({ row }: any) => {
-          return <div>{row.original[`data.${submission}`]}</div>;
+          return <div>{row.original.data[submission]}</div>;
         },
       };
     }),
