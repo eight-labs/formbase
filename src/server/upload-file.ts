@@ -62,7 +62,8 @@ export function assignFileOrImage(
 ): void {
   let isImage = false;
   if (formData[key] instanceof Blob) {
-    isImage = formData[key]?.type.startsWith("image/");
+    const blob = formData[key] as Blob;
+    isImage = blob.type.startsWith("image/");
   }
   const field = isImage ? "image" : "file";
 
