@@ -12,7 +12,7 @@ export type Variables = {
 export const app = new Hono<{ Variables: Variables }>().basePath("/api");
 
 app.use("/forms/*", async (c, next) => {
-  const authorizationKey = c.req.raw.headers.get("x-formbase-key");
+  const authorizationKey = c.req.raw.headers.get("X-Formbase-Key");
   if (!authorizationKey) {
     return c.json({ error: "Unauthorized" }, 401);
   }
