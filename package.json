@@ -45,7 +45,6 @@
     "@trpc/server": "^10.43.6",
     "@types/bcryptjs": "^2.4.6",
     "arctic": "^1.1.0",
-    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "data-fns": "^1.1.0",
