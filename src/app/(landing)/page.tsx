@@ -399,7 +399,7 @@ const HomePage = async () => {
               Zapier, Notion, and more.
             </p>
           </div>
-          <div className="relative -ml-4 mt-10 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
+          <div className="relative mx-auto -ml-4 mt-10 overflow-x-auto px-6 sm:px-0 ">
             <div className="mx-auto flex w-fit gap-3">
               <div className="relative mx-auto flex size-16 rounded-[--card-border-radius]  border *:relative *:m-auto *:size-7 before:absolute before:inset-0 before:rounded-[calc(var(--card-border-radius)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950 md:size-20">
                 <svg
