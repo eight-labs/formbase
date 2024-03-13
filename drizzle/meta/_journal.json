@@ -8,6 +8,13 @@
       "when": 1710042143399,
       "tag": "0000_large_zzzax",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1710258514480,
+      "tag": "0001_sudden_crusher_hogan",
+      "breakpoints": true
     }
   ]
 }

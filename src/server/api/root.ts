@@ -1,3 +1,4 @@
+import { apiKeysRouter } from "./routers/apiKeys";
 import { formRouter } from "./routers/form";
 import { formDataRouter } from "./routers/formData";
 import { stripeRouter } from "./routers/stripe";
@@ -9,6 +10,7 @@ export const appRouter = createTRPCRouter({
   stripe: stripeRouter,
   form: formRouter,
   formData: formDataRouter,
+  apiKeys: apiKeysRouter,
 });
 
 export type AppRouter = typeof appRouter;
