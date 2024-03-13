@@ -592,7 +592,7 @@ const HomePage = async () => {
                 <div className="bg-[#d4d4d4] dark:bg-[#404040]"></div>
               </div>
               <div>
-                <div className="py-4">
+                <div className="overflow-scroll py-4">
                   <pre className="px-[--card-padding]">
                     <code className="font-mono text-sm">
                       {`<form
