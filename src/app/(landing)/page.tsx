@@ -201,7 +201,7 @@ const HomePage = async () => {
                 </div>
               </div>
 
-              <div className="relative col-span-full overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
+              <div className="relative col-span-full overflow-hidden  rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
                 <div className="grid sm:grid-cols-2">
                   <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
                     <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
@@ -237,11 +237,11 @@ const HomePage = async () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="space-y-2">
+                    <div className="w-[59%] space-y-2 md:w-full">
                       <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
                         Email Notifications
                       </h2>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <p className=" text-gray-700 dark:text-gray-300 ">
                         Receive real-time notifications whenever your form
                         receives a new entry.
                       </p>
@@ -567,19 +567,19 @@ const HomePage = async () => {
                 </h2>
               </div>
               <ul className="mt-8 divide-y divide-[--ui-light-border-color] border-y border-[--ui-light-border-color] text-gray-700 *:flex *:items-center *:gap-3 *:py-3 dark:divide-[--ui-dark-border-color] dark:border-[--ui-dark-border-color] dark:text-gray-300">
-                <li>
+                <li key="1">
                   <ListPlus strokeWidth={1.5} className="size-5" />
                   Create your form
                 </li>
-                <li>
+                <li key="2">
                   <Server strokeWidth={1.5} className="size-5" />
                   Get your form endpoint
                 </li>
-                <li>
+                <li key="3">
                   <Code strokeWidth={1.5} className="size-5" />
                   Add the form to your website
                 </li>
-                <li>
+                <li key="4">
                   <MousePointerSquare strokeWidth={1.5} className="size-5" />
                   Start receiving submissions
                 </li>
