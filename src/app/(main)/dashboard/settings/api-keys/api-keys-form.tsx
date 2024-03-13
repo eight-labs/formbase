@@ -47,7 +47,7 @@ export function ApiKeysForm() {
   const { mutateAsync: createApiKey, isLoading: isCreatingApiKey } =
     api.apiKeys.create.useMutation({
       onSuccess: () => {
-        toast.success("Your API Key has been deleted", {
+        toast.success("Your API Key has been created", {
           icon: <KeyRound className="h-4 w-4" />,
         });
       },
