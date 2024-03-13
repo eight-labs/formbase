@@ -33,7 +33,7 @@ export const Header = ({ user }: LandingHeaderProps) => {
                 <div className="mt-6 text-gray-600 dark:text-gray-300 md:-ml-4 md:mt-0 lg:pr-4">
                   <ul className="space-y-6 text-base tracking-wide md:flex md:space-y-0 md:text-sm">
                     {routes.map(({ name, href }) => (
-                      <li>
+                      <li key={href}>
                         <Link
                           href={href}
                           className="block transition hover:text-primary-600 dark:hover:text-primary-400 md:px-4"
