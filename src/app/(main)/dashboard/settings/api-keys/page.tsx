@@ -23,21 +23,6 @@ export default async function SettingsPage() {
 
   const userKeys = await api.apiKeys.getUserKeys.query();
 
-  if (!userKeys) {
-    return (
-      <div className="space-y-6">
-        <div>
-          <h3 className="text-lg font-medium">API Keys</h3>
-          <p className="text-sm text-muted-foreground">
-            Generate and manage your API keys
-          </p>
-        </div>
-        <Separator />
-        <ApiKeysForm />
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
       <div>
@@ -47,9 +32,7 @@ export default async function SettingsPage() {
         </p>
       </div>
       <Separator />
-      <div>
-        <ApiKeyCard apiKey={userKeys} />
-      </div>
+      <div>{userKeys ? <ApiKeyCard apiKey={userKeys} /> : <ApiKeysForm />}</div>
     </div>
   );
 }
