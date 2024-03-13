@@ -237,7 +237,7 @@ const HomePage = async () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="w-[59%] space-y-2 md:w-full">
+                    <div className="w-1/2 space-y-2 md:w-full">
                       <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
                         Email Notifications
                       </h2>
