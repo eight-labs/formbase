@@ -11,8 +11,7 @@ import { ApiKeysForm } from "./api-keys-form";
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-  title: "Settings - API Keys | Formbase",
-  description: "Programmatically manage your forms and submissions.",
+  title: "API Keys",
 };
 
 export default async function SettingsPage() {
