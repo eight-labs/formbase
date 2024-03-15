@@ -4,7 +4,6 @@ import { api } from "~/trpc/server";
 
 import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
 import { FormSettings } from "./form-settings";
-import SetUpPage from "./set-up";
 import { SubmissionsTable } from "./submissions-table";
 import { EmptyFormState } from "../../dashboard/_components/empty-state";
 
@@ -31,7 +30,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
       <Tabs defaultValue="submissions">
         <TabsList>
           <TabsTrigger value="submissions">Submissions</TabsTrigger>
-          <TabsTrigger value="setup">Setup</TabsTrigger>
+          {/* <TabsTrigger value="setup">Setup</TabsTrigger> */}
           {/* <TabsTrigger value="analytics">Analytics</TabsTrigger> */}
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
@@ -58,9 +57,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
             </>
           )}
         </TabsContent>
-        <TabsContent value="setup">
-          <SetUpPage formId={formId} />
-        </TabsContent>
+        {/* <TabsContent value="setup">Change your password here.</TabsContent> */}
         {/* <TabsContent value="analytics">Look at your analytics here</TabsContent> */}
         <TabsContent value="settings" className="my-6">
           <FormSettings form={form} />
