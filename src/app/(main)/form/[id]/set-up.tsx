@@ -46,7 +46,10 @@ const SetUpPage = ({ formId }: { formId: string }) => {
       </div>
 
       <span className="mt-3 text-sm text-muted-foreground">
-        Having trouble? <span className="underline"> Contact us</span>
+        Having trouble?{" "}
+        <a href="mailto:hi@eightlabs.xyz" className="cursor-pointer underline">
+          Contact us
+        </a>
       </span>
     </div>
   );
