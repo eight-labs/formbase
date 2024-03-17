@@ -9,7 +9,7 @@ export type Variables = {
   apiKeyID: string;
 };
 
-export const app = new Hono<{ Variables: Variables }>().basePath("/api");
+export const app = new Hono<{ Variables: Variables }>().basePath("/api/v1");
 
 app.use("/forms/*", async (c, next) => {
   const authorizationKey = c.req.raw.headers.get("X-Formbase-Key");
