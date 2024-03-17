@@ -132,6 +132,27 @@ export const formDataRelations = relations(formDatas, ({ one }) => ({
   }),
 }));
 
+export const apiKeys = createTable(
+  "api_keys",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id").notNull(),
+    key: text("key").notNull(),
+    name: text("name").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userIdx: index("api_key_user_idx").on(t.userId),
+  }),
+);
+
+export const apiKeyRelations = relations(apiKeys, ({ one }) => ({
+  user: one(users, {
+    fields: [apiKeys.userId],
+    references: [users.id],
+  }),
+}));
+
 export type FormData = typeof formDatas.$inferSelect;
 export type NewFormData = typeof formDatas.$inferInsert;
 
@@ -139,3 +160,5 @@ export type Form = typeof forms.$inferSelect;
 export type NewForm = typeof forms.$inferInsert;
 
 export type Session = typeof sessions.$inferSelect;
+
+export type ApiKey = typeof apiKeys.$inferSelect;

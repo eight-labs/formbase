@@ -12,6 +12,10 @@ const sidebarNavItems = [
     title: "Profile",
     href: "/dashboard/settings",
   },
+  {
+    title: "API Keys",
+    href: "/dashboard/settings/api-keys",
+  },
 ];
 
 interface SettingsLayoutProps {
