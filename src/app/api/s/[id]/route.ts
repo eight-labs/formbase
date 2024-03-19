@@ -51,10 +51,18 @@ export async function POST(
 
   const formDataKeys = Object.keys(formData);
   const formKeys = form?.keys || [];
-  const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
+  const updatedKeys = [...new Set([...formKeys, ...formDataKeys])].filter(
+    (key) => key !== "_gotcha",
+  );
 
   if (!form) {
     return new Response("Form not found", { status: 404 });
+  }
+
+  // if the key name _gotcha is present, then it means the form was submitted by a bot
+  const submissionIsSpam = !!formData._gotcha;
+  if (submissionIsSpam) {
+    delete formData._gotcha;
   }
 
   await db.transaction(async (tx) => {
@@ -63,6 +71,7 @@ export async function POST(
       formId,
       id: generateId(15),
       createdAt: new Date(),
+      isSpam: submissionIsSpam,
     });
 
     await tx

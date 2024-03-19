@@ -37,6 +37,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
 
 type SubmissionsTableProps = {
@@ -187,7 +188,13 @@ export function SubmissionsTable({
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button
+                variant="ghost"
+                className={cn(
+                  "h-8 w-8 p-0",
+                  row.original.isSpam && "hover:bg-red-100",
+                )}
+              >
                 <span className="sr-only">Open menu</span>
                 <DotsHorizontalIcon className="h-4 w-4" />
               </Button>
@@ -260,6 +267,10 @@ export function SubmissionsTable({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className={cn(
+                    row.original.isSpam &&
+                      "bg-red-100 duration-300 hover:bg-red-50",
+                  )}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
