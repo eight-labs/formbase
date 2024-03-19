@@ -106,6 +106,7 @@ export const formDatas = createTable(
     formId: text("form_id").notNull(),
     data: json("data").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
+    isSpam: boolean("is_spam").default(false).notNull(),
   },
   (t) => ({
     formIdx: index("form_idx").on(t.formId),
