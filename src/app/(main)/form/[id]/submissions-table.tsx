@@ -139,6 +139,7 @@ export function SubmissionsTable({
             if (!data[submission]) {
               return null;
             }
+
             const fileUrl = data[submission];
             const fileName = formatFileName(fileUrl);
             return (
@@ -159,6 +160,7 @@ export function SubmissionsTable({
           },
         };
       }
+
       return {
         accessorKey: submission as string,
         header: () => {

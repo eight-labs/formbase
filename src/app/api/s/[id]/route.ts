@@ -42,6 +42,7 @@ export async function POST(
       }
     }
   }
+
   try {
     const formData =
       source === "formData"
@@ -55,8 +56,14 @@ export async function POST(
     );
 
     for (const key of fileKeys) {
-      const fileUrl = await uploadFileFromBlob(formData[key]);
-      assignFileOrImage(formData, key, fileUrl);
+      const file = formDataFromRequest.get(key) as File;
+      const fileUrl = await uploadFileFromBlob({ file });
+
+      assignFileOrImage({
+        formData,
+        key,
+        fileUrl,
+      });
     }
 
     const formDataKeys = Object.keys(formData);

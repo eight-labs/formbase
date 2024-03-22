@@ -49,27 +49,33 @@ export async function uploadFile(fileBuffer: Buffer, mimetype: string) {
   }
 }
 
-export async function uploadFileFromBlob(blob: Blob): Promise<string> {
-  const response = new Response(blob);
+export async function uploadFileFromBlob({
+  file,
+}: {
+  file: Blob;
+}): Promise<string> {
+  const response = new Response(file);
   const buffer = await response.arrayBuffer();
-  return uploadFile(Buffer.from(buffer), blob.type);
+  return uploadFile(Buffer.from(buffer), file.type);
 }
 
-export function assignFileOrImage(
-  formData: FormData,
-  key: string,
-  fileUrl: string,
-): void {
+export function assignFileOrImage({
+  formData,
+  key,
+  fileUrl,
+}: {
+  formData: FormData;
+  key: string;
+  fileUrl: string;
+}): void {
   let isImage = false;
   if (formData[key] instanceof Blob) {
     const blob = formData[key] as Blob;
     isImage = blob.type.startsWith("image/");
   }
-  const field = isImage ? "image" : "file";
 
-  if (!formData[field]) {
-    formData[field] = fileUrl;
-  }
+  const field = isImage ? "image" : "file";
+  formData[field] = fileUrl;
 
   if (key !== "file" && key !== "image") {
     delete formData[key];
