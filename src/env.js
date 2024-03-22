@@ -24,6 +24,12 @@ export const env = createEnv({
     STRIPE_PRO_MONTHLY_PLAN_ID: z.string().trim().min(1),
     ALLOW_SIGNIN_SIGNUP: z.string().trim().min(1),
     UMAMI_TRACKING_ID: z.string().optional(),
+    MINIO_ENDPOINT: z.string().trim().min(1),
+    MINIO_PORT: z.number().int().min(1),
+    MINIO_USESSL: z.boolean(),
+    MINIO_ACCESSKEY: z.string().trim().min(1),
+    MINIO_SECRETKEY: z.string().trim().min(1),
+    MINIO_BUCKET: z.string().trim().min(1),
   },
 
   /**
@@ -55,6 +61,12 @@ export const env = createEnv({
     STRIPE_PRO_MONTHLY_PLAN_ID: process.env.STRIPE_PRO_MONTHLY_PLAN_ID,
     ALLOW_SIGNIN_SIGNUP: process.env.ALLOW_SIGNIN_SIGNUP,
     UMAMI_TRACKING_ID: process.env.UMAMI_TRACKING_ID,
+    MINIO_ENDPOINT: process.env.MINIO_ENDPOINT,
+    MINIO_PORT: parseInt(process.env.MINIO_PORT ?? ""),
+    MINIO_USESSL: process.env.MINIO_USESSL === "true",
+    MINIO_ACCESSKEY: process.env.MINIO_ACCESSKEY,
+    MINIO_SECRETKEY: process.env.MINIO_SECRETKEY,
+    MINIO_BUCKET: process.env.MINIO_BUCKET,
     // Client-side env vars
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },

@@ -37,7 +37,10 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { formatFileName } from "~/lib/utils";
 import { api } from "~/trpc/react";
+
+import { ImagePreviewDialog } from "./image-preview-dialog";
 
 type SubmissionsTableProps = {
   formKeys: string[];
@@ -117,13 +120,49 @@ export function SubmissionsTable({
     },
 
     ...formKeysArray.map((submission: any) => {
+      if (submission === "image" || submission === "file") {
+        return {
+          accessorKey: submission as string,
+          header: () => {
+            return (
+              <Button
+                variant="ghost"
+                className="px-0 py-0 capitalize hover:bg-transparent"
+              >
+                {submission}
+                <CaretSortIcon className="ml-2 h-4 w-4" />
+              </Button>
+            );
+          },
+          cell: ({ row }: any) => {
+            const data = row.original.data;
+            if (!data[submission]) {
+              return null;
+            }
+
+            const fileUrl = data[submission];
+            const fileName = formatFileName(fileUrl);
+            return (
+              <div className="flex items-center">
+                <a
+                  href={fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mr-2 underline hover:no-underline"
+                >
+                  {fileName}
+                </a>
+                {submission === "image" && (
+                  <ImagePreviewDialog fileName={fileName} imageUrl={fileUrl} />
+                )}
+              </div>
+            );
+          },
+        };
+      }
+
       return {
         accessorKey: submission as string,
-        sortingFn: (a: any, b: any) => {
-          const valueA = a.original.data[submission] as string;
-          const valueB = b.original.data[submission] as string;
-          return valueA.localeCompare(valueB);
-        },
         header: () => {
           return (
             <Button
@@ -136,7 +175,7 @@ export function SubmissionsTable({
           );
         },
         cell: ({ row }: any) => {
-          return <div>{row.original[`data.${submission}`]}</div>;
+          return <div>{row.original.data[submission]}</div>;
         },
       };
     }),

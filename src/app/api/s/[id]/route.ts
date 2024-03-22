@@ -6,6 +6,7 @@ import { generateId } from "~/lib/utils/generate-id";
 import { db } from "~/server/db";
 import { formDatas, forms } from "~/server/db/schema";
 import { sendMail } from "~/server/send-mail";
+import { assignFileOrImage, uploadFileFromBlob } from "~/server/upload-file";
 
 export async function POST(
   request: Request,
@@ -42,62 +43,84 @@ export async function POST(
     }
   }
 
-  const formData =
-    source === "formData"
-      ? Object.fromEntries(formDataFromRequest)
-      : formDataFromRequest;
+  try {
+    const formData =
+      source === "formData"
+        ? Object.fromEntries(formDataFromRequest)
+        : formDataFromRequest;
 
-  const { browser } = userAgent(request);
+    const { browser } = userAgent(request);
 
-  const formDataKeys = Object.keys(formData);
-  const formKeys = form?.keys || [];
-  const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
+    const fileKeys = Object.keys(formData).filter(
+      (key) => formData[key] instanceof Blob,
+    );
 
-  if (!form) {
-    return new Response("Form not found", { status: 404 });
+    for (const key of fileKeys) {
+      const file = formDataFromRequest.get(key) as File;
+      const fileUrl = await uploadFileFromBlob({ file });
+
+      assignFileOrImage({
+        formData,
+        key,
+        fileUrl,
+      });
+    }
+
+    const formDataKeys = Object.keys(formData);
+    const formKeys = form?.keys || [];
+    const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
+
+    if (!form) {
+      return new Response("Form not found", { status: 404 });
+    }
+
+    await db.transaction(async (tx) => {
+      await tx.insert(formDatas).values({
+        data: formData,
+        formId,
+        id: generateId(15),
+        createdAt: new Date(),
+      });
+
+      await tx
+        .update(forms)
+        .set({
+          updatedAt: new Date(),
+          keys: updatedKeys,
+        })
+        .where(eq(forms.id, formId));
+    });
+
+    if (form.enableEmailNotifications) {
+      const userId = form.userId;
+
+      const user = await db.query.users.findFirst({
+        where: (table, { eq }) => eq(table.id, userId),
+      });
+
+      sendMail({
+        to: user!.email,
+        subject: `New Submission for ${form.title}`,
+        body: renderNewSubmissionEmail({
+          link: `http://localhost:3000/form/${formId}`,
+          formTitle: form.title,
+        }),
+      });
+    }
+
+    if (!browser.name) {
+      return Response.json({
+        formId,
+        message: "Submission successful",
+        data: formData,
+      });
+    }
+
+    return Response.redirect(`http://localhost:3000/s/${formId}`, 303);
+  } catch (error) {
+    console.error(error);
+    return new Response("There was an issue processing your form", {
+      status: 500,
+    });
   }
-
-  await db.transaction(async (tx) => {
-    await tx.insert(formDatas).values({
-      data: formData,
-      formId,
-      id: generateId(15),
-      createdAt: new Date(),
-    });
-
-    await tx
-      .update(forms)
-      .set({
-        updatedAt: new Date(),
-        keys: updatedKeys,
-      })
-      .where(eq(forms.id, formId));
-  });
-
-  if (form.enableEmailNotifications) {
-    const userId = form.userId;
-
-    const user = await db.query.users.findFirst({
-      where: (table, { eq }) => eq(table.id, userId),
-    });
-
-    sendMail({
-      to: user!.email,
-      subject: `New Submission for ${form.title}`,
-      body: renderNewSubmissionEmail({
-        link: `http://localhost:3000/form/${formId}`,
-        formTitle: form.title,
-      }),
-    });
-  }
-
-  if (!browser.name) {
-    return Response.json({
-      formId,
-      message: "Submission successful",
-      data: formData,
-    });
-  }
-
-  return Response.redirect(`http://localhost:3000/s/${formId}`, 303);
 }
