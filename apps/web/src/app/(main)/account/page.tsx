@@ -11,8 +11,8 @@ import {
 } from "src/components/ui/card";
 import { logout } from "src/lib/auth/actions";
 import { validateRequest } from "src/lib/auth/validate-request";
-import { redirects } from "src/lib/constants";
-import type { User } from "src/server/db/schema";
+import { redirects } from "@formbase/lib/constants";
+import type { User } from "@formbase/db/schema";
 
 export default async function AccountPage() {
   const { user } = (await validateRequest()) as { user: User | null };

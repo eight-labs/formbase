@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import * as React from "react";
 
-import { env } from "src/env";
+import { env } from "@formbase/env";
 import { api } from "src/trpc/server";
 
 import { Forms } from "./_components/forms";

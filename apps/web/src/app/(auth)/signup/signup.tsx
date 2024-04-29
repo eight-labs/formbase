@@ -17,7 +17,7 @@ import {
 import { Input } from "src/components/ui/input";
 import { Label } from "src/components/ui/label";
 import { signup } from "src/lib/auth/actions";
-import { APP_TITLE } from "src/lib/constants";
+import { APP_TITLE } from "@formbase/lib/constants";
 
 export function Signup() {
   const [state, formAction] = useFormState(signup, null);

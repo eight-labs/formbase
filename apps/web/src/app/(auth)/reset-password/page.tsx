@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "src/components/ui/card";
 import { validateRequest } from "src/lib/auth/validate-request";
-import { redirects } from "src/lib/constants";
+import { redirects } from "@formbase/lib/constants";
 
 import { SendResetEmail } from "./send-reset-email";
 

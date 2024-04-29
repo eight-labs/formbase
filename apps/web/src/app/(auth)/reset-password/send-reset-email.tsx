@@ -12,7 +12,7 @@ import { Button } from "src/components/ui/button";
 import { Input } from "src/components/ui/input";
 import { Label } from "src/components/ui/label";
 import { sendPasswordResetLink } from "src/lib/auth/actions";
-import { redirects } from "src/lib/constants";
+import { redirects } from "@formbase/lib/constants";
 
 export function SendResetEmail() {
   const [state, formAction] = useFormState(sendPasswordResetLink, null);

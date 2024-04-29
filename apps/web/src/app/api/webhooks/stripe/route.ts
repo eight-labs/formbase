@@ -2,10 +2,10 @@ import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import type Stripe from "stripe";
 
-import { env } from "src/env";
+import { env } from "@formbase/env";
 import { stripe } from "src/lib/stripe";
-import { db } from "src/server/db";
-import { users } from "src/server/db/schema";
+import { db } from "@formbase/db";
+import { users } from "@formbase/db/schema";
 
 export async function POST(req: Request) {
   const body = await req.text();

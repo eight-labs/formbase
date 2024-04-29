@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { users } from "src/server/db/schema";
+import { users } from "@formbase/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 

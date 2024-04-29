@@ -5,8 +5,8 @@ import Script from "next/script";
 
 import { ThemeProvider } from "src/components/theme-provider";
 import { Toaster } from "src/components/ui/sonner";
-import { env } from "src/env";
-import { APP_TITLE } from "src/lib/constants";
+import { env } from "@formbase/env";
+import { APP_TITLE } from "@formbase/lib/constants";
 import { fontSans } from "src/lib/fonts";
 import { cn } from "src/lib/utils";
 import { TRPCReactProvider } from "src/trpc/react";

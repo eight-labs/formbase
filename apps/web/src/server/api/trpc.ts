@@ -13,7 +13,7 @@ import { ZodError } from "zod";
 
 import { uncachedValidateRequest } from "src/lib/auth/validate-request";
 import { stripe } from "src/lib/stripe";
-import { db } from "src/server/db";
+import { db } from "@formbase/db";
 
 /**
  * 1. CONTEXT

@@ -37,7 +37,7 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    "src/server/db/migrate.mts"
-  ],
+    "../../packages/db/migrate.mts"
+, "../../packages/db/index.ts", "../../packages/db/schema.ts", "../../packages/db/util.ts", "../../packages/lib/constants.ts", "../../packages/db/drizzle.config.ts"  ],
   "exclude": ["node_modules"]
 }

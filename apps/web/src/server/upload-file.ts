@@ -1,6 +1,6 @@
 import { Client } from "minio";
 
-import { env } from "src/env";
+import { env } from "@formbase/env";
 import { generateId } from "src/lib/utils/generate-id";
 
 type FormData = {

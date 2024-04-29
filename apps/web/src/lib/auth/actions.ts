@@ -10,7 +10,7 @@ import { TimeSpan, createDate, isWithinExpirationDate } from "oslo";
 import { alphabet, generateRandomString } from "oslo/crypto";
 import { z } from "zod";
 
-import { env } from "src/env";
+import { env } from "@formbase/env";
 import { lucia } from "src/lib/auth";
 import { validateRequest } from "src/lib/auth/validate-request";
 import { renderVerificationCodeEmail } from "src/lib/email-templates/email-verification";
@@ -22,16 +22,16 @@ import {
   resetPasswordSchema,
   signupSchema,
 } from "src/lib/validators/auth";
-import { db } from "src/server/db";
+import { db } from "@formbase/db";
 import {
   type User,
   emailVerificationCodes,
   passwordResetTokens,
   users,
-} from "src/server/db/schema";
+} from "@formbase/db/schema";
 import { sendMail } from "src/server/send-mail";
 
-import { redirects } from "../constants";
+import { redirects } from "../../../../../packages/lib/constants";
 
 export interface ActionResponse<T> {
   fieldError?: Partial<Record<keyof T, string | undefined>>;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { Separator } from "src/components/ui/separator";
-import { env } from "src/env";
+import { env } from "@formbase/env";
 import { validateRequest } from "src/lib/auth/validate-request";
 
 import { ProfileForm } from "./profile-form";

@@ -1,0 +1,20 @@
+{
+  "name": "@formbase/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Add dev script here'",
+    "build": "echo 'Add build script here'",
+    "test": "echo 'Add test script here'",
+    "lint": "echo 'Add lint script here'"
+  },
+  "dependencies": {
+    "@formbase/env": "workspace:*",
+    "@formbase/lib": "workspace:*",
+    "@lucia-auth/adapter-drizzle": "^1.0.7",
+    "drizzle-kit": "^0.20.17",
+    "drizzle-orm": "^0.29.5",
+    "postgres": "^3.4.4"
+  }
+}

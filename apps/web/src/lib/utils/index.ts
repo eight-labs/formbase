@@ -3,7 +3,7 @@ import path from "path";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { env } from "src/env";
+import { env } from "@formbase/env";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

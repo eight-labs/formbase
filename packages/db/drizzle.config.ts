@@ -1,10 +1,10 @@
 import { type Config } from "drizzle-kit";
 
-import { env } from "src/env";
-import { DATABASE_PREFIX } from "src/lib/constants";
+import { env } from "@formbase/env";
+import { DATABASE_PREFIX } from "@formbase/lib/constants.js";
 
 export default {
-  schema: "./src/server/db/schema.ts",
+  schema: "./schema.ts",
   out: "./drizzle",
   driver: "pg",
   dbCredentials: {

@@ -3,7 +3,7 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
 
-import { env } from "~/env";
+import { env } from "@formbase/env";
 
 migrate(drizzle(postgres(env.DATABASE_URL, { max: 1 })), {
   migrationsFolder: "./drizzle",

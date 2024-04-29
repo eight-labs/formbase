@@ -5,9 +5,9 @@ import { GitHub } from "arctic";
 import type { Adapter } from "lucia";
 import { Lucia, TimeSpan } from "lucia";
 
-import { env } from "src/env.js";
-import { db } from "src/server/db";
-import { type User as DbUser, sessions, users } from "src/server/db/schema";
+import { env } from "@formbase/env";
+import { db } from "@formbase/db";
+import { type User as DbUser, sessions, users } from "@formbase/db/schema";
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 

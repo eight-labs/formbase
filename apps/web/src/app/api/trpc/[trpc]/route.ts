@@ -1,7 +1,7 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { type NextRequest } from "next/server";
 
-import { env } from "src/env";
+import { env } from "@formbase/env";
 import { appRouter } from "src/server/api/root";
 import { createTRPCContext } from "src/server/api/trpc";
 

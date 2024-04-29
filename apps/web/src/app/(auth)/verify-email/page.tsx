@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from "src/components/ui/card";
 import { validateRequest } from "src/lib/auth/validate-request";
-import { redirects } from "src/lib/constants";
-import type { User } from "src/server/db/schema";
+import { redirects } from "@formbase/lib/constants";
+import type { User } from "@formbase/db/schema";
 
 import { VerifyCode } from "./verify-code";
 

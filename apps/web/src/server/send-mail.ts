@@ -1,7 +1,7 @@
 import { type TransportOptions, createTransport } from "nodemailer";
 
-import { env } from "src/env";
-import { EMAIL_SENDER } from "src/lib/constants";
+import { env } from "@formbase/env";
+import { EMAIL_SENDER } from "@formbase/lib/constants";
 
 const smtpConfig = {
   host: env.SMTP_HOST,

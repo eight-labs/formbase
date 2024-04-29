@@ -3,8 +3,8 @@ import { userAgent } from "next/server";
 
 import { renderNewSubmissionEmail } from "src/lib/email-templates/new-submission";
 import { generateId } from "src/lib/utils/generate-id";
-import { db } from "src/server/db";
-import { formDatas, forms } from "src/server/db/schema";
+import { db } from "@formbase/db";
+import { formDatas, forms } from "@formbase/db/schema";
 import { sendMail } from "src/server/send-mail";
 import { assignFileOrImage, uploadFileFromBlob } from "src/server/upload-file";
 

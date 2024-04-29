@@ -4,9 +4,9 @@ import * as React from "react";
 
 import { ExclamationTriangleIcon } from "src/components/icons";
 import { Alert, AlertDescription, AlertTitle } from "src/components/ui/alert";
-import { env } from "src/env";
+import { env } from "@formbase/env";
 import { validateRequest } from "src/lib/auth/validate-request";
-import { APP_TITLE } from "src/lib/constants";
+import { APP_TITLE } from "@formbase/lib/constants";
 import { api } from "src/trpc/server";
 
 import { Billing } from "./_components/billing";

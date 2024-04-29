@@ -2,7 +2,7 @@ import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-import { env } from "src/env.js";
+import { env } from "@formbase/env";
 
 import * as schema from "./schema";
 

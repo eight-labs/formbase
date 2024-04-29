@@ -30,7 +30,7 @@ import {
   DropdownMenuTrigger,
 } from "src/components/ui/dropdown-menu";
 import { logout } from "src/lib/auth/actions";
-import { APP_TITLE } from "src/lib/constants";
+import { APP_TITLE } from "@formbase/lib/constants";
 
 export const UserDropdown = ({
   email,

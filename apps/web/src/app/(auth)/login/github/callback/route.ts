@@ -3,10 +3,10 @@ import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 
 import { github, lucia } from "src/lib/auth";
-import { redirects } from "src/lib/constants";
+import { redirects } from "@formbase/lib/constants";
 import { generateId } from "src/lib/utils/generate-id";
-import { db } from "src/server/db";
-import { users } from "src/server/db/schema";
+import { db } from "@formbase/db";
+import { users } from "@formbase/db/schema";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);

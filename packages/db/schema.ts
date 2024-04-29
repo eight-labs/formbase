@@ -9,7 +9,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
-import { createTable } from "src/server/db/util";
+import { createTable } from "./util";
 
 export const users = createTable(
   "users",

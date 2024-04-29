@@ -3,7 +3,7 @@ import { verifyRequestOrigin } from "lucia";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { env } from "src/env";
+import { env } from "@formbase/env";
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   if (request.method === "GET") {

@@ -1,4 +1,4 @@
-import { env } from "src/env";
+import { env } from "@formbase/env";
 
 export interface SubscriptionPlan {
   name: string;
