@@ -1,43 +1,28 @@
 {
-  "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
+  "extends": "@formbase/typescript-config/nextjs.json",
 
-    /* Strictness */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "checkJs": true,
-
-    /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
-    "noEmit": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "preserve",
-    "plugins": [{ "name": "next" }],
-    "incremental": true,
-
-    /* Path Aliases */
+  "compilerOptions": { 
+    "plugins": [
+      {
+        "name": "next",
+      }
+    ], 
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
-    }
+      "~/*": ["./src/*"]
+    },
   },
+ 
   "include": [
-    ".eslintrc.cjs",
     "next-env.d.ts",
+    "next.config.js",
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    "../../packages/db/migrate.mts"
-, "../../packages/db/index.ts", "../../packages/db/schema.ts", "../../packages/db/util.ts", "../../packages/lib/constants.ts", "../../packages/db/drizzle.config.ts"  ],
+    "../../packages/email/send-mail.ts",
+    ".eslintrc.cjs"
+  ],
   "exclude": ["node_modules"]
 }

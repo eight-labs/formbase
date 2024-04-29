@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import { redirect } from "next/navigation";
 import * as React from "react";
 
-import { validateRequest } from "src/lib/auth/validate-request";
+import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { redirects } from "@formbase/lib/constants";
 
 type DashboardLayoutProps = {

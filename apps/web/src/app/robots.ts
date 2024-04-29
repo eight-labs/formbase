@@ -1,6 +1,6 @@
 import { type MetadataRoute } from "next";
 
-import { absoluteUrl } from "src/lib/utils";
+import { absoluteUrl } from "@formbase/lib/utils";
 
 export default function robots(): MetadataRoute.Robots {
   return {

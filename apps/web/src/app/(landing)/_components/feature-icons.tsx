@@ -1,6 +1,6 @@
 import { type SVGProps, forwardRef } from "react";
 
-import { cn } from "src/lib/utils";
+import { cn } from "@formbase/lib/utils";
 
 const NextjsLight = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   ({ className, ...props }, ref) => (

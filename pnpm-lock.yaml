@@ -26,6 +26,9 @@ importers:
       '@formbase/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@formbase/email':
+        specifier: workspace:*
+        version: link:../../packages/email
       '@formbase/env':
         specifier: workspace:*
         version: link:../../packages/env
@@ -319,6 +322,37 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4
 
+  packages/email:
+    dependencies:
+      '@formbase/env':
+        specifier: workspace:*
+        version: link:../env
+      '@formbase/lib':
+        specifier: workspace:*
+        version: link:../lib
+      '@formbase/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@react-email/components':
+        specifier: ^0.0.12
+        version: 0.0.12(@types/react@18.3.1)(react@18.2.0)
+      '@react-email/render':
+        specifier: ^0.0.10
+        version: 0.0.10
+      nodemailer:
+        specifier: ^6.9.13
+        version: 6.9.13
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+    devDependencies:
+      '@types/nodemailer':
+        specifier: ^6.4.14
+        version: 6.4.14
+      '@types/react':
+        specifier: ^18.3.1
+        version: 18.3.1
+
   packages/env:
     dependencies:
       '@t3-oss/env-nextjs':
@@ -352,7 +386,54 @@ importers:
         specifier: ^5.3.3
         version: 5.4.5
 
-  packages/lib: {}
+  packages/lib:
+    dependencies:
+      '@formbase/env':
+        specifier: workspace:*
+        version: link:../env
+      '@formbase/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@lucia-auth/adapter-drizzle':
+        specifier: ^1.0.7
+        version: 1.0.7(lucia@3.2.0)
+      arctic:
+        specifier: ^1.7.0
+        version: 1.7.0
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      drizzle-orm:
+        specifier: ^0.29.5
+        version: 0.29.5(@planetscale/database@1.17.0)(@types/react@18.3.1)(mysql2@3.9.7)(postgres@3.4.4)(react@18.2.0)
+      lucia:
+        specifier: ^3.2.0
+        version: 3.2.0
+      nanoid:
+        specifier: ^5.0.7
+        version: 5.0.7
+      next:
+        specifier: ^14.2.3
+        version: 14.2.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      oslo:
+        specifier: ^1.2.0
+        version: 1.2.0
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      stripe:
+        specifier: ^14.25.0
+        version: 14.25.0
+      tailwind-merge:
+        specifier: ^2.3.0
+        version: 2.3.0
+      zod:
+        specifier: ^3.23.4
+        version: 3.23.4
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.1
+        version: 18.3.1
 
   packages/typescript-config: {}
 
@@ -7075,7 +7156,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.7.1(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.7.1(eslint@8.57.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3

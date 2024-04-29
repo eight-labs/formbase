@@ -8,7 +8,7 @@ import { ExclamationTriangleIcon } from "src/components/icons";
 import { PasswordInput } from "src/components/password-input";
 import { SubmitButton } from "src/components/submit-button";
 import { Label } from "src/components/ui/label";
-import { resetPassword } from "src/lib/auth/actions";
+import { resetPassword } from "@formbase/lib/auth/actions";
 
 export function ResetPassword({ token }: { token: string }) {
   const [state, formAction] = useFormState(resetPassword, null);

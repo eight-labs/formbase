@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { validateRequest } from "src/lib/auth/validate-request";
+import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { redirects } from "@formbase/lib/constants";
 
 import { Signup } from "./signup";

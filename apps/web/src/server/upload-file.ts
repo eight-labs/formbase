@@ -1,7 +1,7 @@
 import { Client } from "minio";
 
 import { env } from "@formbase/env";
-import { generateId } from "src/lib/utils/generate-id";
+import { generateId } from "@formbase/lib/utils/generate-id";
 
 type FormData = {
   [key: string]: Blob | string;

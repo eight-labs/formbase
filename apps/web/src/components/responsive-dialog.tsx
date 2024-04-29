@@ -27,8 +27,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "src/components/ui/drawer";
-import { useMediaQuery } from "src/lib/hooks/use-media-query";
-import { cn } from "src/lib/utils";
+import { useMediaQuery } from "@formbase/lib/hooks/use-media-query";
+import { cn } from "@formbase/lib/utils";
 
 type StatefulContent = ({
   open,

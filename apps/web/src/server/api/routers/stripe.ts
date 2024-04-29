@@ -1,7 +1,7 @@
 import { freePlan, proPlan, subscriptionPlans } from "src/config/subscriptions";
-import { stripe } from "src/lib/stripe";
-import { absoluteUrl, formatPrice } from "src/lib/utils";
-import { manageSubscriptionSchema } from "src/lib/validators/stripe";
+import { stripe } from "@formbase/lib/stripe";
+import { absoluteUrl, formatPrice } from "@formbase/lib/utils";
+import { manageSubscriptionSchema } from "@formbase/lib/validators/stripe";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 

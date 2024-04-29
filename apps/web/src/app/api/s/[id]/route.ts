@@ -1,12 +1,15 @@
 import { eq } from "drizzle-orm";
 import { userAgent } from "next/server";
 
-import { renderNewSubmissionEmail } from "src/lib/email-templates/new-submission";
-import { generateId } from "src/lib/utils/generate-id";
+import { renderNewSubmissionEmail } from "@formbase/email/new-submission";
+import { generateId } from "@formbase/lib/utils/generate-id";
 import { db } from "@formbase/db";
 import { formDatas, forms } from "@formbase/db/schema";
-import { sendMail } from "src/server/send-mail";
-import { assignFileOrImage, uploadFileFromBlob } from "src/server/upload-file";
+import { sendMail } from "@formbase/email/mailer";
+import {
+  assignFileOrImage,
+  uploadFileFromBlob,
+} from "../../../../server/upload-file";
 
 export async function POST(
   request: Request,

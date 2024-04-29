@@ -1,7 +1,7 @@
 import { count, eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { generateId } from "src/lib/utils/generate-id";
+import { generateId } from "@formbase/lib/utils/generate-id";
 import { formDatas, forms } from "@formbase/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";

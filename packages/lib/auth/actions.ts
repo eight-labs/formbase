@@ -11,27 +11,28 @@ import { alphabet, generateRandomString } from "oslo/crypto";
 import { z } from "zod";
 
 import { env } from "@formbase/env";
-import { lucia } from "src/lib/auth";
-import { validateRequest } from "src/lib/auth/validate-request";
-import { renderVerificationCodeEmail } from "src/lib/email-templates/email-verification";
-import { renderResetPasswordEmail } from "src/lib/email-templates/reset-password";
+import { lucia } from "../auth";
+import { validateRequest } from "../auth/validate-request";
 import {
   type LoginInput,
   type SignupInput,
   loginSchema,
   resetPasswordSchema,
   signupSchema,
-} from "src/lib/validators/auth";
-import { db } from "@formbase/db";
+} from "../validators/auth";
+import { db } from "../../db";
 import {
   type User,
   emailVerificationCodes,
   passwordResetTokens,
   users,
-} from "@formbase/db/schema";
-import { sendMail } from "src/server/send-mail";
+} from "../../db/schema";
 
-import { redirects } from "../../../../../packages/lib/constants";
+import { redirects } from "../constants";
+import {
+  sendVerificationEmail,
+  sendResetPasswordEmail as sendUserPasswordResetLink,
+} from "../../email";
 
 export interface ActionResponse<T> {
   fieldError?: Partial<Record<keyof T, string | undefined>>;
@@ -132,11 +133,7 @@ export async function signup(
   });
 
   const verificationCode = await generateEmailVerificationCode(userId, email);
-  await sendMail({
-    to: email,
-    subject: "Verify your account",
-    body: renderVerificationCodeEmail({ code: verificationCode }),
-  });
+  sendVerificationEmail({ email, code: verificationCode });
 
   const session = await lucia.createSession(userId, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
@@ -187,11 +184,7 @@ export async function resendVerificationEmail(): Promise<{
     user.id,
     user.email,
   );
-  await sendMail({
-    to: user.email,
-    subject: "Verify your account",
-    body: renderVerificationCodeEmail({ code: verificationCode }),
-  });
+  sendVerificationEmail({ email: user.email, code: verificationCode });
 
   return { success: true };
 }
@@ -264,12 +257,7 @@ export async function sendPasswordResetLink(
     const verificationToken = await generatePasswordResetToken(user.id);
 
     const verificationLink = `${env.NEXT_PUBLIC_APP_URL}/reset-password/${verificationToken}`;
-
-    await sendMail({
-      to: user.email,
-      subject: "Reset your password",
-      body: renderResetPasswordEmail({ link: verificationLink }),
-    });
+    sendUserPasswordResetLink({ email: user.email, link: verificationLink });
 
     return { success: true };
   } catch (error) {

@@ -11,8 +11,8 @@ import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import { uncachedValidateRequest } from "src/lib/auth/validate-request";
-import { stripe } from "src/lib/stripe";
+import { uncachedValidateRequest } from "@formbase/lib/auth/validate-request";
+import { stripe } from "@formbase/lib/stripe";
 import { db } from "@formbase/db";
 
 /**

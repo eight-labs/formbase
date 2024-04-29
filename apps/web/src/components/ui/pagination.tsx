@@ -7,7 +7,7 @@ import {
   DotsHorizontalIcon,
 } from "src/components/icons";
 import { type ButtonProps, buttonVariants } from "src/components/ui/button";
-import { cn } from "src/lib/utils";
+import { cn } from "@formbase/lib/utils";
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav

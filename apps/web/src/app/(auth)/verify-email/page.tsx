@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "src/components/ui/card";
-import { validateRequest } from "src/lib/auth/validate-request";
+import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { redirects } from "@formbase/lib/constants";
 import type { User } from "@formbase/db/schema";
 

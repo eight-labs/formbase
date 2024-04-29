@@ -1,5 +1,5 @@
 {
-  "name": "@formbase/lib",
+  "name": "@formbase/email",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,21 +10,15 @@
   },
   "dependencies": {
     "@formbase/env": "workspace:*",
+    "@formbase/lib": "workspace:*",
     "@formbase/typescript-config": "workspace:*",
-    "@lucia-auth/adapter-drizzle": "^1.0.7",
-    "arctic": "^1.7.0",
-    "clsx": "^2.1.1",
-    "drizzle-orm": "^0.29.5",
-    "lucia": "^3.2.0",
-    "nanoid": "^5.0.7",
-    "next": "^14.2.3",
-    "oslo": "^1.2.0",
-    "react": "18.2.0",
-    "stripe": "^14.25.0",
-    "tailwind-merge": "^2.3.0",
-    "zod": "^3.23.4"
+    "@react-email/components": "^0.0.12",
+    "@react-email/render": "^0.0.10",
+    "nodemailer": "^6.9.13",
+    "react": "18.2.0"
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.14",
     "@types/react": "^18.3.1"
   }
 }

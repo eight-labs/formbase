@@ -23,6 +23,7 @@
     "@formbase/db": "workspace:*",
     "@formbase/env": "workspace:*",
     "@formbase/lib": "workspace:*",
+    "@formbase/email": "workspace:*",
     "@hookform/resolvers": "^3.3.4",
     "@lucia-auth/adapter-drizzle": "^1.0.7",
     "@planetscale/database": "^1.17.0",

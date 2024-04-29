@@ -9,8 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "src/components/ui/card";
-import { logout } from "src/lib/auth/actions";
-import { validateRequest } from "src/lib/auth/validate-request";
+import { logout } from "@formbase/lib/auth/actions";
+import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { redirects } from "@formbase/lib/constants";
 import type { User } from "@formbase/db/schema";
 

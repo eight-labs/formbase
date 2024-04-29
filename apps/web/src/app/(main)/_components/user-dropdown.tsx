@@ -29,7 +29,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "src/components/ui/dropdown-menu";
-import { logout } from "src/lib/auth/actions";
+import { logout } from "@formbase/lib/auth/actions";
 import { APP_TITLE } from "@formbase/lib/constants";
 
 export const UserDropdown = ({

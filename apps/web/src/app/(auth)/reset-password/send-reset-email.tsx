@@ -11,7 +11,7 @@ import { SubmitButton } from "src/components/submit-button";
 import { Button } from "src/components/ui/button";
 import { Input } from "src/components/ui/input";
 import { Label } from "src/components/ui/label";
-import { sendPasswordResetLink } from "src/lib/auth/actions";
+import { sendPasswordResetLink } from "@formbase/lib/auth/actions";
 import { redirects } from "@formbase/lib/constants";
 
 export function SendResetEmail() {

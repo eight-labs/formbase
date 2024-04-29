@@ -3,7 +3,7 @@
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
 
-import { useCopyToClipboard } from "src/lib/hooks/use-copy-to-clipboard";
+import { useCopyToClipboard } from "@formbase/lib/hooks/use-copy-to-clipboard";
 
 type CopyButtonProps = {
   text: string;

@@ -11,7 +11,7 @@ import {
   logout,
   resendVerificationEmail as resendEmail,
   verifyEmail,
-} from "src/lib/auth/actions";
+} from "@formbase/lib/auth/actions";
 
 export const VerifyCode = () => {
   const [verifyEmailState, verifyEmailAction] = useFormState(verifyEmail, null);

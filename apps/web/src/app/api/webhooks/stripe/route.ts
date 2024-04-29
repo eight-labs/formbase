@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import type Stripe from "stripe";
 
 import { env } from "@formbase/env";
-import { stripe } from "src/lib/stripe";
+import { stripe } from "@formbase/lib/stripe";
 import { db } from "@formbase/db";
 import { users } from "@formbase/db/schema";
 

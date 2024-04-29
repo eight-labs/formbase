@@ -6,8 +6,8 @@ import type { Adapter } from "lucia";
 import { Lucia, TimeSpan } from "lucia";
 
 import { env } from "@formbase/env";
-import { db } from "@formbase/db";
-import { type User as DbUser, sessions, users } from "@formbase/db/schema";
+import { db } from "../../db";
+import { type User as DbUser, sessions, users } from "../../db/schema";
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 

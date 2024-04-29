@@ -16,7 +16,7 @@ import {
 } from "src/components/ui/card";
 import { Input } from "src/components/ui/input";
 import { Label } from "src/components/ui/label";
-import { signup } from "src/lib/auth/actions";
+import { signup } from "@formbase/lib/auth/actions";
 import { APP_TITLE } from "@formbase/lib/constants";
 
 export function Signup() {

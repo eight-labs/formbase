@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { flattenObject } from "src/lib/flatten-object";
-import { generateId } from "src/lib/utils/generate-id";
+import { flattenObject } from "@formbase/lib/flatten-object";
+import { generateId } from "@formbase/lib/utils/generate-id";
 import { formDatas, forms } from "@formbase/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";

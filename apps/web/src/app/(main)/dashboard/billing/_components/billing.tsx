@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "src/components/ui/card";
-import { formatDate } from "src/lib/utils";
+import { formatDate } from "@formbase/lib/utils";
 import { type RouterOutputs } from "src/trpc/shared";
 
 import { ManageSubscriptionForm } from "./manage-subscription-form";

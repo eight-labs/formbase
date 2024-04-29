@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { Separator } from "src/components/ui/separator";
 import { env } from "@formbase/env";
-import { validateRequest } from "src/lib/auth/validate-request";
+import { validateRequest } from "@formbase/lib/auth/validate-request";
 
 import { ProfileForm } from "./profile-form";
 
