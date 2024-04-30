@@ -1,0 +1,12 @@
+{
+  "name": "@formbase/env",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Add dev script here'"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.7.3",
+    "zod": "^3.23.4"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@formbase/db",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "db:generate": "drizzle-kit generate:pg",
+    "db:push": "drizzle-kit push:pg",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@formbase/env": "workspace:*",
+    "@formbase/lib": "workspace:*",
+    "@lucia-auth/adapter-drizzle": "^1.0.7",
+    "drizzle-kit": "^0.20.17",
+    "drizzle-orm": "^0.29.5",
+    "postgres": "^3.4.4"
+  }
+}
