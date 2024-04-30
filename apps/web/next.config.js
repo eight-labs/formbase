@@ -1,5 +1,23 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+import path from "path";
+import { fileURLToPath } from "url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+import { config } from "dotenv";
+const ENV_FILES = [
+  ".env",
+  ".env.local",
+  `.env.${process.env.NODE_ENV || "development"}`,
+];
+
+ENV_FILES.forEach((file) => {
+  config({
+    path: path.join(__dirname, `../../${file}`),
+  });
+});
+
 /** @type {import("next").NextConfig} */
-const config = {
+const nextConfig = {
   images: {
     remotePatterns: [
       {
@@ -12,6 +30,13 @@ const config = {
       },
     ],
   },
+  transpilePackages: [
+    "@formbase/lib",
+    "@formbase/email",
+    "@formbase/db",
+    "@formbase/trpc",
+    "@formbase/ui",
+  ],
 };
 
-export default config;
+export default nextConfig;

@@ -37,7 +37,6 @@ export const env = createEnv({
    * isn't built with invalid env vars. To expose them to the client, prefix them with
    * `NEXT_PUBLIC_`.
    */
-  clientPrefix: "NEXT_PUBLIC_",
   client: {
     NEXT_PUBLIC_APP_URL: z.string().url(),
   },

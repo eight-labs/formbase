@@ -1,6 +1,6 @@
 {
   "name": "@formbase/db",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "db:generate": "drizzle-kit generate:pg",

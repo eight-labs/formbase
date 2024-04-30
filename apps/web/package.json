@@ -1,6 +1,6 @@
 {
   "name": "@formbase/web",
-  "version": "0.0.0-alpha",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -27,6 +27,7 @@
     "@trpc/server": "^10.45.2",
     "arctic": "^1.7.0",
     "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.29.5",
     "lucia": "^3.2.0",
     "lucide-react": "^0.335.0",

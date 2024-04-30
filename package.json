@@ -1,6 +1,6 @@
 {
   "name": "formbase",
-  "private": true,
+  "version": "0.0.1",
   "scripts": {
     "d": "dotenvx run -- pnpm docker:start && pnpm db:generate && pnpm db:push && pnpm dev",
     "dev": "dotenvx run -- turbo dev",

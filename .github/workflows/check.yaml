@@ -24,7 +24,7 @@ jobs:
         run: pnpm install
 
       - name: Type check and lint
-        run: pnpm run typecheck && pnpm run lint
+        run: pnpm --filter @formbase/web run typecheck && pnpm --filter @formbase/web run lint
         env:
           # use dummy env variables to bypass t3-env check
           DATABASE_URL: postgresql://test:xxxx@xxxxxxxxx:3306/test
