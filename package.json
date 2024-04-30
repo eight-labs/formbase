@@ -2,10 +2,16 @@
   "name": "formbase",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "d": "dotenvx run -- pnpm docker:start && pnpm db:generate && pnpm db:push && pnpm dev",
+    "dev": "dotenvx run -- turbo dev",
+    "db:push": "dotenvx run -- pnpm --filter @formbase/db run db:push",
+    "db:studio": " dotenvx run -- pnpm --filter @formbase/db run db:studio",
+    "db:generate": "dotenvx run -- pnpm --filter @formbase/db run db:generate",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "build": "turbo build",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "typecheck": "tsc --noEmit",
+    "docker:start": "docker-compose -f ./docker/docker-compose.yml up -d"
   },
   "devDependencies": {
     "@formbase/eslint-config": "workspace:*",
@@ -16,5 +22,8 @@
   "packageManager": "pnpm@9.0.4",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^0.37.0"
   }
 }

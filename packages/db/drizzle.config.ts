@@ -1,7 +1,7 @@
 import { type Config } from "drizzle-kit";
 
 import { env } from "@formbase/env";
-import { DATABASE_PREFIX } from "@formbase/lib/constants.js";
+import { DATABASE_PREFIX } from "@formbase/lib/constants";
 
 export default {
   schema: "./schema.ts",
