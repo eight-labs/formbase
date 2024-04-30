@@ -1,4 +1,4 @@
-import "~/styles/globals.css";
+import "../styles/globals.css";
 
 import { env } from "@formbase/env";
 import { APP_TITLE } from "@formbase/lib/constants";

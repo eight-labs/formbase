@@ -3,7 +3,7 @@ import { APP_TITLE } from "@formbase/lib/constants";
 import { FunctionSquare } from "lucide-react";
 import Link from "next/link";
 
-import { UserDropdown } from "src/app/(main)/_components/user-dropdown";
+import { UserDropdown } from "./user-dropdown";
 
 const routes = [{ name: "Dashboard", href: "/dashboard" }] as const;
 
