@@ -1,1 +1,1 @@
-# `email`
+# `@formbase/email`
