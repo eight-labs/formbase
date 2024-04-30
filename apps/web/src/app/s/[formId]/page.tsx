@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "src/components/ui/button";
-import { api } from "src/trpc/server";
+import { api } from "@formbase/trpc/server";
 
 export default async function FormCompletedPage({
   params,

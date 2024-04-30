@@ -5,7 +5,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "src/components/ui/tabs";
-import { api } from "src/trpc/server";
+import { api } from "@formbase/trpc/server";
 
 import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
 import { FormSettings } from "./form-settings";

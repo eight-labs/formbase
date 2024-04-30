@@ -38,7 +38,7 @@ import {
   TableRow,
 } from "src/components/ui/table";
 import { formatFileName } from "@formbase/lib/utils";
-import { api } from "src/trpc/react";
+import { api } from "@formbase/trpc/react";
 
 import { ImagePreviewDialog } from "./image-preview-dialog";
 

@@ -8,14 +8,13 @@ import { Toaster } from "src/components/ui/sonner";
 import { env } from "@formbase/env";
 import { APP_TITLE } from "@formbase/lib/constants";
 import { cn } from "@formbase/lib/utils";
-import { TRPCReactProvider } from "src/trpc/react";
+import { TRPCReactProvider } from "@formbase/trpc/react";
 import { Inter as FontSans } from "next/font/google";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
 
 export const metadata: Metadata = {
   title: {

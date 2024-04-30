@@ -2,14 +2,17 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
-import { createTRPCReact } from "@trpc/react-query";
+import { createTRPCReact, CreateTRPCReact } from "@trpc/react-query";
 import { useState } from "react";
 
-import { type AppRouter } from "src/server/api/root";
+import { AppRouter } from "./server/api/root";
 
 import { getUrl, transformer } from "./shared";
 
-export const api = createTRPCReact<AppRouter>();
+// This is a hack to fix some wierd type errors
+// TODO: pls fix
+export const api: CreateTRPCReact<AppRouter, unknown, unknown> =
+  createTRPCReact<AppRouter>();
 
 export function TRPCReactProvider(props: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());

@@ -19,8 +19,8 @@ import {
 import { Input } from "src/components/ui/input";
 import { Label } from "src/components/ui/label";
 import { Switch } from "src/components/ui/switch";
-import { api } from "src/trpc/react";
-import { type RouterOutputs } from "src/trpc/shared";
+import { api } from "@formbase/trpc/react";
+import { type RouterOutputs } from "@formbase/trpc/shared";
 
 import { DeleteFormDialog } from "./delete-form-dialog";
 import { refreshDashboardAfterDeletion } from "../_actions/refresh-dashboard-after-deletion";

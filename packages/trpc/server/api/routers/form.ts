@@ -1,4 +1,4 @@
-import { count, eq } from "drizzle-orm";
+import { count, eq, and } from "drizzle-orm";
 import { z } from "zod";
 
 import { generateId } from "@formbase/lib/utils/generate-id";
@@ -33,7 +33,7 @@ export const formRouter = createTRPCRouter({
     .input(z.object({ formId: z.string() }))
     .query(({ ctx, input }) =>
       ctx.db.query.forms.findFirst({
-        where: (table, { eq, and }) =>
+        where: (table) =>
           and(eq(table.id, input.formId), eq(table.userId, ctx.user.id)),
         with: { user: { columns: { email: true } } },
       }),
@@ -108,7 +108,7 @@ export const formRouter = createTRPCRouter({
     )
     .query(({ ctx, input }) =>
       ctx.db.query.forms.findMany({
-        where: (table, { eq }) => eq(table.userId, ctx.user.id),
+        where: (table) => eq(table.userId, ctx.user.id),
         offset: (input.page - 1) * input.perPage,
         limit: input.perPage,
         // orderBy: (table, { desc }) => desc(table.createdAt),
@@ -133,7 +133,7 @@ export const formRouter = createTRPCRouter({
     )
     .query(({ ctx, input }) =>
       ctx.db.query.forms.findFirst({
-        where: (table, { eq }) => eq(table.id, input.formId),
+        where: (table) => eq(table.id, input.formId),
         columns: {
           returnUrl: true,
         },

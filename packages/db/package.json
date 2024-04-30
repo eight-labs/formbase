@@ -2,7 +2,6 @@
   "name": "@formbase/db",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "echo 'Add dev script here'",
     "build": "echo 'Add build script here'",

@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 import * as React from "react";
 
 import { env } from "@formbase/env";
-import { api } from "src/trpc/server";
+import { api } from "@formbase/trpc/server";
 
 import { Forms } from "./_components/forms";
 import { CreateFormDialog } from "./_components/new-form-dialog";

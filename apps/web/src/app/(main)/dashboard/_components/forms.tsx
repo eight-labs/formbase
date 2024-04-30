@@ -1,8 +1,7 @@
 "use client";
 
+import { type RouterOutputs } from "@formbase/trpc/shared";
 import { use } from "react";
-
-import { type RouterOutputs } from "src/trpc/shared";
 
 import { EmptyFormState } from "./empty-state";
 import { FormCard } from "./form-card";

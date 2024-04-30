@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "src/components/ui/alert";
 import { env } from "@formbase/env";
 import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { APP_TITLE } from "@formbase/lib/constants";
-import { api } from "src/trpc/server";
+import { api } from "@formbase/trpc/server";
 
 import { Billing } from "./_components/billing";
 import { BillingSkeleton } from "./_components/billing-skeleton";

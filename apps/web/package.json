@@ -18,12 +18,13 @@
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe --latest"
   },
   "dependencies": {
-    "@formbase/eslint-config": "workspace:*",
-    "@formbase/typescript-config": "workspace:*",
     "@formbase/db": "workspace:*",
-    "@formbase/env": "workspace:*",
-    "@formbase/lib": "workspace:*",
     "@formbase/email": "workspace:*",
+    "@formbase/env": "workspace:*",
+    "@formbase/eslint-config": "workspace:*",
+    "@formbase/lib": "workspace:*",
+    "@formbase/trpc": "workspace:^",
+    "@formbase/typescript-config": "workspace:*",
     "@hookform/resolvers": "^3.3.4",
     "@lucia-auth/adapter-drizzle": "^1.0.7",
     "@planetscale/database": "^1.17.0",

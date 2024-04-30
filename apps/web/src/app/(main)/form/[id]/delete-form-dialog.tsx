@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "src/components/ui/dialog";
-import { api } from "src/trpc/react";
+import { api } from "@formbase/trpc/react";
 
 type DeleteFormDialogProps = {
   formId: string;

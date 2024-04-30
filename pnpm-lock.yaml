@@ -38,6 +38,9 @@ importers:
       '@formbase/lib':
         specifier: workspace:*
         version: link:../../packages/lib
+      '@formbase/trpc':
+        specifier: workspace:^
+        version: link:../../packages/trpc
       '@formbase/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -427,6 +430,49 @@ importers:
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
+      zod:
+        specifier: ^3.23.4
+        version: 3.23.4
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.1
+        version: 18.3.1
+
+  packages/trpc:
+    dependencies:
+      '@formbase/db':
+        specifier: workspace:^
+        version: link:../db
+      '@formbase/lib':
+        specifier: workspace:^
+        version: link:../lib
+      '@formbase/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@tanstack/react-query':
+        specifier: ^4.36.1
+        version: 4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@trpc/client':
+        specifier: ^10.45.2
+        version: 10.45.2(@trpc/server@10.45.2)
+      '@trpc/react-query':
+        specifier: ^10.45.2
+        version: 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@trpc/server':
+        specifier: ^10.45.2
+        version: 10.45.2
+      drizzle-orm:
+        specifier: ^0.29.5
+        version: 0.29.5(@planetscale/database@1.17.0)(@types/react@18.3.1)(mysql2@3.9.7)(postgres@3.4.4)(react@18.2.0)
+      next:
+        specifier: ^14.2.3
+        version: 14.2.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      superjson:
+        specifier: ^2.2.1
+        version: 2.2.1
       zod:
         specifier: ^3.23.4
         version: 3.23.4
@@ -7156,7 +7202,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.7.1(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.7.1(eslint@8.57.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3

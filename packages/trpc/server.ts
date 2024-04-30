@@ -11,8 +11,8 @@ import { type TRPCErrorResponse } from "@trpc/server/rpc";
 import { headers } from "next/headers";
 import { cache } from "react";
 
-import { type AppRouter, appRouter } from "src/server/api/root";
-import { createTRPCContext } from "src/server/api/trpc";
+import { type AppRouter, appRouter } from "./server/api/root";
+import { createTRPCContext } from "./server/api/trpc";
 
 import { transformer } from "./shared";
 

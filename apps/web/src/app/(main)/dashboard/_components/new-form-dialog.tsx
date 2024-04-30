@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from "src/components/ui/form";
 import { Input } from "src/components/ui/input";
-import { api } from "src/trpc/react";
+import { api } from "@formbase/trpc/react";
 
 const FormSchema = z.object({
   name: z.string().min(1, {

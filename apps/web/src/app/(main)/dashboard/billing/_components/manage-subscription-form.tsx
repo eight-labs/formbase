@@ -6,7 +6,7 @@ import { type z } from "zod";
 
 import { Button } from "src/components/ui/button";
 import { type manageSubscriptionSchema } from "@formbase/lib/validators/stripe";
-import { api } from "src/trpc/react";
+import { api } from "@formbase/trpc/react";
 
 type ManageSubscriptionFormProps = z.infer<typeof manageSubscriptionSchema>;
 

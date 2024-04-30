@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "src/components/ui/dropdown-menu";
-import type { RouterOutputs } from "src/trpc/shared";
+import type { RouterOutputs } from "@formbase/trpc/shared";
 
 import { DeleteFormDialog } from "../../form/[id]/delete-form-dialog";
 

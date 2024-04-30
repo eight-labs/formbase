@@ -23,6 +23,6 @@
     ".next/types/**/*.ts",
     "../../packages/email/send-mail.ts",
     ".eslintrc.cjs"
-  ],
+, "../../packages/trpc/react.tsx"  ],
   "exclude": ["node_modules"]
 }
