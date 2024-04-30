@@ -1,10 +1,13 @@
 "use client";
 
+import { cn } from "@formbase/lib/utils";
+import {
+  CreditCard,
+  FileTextIcon,
+  GearIcon,
+} from "@formbase/ui/components/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { CreditCard, FileTextIcon, GearIcon } from "src/components/icons";
-import { cn } from "@formbase/lib/utils";
 
 const items = [
   {

@@ -1,9 +1,5 @@
-import { TrashIcon } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
-
-import { Button } from "src/components/ui/button";
+import { api } from "@formbase/trpc/react";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Dialog,
   DialogContent,
@@ -11,8 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "src/components/ui/dialog";
-import { api } from "@formbase/trpc/react";
+} from "@formbase/ui/primitives/dialog";
+import { TrashIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 
 type DeleteFormDialogProps = {
   formId: string;

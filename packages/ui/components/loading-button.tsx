@@ -2,8 +2,8 @@
 
 import { forwardRef } from "react";
 
-import { AnimatedSpinner } from "src/components/icons";
-import { Button, type ButtonProps } from "src/components/ui/button";
+import { AnimatedSpinner } from "./icons";
+import { Button, type ButtonProps } from "../primitives/button";
 import { cn } from "@formbase/lib/utils";
 
 export interface LoadingButtonProps extends ButtonProps {

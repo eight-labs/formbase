@@ -4,7 +4,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "src/components/ui/card";
+} from "@formbase/ui/primitives/card";
 
 import { ResetPassword } from "./reset-password";
 

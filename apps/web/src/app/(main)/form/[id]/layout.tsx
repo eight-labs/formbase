@@ -1,8 +1,7 @@
-import { redirect } from "next/navigation";
-import * as React from "react";
-
 import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { redirects } from "@formbase/lib/constants";
+import { redirect } from "next/navigation";
+import * as React from "react";
 
 interface Props {
   children: React.ReactNode;

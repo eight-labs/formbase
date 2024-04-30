@@ -1,8 +1,7 @@
-import { generateState } from "arctic";
-import { cookies } from "next/headers";
-
 import { env } from "@formbase/env";
 import { github } from "@formbase/lib/auth";
+import { generateState } from "arctic";
+import { cookies } from "next/headers";
 
 export async function GET(): Promise<Response> {
   const state = generateState();

@@ -1,10 +1,9 @@
 "use client";
 
+import { Sheet, SheetContent } from "@formbase/ui/primitives/sheet";
 import { FunctionSquare } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
-import { Sheet, SheetContent } from "src/components/ui/sheet";
 
 import { HamburgerMenu } from "./mobile-hamburger";
 import { ThemeToggle } from "./theme-toggle";

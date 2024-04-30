@@ -1,6 +1,5 @@
-import { FunctionSquare } from "lucide-react";
-
 import { cn } from "@formbase/lib/utils";
+import { FunctionSquare } from "lucide-react";
 
 import { ThemeToggle } from "./theme-toggle";
 

@@ -1,11 +1,10 @@
+import { db } from "@formbase/db";
+import { users } from "@formbase/db/schema";
+import { env } from "@formbase/env";
+import { stripe } from "@formbase/lib/stripe";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import type Stripe from "stripe";
-
-import { env } from "@formbase/env";
-import { stripe } from "@formbase/lib/stripe";
-import { db } from "@formbase/db";
-import { users } from "@formbase/db/schema";
 
 export async function POST(req: Request) {
   const body = await req.text();

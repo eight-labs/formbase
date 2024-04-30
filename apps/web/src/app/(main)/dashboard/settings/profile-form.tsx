@@ -1,14 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { User } from "lucia";
-import { UserCheck } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-
-import { Button } from "src/components/ui/button";
+import { api } from "@formbase/trpc/react";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Form,
   FormControl,
@@ -16,9 +9,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "src/components/ui/form";
-import { Input } from "src/components/ui/input";
-import { api } from "@formbase/trpc/react";
+} from "@formbase/ui/primitives/form";
+import { Input } from "@formbase/ui/primitives/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { User } from "lucia";
+import { UserCheck } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const profileFormSchema = z.object({
   email: z

@@ -1,10 +1,9 @@
 "use client";
 
+import { cn } from "@formbase/lib/utils";
+import { buttonVariants } from "@formbase/ui/primitives/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { buttonVariants } from "src/components/ui/button";
-import { cn } from "@formbase/lib/utils";
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {

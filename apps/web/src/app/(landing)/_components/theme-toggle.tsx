@@ -1,16 +1,15 @@
 "use client";
 
-import { Laptop, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import * as React from "react";
-
-import { Button } from "src/components/ui/button";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "src/components/ui/dropdown-menu";
+} from "@formbase/ui/primitives/dropdown-menu";
+import { Laptop, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import * as React from "react";
 
 export function ThemeToggle() {
   const { setTheme } = useTheme();

@@ -1,6 +1,8 @@
-import { redirect } from "next/navigation";
-
-import { SubmitButton } from "src/components/submit-button";
+import type { User } from "@formbase/db/schema";
+import { logout } from "@formbase/lib/auth/actions";
+import { validateRequest } from "@formbase/lib/auth/validate-request";
+import { redirects } from "@formbase/lib/constants";
+import { SubmitButton } from "@formbase/ui/components/submit-button";
 import {
   Card,
   CardContent,
@@ -8,11 +10,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "src/components/ui/card";
-import { logout } from "@formbase/lib/auth/actions";
-import { validateRequest } from "@formbase/lib/auth/validate-request";
-import { redirects } from "@formbase/lib/constants";
-import type { User } from "@formbase/db/schema";
+} from "@formbase/ui/primitives/card";
+import { redirect } from "next/navigation";
 
 export default async function AccountPage() {
   const { user } = (await validateRequest()) as { user: User | null };

@@ -1,9 +1,6 @@
 "use client";
 
-import { ArrowDownToLine, FileDown } from "lucide-react";
-import { toast } from "sonner";
-
-import { Button } from "src/components/ui/button";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "src/components/ui/dropdown-menu";
+} from "@formbase/ui/primitives/dropdown-menu";
+import { ArrowDownToLine, FileDown } from "lucide-react";
+import { toast } from "sonner";
 
 export function ExportSubmissionsDropDownButton({
   submissions,

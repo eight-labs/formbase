@@ -1,12 +1,11 @@
 "use client";
 
+import { type manageSubscriptionSchema } from "@formbase/lib/validators/stripe";
+import { api } from "@formbase/trpc/react";
+import { Button } from "@formbase/ui/primitives/button";
 import * as React from "react";
 import { toast } from "sonner";
 import { type z } from "zod";
-
-import { Button } from "src/components/ui/button";
-import { type manageSubscriptionSchema } from "@formbase/lib/validators/stripe";
-import { api } from "@formbase/trpc/react";
 
 type ManageSubscriptionFormProps = z.infer<typeof manageSubscriptionSchema>;
 

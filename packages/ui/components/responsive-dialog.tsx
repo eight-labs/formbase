@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-import { Button } from "src/components/ui/button";
+import { Button } from "../primitives/button";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "src/components/ui/dialog";
+} from "../primitives/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -26,7 +26,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "src/components/ui/drawer";
+} from "../primitives/drawer";
 import { useMediaQuery } from "@formbase/lib/hooks/use-media-query";
 import { cn } from "@formbase/lib/utils";
 

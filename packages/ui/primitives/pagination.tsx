@@ -1,12 +1,8 @@
 import Link from "next/link";
 import * as React from "react";
 
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DotsHorizontalIcon,
-} from "src/components/icons";
-import { type ButtonProps, buttonVariants } from "src/components/ui/button";
+import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from "./icons";
+import { type ButtonProps, buttonVariants } from "../primitives/button";
 import { cn } from "@formbase/lib/utils";
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (

@@ -1,6 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { formatFileName } from "@formbase/lib/utils";
+import { api } from "@formbase/trpc/react";
+import { Button } from "@formbase/ui/primitives/button";
+import { Checkbox } from "@formbase/ui/primitives/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@formbase/ui/primitives/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@formbase/ui/primitives/table";
 import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import type {
   ColumnDef,
@@ -20,25 +38,6 @@ import { Trash2, TrashIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { toast } from "sonner";
-
-import { Button } from "src/components/ui/button";
-import { Checkbox } from "src/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "src/components/ui/dropdown-menu";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "src/components/ui/table";
-import { formatFileName } from "@formbase/lib/utils";
-import { api } from "@formbase/trpc/react";
 
 import { ImagePreviewDialog } from "./image-preview-dialog";
 

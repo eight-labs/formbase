@@ -1,14 +1,13 @@
-import { redirect } from "next/navigation";
-
+import { validateRequest } from "@formbase/lib/auth/validate-request";
+import { redirects } from "@formbase/lib/constants";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "src/components/ui/card";
-import { validateRequest } from "@formbase/lib/auth/validate-request";
-import { redirects } from "@formbase/lib/constants";
+} from "@formbase/ui/primitives/card";
+import { redirect } from "next/navigation";
 
 import { SendResetEmail } from "./send-reset-email";
 

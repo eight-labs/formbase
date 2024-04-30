@@ -1,15 +1,14 @@
 import "~/styles/globals.css";
 
-import type { Metadata, Viewport } from "next";
-import Script from "next/script";
-
-import { ThemeProvider } from "src/components/theme-provider";
-import { Toaster } from "src/components/ui/sonner";
 import { env } from "@formbase/env";
 import { APP_TITLE } from "@formbase/lib/constants";
 import { cn } from "@formbase/lib/utils";
 import { TRPCReactProvider } from "@formbase/trpc/react";
+import { ThemeProvider } from "@formbase/ui/components/theme-provider";
+import { Toaster } from "@formbase/ui/primitives/sonner";
+import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
+import Script from "next/script";
 
 const fontSans = FontSans({
   subsets: ["latin"],

@@ -1,8 +1,7 @@
 "use client";
 
+import { Button } from "@formbase/ui/primitives/button";
 import { Menu, X } from "lucide-react";
-
-import { Button } from "src/components/ui/button";
 
 export interface HamburgerMenuProps {
   isMenuOpen: boolean;

@@ -1,12 +1,4 @@
-import { TrashIcon } from "@radix-ui/react-icons";
-import { DownloadIcon, EyeIcon } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
-
-import { AspectRatio } from "src/components/ui/aspect-ratio";
-import { Button } from "src/components/ui/button";
+import { AspectRatio } from "@formbase/ui/primitives/aspect-ratio";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +6,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "src/components/ui/dialog";
+} from "@formbase/ui/primitives/dialog";
+import { DownloadIcon, EyeIcon } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 type ImagePreviewDialogProps = {
   fileName: string;

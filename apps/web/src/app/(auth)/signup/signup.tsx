@@ -1,23 +1,22 @@
 "use client";
 
-import Link from "next/link";
-import { useFormState } from "react-dom";
-
-import { GitHubLogoIcon } from "src/components/icons";
-import { PasswordInput } from "src/components/password-input";
-import { SubmitButton } from "src/components/submit-button";
-import { Button } from "src/components/ui/button";
+import { signup } from "@formbase/lib/auth/actions";
+import { APP_TITLE } from "@formbase/lib/constants";
+import { GitHubLogoIcon } from "@formbase/ui/components/icons";
+import { PasswordInput } from "@formbase/ui/components/password-input";
+import { SubmitButton } from "@formbase/ui/components/submit-button";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "src/components/ui/card";
-import { Input } from "src/components/ui/input";
-import { Label } from "src/components/ui/label";
-import { signup } from "@formbase/lib/auth/actions";
-import { APP_TITLE } from "@formbase/lib/constants";
+} from "@formbase/ui/primitives/card";
+import { Input } from "@formbase/ui/primitives/input";
+import { Label } from "@formbase/ui/primitives/label";
+import Link from "next/link";
+import { useFormState } from "react-dom";
 
 export function Signup() {
   const [state, formAction] = useFormState(signup, null);

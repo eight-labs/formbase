@@ -1,12 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import { useState } from "react";
-import { toast } from "sonner";
-
-import { ExclamationTriangleIcon } from "src/components/icons";
-import { LoadingButton } from "src/components/loading-button";
+import { logout } from "@formbase/lib/auth/actions";
+import { APP_TITLE } from "@formbase/lib/constants";
+import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
+import { LoadingButton } from "@formbase/ui/components/loading-button";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -14,8 +11,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "src/components/ui/alert-dialog";
-import { Button } from "src/components/ui/button";
+} from "@formbase/ui/primitives/alert-dialog";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,9 +25,11 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "src/components/ui/dropdown-menu";
-import { logout } from "@formbase/lib/auth/actions";
-import { APP_TITLE } from "@formbase/lib/constants";
+} from "@formbase/ui/primitives/dropdown-menu";
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export const UserDropdown = ({
   email,

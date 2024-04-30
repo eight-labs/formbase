@@ -1,11 +1,11 @@
-import { CopyButton } from "src/components/copy-button";
+import { api } from "@formbase/trpc/server";
+import { CopyButton } from "@formbase/ui/components/copy-button";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "src/components/ui/tabs";
-import { api } from "@formbase/trpc/server";
+} from "@formbase/ui/primitives/tabs";
 
 import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
 import { FormSettings } from "./form-settings";

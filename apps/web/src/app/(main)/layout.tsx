@@ -1,9 +1,8 @@
-import { redirect } from "next/navigation";
-import { type ReactNode } from "react";
-
+import type { User } from "@formbase/db/schema";
 import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { redirects } from "@formbase/lib/constants";
-import type { User } from "@formbase/db/schema";
+import { redirect } from "next/navigation";
+import { type ReactNode } from "react";
 
 import { Header } from "./_components/header";
 

@@ -1,13 +1,16 @@
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-import * as React from "react";
-
-import { ExclamationTriangleIcon } from "src/components/icons";
-import { Alert, AlertDescription, AlertTitle } from "src/components/ui/alert";
 import { env } from "@formbase/env";
 import { validateRequest } from "@formbase/lib/auth/validate-request";
 import { APP_TITLE } from "@formbase/lib/constants";
 import { api } from "@formbase/trpc/server";
+import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@formbase/ui/primitives/alert";
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import * as React from "react";
 
 import { Billing } from "./_components/billing";
 import { BillingSkeleton } from "./_components/billing-skeleton";

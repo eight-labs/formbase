@@ -3,8 +3,8 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-} from "src/components/ui/card";
-import { Skeleton } from "src/components/ui/skeleton";
+} from "@formbase/ui/primitives/card";
+import { Skeleton } from "@formbase/ui/primitives/skeleton";
 
 export function BillingSkeleton() {
   return (

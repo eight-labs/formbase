@@ -2,9 +2,9 @@
 
 import * as React from "react";
 
-import { EyeCloseIcon, EyeOpenIcon } from "src/components/icons";
-import { Button } from "src/components/ui/button";
-import { Input, type InputProps } from "src/components/ui/input";
+import { EyeCloseIcon, EyeOpenIcon } from "./icons";
+import { Button } from "../primitives/button";
+import { Input, type InputProps } from "../primitives/input";
 import { cn } from "@formbase/lib/utils";
 
 const PasswordInputComponent = React.forwardRef<HTMLInputElement, InputProps>(

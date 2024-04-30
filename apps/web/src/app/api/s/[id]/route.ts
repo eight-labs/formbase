@@ -1,11 +1,11 @@
-import { eq } from "drizzle-orm";
-import { userAgent } from "next/server";
-
-import { renderNewSubmissionEmail } from "@formbase/email/new-submission";
-import { generateId } from "@formbase/lib/utils/generate-id";
 import { db } from "@formbase/db";
 import { formDatas, forms } from "@formbase/db/schema";
 import { sendMail } from "@formbase/email/mailer";
+import { renderNewSubmissionEmail } from "@formbase/email/new-submission";
+import { generateId } from "@formbase/lib/utils/generate-id";
+import { eq } from "drizzle-orm";
+import { userAgent } from "next/server";
+
 import {
   assignFileOrImage,
   uploadFileFromBlob,

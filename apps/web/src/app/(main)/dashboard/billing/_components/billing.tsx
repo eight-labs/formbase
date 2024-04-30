@@ -1,7 +1,7 @@
-import Link from "next/link";
-
-import { CheckIcon } from "src/components/icons";
-import { Button } from "src/components/ui/button";
+import { formatDate } from "@formbase/lib/utils";
+import { type RouterOutputs } from "@formbase/trpc/shared";
+import { CheckIcon } from "@formbase/ui/components/icons";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Card,
   CardContent,
@@ -9,9 +9,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "src/components/ui/card";
-import { formatDate } from "@formbase/lib/utils";
-import { type RouterOutputs } from "@formbase/trpc/shared";
+} from "@formbase/ui/primitives/card";
+import Link from "next/link";
 
 import { ManageSubscriptionForm } from "./manage-subscription-form";
 

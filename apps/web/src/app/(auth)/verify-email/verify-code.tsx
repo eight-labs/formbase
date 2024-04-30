@@ -1,17 +1,16 @@
 "use client";
-import { Label } from "@radix-ui/react-label";
-import { useEffect, useRef } from "react";
-import { useFormState } from "react-dom";
-import { toast } from "sonner";
-
-import { ExclamationTriangleIcon } from "src/components/icons";
-import { SubmitButton } from "src/components/submit-button";
-import { Input } from "src/components/ui/input";
 import {
   logout,
   resendVerificationEmail as resendEmail,
   verifyEmail,
 } from "@formbase/lib/auth/actions";
+import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
+import { SubmitButton } from "@formbase/ui/components/submit-button";
+import { Input } from "@formbase/ui/primitives/input";
+import { Label } from "@formbase/ui/primitives/label";
+import { useEffect, useRef } from "react";
+import { useFormState } from "react-dom";
+import { toast } from "sonner";
 
 export const VerifyCode = () => {
   const [verifyEmailState, verifyEmailAction] = useFormState(verifyEmail, null);

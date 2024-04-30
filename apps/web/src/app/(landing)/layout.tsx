@@ -1,6 +1,5 @@
-import { type ReactNode } from "react";
-
 import { validateRequest } from "@formbase/lib/auth/validate-request";
+import { type ReactNode } from "react";
 
 import { Header } from "./_components/header";
 import { SiteFooter } from "./_components/site-footer";

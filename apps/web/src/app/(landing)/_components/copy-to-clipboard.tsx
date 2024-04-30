@@ -1,10 +1,9 @@
 "use client";
 
+import { Button } from "@formbase/ui/primitives/button";
+import { Input } from "@formbase/ui/primitives/input";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
-
-import { Button } from "src/components/ui/button";
-import { Input } from "src/components/ui/input";
 
 export const CopyToClipboard = ({ text }: { text: string }) => {
   const copyToClipboard = async () => {

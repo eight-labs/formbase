@@ -1,18 +1,17 @@
 "use client";
 
+import { sendPasswordResetLink } from "@formbase/lib/auth/actions";
+import { redirects } from "@formbase/lib/constants";
+import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
+import { SubmitButton } from "@formbase/ui/components/submit-button";
+import { Button } from "@formbase/ui/primitives/button";
+import { Input } from "@formbase/ui/primitives/input";
+import { Label } from "@formbase/ui/primitives/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "sonner";
-
-import { ExclamationTriangleIcon } from "src/components/icons";
-import { SubmitButton } from "src/components/submit-button";
-import { Button } from "src/components/ui/button";
-import { Input } from "src/components/ui/input";
-import { Label } from "src/components/ui/label";
-import { sendPasswordResetLink } from "@formbase/lib/auth/actions";
-import { redirects } from "@formbase/lib/constants";
 
 export function SendResetEmail() {
   const [state, formAction] = useFormState(sendPasswordResetLink, null);

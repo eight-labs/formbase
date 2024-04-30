@@ -1,12 +1,11 @@
-import { OAuth2RequestError } from "arctic";
-import { eq } from "drizzle-orm";
-import { cookies } from "next/headers";
-
+import { db } from "@formbase/db";
+import { users } from "@formbase/db/schema";
 import { github, lucia } from "@formbase/lib/auth";
 import { redirects } from "@formbase/lib/constants";
 import { generateId } from "@formbase/lib/utils/generate-id";
-import { db } from "@formbase/db";
-import { users } from "@formbase/db/schema";
+import { OAuth2RequestError } from "arctic";
+import { eq } from "drizzle-orm";
+import { cookies } from "next/headers";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);

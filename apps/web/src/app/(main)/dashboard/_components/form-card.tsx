@@ -1,22 +1,21 @@
-import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import { formatDistanceToNow } from "date-fns";
-import Link from "next/link";
-
-import { CopyButton } from "src/components/copy-button";
-import { Button } from "src/components/ui/button";
+import type { RouterOutputs } from "@formbase/trpc/shared";
+import { CopyButton } from "@formbase/ui/components/copy-button";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "src/components/ui/card";
+} from "@formbase/ui/primitives/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "src/components/ui/dropdown-menu";
-import type { RouterOutputs } from "@formbase/trpc/shared";
+} from "@formbase/ui/primitives/dropdown-menu";
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 
 import { DeleteFormDialog } from "../../form/[id]/delete-form-dialog";
 

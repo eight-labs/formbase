@@ -1,8 +1,7 @@
+import { env } from "@formbase/env";
 import type { User as LuciaUser } from "lucia";
 import { FunctionSquare } from "lucide-react";
 import Link from "next/link";
-
-import { env } from "@formbase/env";
 
 import { MobileNavigation } from "./mobile-navigation";
 

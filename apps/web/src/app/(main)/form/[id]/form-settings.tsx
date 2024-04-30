@@ -1,13 +1,8 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { BellRing, ExternalLink, FolderPen, FolderX } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-
-import { Button } from "src/components/ui/button";
+import { api } from "@formbase/trpc/react";
+import { type RouterOutputs } from "@formbase/trpc/shared";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Form,
   FormControl,
@@ -15,12 +10,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "src/components/ui/form";
-import { Input } from "src/components/ui/input";
-import { Label } from "src/components/ui/label";
-import { Switch } from "src/components/ui/switch";
-import { api } from "@formbase/trpc/react";
-import { type RouterOutputs } from "@formbase/trpc/shared";
+} from "@formbase/ui/primitives/form";
+import { Input } from "@formbase/ui/primitives/input";
+import { Label } from "@formbase/ui/primitives/label";
+import { Switch } from "@formbase/ui/primitives/switch";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BellRing, ExternalLink, FolderPen, FolderX } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 import { DeleteFormDialog } from "./delete-form-dialog";
 import { refreshDashboardAfterDeletion } from "../_actions/refresh-dashboard-after-deletion";

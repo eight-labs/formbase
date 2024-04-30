@@ -1,0 +1,5 @@
+{
+  "extends": "@formbase/typescript-config/react-library.json",
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "**/*.json"],
+  "exclude": ["dist", "build", "node_modules"]
+}
