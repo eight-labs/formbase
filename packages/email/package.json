@@ -1,0 +1,21 @@
+{
+  "name": "@formbase/email",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Add dev script here'"
+  },
+  "dependencies": {
+    "@formbase/env": "workspace:*",
+    "@formbase/lib": "workspace:*",
+    "@formbase/typescript-config": "workspace:*",
+    "@react-email/components": "^0.0.12",
+    "@react-email/render": "^0.0.10",
+    "nodemailer": "^6.9.13",
+    "react": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.14",
+    "@types/react": "^18.3.1"
+  }
+}
