@@ -21,7 +21,7 @@
         "AUTH_GOOGLE_SECRET",
         "AUTH_GOOGLE_CODE_VERIFIER"
       ],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", ".astro/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "db:migrate": {
       "dependsOn": ["db:generate"],
