@@ -1,0 +1,25 @@
+{
+  "name": "@formbase/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --cache --max-warnings 0",
+    "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
+  },
+  "dependencies": {
+    "@formbase/auth": "workspace:^",
+    "@formbase/db": "workspace:^",
+    "@formbase/env": "workspace:^",
+    "@formbase/utils": "workspace:^",
+    "@trpc/server": "next",
+    "stripe": "^15.8.0",
+    "superjson": "^2.2.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@formbase/tsconfig": "workspace:^",
+    "@types/node": "^20.12.12",
+    "eslint-config-formbase": "workspace:^"
+  }
+}

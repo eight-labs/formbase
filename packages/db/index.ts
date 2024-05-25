@@ -1,32 +1,18 @@
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
-import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { env } from '@formbase/env';
+import { and, count, eq } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
-import { env } from "@formbase/env";
+import * as dbSchema from './schema';
 
-import * as schema from "./schema";
+const queryClient = postgres(env.DATABASE_URL);
 
-declare global {
-  // eslint-disable-next-line no-var -- only var works here
-  var db: PostgresJsDatabase<typeof schema> | undefined;
-}
+export const db = drizzle(queryClient, {
+  schema: dbSchema,
+});
 
-let db: PostgresJsDatabase<typeof schema>;
-
-if (env.NODE_ENV === "production") {
-  db = drizzle(postgres(env.DATABASE_URL), { schema });
-} else {
-  if (!global.db) {
-    global.db = drizzle(postgres(env.DATABASE_URL), { schema });
-  }
-
-  db = global.db;
-}
-
-export { db };
-
-export const adapter = new DrizzlePostgreSQLAdapter(
-  db,
-  schema.sessions,
-  schema.users,
-);
+export const drizzlePrimitives = {
+  eq,
+  and,
+  count,
+};

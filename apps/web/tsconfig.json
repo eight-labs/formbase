@@ -1,29 +1,19 @@
 {
-  "extends": "@formbase/typescript-config/nextjs.json",
-
+  "extends": ["@formbase/tsconfig/next.json"],
   "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
     }
   },
-
   "include": [
     "next-env.d.ts",
-    "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.cjs",
-    "**/*.js",
     ".next/types/**/*.ts",
-    "../../packages/email/send-mail.ts",
+    "**/*.js",
+    "**/*.cjs",
     ".eslintrc.cjs",
-    "../../packages/trpc/react.tsx"
+    "**/*.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "test-results"]
 }

@@ -1,0 +1,9 @@
+{
+  "extends": ["@formbase/tsconfig/base.json"],
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "tsBuildInfoFile": ".tsbuildinfo"
+  },
+  "include": ["**/*.ts", "**/*.mjs", "**/*.js", "**/*.cjs", ".eslintrc.cjs"],
+  "exclude": ["node_modules", "dist"]
+}

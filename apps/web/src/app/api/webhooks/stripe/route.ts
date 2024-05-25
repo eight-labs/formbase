@@ -1,14 +1,17 @@
-import { db } from "@formbase/db";
-import { users } from "@formbase/db/schema";
-import { env } from "@formbase/env";
-import { stripe } from "@formbase/lib/stripe";
-import { eq } from "drizzle-orm";
-import { headers } from "next/headers";
-import type Stripe from "stripe";
+import { headers } from 'next/headers';
+
+import type Stripe from 'stripe';
+
+import { env } from '@formbase/env';
+import { stripe } from '@formbase/lib/stripe';
+import { eq } from 'drizzle-orm';
+
+import { db } from '../../../../../../../packages/db';
+import { users } from '../../../../../../../packages/db/schema';
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const signature = headers().get("Stripe-Signature") ?? "";
+  const signature = headers().get('Stripe-Signature') ?? '';
 
   let event: Stripe.Event;
 
@@ -20,19 +23,19 @@ export async function POST(req: Request) {
     );
   } catch (err) {
     return new Response(
-      `Webhook Error: ${err instanceof Error ? err.message : "Unknown error."}`,
+      `Webhook Error: ${err instanceof Error ? err.message : 'Unknown error.'}`,
       { status: 400 },
     );
   }
 
   switch (event.type) {
-    case "checkout.session.completed": {
+    case 'checkout.session.completed': {
       const checkoutSessionCompleted = event.data.object;
 
       const userId = checkoutSessionCompleted?.metadata?.userId;
 
       if (!userId) {
-        return new Response("User id not found in checkout session metadata.", {
+        return new Response('User id not found in checkout session metadata.', {
           status: 404,
         });
       }
@@ -59,13 +62,13 @@ export async function POST(req: Request) {
 
       break;
     }
-    case "invoice.payment_succeeded": {
+    case 'invoice.payment_succeeded': {
       const invoicePaymentSucceeded = event.data.object;
 
       const userId = invoicePaymentSucceeded?.metadata?.userId;
 
       if (!userId) {
-        return new Response("User id not found in invoice metadata.", {
+        return new Response('User id not found in invoice metadata.', {
           status: 404,
         });
       }

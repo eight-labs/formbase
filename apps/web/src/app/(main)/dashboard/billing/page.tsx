@@ -1,31 +1,33 @@
-import { env } from "@formbase/env";
-import { validateRequest } from "@formbase/lib/auth/validate-request";
-import { APP_TITLE } from "@formbase/lib/constants";
-import { api } from "@formbase/trpc/server";
-import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
+import * as React from 'react';
+import { redirect } from 'next/navigation';
+
+import type { Metadata } from 'next';
+
+import { env } from '@formbase/env';
+import { validateRequest } from '@formbase/lib/auth/validate-request';
+import { APP_TITLE } from '@formbase/lib/constants';
+import { api } from '@formbase/trpc/server';
+import { ExclamationTriangleIcon } from '@formbase/ui/components/icons';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "@formbase/ui/primitives/alert";
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-import * as React from "react";
+} from '@formbase/ui/primitives/alert';
 
-import { Billing } from "./_components/billing";
-import { BillingSkeleton } from "./_components/billing-skeleton";
+import { Billing } from './_components/billing';
+import { BillingSkeleton } from './_components/billing-skeleton';
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-  title: "Billing",
-  description: "Manage your billing and subscription",
+  title: 'Billing',
+  description: 'Manage your billing and subscription',
 };
 
 export default async function BillingPage() {
   const { user } = await validateRequest();
 
   if (!user) {
-    redirect("/signin");
+    redirect('/signin');
   }
 
   const stripePromises = Promise.all([
@@ -46,8 +48,8 @@ export default async function BillingPage() {
           <ExclamationTriangleIcon className="h-6 w-6" />
           <AlertTitle>This is a demo app.</AlertTitle>
           <AlertDescription>
-            {APP_TITLE} app is a demo app using a Stripe test environment. You
-            can find a list of test card numbers on the{" "}
+            Formbase app is a demo app using a Stripe test environment. You can
+            find a list of test card numbers on the{' '}
             <a
               href="https://stripe.com/docs/testing#cards"
               target="_blank"

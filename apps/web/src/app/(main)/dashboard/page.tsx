@@ -1,29 +1,22 @@
-import { env } from "@formbase/env";
-import { api } from "@formbase/trpc/server";
-import { type Metadata } from "next";
-import * as React from "react";
+import * as React from 'react';
+import { type Metadata } from 'next';
 
-import { Forms } from "./_components/forms";
-import { CreateFormDialog } from "./_components/new-form-dialog";
-import { FormsSkeleton } from "./_components/posts-skeleton";
+import { env } from '@formbase/env';
+
+import { api } from '~/lib/trpc/server';
+
+import { Forms } from './_components/forms';
+import { CreateFormDialog } from './_components/new-form-dialog';
+import { FormsSkeleton } from './_components/posts-skeleton';
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-  title: "Forms",
-  description: "Manage your forms here",
+  title: 'Forms',
+  description: 'Manage your forms here',
 };
 
-export default async function DashboardPage() {
-  /**
-   * Passing multiple promises to `Promise.all` to fetch data in parallel to prevent waterfall requests.
-   * Passing promises to the `Posts` component to make them hot promises (they can run without being awaited) to prevent waterfall requests.
-   * @see https://www.youtube.com/shorts/A7GGjutZxrs
-   * @see https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#parallel-data-fetching
-   */
-  const promises = Promise.all([
-    api.form.userForms.query({}),
-    api.stripe.getPlan.query(),
-  ]);
+export default function DashboardPage() {
+  const promises = Promise.all([api.form.userForms({})]);
 
   return (
     <div className="py-2 md:py-8">

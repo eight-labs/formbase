@@ -1,16 +1,29 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+'use client';
 
-import { formatFileName } from "@formbase/lib/utils";
-import { api } from "@formbase/trpc/react";
-import { Button } from "@formbase/ui/primitives/button";
-import { Checkbox } from "@formbase/ui/primitives/checkbox";
+import * as React from 'react';
+import { useRouter } from 'next/navigation';
+
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+} from '@tanstack/react-table';
+
+import { Button } from '@formbase/ui/primitives/button';
+import { Checkbox } from '@formbase/ui/primitives/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@formbase/ui/primitives/dropdown-menu";
+} from '@formbase/ui/primitives/dropdown-menu';
 import {
   Table,
   TableBody,
@@ -18,14 +31,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@formbase/ui/primitives/table";
-import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
-import type {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-} from "@tanstack/react-table";
+} from '@formbase/ui/primitives/table';
+import { formatFileName } from '@formbase/utils';
+import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 import {
   flexRender,
   getCoreRowModel,
@@ -33,13 +41,13 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import { Trash2, TrashIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import * as React from "react";
-import { toast } from "sonner";
+} from '@tanstack/react-table';
+import { Trash2, TrashIcon } from 'lucide-react';
+import { toast } from 'sonner';
 
-import { ImagePreviewDialog } from "./image-preview-dialog";
+import { api } from '~/lib/trpc/react';
+
+import { ImagePreviewDialog } from './image-preview-dialog';
 
 type SubmissionsTableProps = {
   formKeys: string[];
@@ -47,9 +55,7 @@ type SubmissionsTableProps = {
   submissions: any; // FIXME: take care of this
 };
 
-type FormDataType = {
-  [key: string]: string;
-};
+type FormDataType = Record<string, string>;
 
 export function SubmissionsTable({
   submissions,
@@ -82,7 +88,7 @@ export function SubmissionsTable({
         onSuccess: () => {
           router.refresh();
 
-          toast.success("Submission has been deleted", {
+          toast.success('Submission has been deleted', {
             icon: <TrashIcon className="h-4 w-4" />,
           });
         },
@@ -90,19 +96,19 @@ export function SubmissionsTable({
     );
   };
 
-  const columns: ColumnDef<FormDataType>[] = [
+  const columns: Array<ColumnDef<FormDataType>> = [
     {
-      id: "select",
+      id: 'select',
       header: ({ table }) => {
         return (
           <Checkbox
             checked={
               table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && "indeterminate")
+              (table.getIsSomePageRowsSelected() && 'indeterminate')
             }
-            onCheckedChange={(value) =>
-              table.toggleAllPageRowsSelected(!!value)
-            }
+            onCheckedChange={(value) => {
+              table.toggleAllPageRowsSelected(!!value);
+            }}
             aria-label="Select all"
           />
         );
@@ -110,7 +116,9 @@ export function SubmissionsTable({
       cell: ({ row }) => (
         <Checkbox
           checked={row.getIsSelected()}
-          onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+          onCheckedChange={(value: any) => {
+            row.toggleSelected(!!value);
+          }}
           aria-label="Select row"
         />
       ),
@@ -119,7 +127,7 @@ export function SubmissionsTable({
     },
 
     ...formKeysArray.map((submission: any) => {
-      if (submission === "image" || submission === "file") {
+      if (submission === 'image' || submission === 'file') {
         return {
           accessorKey: submission as string,
           header: () => {
@@ -140,7 +148,7 @@ export function SubmissionsTable({
             }
 
             const fileUrl = data[submission];
-            const fileName = formatFileName(fileUrl);
+            const fileName = formatFileName(fileUrl as string);
             return (
               <div className="flex items-center">
                 <a
@@ -151,7 +159,7 @@ export function SubmissionsTable({
                 >
                   {fileName}
                 </a>
-                {submission === "image" && (
+                {submission === 'image' && (
                   <ImagePreviewDialog fileName={fileName} imageUrl={fileUrl} />
                 )}
               </div>
@@ -180,7 +188,7 @@ export function SubmissionsTable({
     }),
 
     {
-      accessorKey: "createdAt",
+      accessorKey: 'createdAt',
       header: () => {
         return (
           <Button
@@ -193,34 +201,38 @@ export function SubmissionsTable({
         );
       },
       sortingFn: (a: any, b: any) => {
-        const dateA = new Date(a.original.createdAt);
-        const dateB = new Date(b.original.createdAt);
+        const dateA = new Date(a.original.createdAt as Date);
+        const dateB = new Date(b.original.createdAt as Date);
         return dateA.getTime() - dateB.getTime();
       },
       cell: ({ row }: any) => {
-        const date = new Date(row.original.createdAt);
-        const dateString = date.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
+        const date = new Date(row.original.createdAt as Date);
+        const dateString = date.toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
         });
 
-        const timeString = date.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
+        const timeString = date.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
           hour12: true,
         });
 
-        return <div>{dateString + ", " + timeString}</div>;
+        return <div>{dateString + ', ' + timeString}</div>;
       },
     },
 
     {
-      id: "actions",
+      id: 'actions',
       enableHiding: false,
       size: 20,
       cell: ({ row }) => {
-        const submissionId = row.original.id as string;
+        const submissionId = row.original['id'];
+
+        if (!submissionId) {
+          return null;
+        }
 
         return (
           <DropdownMenu>
@@ -293,11 +305,11 @@ export function SubmissionsTable({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -324,14 +336,16 @@ export function SubmissionsTable({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.previousPage()}
+            onClick={() => {
+              table.previousPage();
+            }}
             disabled={!table.getCanPreviousPage()}
           >
             Previous
@@ -339,7 +353,9 @@ export function SubmissionsTable({
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.nextPage()}
+            onClick={() => {
+              table.nextPage();
+            }}
             disabled={!table.getCanNextPage()}
           >
             Next

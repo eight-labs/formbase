@@ -1,4 +1,7 @@
-import { AspectRatio } from "@formbase/ui/primitives/aspect-ratio";
+import { useState } from 'react';
+import Image from 'next/image';
+
+import { AspectRatio } from '@formbase/ui/primitives/aspect-ratio';
 import {
   Dialog,
   DialogContent,
@@ -6,10 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@formbase/ui/primitives/dialog";
-import { DownloadIcon, EyeIcon } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
+} from '@formbase/ui/primitives/dialog';
+import { DownloadIcon, EyeIcon } from 'lucide-react';
 
 type ImagePreviewDialogProps = {
   fileName: string;

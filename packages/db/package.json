@@ -1,18 +1,31 @@
 {
   "name": "@formbase/db",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "db:generate": "drizzle-kit generate:pg",
-    "db:push": "drizzle-kit push:pg",
-    "db:studio": "drizzle-kit studio"
+    "db:check": "dotenv -e ../../apps/web/.env.local drizzle-kit check",
+    "db:generate": "dotenv -e ../../apps/web/.env.local drizzle-kit generate",
+    "db:migrate": "dotenv -e ../../apps/web/.env.local drizzle-kit migrate",
+    "db:migrate:drop": "dotenv -e ../../apps/web/.env.local drizzle-kit drop",
+    "db:pull": "dotenv -e ../../apps/web/.env.local drizzle-kit introspect",
+    "db:push": "dotenv -e ../../apps/web/.env.local drizzle-kit push",
+    "db:studio": "dotenv -e ../../apps/web/.env.local drizzle-kit studio",
+    "db:up": "dotenv -e ../../apps/web/.env.local drizzle-kit up",
+    "lint": "eslint . --cache --max-warnings 0",
+    "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "dependencies": {
-    "@formbase/env": "workspace:*",
-    "@formbase/lib": "workspace:*",
-    "@lucia-auth/adapter-drizzle": "^1.0.7",
-    "drizzle-kit": "^0.20.17",
-    "drizzle-orm": "^0.29.5",
-    "postgres": "^3.4.4"
+    "@formbase/env": "workspace:^",
+    "drizzle-orm": "^0.30.10",
+    "pg": "^8.11.5",
+    "postgres": "^3.4.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@formbase/tsconfig": "workspace:*",
+    "dotenv-cli": "^7.4.2",
+    "drizzle-kit": "^0.21.4",
+    "eslint-config-formbase": "workspace:*"
   }
 }

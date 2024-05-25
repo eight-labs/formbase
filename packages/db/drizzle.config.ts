@@ -1,14 +1,13 @@
-import { type Config } from "drizzle-kit";
+import type { Config } from 'drizzle-kit';
 
-import { env } from "@formbase/env";
-import { DATABASE_PREFIX } from "@formbase/lib/constants";
+import { env } from '@formbase/env';
 
 export default {
-  schema: "./schema.ts",
-  out: "./drizzle",
-  driver: "pg",
+  dialect: 'postgresql',
+  schema: './schema/index.ts',
+  out: './drizzle',
   dbCredentials: {
-    connectionString: env.DATABASE_URL,
+    url: env.DATABASE_URL,
   },
-  tablesFilter: [`${DATABASE_PREFIX}_*`],
+  tablesFilter: ['formbase_*'],
 } satisfies Config;

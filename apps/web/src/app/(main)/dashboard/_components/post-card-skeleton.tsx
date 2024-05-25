@@ -3,8 +3,8 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-} from "@formbase/ui/primitives/card";
-import { Skeleton } from "@formbase/ui/primitives/skeleton";
+} from '@formbase/ui/primitives/card';
+import { Skeleton } from '@formbase/ui/primitives/skeleton';
 
 export function PostCardSkeleton() {
   return (

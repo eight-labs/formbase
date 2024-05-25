@@ -1,22 +1,23 @@
-import { api } from "@formbase/trpc/server";
-import { CopyButton } from "@formbase/ui/components/copy-button";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@formbase/ui/primitives/tabs";
+} from '@formbase/ui/primitives/tabs';
 
-import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
-import { FormSettings } from "./form-settings";
-import { SubmissionsTable } from "./submissions-table";
-import { EmptyFormState } from "../../dashboard/_components/empty-state";
+import { CopyButton } from '~/components/copy-button';
+import { api } from '~/lib/trpc/server';
+
+import { EmptyFormState } from '../../dashboard/_components/empty-state';
+import { ExportSubmissionsDropDownButton } from './export-submissions-button';
+import { FormSettings } from './form-settings';
+import { SubmissionsTable } from './submissions-table';
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
   const [form, formSubmissions] = await Promise.all([
-    api.form.get.query({ formId }),
-    api.formData.all.query({ formId }),
+    api.form.get({ formId }),
+    api.formData.all({ formId }),
   ]);
 
   return (
@@ -50,12 +51,12 @@ export default async function FormPage({ params }: { params: { id: string } }) {
                 </span>
                 <ExportSubmissionsDropDownButton
                   submissions={formSubmissions}
-                  formKeys={form?.keys || []}
-                  formTitle={form?.title || ""}
+                  formKeys={form?.keys ?? []}
+                  formTitle={form?.title ?? ''}
                 />
               </div>
               <SubmissionsTable
-                formKeys={form?.keys || []}
+                formKeys={form?.keys ?? []}
                 formId={formId}
                 submissions={formSubmissions}
               />

@@ -1,16 +1,19 @@
-"use client";
+'use client';
+
+import { useEffect, useRef } from 'react';
+
 import {
   logout,
   resendVerificationEmail as resendEmail,
   verifyEmail,
-} from "@formbase/lib/auth/actions";
-import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
-import { SubmitButton } from "@formbase/ui/components/submit-button";
-import { Input } from "@formbase/ui/primitives/input";
-import { Label } from "@formbase/ui/primitives/label";
-import { useEffect, useRef } from "react";
-import { useFormState } from "react-dom";
-import { toast } from "sonner";
+} from '@formbase/auth/actions';
+import { Input } from '@formbase/ui/primitives/input';
+import { Label } from '@formbase/ui/primitives/label';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
+
+import { SubmitButton } from '~/components/submit-button';
 
 export const VerifyCode = () => {
   const [verifyEmailState, verifyEmailAction] = useFormState(verifyEmail, null);
@@ -19,7 +22,7 @@ export const VerifyCode = () => {
 
   useEffect(() => {
     if (resendState?.success) {
-      toast("Email sent!");
+      toast('Email sent!');
     }
     if (resendState?.error) {
       toast(resendState.error, {

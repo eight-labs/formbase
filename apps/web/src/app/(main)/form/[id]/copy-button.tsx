@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { useCopyToClipboard } from "@formbase/lib/hooks/use-copy-to-clipboard";
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
+import { Copy } from 'lucide-react';
+import { toast } from 'sonner';
+
+import { useCopyToClipboard } from '~/lib/hooks/use-copy-to-clipboard';
 
 type CopyFormIdProps = {
   formId: string;
@@ -19,7 +20,7 @@ export default function CopyFormId({ formId }: CopyFormIdProps) {
       <Copy
         onClick={() =>
           copy(formId).then(() => {
-            toast("Copied to Clipboard", {
+            toast('Copied to Clipboard', {
               icon: <Copy className="h-4 w-4" />,
             });
           })

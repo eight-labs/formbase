@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { cn } from "@formbase/lib/utils";
-import { buttonVariants } from "@formbase/ui/primitives/button";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { buttonVariants } from '@formbase/ui/primitives/button';
+import { cn } from '@formbase/ui/utils/cn';
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
-  items: {
+  items: Array<{
     href: string;
     title: string;
-  }[];
+  }>;
 }
 
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
@@ -18,7 +19,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   return (
     <nav
       className={cn(
-        "flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1",
+        'flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1',
         className,
       )}
       {...props}
@@ -28,11 +29,11 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
           key={item.href}
           href={item.href}
           className={cn(
-            buttonVariants({ variant: "ghost" }),
+            buttonVariants({ variant: 'ghost' }),
             pathname === item.href
-              ? "bg-muted hover:bg-muted"
-              : "hover:bg-transparent hover:underline",
-            "justify-start",
+              ? 'bg-muted hover:bg-muted'
+              : 'hover:bg-transparent hover:underline',
+            'justify-start',
           )}
         >
           {item.title}

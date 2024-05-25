@@ -1,16 +1,17 @@
-"use client";
+'use client';
 
-import { Sheet, SheetContent } from "@formbase/ui/primitives/sheet";
-import { FunctionSquare } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { useState } from 'react';
+import Link from 'next/link';
 
-import { HamburgerMenu } from "./mobile-hamburger";
-import { ThemeToggle } from "./theme-toggle";
+import { Sheet, SheetContent } from '@formbase/ui/primitives/sheet';
+import { FunctionSquare } from 'lucide-react';
+
+import { HamburgerMenu } from './mobile-hamburger';
+import { ThemeToggle } from './theme-toggle';
 
 export type MobileNavigationProps = {
   isMenuOpen: boolean;
-  onMenuOpenChange?: (_value: boolean) => void;
+  onMenuOpenChange: (open: boolean) => void;
 };
 
 const MobileNavigationSheet = ({
@@ -18,13 +19,13 @@ const MobileNavigationSheet = ({
   onMenuOpenChange,
 }: MobileNavigationProps) => {
   const handleMenuItemClick = () => {
-    onMenuOpenChange?.(false);
+    onMenuOpenChange(false);
   };
 
   const menuNavigationLinks = [
     {
       href: `/docs`,
-      text: "Docs",
+      text: 'Docs',
     },
   ];
 
@@ -45,7 +46,9 @@ const MobileNavigationSheet = ({
               key={href}
               className="text-2xl font-semibold text-foreground hover:text-foreground/80"
               href={href}
-              onClick={() => handleMenuItemClick()}
+              onClick={() => {
+                handleMenuItemClick();
+              }}
             >
               {text}
             </Link>
@@ -72,7 +75,9 @@ export const MobileNavigation = () => {
   return (
     <>
       <HamburgerMenu
-        onToggleMenuOpen={() => setIsHamburgerMenuOpen((v) => !v)}
+        onToggleMenuOpen={() => {
+          setIsHamburgerMenuOpen((v) => !v);
+        }}
         isMenuOpen={isHamburgerMenuOpen}
       />
       <MobileNavigationSheet

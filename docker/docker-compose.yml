@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 name: formbase
 services:
@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=formbase
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - formbase-db:/var/lib/postgresql/data
 
@@ -26,7 +26,7 @@ services:
 
   minio:
     image: minio/minio
-    container_name: formbase_minio
+    container_name: formbase-minio
     ports:
       - 9002:9002
       - 9001:9001

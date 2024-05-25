@@ -1,8 +1,8 @@
-import { PackageOpen, Rabbit } from "lucide-react";
-import { match } from "ts-pattern";
+import { PackageOpen, Rabbit } from 'lucide-react';
+import { match } from 'ts-pattern';
 
 export type EmptyFormStateProps = {
-  status: "form" | "submission";
+  status: 'form' | 'submission';
 };
 
 export const EmptyFormState = ({ status }: EmptyFormStateProps) => {
@@ -11,20 +11,20 @@ export const EmptyFormState = ({ status }: EmptyFormStateProps) => {
     message,
     icon: Icon,
   } = match(status)
-    .with("form", () => ({
-      title: "No Forms Available",
+    .with('form', () => ({
+      title: 'No Forms Available',
       message:
         "You haven't created any forms yet. Your forms will appear once you've created them.",
       icon: Rabbit,
     }))
-    .with("submission", () => ({
-      title: "No Submissions Available",
+    .with('submission', () => ({
+      title: 'No Submissions Available',
       message:
         "You haven't received any submissions yet. Your submissions will appear once you've received them.",
       icon: PackageOpen,
     }))
     .otherwise(() => ({
-      title: "Nothing to do here!",
+      title: 'Nothing to do here!',
       message: "You're all caught up!",
       icon: Rabbit,
     }));
