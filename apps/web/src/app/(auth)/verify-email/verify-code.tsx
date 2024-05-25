@@ -2,6 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
+
 import {
   logout,
   resendVerificationEmail as resendEmail,
@@ -9,9 +13,6 @@ import {
 } from '@formbase/auth/actions';
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
-import { useFormState } from 'react-dom';
-import { toast } from 'sonner';
 
 import { SubmitButton } from '~/components/submit-button';
 
@@ -52,8 +53,8 @@ export const VerifyCode = () => {
         </SubmitButton>
       </form>
       <form action={logout}>
-        <SubmitButton variant="link" className="p-0 font-normal">
-          want to use another email? Log out now.
+        <SubmitButton variant="link" className="p-0 mt-2 font-normal">
+          Want to use another email? Log out now.
         </SubmitButton>
       </form>
     </div>

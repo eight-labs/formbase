@@ -15,6 +15,13 @@
       "when": 1716665155881,
       "tag": "0001_panoramic_night_thrasher",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1716670013157,
+      "tag": "0002_little_roulette",
+      "breakpoints": true
     }
   ]
 }
