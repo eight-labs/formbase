@@ -51,14 +51,13 @@ export default async function FormPage({ params }: { params: { id: string } }) {
                   Total Submissions: {formSubmissions.length}
                 </span>
                 <ExportSubmissionsDropDownButton
-                  submissions={formSubmissions}
+                  submissions={formSubmissions as FormData[]}
                   formKeys={form?.keys ?? []}
                   formTitle={form?.title ?? ''}
                 />
               </div>
               <SubmissionsTable
                 formKeys={form?.keys ?? []}
-                formId={formId}
                 submissions={formSubmissions as FormData[]}
               />
             </>

@@ -1,9 +1,9 @@
 'use client';
 
-// TODO: Fix typeerrors in this file
 import { ArrowDownToLine, FileDown } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { type FormData } from '@formbase/db/schema';
 import { Button } from '@formbase/ui/primitives/button';
 import {
   DropdownMenu,
@@ -14,68 +14,74 @@ import {
   DropdownMenuTrigger,
 } from '@formbase/ui/primitives/dropdown-menu';
 
-export function ExportSubmissionsDropDownButton({
-  submissions,
-  formKeys: formKeysArray,
-  formTitle,
-}: {
-  submissions: unknown[];
-  // formKeys: string;
+type ExportSubmissionsDropDownButtonProps = {
+  submissions: FormData[];
   formKeys: string[];
   formTitle: string;
-}) {
-  // const formKeysArray = formKeys.split("~?").filter((key) => key.length > 0);
+};
 
-  const handleLinkElementCreationAndClick = (
-    content: string,
-    fileName: string,
-  ) => {
-    const encodedUri = encodeURI(content);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
+const createCSVContent = (
+  submissions: FormData[],
+  formKeys: string[],
+): string => {
+  let csvContent = 'data:text/csv;charset=utf-8,';
+  const header = formKeys.join(',') + '\n';
+  csvContent += header;
 
-    link.click();
-
-    document.body.removeChild(link);
-  };
-
-  const handleDownloadAsCSV = () => {
-    let csvContent = 'data:text/csv;charset=utf-8,';
-    const header = formKeysArray.join(',') + '\n';
-    csvContent += header;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    submissions.forEach((submission: any) => {
-      const row = formKeysArray
-        .map((key) => submission.data[key] || '')
+  submissions.forEach((submission) => {
+    if (submission.data && typeof submission.data === 'object') {
+      const row = formKeys
+        .map((key) => (submission.data as Record<string, unknown>)[key] ?? '')
         .join(',');
       csvContent += row + '\n';
-    });
+    }
+  });
 
-    handleLinkElementCreationAndClick(
-      csvContent,
-      `${formTitle}_submissions.csv`,
-    );
+  return csvContent;
+};
 
+const createJSONContent = (submissions: FormData[]): string => {
+  const jsonContent = JSON.stringify(
+    submissions.map((submission) =>
+      submission.data && typeof submission.data === 'object'
+        ? submission.data
+        : {},
+    ),
+    null,
+    2,
+  );
+
+  return `data:application/json;charset=utf-8,${jsonContent}`;
+};
+
+const triggerDownload = (content: string, fileName: string): void => {
+  const encodedUri = encodeURI(content);
+  const link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', fileName);
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+};
+
+export function ExportSubmissionsDropDownButton({
+  submissions,
+  formKeys,
+  formTitle,
+}: ExportSubmissionsDropDownButtonProps) {
+  const handleDownloadAsCSV = () => {
+    const csvContent = createCSVContent(submissions, formKeys);
+    triggerDownload(csvContent, `${formTitle}_submissions.csv`);
     toast('Submissions exported as CSV', {
       icon: <FileDown className="h-4 w-4" />,
     });
   };
 
   const handleDownloadAsJSON = () => {
-    const jsonContent = JSON.stringify(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      submissions.map((submission: any) => submission.data),
-      null,
-      2,
-    );
-    handleLinkElementCreationAndClick(
-      `data:application/json;charset=utf-8,${jsonContent}`,
-      `${formTitle}_submissions.json`,
-    );
-
+    const jsonContent = createJSONContent(submissions);
+    triggerDownload(jsonContent, `${formTitle}_submissions.json`);
     toast('Submissions exported as JSON', {
       icon: <FileDown className="h-4 w-4" />,
     });
