@@ -1,7 +1,13 @@
-import { drizzlePrimitives } from '@formbase/db';
-import { formDatas, forms } from '@formbase/db/schema';
-import { generateId } from '@formbase/utils/generate-id';
 import { z } from 'zod';
+
+import { drizzlePrimitives } from '@formbase/db';
+import {
+  formDatas,
+  forms,
+  ZInsertFormSchema,
+  ZUpdateFormSchema,
+} from '@formbase/db/schema';
+import { generateId } from '@formbase/utils/generate-id';
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
 
@@ -41,14 +47,7 @@ export const formRouter = createTRPCRouter({
     ),
 
   create: protectedProcedure
-    .input(
-      z.object({
-        title: z.string().min(1).max(255),
-        description: z.string().optional(),
-        returningUrl: z.string().optional(),
-        keys: z.array(z.string()).optional(),
-      }),
-    )
+    .input(ZInsertFormSchema)
     .mutation(async ({ ctx, input }) => {
       const id = generateId(15);
 
@@ -56,37 +55,29 @@ export const formRouter = createTRPCRouter({
         id,
         userId: ctx.user.id,
         title: input.title,
-        description: input.description,
+        description: input.description ?? null,
         updatedAt: new Date(),
-        returnUrl: input.returningUrl,
+        returnUrl: input.returnUrl ?? null,
         keys: [''],
+        enableEmailNotifications: input.enableEmailNotifications ?? true,
+        enableSubmissions: input.enableSubmissions ?? true,
       });
 
       return { id };
     }),
 
   update: protectedProcedure
-    .input(
-      z.object({
-        id: z.string(),
-        title: z.string().min(3).max(255).optional(),
-        description: z.string().min(3).max(255).optional(),
-        enableSubmissions: z.boolean().optional(),
-        enableNotifications: z.boolean().optional(),
-        returnUrl: z.string().optional(),
-      }),
-    )
+    .input(ZUpdateFormSchema)
     .mutation(async ({ ctx, input }) => {
       await ctx.db
         .update(forms)
-        // TODO: drizzle zod types
         .set({
           title: input.title,
-          description: input.description,
+          description: input.description ?? null,
           updatedAt: new Date(),
-          enableSubmissions: input.enableSubmissions,
-          enableEmailNotifications: input.enableNotifications,
-          returnUrl: input.returnUrl,
+          enableSubmissions: input.enableSubmissions ?? true,
+          enableEmailNotifications: input.enableEmailNotifications ?? true,
+          returnUrl: input.returnUrl ?? null,
         })
         .where(eq(forms.id, input.id));
     }),
