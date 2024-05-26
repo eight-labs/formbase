@@ -53,9 +53,6 @@ async function processFileUploads(
 }
 
 async function handleEmailNotifications(form: Form, formId: string) {
-  // simulate a delay of 3 seconds
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   if (form.enableEmailNotifications) {
     const user = await api.user.getUserById({ userId: form.userId });
     if (!user) throw new Error('User not found');

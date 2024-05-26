@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { useFormState } from 'react-dom';
+
 import { login } from '@formbase/auth/actions';
 import { Button } from '@formbase/ui/primitives/button';
 import {
@@ -13,8 +16,6 @@ import {
 } from '@formbase/ui/primitives/card';
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import { useFormState } from 'react-dom';
 
 import { PasswordInput } from '~/components/password-input';
 import { SubmitButton } from '~/components/submit-button';

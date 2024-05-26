@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
+
 import { sendPasswordResetLink } from '@formbase/auth/actions';
 import { Button } from '@formbase/ui/primitives/button';
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
-import { useFormState } from 'react-dom';
-import { toast } from 'sonner';
 
 import { SubmitButton } from '~/components/submit-button';
 
@@ -24,14 +24,13 @@ export function SendResetEmail() {
       router.push('/login');
     }
     if (state?.error) {
-      toast(state.error, {
-        icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
-      });
+      toast(state.error);
+      router.push('/reset-password');
     }
   }, [state?.error, state?.success]);
 
   return (
-    <form className="space-y-4" action={formAction}>
+    <form className="space-y-4 -mt-4" action={formAction}>
       <div className="space-y-2">
         <Label>Your Email</Label>
         <Input

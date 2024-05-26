@@ -34,10 +34,8 @@ export default async function ForgotPasswordPage() {
       <CardHeader>
         <CardTitle>Verify Email</CardTitle>
         <CardDescription>
-          <div className="mt-2">
-            Verification code was sent to <strong>{user.email}</strong>. Check
-            your spam folder if you can&apos;t find the email.
-          </div>
+          Verification code was sent to <strong>{user.email}</strong>. Check
+          your spam folder if you can&apos;t find the email.
         </CardDescription>
       </CardHeader>
       <CardContent>
