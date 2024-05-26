@@ -1,9 +1,9 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
-import type { LuciaUser } from '@formbase/auth';
+import type { LuciaUser } from "@formbase/auth";
 
-import { validateRequest } from '@formbase/auth';
-import { logout } from '@formbase/auth/actions/logout';
+import { validateRequest } from "@formbase/auth";
+import { logout } from "@formbase/auth/actions/logout";
 import {
   Card,
   CardContent,
@@ -11,14 +11,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@formbase/ui/primitives/card';
+} from "@formbase/ui/primitives/card";
 
-import { SubmitButton } from '~/components/submit-button';
+import { SubmitButton } from "~/components/submit-button";
 
 export default async function AccountPage() {
   const { user } = (await validateRequest()) as { user: LuciaUser | null };
   if (!user) {
-    redirect('/login');
+    redirect("/login");
   }
 
   return (

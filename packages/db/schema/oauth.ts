@@ -1,13 +1,13 @@
-import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
+import { pgTable, primaryKey, text } from "drizzle-orm/pg-core";
 
-import { users } from './users';
+import { users } from "./users";
 
 export const oauth = pgTable(
-  'oauth_account',
+  "oauth_account",
   {
-    providerId: text('provider_id').notNull(),
-    providerUserId: text('provider_user_id').notNull(),
-    userId: text('user_id')
+    providerId: text("provider_id").notNull(),
+    providerUserId: text("provider_user_id").notNull(),
+    userId: text("user_id")
       .notNull()
       .references(() => users.id),
   },

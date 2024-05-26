@@ -1,11 +1,11 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { drizzlePrimitives } from '@formbase/db';
-import { formDatas, forms, ZUpdateFormDataSchema } from '@formbase/db/schema';
-import { flattenObject } from '@formbase/utils/flatten-object';
-import { generateId } from '@formbase/utils/generate-id';
+import { drizzlePrimitives } from "@formbase/db";
+import { formDatas, forms, ZUpdateFormDataSchema } from "@formbase/db/schema";
+import { flattenObject } from "@formbase/utils/flatten-object";
+import { generateId } from "@formbase/utils/generate-id";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 const { eq } = drizzlePrimitives;
 

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import type { ButtonProps } from '@formbase/ui/primitives/button';
+import type { ButtonProps } from "@formbase/ui/primitives/button";
 
-import { Button } from '@formbase/ui/primitives/button';
-import { cn } from '@formbase/ui/utils/cn';
+import { Button } from "@formbase/ui/primitives/button";
+import { cn } from "@formbase/ui/utils/cn";
 
-import { AnimatedSpinner } from './icons';
+import { AnimatedSpinner } from "./icons";
 
 export interface LoadingButtonProps extends ButtonProps {
   loading?: boolean;
@@ -20,9 +20,9 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
         ref={ref}
         {...props}
         disabled={props.disabled ? props.disabled : loading}
-        className={cn(className, 'relative')}
+        className={cn(className, "relative")}
       >
-        <span className={cn(loading ? 'opacity-0' : '')}>{children}</span>
+        <span className={cn(loading ? "opacity-0" : "")}>{children}</span>
         {loading ? (
           <div className="absolute inset-0 grid place-items-center">
             <AnimatedSpinner className="h-6 w-6" />
@@ -33,6 +33,6 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
   },
 );
 
-LoadingButton.displayName = 'LoadingButton';
+LoadingButton.displayName = "LoadingButton";
 
 export { LoadingButton };

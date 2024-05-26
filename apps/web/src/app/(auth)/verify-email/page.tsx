@@ -1,32 +1,32 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
-import type { User } from '../../../../../../packages/db/schema';
+import type { User } from "../../../../../../packages/db/schema";
 
-import { validateRequest } from '@formbase/auth';
+import { validateRequest } from "@formbase/auth";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@formbase/ui/primitives/card';
+} from "@formbase/ui/primitives/card";
 
-import { VerifyCode } from './verify-code';
+import { VerifyCode } from "./verify-code";
 
 export const metadata = {
-  title: 'Verify Email',
-  description: 'Verify Email Page',
+  title: "Verify Email",
+  description: "Verify Email Page",
 };
 
 export default async function ForgotPasswordPage() {
   const { user } = (await validateRequest()) as { user: User | null };
 
   if (!user) {
-    redirect('/login');
+    redirect("/login");
   }
 
   if (user.emailVerified) {
-    redirect('/dashboard');
+    redirect("/dashboard");
   }
 
   return (

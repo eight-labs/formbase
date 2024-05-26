@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useTheme } from 'next-themes';
+import * as React from "react";
+import { useTheme } from "next-themes";
 
-import { Button } from '@formbase/ui/primitives/button';
+import { Laptop, Moon, Sun } from "lucide-react";
+
+import { Button } from "@formbase/ui/primitives/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@formbase/ui/primitives/dropdown-menu';
-import { Laptop, Moon, Sun } from 'lucide-react';
+} from "@formbase/ui/primitives/dropdown-menu";
 
 export function ThemeToggle() {
   const { setTheme } = useTheme();
@@ -31,7 +32,7 @@ export function ThemeToggle() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem
           onClick={() => {
-            setTheme('light');
+            setTheme("light");
           }}
         >
           <Sun className="mr-2 h-4 w-4" />
@@ -39,7 +40,7 @@ export function ThemeToggle() {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
-            setTheme('dark');
+            setTheme("dark");
           }}
         >
           <Moon className="mr-2 h-4 w-4" />
@@ -47,7 +48,7 @@ export function ThemeToggle() {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
-            setTheme('system');
+            setTheme("system");
           }}
         >
           <Laptop className="mr-2 h-4 w-4" />

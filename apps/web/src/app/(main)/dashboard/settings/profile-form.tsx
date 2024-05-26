@@ -1,9 +1,15 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
-import { type LuciaUser } from '@formbase/auth';
-import { Button } from '@formbase/ui/primitives/button';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UserCheck } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { type LuciaUser } from "@formbase/auth";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Form,
   FormControl,
@@ -11,20 +17,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@formbase/ui/primitives/form';
-import { Input } from '@formbase/ui/primitives/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { UserCheck } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
+} from "@formbase/ui/primitives/form";
+import { Input } from "@formbase/ui/primitives/input";
 
-import { api } from '~/lib/trpc/react';
+import { api } from "~/lib/trpc/react";
 
 const profileFormSchema = z.object({
   email: z
     .string({
-      required_error: 'Please select an email to display.',
+      required_error: "Please select an email to display.",
     })
     .email(),
   name: z.string(),
@@ -40,10 +41,10 @@ export function ProfileForm({ user }: ProfileFormProps) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      name: user.name ?? '',
+      name: user.name ?? "",
       email: user.email,
     },
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const router = useRouter();
@@ -60,7 +61,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
       {
         onSuccess: () => {
           router.refresh();
-          toast.success('Your name has been updated', {
+          toast.success("Your name has been updated", {
             icon: <UserCheck className="h-4 w-4" />,
           });
         },

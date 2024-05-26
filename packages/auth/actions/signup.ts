@@ -1,20 +1,20 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import type { SignupInput } from '../validators/auth';
-import type { ActionResponse } from './utils';
+import type { SignupInput } from "../validators/auth";
+import type { ActionResponse } from "./utils";
 
-import { generateId, Scrypt } from 'lucia';
+import { generateId, Scrypt } from "lucia";
 
-import { db } from '@formbase/db';
-import { users } from '@formbase/db/schema';
-import { env } from '@formbase/env';
+import { db } from "@formbase/db";
+import { users } from "@formbase/db/schema";
+import { env } from "@formbase/env";
 
-import { lucia } from '../lucia';
-import { signupSchema } from '../validators/auth';
-import { generateEmailVerificationCode } from './utils';
+import { lucia } from "../lucia";
+import { signupSchema } from "../validators/auth";
+import { generateEmailVerificationCode } from "./utils";
 
 export async function signup(
   _: unknown,
@@ -42,7 +42,7 @@ export async function signup(
 
   if (existingUser) {
     return {
-      formError: 'Cannot create account with that email',
+      formError: "Cannot create account with that email",
     };
   }
 
@@ -57,14 +57,14 @@ export async function signup(
   const verificationCode = await generateEmailVerificationCode(userId, email);
 
   void fetch(`${env.NEXT_PUBLIC_APP_URL}/api/mail`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       email,
       code: verificationCode,
-      type: 'verification',
+      type: "verification",
     }),
   });
 
@@ -75,5 +75,5 @@ export async function signup(
     sessionCookie.value,
     sessionCookie.attributes,
   );
-  return redirect('/verify-email');
+  return redirect("/verify-email");
 }

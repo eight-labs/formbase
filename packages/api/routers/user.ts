@@ -1,8 +1,9 @@
-import { drizzlePrimitives } from '@formbase/db';
-import { users } from '@formbase/db/schema';
-import { z } from 'zod';
+import { z } from "zod";
 
-import { createRouter, protectedProcedure, publicProcedure } from '../trpc';
+import { drizzlePrimitives } from "@formbase/db";
+import { users } from "@formbase/db/schema";
+
+import { createRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createRouter({
   get: protectedProcedure.query(({ ctx }) => ctx.user),

@@ -1,12 +1,13 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { type LuciaUser } from '@formbase/auth';
-import { env } from '@formbase/env';
-import { FunctionSquare } from 'lucide-react';
+import { FunctionSquare } from "lucide-react";
 
-import { MobileNavigation } from './mobile-navigation';
+import { type LuciaUser } from "@formbase/auth";
+import { env } from "@formbase/env";
 
-const routes = [{ name: 'Docs', href: '/docs' }] as const;
+import { MobileNavigation } from "./mobile-navigation";
+
+const routes = [{ name: "Docs", href: "/docs" }] as const;
 
 type LandingHeaderProps = {
   user: LuciaUser | null;
@@ -23,7 +24,7 @@ export const Header = ({ user }: LandingHeaderProps) => {
             <div className="flex w-full items-center justify-between lg:w-auto">
               <Link
                 className="text flex items-center justify-center gap-2 font-medium"
-                href={isLoggedIn ? '/dashboard' : '/'}
+                href={isLoggedIn ? "/dashboard" : "/"}
               >
                 <FunctionSquare className="mr-2 h-5 w-5" /> Formbase
               </Link>
@@ -46,7 +47,7 @@ export const Header = ({ user }: LandingHeaderProps) => {
                 </div>
 
                 <>
-                  {env.ALLOW_SIGNIN_SIGNUP === 'false' ? null : (
+                  {env.ALLOW_SIGNIN_SIGNUP === "false" ? null : (
                     <>
                       {isLoggedIn ? (
                         <Link

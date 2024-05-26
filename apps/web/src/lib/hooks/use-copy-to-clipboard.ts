@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
 type CopiedValue = string | null;
 type CopyFn = (text: string) => Promise<boolean>;
@@ -9,7 +9,7 @@ export function useCopyToClipboard(): [CopiedValue, CopyFn] {
   const copy: CopyFn = useCallback(async (text) => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!navigator.clipboard) {
-      console.warn('Clipboard not supported');
+      console.warn("Clipboard not supported");
       return false;
     }
 

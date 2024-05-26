@@ -1,8 +1,8 @@
-import { relations } from 'drizzle-orm';
+import { relations } from "drizzle-orm";
 
-import { formDatas } from './form-data';
-import { forms } from './forms';
-import { users } from './users';
+import { formDatas } from "./form-data";
+import { forms } from "./forms";
+import { users } from "./users";
 
 export const userRelations = relations(users, ({ many }) => ({
   forms: many(forms),

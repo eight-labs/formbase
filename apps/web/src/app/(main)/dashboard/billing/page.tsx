@@ -1,30 +1,30 @@
-import * as React from 'react';
-import { redirect } from 'next/navigation';
+import * as React from "react";
+import { redirect } from "next/navigation";
 
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
-import { validateRequest } from '@formbase/auth';
-import { env } from '@formbase/env';
-import { Alert, AlertDescription } from '@formbase/ui/primitives/alert';
+import { validateRequest } from "@formbase/auth";
+import { env } from "@formbase/env";
+import { Alert, AlertDescription } from "@formbase/ui/primitives/alert";
 
-import { api } from '~/lib/trpc/server';
+import { api } from "~/lib/trpc/server";
 
-import { Billing } from './_components/billing';
-import { BillingSkeleton } from './_components/billing-skeleton';
+import { Billing } from "./_components/billing";
+import { BillingSkeleton } from "./_components/billing-skeleton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-  title: 'Billing',
-  description: 'Manage your billing and subscription',
+  title: "Billing",
+  description: "Manage your billing and subscription",
 };
 
 export default async function BillingPage() {
   const { user } = await validateRequest();
 
   if (!user) {
-    redirect('/signin');
+    redirect("/signin");
   }
 
   const stripePromises = Promise.all([
@@ -45,7 +45,7 @@ export default async function BillingPage() {
           <ExclamationTriangleIcon className="h-6 w-6" />
           <AlertDescription>
             Formbase app is a demo app using a Stripe test environment. You can
-            find a list of test card numbers on the{' '}
+            find a list of test card numbers on the{" "}
             <a
               href="https://stripe.com/docs/testing#cards"
               target="_blank"

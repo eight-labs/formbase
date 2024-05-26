@@ -1,31 +1,31 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-import type { NextRequest } from 'next/server';
+import type { NextRequest } from "next/server";
 
-import { env } from '@formbase/env';
+import { env } from "@formbase/env";
 
-import { verifyRequestOrigin } from './lib/verify-request';
+import { verifyRequestOrigin } from "./lib/verify-request";
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  if (request.method === 'GET') {
+  if (request.method === "GET") {
     if (
-      env.ALLOW_SIGNIN_SIGNUP === 'false' &&
-      request.nextUrl.pathname !== '/'
+      env.ALLOW_SIGNIN_SIGNUP === "false" &&
+      request.nextUrl.pathname !== "/"
     ) {
-      return NextResponse.redirect(new URL('/', request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
 
     return NextResponse.next();
   }
 
-  const originHeader = request.headers.get('Origin');
-  const hostHeader = request.headers.get('Host');
+  const originHeader = request.headers.get("Origin");
+  const hostHeader = request.headers.get("Host");
   const path = request.nextUrl.pathname;
   const url = request.nextUrl as unknown as URL;
 
-  if (path.match('^/s/([a-zA-Z0-9_-]+)$')) {
-    const subpath = path.split('/')[path.split('/').length - 1];
+  if (path.match("^/s/([a-zA-Z0-9_-]+)$")) {
+    const subpath = path.split("/")[path.split("/").length - 1];
 
     return NextResponse.rewrite(new URL(`/api/s/${subpath}`, url));
   }
@@ -45,6 +45,6 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
 export const config = {
   matcher: [
-    '/((?!api|static|.*\\..*|_next|favicon.ico|sitemap.xml|robots.txt).*)',
+    "/((?!api|static|.*\\..*|_next|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };

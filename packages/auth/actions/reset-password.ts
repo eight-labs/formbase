@@ -1,16 +1,16 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { Scrypt } from 'lucia';
-import { isWithinExpirationDate } from 'oslo';
+import { Scrypt } from "lucia";
+import { isWithinExpirationDate } from "oslo";
 
-import { db, drizzlePrimitives } from '@formbase/db';
-import { passwordResetTokens, users } from '@formbase/db/schema';
+import { db, drizzlePrimitives } from "@formbase/db";
+import { passwordResetTokens, users } from "@formbase/db/schema";
 
-import { lucia } from '../lucia';
-import { resetPasswordSchema } from '../validators/auth';
+import { lucia } from "../lucia";
+import { resetPasswordSchema } from "../validators/auth";
 
 export async function resetPassword(
   _: unknown,
@@ -26,7 +26,7 @@ export async function resetPassword(
       error:
         err.fieldErrors.password?.[0] ??
         err.fieldErrors.token?.[0] ??
-        'Unknown error occurred',
+        "Unknown error occurred",
     };
   }
   const { token, password } = parsed.data;
@@ -43,10 +43,10 @@ export async function resetPassword(
     return item;
   });
 
-  if (!dbToken) return { error: 'Invalid password reset link' };
+  if (!dbToken) return { error: "Invalid password reset link" };
 
   if (!isWithinExpirationDate(dbToken.expiresAt))
-    return { error: 'Password reset link expired.' };
+    return { error: "Password reset link expired." };
 
   await lucia.invalidateUserSessions(dbToken.userId);
   const hashedPassword = await new Scrypt().hash(password);
@@ -62,5 +62,5 @@ export async function resetPassword(
     sessionCookie.attributes,
   );
 
-  redirect('/dashboard');
+  redirect("/dashboard");
 }

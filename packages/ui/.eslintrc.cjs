@@ -1,7 +1,7 @@
-/** @type {import('eslint').Linter.Config} */
+/** @type {import("eslint").Linter.Config} */
 const config = {
   root: true,
-  extends: ['formbase/base', 'formbase/react'],
+  extends: ["formbase/base", "formbase/react"],
 };
 
 module.exports = config;

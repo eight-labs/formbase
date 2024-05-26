@@ -9,6 +9,9 @@
     "clean": "rimraf --glob **/node_modules **/dist **/.turbo **/.next **/.astro **/.eslintcache pnpm-lock.yaml **/.tsbuildinfo **/test-results",
     "db:start": "docker-compose -p formbase -f ./docker/docker-compose.yml up -d",
     "dev": "pnpm run db:start && turbo dev",
+    "format": "pnpm format:write",
+    "format:check": "prettier \"**/*\" --ignore-unknown --list-different",
+    "format:write": "prettier \"**/*\" --ignore-unknown --list-different --write",
     "lint": "eslint . --cache --max-warnings 0",
     "reset:changelog": "rimraf --glob **/*.mdx",
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"

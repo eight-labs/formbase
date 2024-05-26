@@ -64,13 +64,9 @@
         "session_user_id_user_id_fk": {
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
-          "columnsFrom": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
           "tableTo": "user",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -106,13 +102,9 @@
         "oauth_account_user_id_user_id_fk": {
           "name": "oauth_account_user_id_user_id_fk",
           "tableFrom": "oauth_account",
-          "columnsFrom": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
           "tableTo": "user",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -120,10 +112,7 @@
       "compositePrimaryKeys": {
         "oauth_account_provider_id_provider_user_id_pk": {
           "name": "oauth_account_provider_id_provider_user_id_pk",
-          "columns": [
-            "provider_id",
-            "provider_user_id"
-          ]
+          "columns": ["provider_id", "provider_user_id"]
         }
       },
       "uniqueConstraints": {}

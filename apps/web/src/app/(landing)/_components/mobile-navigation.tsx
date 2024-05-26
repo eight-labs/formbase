@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from "react";
+import Link from "next/link";
 
-import { Sheet, SheetContent } from '@formbase/ui/primitives/sheet';
-import { FunctionSquare } from 'lucide-react';
+import { FunctionSquare } from "lucide-react";
 
-import { HamburgerMenu } from './mobile-hamburger';
-import { ThemeToggle } from './theme-toggle';
+import { Sheet, SheetContent } from "@formbase/ui/primitives/sheet";
+
+import { HamburgerMenu } from "./mobile-hamburger";
+import { ThemeToggle } from "./theme-toggle";
 
 export type MobileNavigationProps = {
   isMenuOpen: boolean;
@@ -25,7 +26,7 @@ const MobileNavigationSheet = ({
   const menuNavigationLinks = [
     {
       href: `/docs`,
-      text: 'Docs',
+      text: "Docs",
     },
   ];
 

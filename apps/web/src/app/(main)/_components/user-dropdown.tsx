@@ -1,10 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useTheme } from 'next-themes';
-import Link from 'next/link';
+import { useState } from "react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
 
-import { logout } from '@formbase/auth/actions/logout';
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
+
+import { logout } from "@formbase/auth/actions/logout";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -12,8 +15,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@formbase/ui/primitives/alert-dialog';
-import { Button } from '@formbase/ui/primitives/button';
+} from "@formbase/ui/primitives/alert-dialog";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,11 +29,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@formbase/ui/primitives/dropdown-menu';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
-import { toast } from 'sonner';
+} from "@formbase/ui/primitives/dropdown-menu";
 
-import { LoadingButton } from '~/components/loading-button';
+import { LoadingButton } from "~/components/loading-button";
 
 export const UserDropdown = ({
   email,
@@ -48,7 +49,7 @@ export const UserDropdown = ({
       <DropdownMenuTrigger className={className}>
         {/* eslint @next/next/no-img-element:off */}
         <img
-          src={avatar ?? 'https://source.boringavatars.com/marble/60/' + email}
+          src={avatar ?? "https://source.boringavatars.com/marble/60/" + email}
           alt="Avatar"
           className="block h-8 w-8 rounded-full leading-none"
           width={64}
@@ -89,21 +90,21 @@ export const UserDropdown = ({
             <DropdownMenuSubContent>
               <DropdownMenuItem
                 onClick={() => {
-                  setTheme('light');
+                  setTheme("light");
                 }}
               >
                 Light
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
-                  setTheme('dark');
+                  setTheme("dark");
                 }}
               >
                 Dark
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
-                  setTheme('system');
+                  setTheme("system");
                 }}
               >
                 System
@@ -129,7 +130,7 @@ const SignoutConfirmation = () => {
     setIsLoading(true);
     try {
       await logout();
-      toast('Signed out successfully');
+      toast("Signed out successfully");
     } catch (error) {
       if (error instanceof Error) {
         toast(error.message, {

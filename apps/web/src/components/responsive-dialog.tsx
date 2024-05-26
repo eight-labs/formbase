@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from "react";
 
-import { Button } from '@formbase/ui/primitives/button';
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@formbase/ui/primitives/dialog';
+} from "@formbase/ui/primitives/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -23,10 +23,10 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@formbase/ui/primitives/drawer';
-import { cn } from '@formbase/ui/utils/cn';
+} from "@formbase/ui/primitives/drawer";
+import { cn } from "@formbase/ui/utils/cn";
 
-import { useMediaQuery } from '../lib/hooks/use-media-query';
+import { useMediaQuery } from "../lib/hooks/use-media-query";
 
 type StatefulContent = ({
   open,
@@ -45,12 +45,12 @@ export const ResponsiveDialog = (props: {
   contentClassName?: string;
 }) => {
   const [open, setOpen] = useState(false);
-  const isDesktop = useMediaQuery('(min-width: 640px)');
+  const isDesktop = useMediaQuery("(min-width: 640px)");
 
   return isDesktop ? (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{props.trigger}</DialogTrigger>
-      <DialogContent className={cn('max-w-md', props.contentClassName)}>
+      <DialogContent className={cn("max-w-md", props.contentClassName)}>
         <DialogHeader>
           <DialogTitle>{props.title}</DialogTitle>
           <DialogDescription>{props.description}</DialogDescription>
@@ -69,7 +69,7 @@ export const ResponsiveDialog = (props: {
           <DrawerTitle>{props.title}</DrawerTitle>
           <DrawerDescription>{props.description}</DrawerDescription>
         </DrawerHeader>
-        <div className={cn('px-4', props.contentClassName)}>
+        <div className={cn("px-4", props.contentClassName)}>
           {isFunctionType(props.children)
             ? props.children({ open, setOpen })
             : props.children}
@@ -97,5 +97,5 @@ const isFunctionType = (
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) => ReactNode | ReactNode[] => {
-  return typeof prop === 'function';
+  return typeof prop === "function";
 };

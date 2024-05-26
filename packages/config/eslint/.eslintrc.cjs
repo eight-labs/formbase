@@ -1,7 +1,7 @@
-/** @type {import('eslint').Linter.Config} */
+/** @type {import("eslint").Linter.Config} */
 const config = {
   root: true,
-  extends: ['./base.js'],
+  extends: ["./base.js"],
 };
 
 module.exports = config;

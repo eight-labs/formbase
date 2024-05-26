@@ -1,9 +1,15 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
-import { type RouterOutputs } from '@formbase/api';
-import { Button } from '@formbase/ui/primitives/button';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BellRing, ExternalLink, FolderPen, FolderX } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { type RouterOutputs } from "@formbase/api";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Form,
   FormControl,
@@ -11,20 +17,15 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from '@formbase/ui/primitives/form';
-import { Input } from '@formbase/ui/primitives/input';
-import { Label } from '@formbase/ui/primitives/label';
-import { Switch } from '@formbase/ui/primitives/switch';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { BellRing, ExternalLink, FolderPen, FolderX } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
+} from "@formbase/ui/primitives/form";
+import { Input } from "@formbase/ui/primitives/input";
+import { Label } from "@formbase/ui/primitives/label";
+import { Switch } from "@formbase/ui/primitives/switch";
 
-import { api } from '~/lib/trpc/react';
+import { api } from "~/lib/trpc/react";
 
-import { refreshDashboardAfterDeletion } from '../_actions/refresh-dashboard-after-deletion';
-import { DeleteFormDialog } from './delete-form-dialog';
+import { refreshDashboardAfterDeletion } from "../_actions/refresh-dashboard-after-deletion";
+import { DeleteFormDialog } from "./delete-form-dialog";
 
 const formNameSchema = z.object({
   name: z.string().min(1).optional(),
@@ -53,7 +54,7 @@ type EnableFormNotificationsSchema = z.infer<typeof enableNotificationsSchema>;
 type FormReturnUrlSchema = z.infer<typeof formReturnUrlSchema>;
 
 type FormSettingsProps = {
-  form: RouterOutputs['form']['get'];
+  form: RouterOutputs["form"]["get"];
 };
 
 export function FormSettings({ form }: FormSettingsProps) {
@@ -65,7 +66,7 @@ export function FormSettings({ form }: FormSettingsProps) {
 
   const redirectToDashboard = () => {
     refreshDashboardAfterDeletion();
-    router.push('/dashboard');
+    router.push("/dashboard");
   };
 
   return (
@@ -122,14 +123,14 @@ const FormName = ({ formId, name }: { formId: string; name: string }) => {
         title: data.name,
       });
 
-      toast('Your form name has been updated', {
+      toast("Your form name has been updated", {
         icon: <FolderPen className="h-4 w-4" />,
       });
 
       router.refresh();
     } catch {
-      toast('Failed to update form name', {
-        description: 'Please try again later',
+      toast("Failed to update form name", {
+        description: "Please try again later",
         icon: <FolderX className="h-4 w-4" />,
       });
     }
@@ -194,14 +195,14 @@ const ReturnUrlForm = ({
         returnUrl: data.returnUrl,
       });
 
-      toast('Your form name has been updated', {
+      toast("Your form name has been updated", {
         icon: <ExternalLink className="h-4 w-4" />,
       });
 
       router.refresh();
     } catch {
-      toast('Failed to update form name', {
-        description: 'Please try again later',
+      toast("Failed to update form name", {
+        description: "Please try again later",
         icon: <ExternalLink className="h-4 w-4" />,
       });
     }
@@ -276,8 +277,8 @@ const EnableFormSubmissions = ({
 
       toast(
         data.enableFormSubmissions
-          ? 'Your form is now accepting submissions'
-          : 'Your form is no longer accepting submissions',
+          ? "Your form is now accepting submissions"
+          : "Your form is no longer accepting submissions",
         {
           icon: <FolderPen className="h-4 w-4" />,
         },
@@ -285,8 +286,8 @@ const EnableFormSubmissions = ({
 
       router.refresh();
     } catch {
-      toast('Failed to update form', {
-        description: 'Please try again later',
+      toast("Failed to update form", {
+        description: "Please try again later",
         icon: <FolderX className="h-4 w-4" />,
       });
     }
@@ -356,8 +357,8 @@ const EnableFormNotifications = ({
 
       toast(
         data.enableNotifications
-          ? 'You will now receive email notifications for new submissions'
-          : 'You will no longer receive email notifications for new submissions',
+          ? "You will now receive email notifications for new submissions"
+          : "You will no longer receive email notifications for new submissions",
         {
           icon: <BellRing className="h-4 w-4" />,
         },
@@ -365,8 +366,8 @@ const EnableFormNotifications = ({
 
       router.refresh();
     } catch {
-      toast('Failed to update form', {
-        description: 'Please try again later',
+      toast("Failed to update form", {
+        description: "Please try again later",
         icon: <BellRing className="h-4 w-4" />,
       });
     }

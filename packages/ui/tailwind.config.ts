@@ -1,10 +1,10 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
-import { tailwindPreset } from '@formbase/tailwind';
+import { tailwindPreset } from "@formbase/tailwind";
 
 const config: Config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
-  darkMode: 'class',
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  darkMode: "class",
   presets: [tailwindPreset],
 };
 

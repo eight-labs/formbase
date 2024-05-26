@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 name: formbase
 services:
@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=formbase
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - formbase-db:/var/lib/postgresql/data
 

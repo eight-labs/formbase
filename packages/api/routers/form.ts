@@ -1,15 +1,15 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { drizzlePrimitives } from '@formbase/db';
+import { drizzlePrimitives } from "@formbase/db";
 import {
   formDatas,
   forms,
   ZInsertFormSchema,
   ZUpdateFormSchema,
-} from '@formbase/db/schema';
-import { generateId } from '@formbase/utils/generate-id';
+} from "@formbase/db/schema";
+import { generateId } from "@formbase/utils/generate-id";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 const { and, count, eq } = drizzlePrimitives;
 
@@ -58,7 +58,7 @@ export const formRouter = createTRPCRouter({
         description: input.description ?? null,
         updatedAt: new Date(),
         returnUrl: input.returnUrl ?? null,
-        keys: [''],
+        keys: [""],
         enableEmailNotifications: input.enableEmailNotifications ?? true,
         enableSubmissions: input.enableSubmissions ?? true,
       });

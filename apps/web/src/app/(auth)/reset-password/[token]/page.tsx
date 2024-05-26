@@ -4,13 +4,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@formbase/ui/primitives/card';
+} from "@formbase/ui/primitives/card";
 
-import { ResetPassword } from './reset-password';
+import { ResetPassword } from "./reset-password";
 
 export const metadata = {
-  title: 'Reset Password',
-  description: 'Reset Password Page',
+  title: "Reset Password",
+  description: "Reset Password Page",
 };
 
 export default function ResetPasswordPage({

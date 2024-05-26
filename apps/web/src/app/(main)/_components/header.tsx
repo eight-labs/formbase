@@ -1,11 +1,12 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { type LuciaUser } from '@formbase/auth';
-import { FunctionSquare } from 'lucide-react';
+import { FunctionSquare } from "lucide-react";
 
-import { UserDropdown } from './user-dropdown';
+import { type LuciaUser } from "@formbase/auth";
 
-const routes = [{ name: 'Dashboard', href: '/dashboard' }] as const;
+import { UserDropdown } from "./user-dropdown";
+
+const routes = [{ name: "Dashboard", href: "/dashboard" }] as const;
 
 export const Header = ({ user }: { user: LuciaUser }) => {
   return (
@@ -13,7 +14,7 @@ export const Header = ({ user }: { user: LuciaUser }) => {
       <div className="container flex items-center gap-2 px-2 py-2 lg:px-4">
         <Link
           className="text flex items-center justify-center font-medium"
-          href={user.id ? '/dashboard' : '/'}
+          href={user.id ? "/dashboard" : "/"}
         >
           <FunctionSquare className="mr-2 h-5 w-5" /> Formbase
         </Link>

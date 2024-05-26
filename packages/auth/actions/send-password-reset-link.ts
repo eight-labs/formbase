@@ -1,20 +1,20 @@
-'use server';
+"use server";
 
-import { z } from 'zod';
+import { z } from "zod";
 
-import { db } from '@formbase/db';
-import { env } from '@formbase/env';
+import { db } from "@formbase/db";
+import { env } from "@formbase/env";
 
-import { generatePasswordResetToken } from './utils';
+import { generatePasswordResetToken } from "./utils";
 
 export async function sendPasswordResetLink(
   _: unknown,
   formData: FormData,
 ): Promise<{ error?: string; success?: boolean }> {
-  const email = formData.get('email');
+  const email = formData.get("email");
   const parsed = z.string().trim().email().safeParse(email);
   if (!parsed.success) {
-    return { error: 'Provided email is invalid.' };
+    return { error: "Provided email is invalid." };
   }
 
   try {
@@ -30,19 +30,19 @@ export async function sendPasswordResetLink(
     const verificationLink = `${env.NEXT_PUBLIC_APP_URL}/reset-password/${verificationToken}`;
 
     void fetch(`${env.NEXT_PUBLIC_APP_URL}/api/mail`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
         link: verificationLink,
-        type: 'reset',
+        type: "reset",
       }),
     });
 
     return { success: true };
   } catch (error) {
-    return { error: 'Failed to send verification email.' };
+    return { error: "Failed to send verification email." };
   }
 }

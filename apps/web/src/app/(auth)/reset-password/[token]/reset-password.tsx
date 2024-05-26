@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { resetPassword } from '@formbase/auth/actions';
-import { Label } from '@formbase/ui/primitives/label';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
-import { useFormState } from 'react-dom';
-import { toast } from 'sonner';
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { useFormState } from "react-dom";
+import { toast } from "sonner";
 
-import { PasswordInput } from '~/components/password-input';
-import { SubmitButton } from '~/components/submit-button';
+import { resetPassword } from "@formbase/auth/actions";
+import { Label } from "@formbase/ui/primitives/label";
+
+import { PasswordInput } from "~/components/password-input";
+import { SubmitButton } from "~/components/submit-button";
 
 export function ResetPassword({ token }: { token: string }) {
   const [state, formAction] = useFormState(resetPassword, null);

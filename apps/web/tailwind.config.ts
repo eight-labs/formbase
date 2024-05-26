@@ -1,33 +1,34 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
-import { tailwindPreset } from '@formbase/tailwind';
-import { themer } from '@tailus/themer';
+import { themer } from "@tailus/themer";
+
+import { tailwindPreset } from "@formbase/tailwind";
 
 const config: Config = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/ui/primitives/**/*.{ts,tsx}',
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "../../packages/ui/primitives/**/*.{ts,tsx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: "2rem",
       screens: {
-        lg: '1024px',
+        lg: "1024px",
       },
     },
   },
 
   plugins: [
     themer({
-      radius: 'smoothest',
-      background: 'lighter',
-      border: 'light',
-      padding: 'large',
+      radius: "smoothest",
+      background: "lighter",
+      border: "light",
+      padding: "large",
       components: {
         button: {
-          rounded: '2xl',
+          rounded: "2xl",
         },
       },
     }),

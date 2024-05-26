@@ -42,16 +42,12 @@
       "indexes": {
         "email_verif_user_idx": {
           "name": "email_verif_user_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         },
         "email_verif_idx": {
           "name": "email_verif_idx",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": false
         }
       },
@@ -61,9 +57,7 @@
         "email_verification_codes_user_id_unique": {
           "name": "email_verification_codes_user_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "user_id"
-          ]
+          "columns": ["user_id"]
         }
       }
     },
@@ -100,16 +94,12 @@
       "indexes": {
         "form_idx": {
           "name": "form_idx",
-          "columns": [
-            "form_id"
-          ],
+          "columns": ["form_id"],
           "isUnique": false
         },
         "form_data_created_at_idx": {
           "name": "form_data_created_at_idx",
-          "columns": [
-            "created_at"
-          ],
+          "columns": ["created_at"],
           "isUnique": false
         }
       },
@@ -195,16 +185,12 @@
       "indexes": {
         "form_user_idx": {
           "name": "form_user_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         },
         "form_created_at_idx": {
           "name": "form_created_at_idx",
-          "columns": [
-            "created_at"
-          ],
+          "columns": ["created_at"],
           "isUnique": false
         }
       },
@@ -241,12 +227,8 @@
           "name": "oauth_account_user_id_users_id_fk",
           "tableFrom": "oauth_account",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -254,10 +236,7 @@
       "compositePrimaryKeys": {
         "oauth_account_provider_id_provider_user_id_pk": {
           "name": "oauth_account_provider_id_provider_user_id_pk",
-          "columns": [
-            "provider_id",
-            "provider_user_id"
-          ]
+          "columns": ["provider_id", "provider_user_id"]
         }
       },
       "uniqueConstraints": {}
@@ -288,9 +267,7 @@
       "indexes": {
         "password_reset_user_idx": {
           "name": "password_reset_user_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         }
       },
@@ -324,9 +301,7 @@
       "indexes": {
         "sessions_user_idx": {
           "name": "sessions_user_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         }
       },
@@ -422,16 +397,12 @@
       "indexes": {
         "email_idx": {
           "name": "email_idx",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": false
         },
         "github_idx": {
           "name": "github_idx",
-          "columns": [
-            "github_id"
-          ],
+          "columns": ["github_id"],
           "isUnique": false
         }
       },
@@ -441,16 +412,12 @@
         "users_github_id_unique": {
           "name": "users_github_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "github_id"
-          ]
+          "columns": ["github_id"]
         },
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       }
     }

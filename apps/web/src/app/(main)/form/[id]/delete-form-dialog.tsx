@@ -1,7 +1,10 @@
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { Button } from '@formbase/ui/primitives/button';
+import { TrashIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
+
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Dialog,
   DialogContent,
@@ -9,11 +12,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@formbase/ui/primitives/dialog';
-import { TrashIcon } from '@radix-ui/react-icons';
-import { toast } from 'sonner';
+} from "@formbase/ui/primitives/dialog";
 
-import { api } from '~/lib/trpc/react';
+import { api } from "~/lib/trpc/react";
 
 type DeleteFormDialogProps = {
   formId: string;
@@ -38,7 +39,7 @@ export function DeleteFormDialog({
       {
         onSuccess: () => {
           router.refresh();
-          toast.success('Your form has been deleted', {
+          toast.success("Your form has been deleted", {
             icon: <TrashIcon className="h-4 w-4" />,
           });
           onSuccessfulDelete?.();
