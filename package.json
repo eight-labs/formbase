@@ -1,17 +1,15 @@
 {
   "name": "formbase",
-  "version": "0.1.5",
-  "private": true,
-  "description": "A comprehensive, opinionated company monorepo boilerplate",
-  "author": "Eight Labs",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "build": "turbo build",
     "clean": "rimraf --glob **/node_modules **/dist **/.turbo **/.next **/.astro **/.eslintcache pnpm-lock.yaml **/.tsbuildinfo **/test-results",
-    "db:start": "docker-compose -p formbase -f ./docker/docker-compose.yml up -d",
-    "dev": "pnpm run db:start && turbo dev",
-    "format": "pnpm format:write",
+    "d": "pnpm install && pnpm docker:start && pnpm run dev",
+    "dev": "turbo dev",
+    "docker:start": "docker-compose  -p formbase -f ./docker/docker-compose.yml up -d",
+    "format": "prettier \"**/*\" --ignore-unknown --list-different --write",
     "format:check": "prettier \"**/*\" --ignore-unknown --list-different",
-    "format:write": "prettier \"**/*\" --ignore-unknown --list-different --write",
     "lint": "eslint . --cache --max-warnings 0",
     "reset:changelog": "rimraf --glob **/*.mdx",
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
