@@ -1,9 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import * as React from 'react';
@@ -12,10 +6,24 @@ import { useRouter } from 'next/navigation';
 import type {
   ColumnDef,
   ColumnFiltersState,
+  Row,
   SortingState,
   VisibilityState,
 } from '@tanstack/react-table';
 
+import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import { Trash2, TrashIcon } from 'lucide-react';
+import { toast } from 'sonner';
+
+import { type FormData } from '@formbase/db/schema';
 import { Button } from '@formbase/ui/primitives/button';
 import { Checkbox } from '@formbase/ui/primitives/checkbox';
 import {
@@ -33,17 +41,6 @@ import {
   TableRow,
 } from '@formbase/ui/primitives/table';
 import { formatFileName } from '@formbase/utils';
-import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import { Trash2, TrashIcon } from 'lucide-react';
-import { toast } from 'sonner';
 
 import { api } from '~/lib/trpc/react';
 
@@ -51,11 +48,8 @@ import { ImagePreviewDialog } from './image-preview-dialog';
 
 type SubmissionsTableProps = {
   formKeys: string[];
-  formId: string;
-  submissions: any; // FIXME: take care of this
+  submissions: FormData[];
 };
-
-type FormDataType = Record<string, string>;
 
 export function SubmissionsTable({
   submissions,
@@ -96,7 +90,7 @@ export function SubmissionsTable({
     );
   };
 
-  const columns: Array<ColumnDef<FormDataType>> = [
+  const columns: Array<ColumnDef<FormData>> = [
     {
       id: 'select',
       header: ({ table }) => {
@@ -116,7 +110,7 @@ export function SubmissionsTable({
       cell: ({ row }) => (
         <Checkbox
           checked={row.getIsSelected()}
-          onCheckedChange={(value: any) => {
+          onCheckedChange={(value: unknown) => {
             row.toggleSelected(!!value);
           }}
           aria-label="Select row"
@@ -126,10 +120,10 @@ export function SubmissionsTable({
       enableHiding: false,
     },
 
-    ...formKeysArray.map((submission: any) => {
+    ...formKeysArray.map((submission: string) => {
       if (submission === 'image' || submission === 'file') {
         return {
-          accessorKey: submission as string,
+          accessorKey: submission,
           header: () => {
             return (
               <Button
@@ -141,14 +135,15 @@ export function SubmissionsTable({
               </Button>
             );
           },
-          cell: ({ row }: any) => {
-            const data = row.original.data;
-            if (!data[submission]) {
+          cell: ({ row }: { row: Row<FormData> }) => {
+            const data = row.original.data as Record<string, unknown> | null;
+            if (!data?.[submission]) {
               return null;
             }
 
-            const fileUrl = data[submission];
-            const fileName = formatFileName(fileUrl as string);
+            const fileUrl = data[submission] as string;
+            const fileName = formatFileName(fileUrl);
+
             return (
               <div className="flex items-center">
                 <a
@@ -169,7 +164,7 @@ export function SubmissionsTable({
       }
 
       return {
-        accessorKey: submission as string,
+        accessorKey: submission,
         header: () => {
           return (
             <Button
@@ -181,8 +176,17 @@ export function SubmissionsTable({
             </Button>
           );
         },
-        cell: ({ row }: any) => {
-          return <div>{row.original.data[submission]}</div>;
+        cell: ({ row }: { row: Row<FormData> }) => {
+          const data = row.original.data as Record<
+            string,
+            string | undefined
+          > | null;
+
+          if (!data) {
+            return null;
+          }
+
+          return <div>{data[submission]}</div>;
         },
       };
     }),
@@ -200,13 +204,13 @@ export function SubmissionsTable({
           </Button>
         );
       },
-      sortingFn: (a: any, b: any) => {
-        const dateA = new Date(a.original.createdAt as Date);
-        const dateB = new Date(b.original.createdAt as Date);
+      sortingFn: (a, b) => {
+        const dateA = new Date(a.original.createdAt);
+        const dateB = new Date(b.original.createdAt);
         return dateA.getTime() - dateB.getTime();
       },
-      cell: ({ row }: any) => {
-        const date = new Date(row.original.createdAt as Date);
+      cell: ({ row }: { row: Row<FormData> }) => {
+        const date = new Date(row.original.createdAt);
         const dateString = date.toLocaleDateString('en-US', {
           month: 'long',
           day: 'numeric',
@@ -227,8 +231,8 @@ export function SubmissionsTable({
       id: 'actions',
       enableHiding: false,
       size: 20,
-      cell: ({ row }) => {
-        const submissionId = row.original['id'];
+      cell: ({ row }: { row: Row<FormData> }) => {
+        const submissionId = row.original.id;
 
         if (!submissionId) {
           return null;

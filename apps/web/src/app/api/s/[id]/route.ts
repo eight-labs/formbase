@@ -1,123 +1,3 @@
-// import { userAgent } from 'next/server';
-
-// import { sendMail } from '~/lib/email/mailer';
-// import { renderNewSubmissionEmail } from '~/lib/email/templates/new-submission';
-// import { api } from '~/lib/trpc/server';
-// import { assignFileOrImage, uploadFileFromBlob } from '~/lib/upload-file';
-
-// export async function POST(
-//   request: Request,
-//   { params }: { params: { id: string } },
-// ) {
-//   if (!params.id) {
-//     return new Response('Form ID is required', { status: 400 });
-//   }
-
-//   const formId = params.id;
-//   const form = await api.form.getFormById({ formId });
-
-//   if (!form) {
-//     return new Response('Form not found', { status: 404 });
-//   }
-
-//   const setFormData = api.formData.setFormData;
-//   const getUserById = api.user.getUserById;
-
-//   let formDataFromRequest;
-//   let source;
-
-//   try {
-//     formDataFromRequest = await request.formData();
-//     source = 'formData';
-//   } catch (error) {
-//     const errorJSON = error as Error;
-
-//     if (
-//       errorJSON.name === 'TypeError' &&
-//       errorJSON.message.includes('FormData')
-//     ) {
-//       formDataFromRequest = await request.json();
-//       source = 'json';
-
-//       if (!formDataFromRequest) {
-//         return new Response('Invalid form data', { status: 400 });
-//       }
-//     }
-//   }
-
-//   try {
-//     const formData =
-//       source === 'formData'
-//         ? Object.fromEntries(formDataFromRequest)
-//         : formDataFromRequest;
-
-//     const { browser } = userAgent(request);
-
-//     const fileKeys = Object.keys(formData).filter(
-//       (key) => formData[key] instanceof Blob,
-//     );
-
-//     for (const key of fileKeys) {
-//       const file = formDataFromRequest.get(key) as File;
-//       const fileUrl = await uploadFileFromBlob({ file });
-
-//       assignFileOrImage({
-//         formData,
-//         key,
-//         fileUrl,
-//       });
-//     }
-
-//     const formDataKeys = Object.keys(formData);
-//     const formKeys = form.keys || [];
-//     const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
-
-//     if (!formData) {
-//       return new Response('Invalid form data', { status: 400 });
-//     }
-
-//     await setFormData({
-//       data: formData,
-//       formId,
-//       keys: updatedKeys,
-//     });
-
-//     if (form.enableEmailNotifications) {
-//       const userId = form.userId;
-
-//       const user = await getUserById({ userId: userId });
-
-//       if (!user) {
-//         return new Response('User not found', { status: 404 });
-//       }
-
-//       await sendMail({
-//         to: user.email,
-//         subject: `New Submission for ${form.title}`,
-//         body: renderNewSubmissionEmail({
-//           link: `http://localhost:3000/form/${formId}`,
-//           formTitle: form.title,
-//         }),
-//       });
-//     }
-
-//     if (!browser.name) {
-//       return Response.json({
-//         formId,
-//         message: 'Submission successful',
-//         data: formData,
-//       });
-//     }
-
-//     return Response.redirect(`http://localhost:3000/s/${formId}`, 303);
-//   } catch (error) {
-//     console.error(error);
-//     return new Response('There was an issue processing your form', {
-//       status: 500,
-//     });
-//   }
-// }
-
 import { userAgent } from 'next/server';
 
 import { type Form } from '@formbase/db/schema';
@@ -126,6 +6,8 @@ import { sendMail } from '~/lib/email/mailer';
 import { renderNewSubmissionEmail } from '~/lib/email/templates/new-submission';
 import { api } from '~/lib/trpc/server';
 import { assignFileOrImage, uploadFileFromBlob } from '~/lib/upload-file';
+
+type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 async function getFormData(request: Request): Promise<{
   data: Record<string, Blob | string | undefined>;
@@ -171,6 +53,9 @@ async function processFileUploads(
 }
 
 async function handleEmailNotifications(form: Form, formId: string) {
+  // simulate a delay of 3 seconds
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   if (form.enableEmailNotifications) {
     const user = await api.user.getUserById({ userId: form.userId });
     if (!user) throw new Error('User not found');
@@ -191,11 +76,15 @@ export async function POST(
   { params }: { params: { id: string } },
 ) {
   try {
-    if (!params.id) return new Response('Form ID is required', { status: 400 });
+    if (!params.id) {
+      return new Response('Form ID is required', { status: 400 });
+    }
 
     const formId = params.id;
     const form = await api.form.getFormById({ formId });
-    if (!form) return new Response('Form not found', { status: 404 });
+    if (!form) {
+      return new Response('Form not found', { status: 404 });
+    }
 
     const { data: formData, source } = await getFormData(request);
 
@@ -207,12 +96,12 @@ export async function POST(
     const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
 
     await api.formData.setFormData({
-      data: formData,
+      data: formData as Json,
       formId,
       keys: updatedKeys,
     });
 
-    await handleEmailNotifications(form, formId);
+    void handleEmailNotifications(form, formId);
 
     const { browser } = userAgent(request);
 

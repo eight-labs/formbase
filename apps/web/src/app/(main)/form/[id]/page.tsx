@@ -1,3 +1,4 @@
+import { type FormData } from '@formbase/db/schema';
 import {
   Tabs,
   TabsContent,
@@ -58,7 +59,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
               <SubmissionsTable
                 formKeys={form?.keys ?? []}
                 formId={formId}
-                submissions={formSubmissions}
+                submissions={formSubmissions as FormData[]}
               />
             </>
           )}

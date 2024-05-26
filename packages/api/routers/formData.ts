@@ -1,8 +1,9 @@
+import { z } from 'zod';
+
 import { drizzlePrimitives } from '@formbase/db';
-import { formDatas, forms } from '@formbase/db/schema';
+import { formDatas, forms, ZUpdateFormDataSchema } from '@formbase/db/schema';
 import { flattenObject } from '@formbase/utils/flatten-object';
 import { generateId } from '@formbase/utils/generate-id';
-import { z } from 'zod';
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
 
@@ -91,15 +92,15 @@ export const formDataRouter = createTRPCRouter({
 
   setFormData: publicProcedure
     .input(
-      z.object({
-        formId: z.string(),
-        data: z.object({}),
-        keys: z.array(z.string()),
-      }),
+      ZUpdateFormDataSchema.merge(
+        z.object({
+          keys: z.array(z.string()),
+        }),
+      ),
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.transaction(async (tx) => {
-        await tx.insert(formDatas).values({
+      return await ctx.db.transaction(async (tx) => {
+        const formdata = await tx.insert(formDatas).values({
           data: input.data,
           formId: input.formId,
           id: generateId(15),
@@ -113,6 +114,8 @@ export const formDataRouter = createTRPCRouter({
             keys: input.keys,
           })
           .where(eq(forms.id, input.formId));
+
+        return formdata;
       });
     }),
 });
