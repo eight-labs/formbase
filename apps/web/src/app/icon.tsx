@@ -12,7 +12,6 @@ export default function Icon() {
   return new ImageResponse(
     (
       <div
-        //   TODO: fix
         tw="flex items-center justify-center bg-black text-[24px] leading-8 text-white"
         style={{
           width: 32,
