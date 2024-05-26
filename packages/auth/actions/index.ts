@@ -7,6 +7,11 @@ import { redirect } from 'next/navigation';
 import type { User } from '@formbase/db/schema';
 import type { LoginInput, SignupInput } from '../validators/auth';
 
+import { generateId, Scrypt } from 'lucia';
+import { createDate, isWithinExpirationDate, TimeSpan } from 'oslo';
+import { alphabet, generateRandomString } from 'oslo/crypto';
+import { z } from 'zod';
+
 import { db, drizzlePrimitives } from '@formbase/db';
 import {
   emailVerificationCodes,
@@ -14,10 +19,6 @@ import {
   users,
 } from '@formbase/db/schema';
 import { env } from '@formbase/env';
-import { generateId, Scrypt } from 'lucia';
-import { createDate, isWithinExpirationDate, TimeSpan } from 'oslo';
-import { alphabet, generateRandomString } from 'oslo/crypto';
-import { z } from 'zod';
 
 import { auth } from '../auth';
 import { lucia } from '../lucia';
@@ -135,6 +136,7 @@ export async function signup(
   });
 
   const verificationCode = await generateEmailVerificationCode(userId, email);
+  //   TODO: Implement email verification
   //   sendVerificationEmail({ email, code: verificationCode });
 
   const session = await lucia.createSession(userId, {});

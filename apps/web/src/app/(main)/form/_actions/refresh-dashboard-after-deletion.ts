@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-export const refreshDashboardAfterDeletion = () => {
+// eslint-disable-next-line @typescript-eslint/require-await
+export const refreshDashboardAfterDeletion = async () => {
   revalidatePath('/dashboard');
 };

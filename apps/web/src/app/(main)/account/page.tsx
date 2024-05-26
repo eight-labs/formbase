@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import type { LuciaUser } from '@formbase/auth';
 
 import { validateRequest } from '@formbase/auth';
-import { logout } from '@formbase/auth/actions';
+import { logout } from '@formbase/auth/actions/logout';
 import {
   Card,
   CardContent,

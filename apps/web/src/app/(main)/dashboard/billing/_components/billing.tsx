@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
+import { CheckIcon } from 'lucide-react';
+
 import { type RouterOutputs } from '@formbase/api';
-import { formatDate } from '@formbase/lib/utils';
-import { CheckIcon } from '@formbase/ui/components/icons';
 import { Button } from '@formbase/ui/primitives/button';
 import {
   Card,
@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@formbase/ui/primitives/card';
+import { formatDate } from '@formbase/utils';
 
 import { ManageSubscriptionForm } from './manage-subscription-form';
 
