@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { useFormState } from "react-dom";
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { useFormState } from 'react-dom';
 
-import { signup } from "@formbase/auth/actions";
-import { Button } from "@formbase/ui/primitives/button";
+import { signup } from '@formbase/auth/actions';
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@formbase/ui/primitives/card";
-import { Input } from "@formbase/ui/primitives/input";
-import { Label } from "@formbase/ui/primitives/label";
+} from '@formbase/ui/primitives/card';
+import { Input } from '@formbase/ui/primitives/input';
+import { Label } from '@formbase/ui/primitives/label';
 
-import { PasswordInput } from "~/components/password-input";
-import { SubmitButton } from "~/components/submit-button";
+import { PasswordInput } from '~/components/password-input';
+import { SubmitButton } from '~/components/submit-button';
 
 export function Signup() {
   const [state, formAction] = useFormState(signup, null);
@@ -77,8 +77,8 @@ export function Signup() {
             </p>
           ) : null}
           <div>
-            <Link href={"/login"}>
-              <Button variant={"link"} size={"sm"} className="p-0">
+            <Link href={'/login'}>
+              <Button variant={'link'} size={'sm'} className="p-0">
                 Already signed up? Login instead.
               </Button>
             </Link>

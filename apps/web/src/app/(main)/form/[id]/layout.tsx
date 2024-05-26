@@ -1,7 +1,7 @@
-import * as React from "react";
-import { redirect } from "next/navigation";
+import * as React from 'react';
+import { redirect } from 'next/navigation';
 
-import { validateRequest } from "@formbase/auth";
+import { validateRequest } from '@formbase/auth';
 
 interface Props {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export default async function FormLayout({ children }: Props) {
   const { user } = await validateRequest();
 
   if (!user) {
-    redirect("/login");
+    redirect('/login');
   }
 
   return (

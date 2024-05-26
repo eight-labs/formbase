@@ -1,17 +1,17 @@
-import { userAgent } from "next/server";
+import { userAgent } from 'next/server';
 
-import { type Form } from "@formbase/db/schema";
+import { type Form } from '@formbase/db/schema';
 
-import { sendMail } from "~/lib/email/mailer";
-import { renderNewSubmissionEmail } from "~/lib/email/templates/new-submission";
-import { api } from "~/lib/trpc/server";
-import { assignFileOrImage, uploadFileFromBlob } from "~/lib/upload-file";
+import { sendMail } from '~/lib/email/mailer';
+import { renderNewSubmissionEmail } from '~/lib/email/templates/new-submission';
+import { api } from '~/lib/trpc/server';
+import { assignFileOrImage, uploadFileFromBlob } from '~/lib/upload-file';
 
 type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 async function getFormData(request: Request): Promise<{
   data: Record<string, Blob | string | undefined>;
-  source: "formData" | "json";
+  source: 'formData' | 'json';
 }> {
   try {
     const formData = await request.formData();
@@ -19,20 +19,20 @@ async function getFormData(request: Request): Promise<{
     formData.forEach((value, key) => {
       data[key] = value as Blob | string;
     });
-    return { data, source: "formData" };
+    return { data, source: 'formData' };
   } catch (error) {
-    if (error instanceof TypeError && error.message.includes("FormData")) {
+    if (error instanceof TypeError && error.message.includes('FormData')) {
       const jsonData = (await request.json()) as Record<string, unknown>;
-      if (typeof jsonData !== "object") {
-        throw new Error("Invalid form data");
+      if (typeof jsonData !== 'object') {
+        throw new Error('Invalid form data');
       }
       const data: Record<string, Blob | string | undefined> = {};
       Object.keys(jsonData).forEach((key) => {
         data[key] = jsonData[key] as Blob | string | undefined;
       });
-      return { data, source: "json" };
+      return { data, source: 'json' };
     } else {
-      throw new Error("Invalid form data");
+      throw new Error('Invalid form data');
     }
   }
 }
@@ -55,7 +55,7 @@ async function processFileUploads(
 async function handleEmailNotifications(form: Form, formId: string) {
   if (form.enableEmailNotifications) {
     const user = await api.user.getUserById({ userId: form.userId });
-    if (!user) throw new Error("User not found");
+    if (!user) throw new Error('User not found');
 
     await sendMail({
       to: user.email,
@@ -74,18 +74,18 @@ export async function POST(
 ) {
   try {
     if (!params.id) {
-      return new Response("Form ID is required", { status: 400 });
+      return new Response('Form ID is required', { status: 400 });
     }
 
     const formId = params.id;
     const form = await api.form.getFormById({ formId });
     if (!form) {
-      return new Response("Form not found", { status: 404 });
+      return new Response('Form not found', { status: 404 });
     }
 
     const { data: formData, source } = await getFormData(request);
 
-    if (source === "formData")
+    if (source === 'formData')
       await processFileUploads(formData, formData as unknown as FormData);
 
     const formDataKeys = Object.keys(formData);
@@ -106,12 +106,12 @@ export async function POST(
       return new Response(
         JSON.stringify({
           formId,
-          message: "Submission successful",
+          message: 'Submission successful',
           data: formData,
         }),
         {
           status: 200,
-          headers: { "Content-Type": "application/json" },
+          headers: { 'Content-Type': 'application/json' },
         },
       );
     }
@@ -122,7 +122,7 @@ export async function POST(
     });
   } catch (error) {
     console.error(error);
-    return new Response("There was an issue processing your form", {
+    return new Response('There was an issue processing your form', {
       status: 500,
     });
   }

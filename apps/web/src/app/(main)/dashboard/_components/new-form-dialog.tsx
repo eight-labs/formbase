@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import React, { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
-import { Button } from "@formbase/ui/primitives/button";
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@formbase/ui/primitives/dialog";
+} from '@formbase/ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -25,14 +25,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@formbase/ui/primitives/form";
-import { Input } from "@formbase/ui/primitives/input";
+} from '@formbase/ui/primitives/form';
+import { Input } from '@formbase/ui/primitives/input';
 
-import { api } from "~/lib/trpc/react";
+import { api } from '~/lib/trpc/react';
 
 const FormSchema = z.object({
   name: z.string().min(1, {
-    message: "Form title is required.",
+    message: 'Form title is required.',
   }),
   returnUrl: z.string().optional(),
   description: z.string().optional(),
@@ -44,10 +44,10 @@ export function CreateFormDialog() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      returnUrl: "",
-      keys: [""],
+      name: '',
+      description: '',
+      returnUrl: '',
+      keys: [''],
     },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -66,7 +66,7 @@ export function CreateFormDialog() {
         },
         {
           onSuccess: ({ id }) => {
-            toast.success("New form created");
+            toast.success('New form created');
             router.refresh();
 
             setTimeout(() => {
@@ -74,7 +74,7 @@ export function CreateFormDialog() {
             }, 100);
           },
           onError: () => {
-            toast.error("Failed to create form");
+            toast.error('Failed to create form');
           },
         },
       );

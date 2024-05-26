@@ -1,9 +1,9 @@
-import { cache } from "react";
-import { cookies } from "next/headers";
+import { cache } from 'react';
+import { cookies } from 'next/headers';
 
-import { type Session, type User } from "lucia";
+import { type Session, type User } from 'lucia';
 
-import { lucia } from "./lucia";
+import { lucia } from './lucia';
 
 export const uncachedAuth = async (): Promise<
   { user: User; session: Session } | { user: null; session: null }
@@ -31,7 +31,7 @@ export const uncachedAuth = async (): Promise<
       );
     }
   } catch {
-    console.error("Failed to set session cookie");
+    console.error('Failed to set session cookie');
   }
   return result;
 };

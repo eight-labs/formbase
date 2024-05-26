@@ -1,8 +1,8 @@
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
-import { cn } from "@formbase/ui/utils/cn";
+import { cn } from '@formbase/ui/utils/cn';
 
 const AnimatedSpinner = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   ({ className, ...props }, ref) => (
@@ -61,7 +61,7 @@ const AnimatedSpinner = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
     </svg>
   ),
 );
-AnimatedSpinner.displayName = "AnimatedSpinner";
+AnimatedSpinner.displayName = 'AnimatedSpinner';
 
 const CreditCard = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   ({ className, ...props }, ref) => (
@@ -82,7 +82,7 @@ const CreditCard = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
     </svg>
   ),
 );
-CreditCard.displayName = "CreditCard";
+CreditCard.displayName = 'CreditCard';
 
 export { AnimatedSpinner, CreditCard };
 
@@ -115,4 +115,4 @@ export {
   ChevronRightIcon,
   DotsHorizontalIcon,
   ArrowLeftIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons';

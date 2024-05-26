@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
+import { Copy } from 'lucide-react';
+import { toast } from 'sonner';
 
-import { useCopyToClipboard } from "../lib/hooks/use-copy-to-clipboard";
+import { useCopyToClipboard } from '../lib/hooks/use-copy-to-clipboard';
 
 type CopyButtonProps = {
   text: string;
@@ -18,7 +18,7 @@ export const CopyButton = ({ text }: CopyButtonProps) => {
       onClick={async (e) => {
         e.preventDefault();
         await copy(text);
-        toast("Copied to clipboard", {
+        toast('Copied to clipboard', {
           icon: <Copy className="h-4 w-4" />,
         });
       }}

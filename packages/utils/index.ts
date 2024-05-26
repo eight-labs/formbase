@@ -1,21 +1,21 @@
-import path from "path";
+import path from 'path';
 
-import { env } from "@formbase/env";
+import { env } from '@formbase/env';
 
 export const getExceptionType = (error: unknown) => {
   const UnknownException = {
-    type: "UnknownException",
+    type: 'UnknownException',
     status: 500,
-    message: "An unknown error occurred",
+    message: 'An unknown error occurred',
   };
 
   if (!error) return UnknownException;
 
-  if ((error as Record<string, unknown>)["name"] === "DatabaseError") {
+  if ((error as Record<string, unknown>)['name'] === 'DatabaseError') {
     return {
-      type: "DatabaseException",
+      type: 'DatabaseException',
       status: 400,
-      message: "Duplicate key entry",
+      message: 'Duplicate key entry',
     };
   }
 
@@ -25,12 +25,12 @@ export const getExceptionType = (error: unknown) => {
 export function formatDate(
   date: Date | string | number,
   options: Intl.DateTimeFormatOptions = {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
   },
 ) {
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat('en-US', {
     ...options,
   }).format(new Date(date));
 }
@@ -39,10 +39,10 @@ export function formatPrice(
   price: number | string,
   options: Intl.NumberFormatOptions = {},
 ) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: options.currency ?? "USD",
-    notation: options.notation ?? "compact",
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: options.currency ?? 'USD',
+    notation: options.notation ?? 'compact',
     ...options,
   }).format(Number(price));
 }

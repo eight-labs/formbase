@@ -8,10 +8,10 @@ export function verifyRequestOrigin(
   if (!originHost) return false;
   for (const domain of allowedDomains) {
     let host: string | null;
-    if (domain.startsWith("http://") || domain.startsWith("https://")) {
+    if (domain.startsWith('http://') || domain.startsWith('https://')) {
       host = safeURL(domain)?.host ?? null;
     } else {
-      host = safeURL("https://" + domain)?.host ?? null;
+      host = safeURL('https://' + domain)?.host ?? null;
     }
     if (originHost === host) return true;
   }

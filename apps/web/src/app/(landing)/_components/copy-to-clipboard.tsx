@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { CopyIcon } from "@radix-ui/react-icons";
-import { toast } from "sonner";
+import { CopyIcon } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
 
-import { Button } from "@formbase/ui/primitives/button";
-import { Input } from "@formbase/ui/primitives/input";
+import { Button } from '@formbase/ui/primitives/button';
+import { Input } from '@formbase/ui/primitives/input';
 
 export const CopyToClipboard = ({ text }: { text: string }) => {
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(text);
-    toast("Copied to clipboard", {
+    toast('Copied to clipboard', {
       icon: <CopyIcon className="h-4 w-4" />,
     });
   };

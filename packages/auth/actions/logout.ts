@@ -1,16 +1,16 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import { auth } from "../auth";
-import { lucia } from "../lucia";
+import { auth } from '../auth';
+import { lucia } from '../lucia';
 
 export async function logout() {
   const { session } = await auth();
   if (!session) {
     return {
-      error: "Unauthorized",
+      error: 'Unauthorized',
     };
   }
 
@@ -24,5 +24,5 @@ export async function logout() {
     sessionCookie.attributes,
   );
 
-  return redirect("/login");
+  return redirect('/login');
 }

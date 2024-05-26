@@ -1,4 +1,4 @@
-import { PostCardSkeleton } from "./post-card-skeleton";
+import { PostCardSkeleton } from './post-card-skeleton';
 
 export function FormsSkeleton() {
   return (

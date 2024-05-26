@@ -2,7 +2,7 @@ type FlattenedObject = Record<string, unknown>;
 
 export const flattenObject = (
   obj: Record<string, unknown>,
-  parentKey = "",
+  parentKey = '',
 ): FlattenedObject => {
   let flattenedObj: FlattenedObject = {};
 
@@ -11,7 +11,7 @@ export const flattenObject = (
       const value = obj[key];
 
       if (
-        typeof value === "object" &&
+        typeof value === 'object' &&
         value !== null &&
         !Array.isArray(value)
       ) {

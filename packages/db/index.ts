@@ -1,10 +1,10 @@
-import { and, count, eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { and, count, eq } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
-import { env } from "@formbase/env";
+import { env } from '@formbase/env';
 
-import * as dbSchema from "./schema";
+import * as dbSchema from './schema';
 
 const queryClient = postgres(env.DATABASE_URL);
 

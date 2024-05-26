@@ -3,8 +3,8 @@ export default {
   logo: (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
+        display: 'flex',
+        alignItems: 'center',
         gap: 8,
       }}
     >
@@ -12,13 +12,13 @@ export default {
         style={{
           width: 32,
           height: 32,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "black",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'black',
           fontSize: 24,
-          color: "white",
-          borderRadius: "8px",
+          color: 'white',
+          borderRadius: '8px',
         }}
       >
         8
@@ -27,10 +27,10 @@ export default {
     </div>
   ),
   project: {
-    link: "https://github.com/eight-labs/formbase",
+    link: 'https://github.com/eight-labs/formbase',
   },
   chat: {
-    link: "https://discord.gg/8labs",
+    link: 'https://discord.gg/8labs',
     icon: (
       <svg
         viewBox="0 0 256 199"
@@ -49,7 +49,7 @@ export default {
   footer: {
     text: (
       <span>
-        {new Date().getFullYear()} ©{" "}
+        {new Date().getFullYear()} ©{' '}
         <a href="https://eightlabs.xyz" target="_blank">
           Eight Labs
         </a>
@@ -57,10 +57,10 @@ export default {
       </span>
     ),
   },
-  faviconGlyph: "8",
+  faviconGlyph: '8',
   useNextSeoProps() {
     return {
-      titleTemplate: "%s – Formbase",
+      titleTemplate: '%s – Formbase',
     };
   },
   // ... other theme options

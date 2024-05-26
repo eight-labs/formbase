@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 // TODO: Fix typeerrors in this file
-import { ArrowDownToLine, FileDown } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowDownToLine, FileDown } from 'lucide-react';
+import { toast } from 'sonner';
 
-import { Button } from "@formbase/ui/primitives/button";
+import { Button } from '@formbase/ui/primitives/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@formbase/ui/primitives/dropdown-menu";
+} from '@formbase/ui/primitives/dropdown-menu';
 
 export function ExportSubmissionsDropDownButton({
   submissions,
@@ -31,9 +31,9 @@ export function ExportSubmissionsDropDownButton({
     fileName: string,
   ) => {
     const encodedUri = encodeURI(content);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", fileName);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', fileName);
     document.body.appendChild(link);
 
     link.click();
@@ -42,16 +42,16 @@ export function ExportSubmissionsDropDownButton({
   };
 
   const handleDownloadAsCSV = () => {
-    let csvContent = "data:text/csv;charset=utf-8,";
-    const header = formKeysArray.join(",") + "\n";
+    let csvContent = 'data:text/csv;charset=utf-8,';
+    const header = formKeysArray.join(',') + '\n';
     csvContent += header;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     submissions.forEach((submission: any) => {
       const row = formKeysArray
-        .map((key) => submission.data[key] || "")
-        .join(",");
-      csvContent += row + "\n";
+        .map((key) => submission.data[key] || '')
+        .join(',');
+      csvContent += row + '\n';
     });
 
     handleLinkElementCreationAndClick(
@@ -59,7 +59,7 @@ export function ExportSubmissionsDropDownButton({
       `${formTitle}_submissions.csv`,
     );
 
-    toast("Submissions exported as CSV", {
+    toast('Submissions exported as CSV', {
       icon: <FileDown className="h-4 w-4" />,
     });
   };
@@ -76,7 +76,7 @@ export function ExportSubmissionsDropDownButton({
       `${formTitle}_submissions.json`,
     );
 
-    toast("Submissions exported as JSON", {
+    toast('Submissions exported as JSON', {
       icon: <FileDown className="h-4 w-4" />,
     });
   };

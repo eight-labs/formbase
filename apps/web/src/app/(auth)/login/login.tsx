@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { useFormState } from "react-dom";
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { useFormState } from 'react-dom';
 
-import { login } from "@formbase/auth/actions";
-import { Button } from "@formbase/ui/primitives/button";
+import { login } from '@formbase/auth/actions';
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@formbase/ui/primitives/card";
-import { Input } from "@formbase/ui/primitives/input";
-import { Label } from "@formbase/ui/primitives/label";
+} from '@formbase/ui/primitives/card';
+import { Input } from '@formbase/ui/primitives/input';
+import { Label } from '@formbase/ui/primitives/label';
 
-import { PasswordInput } from "~/components/password-input";
-import { SubmitButton } from "~/components/submit-button";
+import { PasswordInput } from '~/components/password-input';
+import { SubmitButton } from '~/components/submit-button';
 
 export function Login() {
   const [state, formAction] = useFormState(login, null);
@@ -66,11 +66,11 @@ export function Login() {
           </div>
 
           <div className="flex flex-wrap justify-between">
-            <Button variant={"link"} size={"sm"} className="p-0" asChild>
-              <Link href={"/signup"}>Not signed up? Sign up now.</Link>
+            <Button variant={'link'} size={'sm'} className="p-0" asChild>
+              <Link href={'/signup'}>Not signed up? Sign up now.</Link>
             </Button>
-            <Button variant={"link"} size={"sm"} className="p-0" asChild>
-              <Link href={"/reset-password"}>Forgot Password?</Link>
+            <Button variant={'link'} size={'sm'} className="p-0" asChild>
+              <Link href={'/reset-password'}>Forgot Password?</Link>
             </Button>
           </div>
 

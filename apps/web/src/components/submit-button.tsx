@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-import type { ButtonProps } from "@formbase/ui/primitives/button";
+import type { ButtonProps } from '@formbase/ui/primitives/button';
 
-import { LoadingButton } from "./loading-button";
+import { LoadingButton } from './loading-button';
 
 const SubmitButton = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, children, ...props }, ref) => {
@@ -15,6 +15,6 @@ const SubmitButton = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
-SubmitButton.displayName = "SubmitButton";
+SubmitButton.displayName = 'SubmitButton';
 
 export { SubmitButton };

@@ -1,3 +1,3 @@
-import { createGithubAuthorizationURL } from "@formbase/auth/providers/github";
+import { createGithubAuthorizationURL } from '@formbase/auth/providers/github';
 
 export { createGithubAuthorizationURL as GET };

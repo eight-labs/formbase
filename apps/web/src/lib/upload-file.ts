@@ -1,7 +1,7 @@
-import { Client } from "minio";
+import { Client } from 'minio';
 
-import { env } from "@formbase/env";
-import { generateId } from "@formbase/utils/generate-id";
+import { env } from '@formbase/env';
+import { generateId } from '@formbase/utils/generate-id';
 
 type FormData = Record<string, Blob | string | undefined>;
 
@@ -18,32 +18,32 @@ export async function createBucket(bucketName: string) {
     const bucketExists = await minio.bucketExists(bucketName);
     if (!bucketExists) {
       await minio.makeBucket(bucketName);
-      console.info("Bucket created successfully:", bucketName);
+      console.info('Bucket created successfully:', bucketName);
     } else {
-      console.info("Bucket already exists:", bucketName);
+      console.info('Bucket already exists:', bucketName);
     }
   } catch (error) {
-    console.error("Failed to create bucket:", error);
-    throw new Error("Failed to create bucket");
+    console.error('Failed to create bucket:', error);
+    throw new Error('Failed to create bucket');
   }
 }
 
 export async function uploadFile(fileBuffer: Buffer, mimetype: string) {
   try {
-    const imageName = `${generateId(15)}.${mimetype.split("/")[1]}`;
+    const imageName = `${generateId(15)}.${mimetype.split('/')[1]}`;
     const bucketName = env.MINIO_BUCKET;
-    console.info("Uploading file:", imageName);
+    console.info('Uploading file:', imageName);
 
     await createBucket(bucketName);
     await minio.putObject(bucketName, imageName, fileBuffer);
 
-    const imageUrl = await minio.presignedUrl("GET", bucketName, imageName);
-    console.info("File uploaded successfully:", imageUrl);
+    const imageUrl = await minio.presignedUrl('GET', bucketName, imageName);
+    console.info('File uploaded successfully:', imageUrl);
 
     return imageUrl;
   } catch (error) {
-    console.error("Failed to upload file:", error);
-    throw new Error("Failed to upload file");
+    console.error('Failed to upload file:', error);
+    throw new Error('Failed to upload file');
   }
 }
 
@@ -68,11 +68,11 @@ export function assignFileOrImage({
 }): void {
   const isImage =
     formData[key] instanceof Blob &&
-    (formData[key] as Blob).type.startsWith("image/");
-  const field = isImage ? "image" : "file";
+    (formData[key] as Blob).type.startsWith('image/');
+  const field = isImage ? 'image' : 'file';
   formData[field] = fileUrl;
 
-  if (key !== "file" && key !== "image") {
+  if (key !== 'file' && key !== 'image') {
     formData[key] = undefined;
   }
 }

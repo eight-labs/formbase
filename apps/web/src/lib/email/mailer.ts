@@ -1,8 +1,8 @@
-import type { TransportOptions } from "nodemailer";
+import type { TransportOptions } from 'nodemailer';
 
-import { createTransport } from "nodemailer";
+import { createTransport } from 'nodemailer';
 
-import { env } from "@formbase/env";
+import { env } from '@formbase/env';
 
 const smtpConfig = {
   host: env.SMTP_HOST,

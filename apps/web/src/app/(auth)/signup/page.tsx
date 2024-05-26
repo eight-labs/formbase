@@ -1,19 +1,19 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
-import { validateRequest } from "@formbase/auth";
+import { validateRequest } from '@formbase/auth';
 
-import { Signup } from "./signup";
+import { Signup } from './signup';
 
 export const metadata = {
-  title: "Sign Up",
-  description: "Signup Page",
+  title: 'Sign Up',
+  description: 'Signup Page',
 };
 
 export default async function SignupPage() {
   const { user } = await validateRequest();
 
   if (user) {
-    redirect("/dashboard");
+    redirect('/dashboard');
   }
 
   return <Signup />;

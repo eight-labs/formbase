@@ -1,16 +1,16 @@
-import * as React from "react";
-import { Inter } from "next/font/google";
-import { redirect } from "next/navigation";
+import * as React from 'react';
+import { Inter } from 'next/font/google';
+import { redirect } from 'next/navigation';
 
-import { validateRequest } from "@formbase/auth";
+import { validateRequest } from '@formbase/auth';
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
 };
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 });
 
 export default async function DashboardLayout({
@@ -18,7 +18,7 @@ export default async function DashboardLayout({
 }: DashboardLayoutProps) {
   const { user } = await validateRequest();
 
-  if (!user) redirect("/login");
+  if (!user) redirect('/login');
 
   return (
     <div

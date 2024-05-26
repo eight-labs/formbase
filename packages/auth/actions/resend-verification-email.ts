@@ -1,16 +1,16 @@
-"use server";
+'use server';
 
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
-import type { User } from "@formbase/db/schema";
+import type { User } from '@formbase/db/schema';
 
-import { isWithinExpirationDate } from "oslo";
+import { isWithinExpirationDate } from 'oslo';
 
-import { db } from "@formbase/db";
-import { env } from "@formbase/env";
+import { db } from '@formbase/db';
+import { env } from '@formbase/env';
 
-import { auth } from "../auth";
-import { generateEmailVerificationCode } from "./utils";
+import { auth } from '../auth';
+import { generateEmailVerificationCode } from './utils';
 
 const timeFromNow = (time: Date) => {
   const now = new Date();
@@ -26,7 +26,7 @@ export async function resendVerificationEmail(): Promise<{
 }> {
   const { user } = (await auth()) as { user: User | null };
   if (!user) {
-    return redirect("/login");
+    return redirect('/login');
   }
   const lastSent = await db.query.emailVerificationCodes.findFirst({
     where: (table, { eq }) => eq(table.userId, user.id),
@@ -46,14 +46,14 @@ export async function resendVerificationEmail(): Promise<{
   );
 
   void fetch(`${env.NEXT_PUBLIC_APP_URL}/api/mail`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       email: user.email,
       code: verificationCode,
-      type: "verification",
+      type: 'verification',
     }),
   });
 

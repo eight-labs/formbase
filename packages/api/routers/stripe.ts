@@ -1,10 +1,10 @@
-import Stripe from "stripe";
-import * as z from "zod";
+import Stripe from 'stripe';
+import * as z from 'zod';
 
-import { env } from "@formbase/env";
-import { absoluteUrl, formatPrice } from "@formbase/utils";
+import { env } from '@formbase/env';
+import { absoluteUrl, formatPrice } from '@formbase/utils';
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure } from '../trpc';
 
 export interface SubscriptionPlan {
   name: string;
@@ -21,21 +21,21 @@ export const manageSubscriptionSchema = z.object({
 });
 
 const stripe = new Stripe(env.STRIPE_API_KEY, {
-  apiVersion: "2024-04-10",
+  apiVersion: '2024-04-10',
   typescript: true,
 });
 
 export const freePlan: SubscriptionPlan = {
-  name: "Free",
-  description: "The free plan is limited to 3 posts.",
-  features: ["Up to 3 posts", "Limited support"],
-  stripePriceId: "",
+  name: 'Free',
+  description: 'The free plan is limited to 3 posts.',
+  features: ['Up to 3 posts', 'Limited support'],
+  stripePriceId: '',
 };
 
 export const proPlan: SubscriptionPlan = {
-  name: "Pro",
-  description: "The Pro plan has unlimited posts.",
-  features: ["Unlimited posts", "Priority support"],
+  name: 'Pro',
+  description: 'The Pro plan has unlimited posts.',
+  features: ['Unlimited posts', 'Priority support'],
   stripePriceId: env.STRIPE_PRO_MONTHLY_PLAN_ID,
 };
 
@@ -52,7 +52,7 @@ export const stripeRouter = createTRPCRouter({
       });
 
       if (!user) {
-        throw new Error("User not found.");
+        throw new Error('User not found.');
       }
 
       const proPrice = await stripe.prices.retrieve(proPlan.stripePriceId);
@@ -86,7 +86,7 @@ export const stripeRouter = createTRPCRouter({
       });
 
       if (!user) {
-        throw new Error("User not found.");
+        throw new Error('User not found.');
       }
 
       // Check if user is on a pro plan
@@ -121,7 +121,7 @@ export const stripeRouter = createTRPCRouter({
   managePlan: protectedProcedure
     .input(manageSubscriptionSchema)
     .mutation(async ({ ctx, input }) => {
-      const billingUrl = absoluteUrl("/dashboard/billing");
+      const billingUrl = absoluteUrl('/dashboard/billing');
 
       const user = await ctx.db.query.users.findFirst({
         where: (table, { eq }) => eq(table.id, ctx.user.id),
@@ -135,7 +135,7 @@ export const stripeRouter = createTRPCRouter({
       });
 
       if (!user) {
-        throw new Error("User not found.");
+        throw new Error('User not found.');
       }
 
       // If the user is already subscribed to a plan, we redirect them to the Stripe billing portal
@@ -154,9 +154,9 @@ export const stripeRouter = createTRPCRouter({
       const stripeSession = await stripe.checkout.sessions.create({
         success_url: billingUrl,
         cancel_url: billingUrl,
-        payment_method_types: ["card"],
-        mode: "subscription",
-        billing_address_collection: "auto",
+        payment_method_types: ['card'],
+        mode: 'subscription',
+        billing_address_collection: 'auto',
         customer_email: user.email,
         line_items: [
           {

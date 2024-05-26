@@ -1,18 +1,18 @@
-import type { User } from "@formbase/db/schema";
+import type { User } from '@formbase/db/schema';
 
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
-import { Lucia } from "lucia";
+import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
+import { Lucia } from 'lucia';
 
-import { db } from "@formbase/db";
-import { sessions, users } from "@formbase/db/schema";
-import { env } from "@formbase/env";
+import { db } from '@formbase/db';
+import { sessions, users } from '@formbase/db/schema';
+import { env } from '@formbase/env';
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
     attributes: {
-      secure: env.NODE_ENV === "production",
+      secure: env.NODE_ENV === 'production',
     },
   },
   getUserAttributes: (attributes) => {
@@ -28,9 +28,9 @@ export const lucia = new Lucia(adapter, {
   },
 });
 
-type DatabaseUserAttributes = Omit<User, "hashedPassword">;
+type DatabaseUserAttributes = Omit<User, 'hashedPassword'>;
 
-declare module "lucia" {
+declare module 'lucia' {
   interface Register {
     Lucia: typeof lucia;
     DatabaseUserAttributes: DatabaseUserAttributes;

@@ -1,29 +1,29 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import type { User } from "@formbase/db/schema";
+import type { User } from '@formbase/db/schema';
 
-import { isWithinExpirationDate } from "oslo";
+import { isWithinExpirationDate } from 'oslo';
 
-import { db, drizzlePrimitives } from "@formbase/db";
-import { emailVerificationCodes, users } from "@formbase/db/schema";
+import { db, drizzlePrimitives } from '@formbase/db';
+import { emailVerificationCodes, users } from '@formbase/db/schema';
 
-import { auth } from "../auth";
-import { lucia } from "../lucia";
+import { auth } from '../auth';
+import { lucia } from '../lucia';
 
 export async function verifyEmail(
   _: unknown,
   formData: FormData,
 ): Promise<{ error: string }> {
-  const code = formData.get("code");
-  if (typeof code !== "string" || code.length !== 8) {
-    return { error: "Invalid code" };
+  const code = formData.get('code');
+  if (typeof code !== 'string' || code.length !== 8) {
+    return { error: 'Invalid code' };
   }
   const { user } = (await auth()) as { user: User | null };
   if (!user) {
-    return redirect("/login");
+    return redirect('/login');
   }
 
   const dbCode = await db.transaction(async (tx) => {
@@ -39,12 +39,12 @@ export async function verifyEmail(
   });
 
   if (!dbCode || dbCode.code !== code)
-    return { error: "Invalid verification code" };
+    return { error: 'Invalid verification code' };
 
   if (!isWithinExpirationDate(dbCode.expiresAt))
-    return { error: "Verification code expired" };
+    return { error: 'Verification code expired' };
 
-  if (dbCode.email !== user.email) return { error: "Email does not match" };
+  if (dbCode.email !== user.email) return { error: 'Email does not match' };
 
   await lucia.invalidateUserSessions(user.id);
   await db
@@ -58,5 +58,5 @@ export async function verifyEmail(
     sessionCookie.value,
     sessionCookie.attributes,
   );
-  redirect("/dashboard");
+  redirect('/dashboard');
 }

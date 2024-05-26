@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Button } from "@formbase/ui/primitives/button";
+import { Button } from '@formbase/ui/primitives/button';
 
-import { api } from "~/lib/trpc/server";
+import { api } from '~/lib/trpc/server';
 
 export default async function FormCompletedPage({
   params,

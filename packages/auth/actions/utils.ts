@@ -1,14 +1,14 @@
-"use server";
+'use server';
 
-import { generateId } from "lucia";
-import { createDate, TimeSpan } from "oslo";
-import { alphabet, generateRandomString } from "oslo/crypto";
+import { generateId } from 'lucia';
+import { createDate, TimeSpan } from 'oslo';
+import { alphabet, generateRandomString } from 'oslo/crypto';
 
-import { db, drizzlePrimitives } from "@formbase/db";
+import { db, drizzlePrimitives } from '@formbase/db';
 import {
   emailVerificationCodes,
   passwordResetTokens,
-} from "@formbase/db/schema";
+} from '@formbase/db/schema';
 
 export interface ActionResponse<T> {
   fieldError?: Partial<Record<keyof T, string | undefined>>;
@@ -22,12 +22,12 @@ export async function generateEmailVerificationCode(
   await db
     .delete(emailVerificationCodes)
     .where(drizzlePrimitives.eq(emailVerificationCodes.userId, userId));
-  const code = generateRandomString(8, alphabet("0-9")); // 8 digit code
+  const code = generateRandomString(8, alphabet('0-9')); // 8 digit code
   await db.insert(emailVerificationCodes).values({
     userId,
     email,
     code,
-    expiresAt: createDate(new TimeSpan(10, "m")), // 10 minutes
+    expiresAt: createDate(new TimeSpan(10, 'm')), // 10 minutes
   });
   return code;
 }
@@ -42,7 +42,7 @@ export async function generatePasswordResetToken(
   await db.insert(passwordResetTokens).values({
     id: tokenId,
     userId,
-    expiresAt: createDate(new TimeSpan(2, "h")),
+    expiresAt: createDate(new TimeSpan(2, 'h')),
   });
   return tokenId;
 }

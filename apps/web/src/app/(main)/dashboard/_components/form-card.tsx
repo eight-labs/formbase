@@ -1,29 +1,29 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import { formatDistanceToNow } from "date-fns";
+import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { formatDistanceToNow } from 'date-fns';
 
-import { type RouterOutputs } from "@formbase/api";
-import { Button } from "@formbase/ui/primitives/button";
+import { type RouterOutputs } from '@formbase/api';
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@formbase/ui/primitives/card";
+} from '@formbase/ui/primitives/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@formbase/ui/primitives/dropdown-menu";
+} from '@formbase/ui/primitives/dropdown-menu';
 
-import { CopyButton } from "~/components/copy-button";
+import { CopyButton } from '~/components/copy-button';
 
-import { DeleteFormDialog } from "../../form/[id]/delete-form-dialog";
+import { DeleteFormDialog } from '../../form/[id]/delete-form-dialog';
 
 type FormCardProp = {
-  form: RouterOutputs["form"]["userForms"][number];
+  form: RouterOutputs['form']['userForms'][number];
   submissionsCount: number;
   updatedAt: Date | null;
   createdAt: Date;
@@ -76,12 +76,12 @@ export function FormCard({
 
           {submissionsCount === 0 ? (
             <p className="text-sm text-muted-foreground">
-              {" "}
+              {' '}
               Last submission: None yet
             </p>
           ) : (
             <p className="text-sm text-muted-foreground">
-              Last submission:{" "}
+              Last submission:{' '}
               {formatDistanceToNow(new Date(updatedAt ?? createdAt), {
                 addSuffix: true,
               })}

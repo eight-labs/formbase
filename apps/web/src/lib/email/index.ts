@@ -1,6 +1,6 @@
-import { sendMail } from "./mailer";
-import { renderVerificationCodeEmail } from "./templates/email-verification";
-import { renderResetPasswordEmail } from "./templates/reset-password";
+import { sendMail } from './mailer';
+import { renderVerificationCodeEmail } from './templates/email-verification';
+import { renderResetPasswordEmail } from './templates/reset-password';
 
 export const sendVerificationEmail = async ({
   email,
@@ -11,7 +11,7 @@ export const sendVerificationEmail = async ({
 }) => {
   await sendMail({
     to: email,
-    subject: "Verify your account",
+    subject: 'Verify your account',
     body: renderVerificationCodeEmail({ code }),
   });
 };
@@ -25,7 +25,7 @@ export const sendResetPasswordEmail = async ({
 }) => {
   await sendMail({
     to: email,
-    subject: "Reset your password",
+    subject: 'Reset your password',
     body: renderResetPasswordEmail({ link }),
   });
 };

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
-import { Button } from "@formbase/ui/primitives/button";
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -14,12 +14,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@formbase/ui/primitives/form";
-import { Input } from "@formbase/ui/primitives/input";
+} from '@formbase/ui/primitives/form';
+import { Input } from '@formbase/ui/primitives/input';
 
 const FormSchema = z.object({
   username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: 'Username must be at least 2 characters.',
   }),
 });
 
@@ -27,12 +27,12 @@ export function InputForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
+      username: '',
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast.message("You submitted the following values:", {
+    toast.message('You submitted the following values:', {
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>

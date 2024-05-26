@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { use } from "react";
+import { use } from 'react';
 
-import { type RouterOutputs } from "@formbase/api";
+import { type RouterOutputs } from '@formbase/api';
 
-import { EmptyFormState } from "./empty-state";
-import { FormCard } from "./form-card";
+import { EmptyFormState } from './empty-state';
+import { FormCard } from './form-card';
 
 interface FormsProps {
   promises: Promise<
     // [RouterOutputs['form']['userForms'], RouterOutputs['stripe']['getPlan']]
-    [RouterOutputs["form"]["userForms"]]
+    [RouterOutputs['form']['userForms']]
   >;
 }
 

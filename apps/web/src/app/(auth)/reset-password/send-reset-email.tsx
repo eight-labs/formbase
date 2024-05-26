@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-import { useFormState } from "react-dom";
-import { toast } from "sonner";
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
 
-import { sendPasswordResetLink } from "@formbase/auth/actions";
-import { Button } from "@formbase/ui/primitives/button";
-import { Input } from "@formbase/ui/primitives/input";
-import { Label } from "@formbase/ui/primitives/label";
+import { sendPasswordResetLink } from '@formbase/auth/actions';
+import { Button } from '@formbase/ui/primitives/button';
+import { Input } from '@formbase/ui/primitives/input';
+import { Label } from '@formbase/ui/primitives/label';
 
-import { SubmitButton } from "~/components/submit-button";
+import { SubmitButton } from '~/components/submit-button';
 
 export function SendResetEmail() {
   const [state, formAction] = useFormState(sendPasswordResetLink, null);
@@ -20,12 +20,12 @@ export function SendResetEmail() {
 
   useEffect(() => {
     if (state?.success) {
-      toast("A password reset link has been sent to your email.");
-      router.push("/login");
+      toast('A password reset link has been sent to your email.');
+      router.push('/login');
     }
     if (state?.error) {
       toast(state.error);
-      router.push("/reset-password");
+      router.push('/reset-password');
     }
   }, [state?.error, state?.success]);
 
@@ -44,7 +44,7 @@ export function SendResetEmail() {
 
       <div className="flex flex-wrap justify-between">
         <Link href="/signup">
-          <Button variant={"link"} size={"sm"} className="p-0">
+          <Button variant={'link'} size={'sm'} className="p-0">
             Not signed up? Sign up now
           </Button>
         </Link>

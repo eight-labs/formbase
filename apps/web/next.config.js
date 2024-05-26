@@ -1,23 +1,23 @@
-/** @type {import("next").NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "pbs.twimg.com",
+        protocol: 'https',
+        hostname: 'pbs.twimg.com',
       },
       {
-        protocol: "http",
-        hostname: "localhost",
+        protocol: 'http',
+        hostname: 'localhost',
       },
     ],
   },
   transpilePackages: [
-    "@formbase/db",
-    "@formbase/auth",
-    "@formbase/env",
-    "@formbase/api",
+    '@formbase/db',
+    '@formbase/auth',
+    '@formbase/env',
+    '@formbase/api',
   ],
   eslint: {
     ignoreDuringBuilds: true,

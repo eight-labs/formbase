@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { CheckIcon } from "lucide-react";
+import { CheckIcon } from 'lucide-react';
 
-import { type RouterOutputs } from "@formbase/api";
-import { Button } from "@formbase/ui/primitives/button";
+import { type RouterOutputs } from '@formbase/api';
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Card,
   CardContent,
@@ -11,14 +11,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@formbase/ui/primitives/card";
-import { formatDate } from "@formbase/utils";
+} from '@formbase/ui/primitives/card';
+import { formatDate } from '@formbase/utils';
 
-import { ManageSubscriptionForm } from "./manage-subscription-form";
+import { ManageSubscriptionForm } from './manage-subscription-form';
 
 interface BillingProps {
   stripePromises: Promise<
-    [RouterOutputs["stripe"]["getPlans"], RouterOutputs["stripe"]["getPlan"]]
+    [RouterOutputs['stripe']['getPlans'], RouterOutputs['stripe']['getPlan']]
   >;
 }
 
@@ -30,14 +30,14 @@ export async function Billing({ stripePromises }: BillingProps) {
       <section>
         <Card className="space-y-2 p-8">
           <h3 className="text-lg font-semibold sm:text-xl">
-            {plan?.name ?? "Free"} plan
+            {plan?.name ?? 'Free'} plan
           </h3>
           <p className="text-sm text-muted-foreground">
             {!plan?.isPro
-              ? "The free plan is limited to 3 posts. Upgrade to the Pro plan to unlock unlimited posts."
+              ? 'The free plan is limited to 3 posts. Upgrade to the Pro plan to unlock unlimited posts.'
               : plan.isCanceled
-                ? "Your plan will be canceled on "
-                : "Your plan renews on "}
+                ? 'Your plan will be canceled on '
+                : 'Your plan renews on '}
             {plan?.stripeCurrentPeriodEnd
               ? formatDate(plan.stripeCurrentPeriodEnd)
               : null}
@@ -74,7 +74,7 @@ export async function Billing({ stripePromises }: BillingProps) {
               </div>
             </CardContent>
             <CardFooter className="pt-4">
-              {item.name === "Free" ? (
+              {item.name === 'Free' ? (
                 <Button className="w-full" asChild>
                   <Link href="/dashboard">
                     Get started

@@ -1,17 +1,17 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import type { LoginInput } from "../validators/auth";
+import type { LoginInput } from '../validators/auth';
 
-import { Scrypt } from "lucia";
+import { Scrypt } from 'lucia';
 
-import { db } from "@formbase/db";
+import { db } from '@formbase/db';
 
-import { lucia } from "../lucia";
-import { loginSchema } from "../validators/auth";
-import { type ActionResponse } from "./utils";
+import { lucia } from '../lucia';
+import { loginSchema } from '../validators/auth';
+import { type ActionResponse } from './utils';
 
 export async function login(
   _: unknown,
@@ -38,13 +38,13 @@ export async function login(
 
   if (!existingUser) {
     return {
-      formError: "Incorrect email or password",
+      formError: 'Incorrect email or password',
     };
   }
 
   if (!existingUser.hashedPassword) {
     return {
-      formError: "Incorrect email or password",
+      formError: 'Incorrect email or password',
     };
   }
 
@@ -54,7 +54,7 @@ export async function login(
   );
   if (!validPassword) {
     return {
-      formError: "Incorrect email or password",
+      formError: 'Incorrect email or password',
     };
   }
 
@@ -65,5 +65,5 @@ export async function login(
     sessionCookie.value,
     sessionCookie.attributes,
   );
-  return redirect("/dashboard");
+  return redirect('/dashboard');
 }

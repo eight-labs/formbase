@@ -1,13 +1,13 @@
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 
-import { generateState, GitHub, OAuth2RequestError } from "arctic";
-import { generateId } from "lucia";
+import { generateState, GitHub, OAuth2RequestError } from 'arctic';
+import { generateId } from 'lucia';
 
-import { db } from "@formbase/db";
-import { oauth, users } from "@formbase/db/schema";
-import { env } from "@formbase/env";
+import { db } from '@formbase/db';
+import { oauth, users } from '@formbase/db/schema';
+import { env } from '@formbase/env';
 
-import { lucia } from "../lucia";
+import { lucia } from '../lucia';
 
 const github =
   env.AUTH_GITHUB_ID !== undefined && env.AUTH_GITHUB_SECRET !== undefined
@@ -18,21 +18,21 @@ export async function createGithubAuthorizationURL(): Promise<Response> {
   if (!github) {
     return new Response(null, {
       status: 404,
-      statusText: "Not Found",
+      statusText: 'Not Found',
     });
   }
 
   const state = generateState();
   const url = await github.createAuthorizationURL(state, {
-    scopes: ["read:user", "user:email"],
+    scopes: ['read:user', 'user:email'],
   });
 
-  cookies().set("github_oauth_state", state, {
-    path: "/",
-    secure: env.NODE_ENV === "production",
+  cookies().set('github_oauth_state', state, {
+    path: '/',
+    secure: env.NODE_ENV === 'production',
     httpOnly: true,
     maxAge: 60 * 10,
-    sameSite: "lax",
+    sameSite: 'lax',
   });
 
   return Response.redirect(url);
@@ -49,7 +49,7 @@ type EmailInfo = {
   email: string;
   primary: boolean;
   verified: boolean;
-  visibility: "private" | null;
+  visibility: 'private' | null;
 };
 
 type EmailList = EmailInfo[];
@@ -60,14 +60,14 @@ export async function validateGithubCallback(
   if (!github) {
     return new Response(null, {
       status: 404,
-      statusText: "Not Found",
+      statusText: 'Not Found',
     });
   }
 
   const url = new URL(request.url);
-  const code = url.searchParams.get("code");
-  const state = url.searchParams.get("state");
-  const storedState = cookies().get("github_oauth_state")?.value ?? null;
+  const code = url.searchParams.get('code');
+  const state = url.searchParams.get('state');
+  const storedState = cookies().get('github_oauth_state')?.value ?? null;
   if (!code || !state || !storedState || state !== storedState) {
     return new Response(null, {
       status: 400,
@@ -76,14 +76,14 @@ export async function validateGithubCallback(
 
   try {
     const tokens = await github.validateAuthorizationCode(code);
-    const githubUserResponse = await fetch("https://api.github.com/user", {
+    const githubUserResponse = await fetch('https://api.github.com/user', {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`,
       },
     });
     const githubUser = (await githubUserResponse.json()) as GitHubUser;
 
-    const emailResponse = await fetch("https://api.github.com/user/emails", {
+    const emailResponse = await fetch('https://api.github.com/user/emails', {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`,
       },
@@ -97,16 +97,16 @@ export async function validateGithubCallback(
     if (!primaryEmail?.email || !primaryEmail.verified) {
       return new Response(
         JSON.stringify({
-          error: "Your github account must have a primary email address.",
+          error: 'Your github account must have a primary email address.',
         }),
-        { status: 400, headers: { Location: "/login" } },
+        { status: 400, headers: { Location: '/login' } },
       );
     }
 
     const existingUser = await db.query.oauth.findFirst({
       where: (table, { and, eq }) =>
         and(
-          eq(table.providerId, "github"),
+          eq(table.providerId, 'github'),
           eq(table.providerUserId, githubUser.id),
         ),
     });
@@ -122,7 +122,7 @@ export async function validateGithubCallback(
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "/",
+          Location: '/',
         },
       });
     }
@@ -135,7 +135,7 @@ export async function validateGithubCallback(
     });
 
     await db.insert(oauth).values({
-      providerId: "github",
+      providerId: 'github',
       providerUserId: githubUser.id,
       userId,
     });
@@ -150,7 +150,7 @@ export async function validateGithubCallback(
     return new Response(null, {
       status: 302,
       headers: {
-        Location: "/",
+        Location: '/',
       },
     });
   } catch (e) {

@@ -1,9 +1,9 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import superjson from "superjson";
-import { ZodError } from "zod";
+import { initTRPC, TRPCError } from '@trpc/server';
+import superjson from 'superjson';
+import { ZodError } from 'zod';
 
-import { auth } from "@formbase/auth";
-import { db } from "@formbase/db";
+import { auth } from '@formbase/auth';
+import { db } from '@formbase/db';
 
 export const createTRPCContext = async (opts: { headers: Headers }) => {
   const { session, user } = await auth();
@@ -38,7 +38,7 @@ export const publicProcedure = t.procedure;
 
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
   if (!ctx.session || !ctx.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
 
   return next({
