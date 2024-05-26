@@ -122,7 +122,7 @@ export async function validateGithubCallback(
       return new Response(null, {
         status: 302,
         headers: {
-          Location: '/',
+          Location: '/dashboard',
         },
       });
     }
@@ -132,6 +132,7 @@ export async function validateGithubCallback(
       id: userId,
       email: primaryEmail.email,
       name: githubUser.name,
+      avatar: githubUser.avatar_url,
     });
 
     await db.insert(oauth).values({
@@ -150,7 +151,7 @@ export async function validateGithubCallback(
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/',
+        Location: '/dashboard',
       },
     });
   } catch (e) {
