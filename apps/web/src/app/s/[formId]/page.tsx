@@ -1,13 +1,15 @@
-import { api } from "@formbase/trpc/server";
-import { Button } from "@formbase/ui/primitives/button";
-import Link from "next/link";
+import Link from 'next/link';
+
+import { Button } from '@formbase/ui/primitives/button';
+
+import { api } from '~/lib/trpc/server';
 
 export default async function FormCompletedPage({
   params,
 }: {
   params: { formId: string };
 }) {
-  const form = await api.form.hasReturiningUrl.query({ formId: params.formId });
+  const form = await api.form.hasReturiningUrl({ formId: params.formId });
 
   if (!form) {
     return (

@@ -1,16 +1,16 @@
-import { type Metadata } from "next";
+import { type Metadata } from 'next';
 
-import { SidebarNav } from "./sidebar-nav";
+import { SidebarNav } from './sidebar-nav';
 
 export const metadata: Metadata = {
-  title: "Forms",
-  description: "Advanced form example using react-hook-form and Zod.",
+  title: 'Forms',
+  description: 'Advanced form example using react-hook-form and Zod.',
 };
 
 const sidebarNavItems = [
   {
-    title: "Profile",
-    href: "/dashboard/settings",
+    title: 'Profile',
+    href: '/dashboard/settings',
   },
 ];
 

@@ -1,0 +1,26 @@
+{
+  "name": "eslint-config-formbase",
+  "version": "0.1.0",
+  "private": true,
+  "files": [
+    "./base.js",
+    "./next.js",
+    "./react.js"
+  ],
+  "scripts": {
+    "lint": "eslint . --cache --max-warnings 0",
+    "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
+  },
+  "devDependencies": {
+    "@formbase/tsconfig": "workspace:^",
+    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "@typescript-eslint/parser": "^7.10.0",
+    "astro-eslint-parser": "^1.0.2",
+    "eslint-config-next": "^14.2.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.2"
+  }
+}

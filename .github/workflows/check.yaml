@@ -14,7 +14,7 @@ jobs:
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
-          version: 9.0.4
+          version: 9.0.6
           run_install: false
       - uses: actions/setup-node@v3
         with:
@@ -24,7 +24,7 @@ jobs:
         run: pnpm install
 
       - name: Type check and lint
-        run: pnpm --filter @formbase/web run typecheck && pnpm --filter @formbase/web run lint
+        run: pnpm typecheck && pnpm lint
         env:
           # use dummy env variables to bypass t3-env check
           DATABASE_URL: postgresql://test:xxxx@xxxxxxxxx:3306/test
@@ -34,8 +34,14 @@ jobs:
           SMTP_PASSWORD: password
           NEXT_PUBLIC_APP_URL: http://localhost:3000
           ALLOW_SIGNIN_SIGNUP: true
-          GITHUB_CLIENT_ID: client_id
-          GITHUB_CLIENT_SECRET: client_secret
+          AUTH_GITHUB_ID: client_id
+          AUTH_GITHUB_SECRET: client_secret
           STRIPE_API_KEY: stripe_api_key
           STRIPE_WEBHOOK_SECRET: stripe_webhook_secret
           STRIPE_PRO_MONTHLY_PLAN_ID: stripe_pro_monthly_plan_id
+          MINIO_ENDPOINT: minio_endpoint
+          MINIO_ACCESS_KEY: minio_access_key
+          MINIO_SECRET_KEY: minio_secret_key
+          MINIO_BUCKET: minio_bucket
+          MINIO_PORT: 9000
+          MINIO_USESSL: false

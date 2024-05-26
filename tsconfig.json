@@ -1,3 +1,5 @@
 {
-  "extends": "@formbase/typescript-config/base.json"
+  "extends": ["@formbase/tsconfig/base.json"],
+  "include": [".eslintrc.cjs", "*.js", "*.ts", "*.cjs", "*.mjs"],
+  "exclude": ["apps", "packages", "node_modules"]
 }

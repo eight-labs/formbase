@@ -1,9 +1,7 @@
-/** @type {import("eslint").Linter.Config} */
-module.exports = {
+/** @type {import('eslint').Linter.Config} */
+const config = {
   root: true,
-  extends: ["@formbase/eslint-config/next.js"],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: true,
-  },
+  extends: ['formbase/base', 'formbase/next', 'formbase/react'],
 };
+
+module.exports = config;

@@ -1,12 +1,13 @@
-import { absoluteUrl } from "@formbase/lib/utils";
-import { type MetadataRoute } from "next";
+import { type MetadataRoute } from 'next';
+
+import { absoluteUrl } from '@formbase/utils';
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: "*",
-      allow: "/",
+      userAgent: '*',
+      allow: '/',
     },
-    sitemap: absoluteUrl("/sitemap.xml"),
+    sitemap: absoluteUrl('/sitemap.xml'),
   };
 }

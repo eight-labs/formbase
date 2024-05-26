@@ -1,15 +1,79 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDotEnv": ["apps/web/.env.local"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "dependsOn": ["^build", "^db:migrate"],
+      "inputs": [
+        "src/**",
+        "public/**",
+        "next.config.js",
+        "postcss.config.cjs",
+        "tailwind.config.ts",
+        "package.json",
+        "tsconfig.json"
+      ],
+      "env": [
+        "DATABASE_URL",
+        "AUTH_GITHUB_ID",
+        "AUTH_GITHUB_SECRET",
+        "SMTP_HOST",
+        "SMTP_PORT",
+        "SMTP_USER",
+        "SMTP_PASSWORD",
+        "STRIPE_API_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "STRIPE_PRO_MONTHLY_PLAN_ID",
+        "ALLOW_SIGNIN_SIGNUP",
+        "UMAMI_TRACKING_ID",
+        "MINIO_ENDPOINT",
+        "MINIO_PORT",
+        "MINIO_USESSL",
+        "MINIO_ACCESSKEY",
+        "MINIO_SECRETKEY",
+        "MINIO_BUCKET"
+      ],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "db:migrate": {
+      "dependsOn": ["db:generate"],
+      "inputs": ["drizzle/**"]
+    },
+    "db:generate": {
+      "outputs": ["drizzle/**"],
+      "inputs": ["src/schema/**", "drizzle.config.ts"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^build"],
+      "inputs": [
+        "**/*.ts",
+        "**/*.d.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.cjs",
+        "**/*.mjs"
+      ]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "**/*.ts",
+        "**/*.d.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.cjs",
+        "**/*.mjs"
+      ]
     },
     "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
+      "dependsOn": ["^build", "build"],
       "cache": false,
       "persistent": true
     }

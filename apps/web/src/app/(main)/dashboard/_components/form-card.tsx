@@ -1,32 +1,35 @@
-import type { RouterOutputs } from "@formbase/trpc/shared";
-import { CopyButton } from "@formbase/ui/components/copy-button";
-import { Button } from "@formbase/ui/primitives/button";
+import Link from 'next/link';
+
+import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { formatDistanceToNow } from 'date-fns';
+
+import { type RouterOutputs } from '@formbase/api';
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@formbase/ui/primitives/card";
+} from '@formbase/ui/primitives/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@formbase/ui/primitives/dropdown-menu";
-import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import { formatDistanceToNow } from "date-fns";
-import Link from "next/link";
+} from '@formbase/ui/primitives/dropdown-menu';
 
-import { DeleteFormDialog } from "../../form/[id]/delete-form-dialog";
+import { CopyButton } from '~/components/copy-button';
+
+import { DeleteFormDialog } from '../../form/[id]/delete-form-dialog';
 
 type FormCardProp = {
-  form: RouterOutputs["form"]["userForms"][number];
+  form: RouterOutputs['form']['userForms'][number];
   submissionsCount: number;
   updatedAt: Date | null;
   createdAt: Date;
 };
 
-export async function FormCard({
+export function FormCard({
   form,
   submissionsCount,
   createdAt,
@@ -54,7 +57,11 @@ export async function FormCard({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={(e) => e.preventDefault()}>
+                <DropdownMenuItem
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
                   <DeleteFormDialog formId={form.id} />
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -69,13 +76,13 @@ export async function FormCard({
 
           {submissionsCount === 0 ? (
             <p className="text-sm text-muted-foreground">
-              {" "}
+              {' '}
               Last submission: None yet
             </p>
           ) : (
             <p className="text-sm text-muted-foreground">
-              Last submission:{" "}
-              {formatDistanceToNow(new Date(updatedAt || createdAt), {
+              Last submission:{' '}
+              {formatDistanceToNow(new Date(updatedAt ?? createdAt), {
                 addSuffix: true,
               })}
             </p>

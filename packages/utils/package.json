@@ -1,0 +1,21 @@
+{
+  "name": "@formbase/utils",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --cache --max-warnings 0",
+    "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "nanoid": "^5.0.7",
+    "tailwind-merge": "^2.3.0"
+  },
+  "devDependencies": {
+    "@formbase/env": "workspace:^",
+    "@formbase/tsconfig": "workspace:^",
+    "@types/node": "^20.12.12",
+    "eslint-config-formbase": "workspace:^"
+  }
+}

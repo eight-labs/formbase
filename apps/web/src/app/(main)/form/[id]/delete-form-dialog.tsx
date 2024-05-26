@@ -1,5 +1,10 @@
-import { api } from "@formbase/trpc/react";
-import { Button } from "@formbase/ui/primitives/button";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { TrashIcon } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
+
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -7,11 +12,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@formbase/ui/primitives/dialog";
-import { TrashIcon } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
+} from '@formbase/ui/primitives/dialog';
+
+import { api } from '~/lib/trpc/react';
 
 type DeleteFormDialogProps = {
   formId: string;
@@ -25,7 +28,7 @@ export function DeleteFormDialog({
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
-  const { mutateAsync: deleteForm, isLoading: isFormDeleting } =
+  const { mutateAsync: deleteForm, isPending: isFormDeleting } =
     api.form.delete.useMutation();
 
   const handleDelete = async () => {
@@ -36,7 +39,7 @@ export function DeleteFormDialog({
       {
         onSuccess: () => {
           router.refresh();
-          toast.success("Your form has been deleted", {
+          toast.success('Your form has been deleted', {
             icon: <TrashIcon className="h-4 w-4" />,
           });
           onSuccessfulDelete?.();
@@ -62,7 +65,9 @@ export function DeleteFormDialog({
           <Button
             variant="outline"
             className="w-full"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+            }}
           >
             Cancel
           </Button>

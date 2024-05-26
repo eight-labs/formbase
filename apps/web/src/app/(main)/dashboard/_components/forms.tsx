@@ -1,29 +1,21 @@
-"use client";
+'use client';
 
-import { type RouterOutputs } from "@formbase/trpc/shared";
-import { use } from "react";
+import { use } from 'react';
 
-import { EmptyFormState } from "./empty-state";
-import { FormCard } from "./form-card";
+import { type RouterOutputs } from '@formbase/api';
+
+import { EmptyFormState } from './empty-state';
+import { FormCard } from './form-card';
 
 interface FormsProps {
   promises: Promise<
-    [RouterOutputs["form"]["userForms"], RouterOutputs["stripe"]["getPlan"]]
+    // [RouterOutputs['form']['userForms'], RouterOutputs['stripe']['getPlan']]
+    [RouterOutputs['form']['userForms']]
   >;
 }
 
 export function Forms({ promises }: FormsProps) {
-  /**
-   * use is a React Hook that lets you read the value of a resource like a Promise or context.
-   * @see https://react.dev/reference/react/use
-   */
-  const [forms, _subscriptionPlan] = use(promises);
-
-  /**
-   * useOptimistic is a React Hook that lets you show a different state while an async action is underway.
-   * It accepts some state as an argument and returns a copy of that state that can be different during the duration of an async action such as a network request.
-   * @see https://react.dev/reference/react/useOptimistic
-   */
+  const [forms] = use(promises);
 
   return (
     <div className="space-y-8">

@@ -1,31 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+'use client';
 
-import { formatFileName } from "@formbase/lib/utils";
-import { api } from "@formbase/trpc/react";
-import { Button } from "@formbase/ui/primitives/button";
-import { Checkbox } from "@formbase/ui/primitives/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@formbase/ui/primitives/dropdown-menu";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@formbase/ui/primitives/table";
-import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import * as React from 'react';
+import { useRouter } from 'next/navigation';
+
 import type {
   ColumnDef,
   ColumnFiltersState,
+  Row,
   SortingState,
   VisibilityState,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
+
+import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 import {
   flexRender,
   getCoreRowModel,
@@ -33,22 +19,36 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import { Trash2, TrashIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import * as React from "react";
-import { toast } from "sonner";
+} from '@tanstack/react-table';
+import { Trash2, TrashIcon } from 'lucide-react';
+import { toast } from 'sonner';
 
-import { ImagePreviewDialog } from "./image-preview-dialog";
+import { type FormData } from '@formbase/db/schema';
+import { Button } from '@formbase/ui/primitives/button';
+import { Checkbox } from '@formbase/ui/primitives/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@formbase/ui/primitives/dropdown-menu';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@formbase/ui/primitives/table';
+import { formatFileName } from '@formbase/utils';
+
+import { api } from '~/lib/trpc/react';
+
+import { ImagePreviewDialog } from './image-preview-dialog';
 
 type SubmissionsTableProps = {
   formKeys: string[];
-  formId: string;
-  submissions: any; // FIXME: take care of this
-};
-
-type FormDataType = {
-  [key: string]: string;
+  submissions: FormData[];
 };
 
 export function SubmissionsTable({
@@ -82,7 +82,7 @@ export function SubmissionsTable({
         onSuccess: () => {
           router.refresh();
 
-          toast.success("Submission has been deleted", {
+          toast.success('Submission has been deleted', {
             icon: <TrashIcon className="h-4 w-4" />,
           });
         },
@@ -90,19 +90,19 @@ export function SubmissionsTable({
     );
   };
 
-  const columns: ColumnDef<FormDataType>[] = [
+  const columns: Array<ColumnDef<FormData>> = [
     {
-      id: "select",
+      id: 'select',
       header: ({ table }) => {
         return (
           <Checkbox
             checked={
               table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && "indeterminate")
+              (table.getIsSomePageRowsSelected() && 'indeterminate')
             }
-            onCheckedChange={(value) =>
-              table.toggleAllPageRowsSelected(!!value)
-            }
+            onCheckedChange={(value) => {
+              table.toggleAllPageRowsSelected(!!value);
+            }}
             aria-label="Select all"
           />
         );
@@ -110,7 +110,9 @@ export function SubmissionsTable({
       cell: ({ row }) => (
         <Checkbox
           checked={row.getIsSelected()}
-          onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+          onCheckedChange={(value: unknown) => {
+            row.toggleSelected(!!value);
+          }}
           aria-label="Select row"
         />
       ),
@@ -118,10 +120,10 @@ export function SubmissionsTable({
       enableHiding: false,
     },
 
-    ...formKeysArray.map((submission: any) => {
-      if (submission === "image" || submission === "file") {
+    ...formKeysArray.map((submission: string) => {
+      if (submission === 'image' || submission === 'file') {
         return {
-          accessorKey: submission as string,
+          accessorKey: submission,
           header: () => {
             return (
               <Button
@@ -133,14 +135,15 @@ export function SubmissionsTable({
               </Button>
             );
           },
-          cell: ({ row }: any) => {
-            const data = row.original.data;
-            if (!data[submission]) {
+          cell: ({ row }: { row: Row<FormData> }) => {
+            const data = row.original.data as Record<string, unknown> | null;
+            if (!data?.[submission]) {
               return null;
             }
 
-            const fileUrl = data[submission];
+            const fileUrl = data[submission] as string;
             const fileName = formatFileName(fileUrl);
+
             return (
               <div className="flex items-center">
                 <a
@@ -151,7 +154,7 @@ export function SubmissionsTable({
                 >
                   {fileName}
                 </a>
-                {submission === "image" && (
+                {submission === 'image' && (
                   <ImagePreviewDialog fileName={fileName} imageUrl={fileUrl} />
                 )}
               </div>
@@ -161,7 +164,7 @@ export function SubmissionsTable({
       }
 
       return {
-        accessorKey: submission as string,
+        accessorKey: submission,
         header: () => {
           return (
             <Button
@@ -173,14 +176,23 @@ export function SubmissionsTable({
             </Button>
           );
         },
-        cell: ({ row }: any) => {
-          return <div>{row.original.data[submission]}</div>;
+        cell: ({ row }: { row: Row<FormData> }) => {
+          const data = row.original.data as Record<
+            string,
+            string | undefined
+          > | null;
+
+          if (!data) {
+            return null;
+          }
+
+          return <div>{data[submission]}</div>;
         },
       };
     }),
 
     {
-      accessorKey: "createdAt",
+      accessorKey: 'createdAt',
       header: () => {
         return (
           <Button
@@ -192,35 +204,39 @@ export function SubmissionsTable({
           </Button>
         );
       },
-      sortingFn: (a: any, b: any) => {
+      sortingFn: (a, b) => {
         const dateA = new Date(a.original.createdAt);
         const dateB = new Date(b.original.createdAt);
         return dateA.getTime() - dateB.getTime();
       },
-      cell: ({ row }: any) => {
+      cell: ({ row }: { row: Row<FormData> }) => {
         const date = new Date(row.original.createdAt);
-        const dateString = date.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
+        const dateString = date.toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
         });
 
-        const timeString = date.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
+        const timeString = date.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
           hour12: true,
         });
 
-        return <div>{dateString + ", " + timeString}</div>;
+        return <div>{dateString + ', ' + timeString}</div>;
       },
     },
 
     {
-      id: "actions",
+      id: 'actions',
       enableHiding: false,
       size: 20,
-      cell: ({ row }) => {
-        const submissionId = row.original.id as string;
+      cell: ({ row }: { row: Row<FormData> }) => {
+        const submissionId = row.original.id;
+
+        if (!submissionId) {
+          return null;
+        }
 
         return (
           <DropdownMenu>
@@ -293,11 +309,11 @@ export function SubmissionsTable({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -324,14 +340,16 @@ export function SubmissionsTable({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.previousPage()}
+            onClick={() => {
+              table.previousPage();
+            }}
             disabled={!table.getCanPreviousPage()}
           >
             Previous
@@ -339,7 +357,9 @@ export function SubmissionsTable({
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.nextPage()}
+            onClick={() => {
+              table.nextPage();
+            }}
             disabled={!table.getCanNextPage()}
           >
             Next

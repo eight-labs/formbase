@@ -1,0 +1,11 @@
+{
+  "name": "@formbase/tsconfig",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "./base.json",
+    "./next.json",
+    "./react.json"
+  ]
+}

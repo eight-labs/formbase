@@ -1,128 +1,128 @@
-import { db } from "@formbase/db";
-import { formDatas, forms } from "@formbase/db/schema";
-import { sendMail } from "@formbase/email/mailer";
-import { renderNewSubmissionEmail } from "@formbase/email/new-submission";
-import { generateId } from "@formbase/lib/utils/generate-id";
-import { eq } from "drizzle-orm";
-import { userAgent } from "next/server";
+import { userAgent } from 'next/server';
 
-import {
-  assignFileOrImage,
-  uploadFileFromBlob,
-} from "../../../../server/upload-file";
+import { type Form } from '@formbase/db/schema';
+
+import { sendMail } from '~/lib/email/mailer';
+import { renderNewSubmissionEmail } from '~/lib/email/templates/new-submission';
+import { api } from '~/lib/trpc/server';
+import { assignFileOrImage, uploadFileFromBlob } from '~/lib/upload-file';
+
+type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
+
+async function getFormData(request: Request): Promise<{
+  data: Record<string, Blob | string | undefined>;
+  source: 'formData' | 'json';
+}> {
+  try {
+    const formData = await request.formData();
+    const data: Record<string, Blob | string | undefined> = {};
+    formData.forEach((value, key) => {
+      data[key] = value as Blob | string;
+    });
+    return { data, source: 'formData' };
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes('FormData')) {
+      const jsonData = (await request.json()) as Record<string, unknown>;
+      if (typeof jsonData !== 'object') {
+        throw new Error('Invalid form data');
+      }
+      const data: Record<string, Blob | string | undefined> = {};
+      Object.keys(jsonData).forEach((key) => {
+        data[key] = jsonData[key] as Blob | string | undefined;
+      });
+      return { data, source: 'json' };
+    } else {
+      throw new Error('Invalid form data');
+    }
+  }
+}
+
+async function processFileUploads(
+  formData: Record<string, Blob | string | undefined>,
+  formDataFromRequest: FormData,
+) {
+  const fileKeys = Object.keys(formData).filter(
+    (key) => formData[key] instanceof Blob,
+  );
+
+  for (const key of fileKeys) {
+    const file = formDataFromRequest.get(key) as File;
+    const fileUrl = await uploadFileFromBlob({ file });
+    assignFileOrImage({ formData, key, fileUrl });
+  }
+}
+
+async function handleEmailNotifications(form: Form, formId: string) {
+  if (form.enableEmailNotifications) {
+    const user = await api.user.getUserById({ userId: form.userId });
+    if (!user) throw new Error('User not found');
+
+    await sendMail({
+      to: user.email,
+      subject: `New Submission for ${form.title}`,
+      body: renderNewSubmissionEmail({
+        link: `http://localhost:3000/form/${formId}`,
+        formTitle: form.title,
+      }),
+    });
+  }
+}
 
 export async function POST(
   request: Request,
   { params }: { params: { id: string } },
 ) {
-  if (!params.id) {
-    return new Response("Form ID is required", { status: 400 });
-  }
-
-  const formId = params.id;
-  const form = await db.query.forms.findFirst({
-    where: (table, { eq }) => eq(table.id, formId),
-  });
-
-  let formDataFromRequest;
-  let source;
-
   try {
-    formDataFromRequest = await request.formData();
-    source = "formData";
-  } catch (error) {
-    const errorJSON = error as unknown as Error;
-
-    if (
-      errorJSON.name === "TypeError" &&
-      errorJSON.message.includes("FormData")
-    ) {
-      formDataFromRequest = await request.json();
-      source = "json";
-
-      if (!formDataFromRequest) {
-        return new Response("Invalid form data", { status: 400 });
-      }
+    if (!params.id) {
+      return new Response('Form ID is required', { status: 400 });
     }
-  }
 
-  try {
-    const formData =
-      source === "formData"
-        ? Object.fromEntries(formDataFromRequest)
-        : formDataFromRequest;
+    const formId = params.id;
+    const form = await api.form.getFormById({ formId });
+    if (!form) {
+      return new Response('Form not found', { status: 404 });
+    }
+
+    const { data: formData, source } = await getFormData(request);
+
+    if (source === 'formData')
+      await processFileUploads(formData, formData as unknown as FormData);
+
+    const formDataKeys = Object.keys(formData);
+    const formKeys = form.keys;
+    const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
+
+    await api.formData.setFormData({
+      data: formData as Json,
+      formId,
+      keys: updatedKeys,
+    });
+
+    void handleEmailNotifications(form, formId);
 
     const { browser } = userAgent(request);
 
-    const fileKeys = Object.keys(formData).filter(
-      (key) => formData[key] instanceof Blob,
-    );
-
-    for (const key of fileKeys) {
-      const file = formDataFromRequest.get(key) as File;
-      const fileUrl = await uploadFileFromBlob({ file });
-
-      assignFileOrImage({
-        formData,
-        key,
-        fileUrl,
-      });
-    }
-
-    const formDataKeys = Object.keys(formData);
-    const formKeys = form?.keys || [];
-    const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
-
-    if (!form) {
-      return new Response("Form not found", { status: 404 });
-    }
-
-    await db.transaction(async (tx) => {
-      await tx.insert(formDatas).values({
-        data: formData,
-        formId,
-        id: generateId(15),
-        createdAt: new Date(),
-      });
-
-      await tx
-        .update(forms)
-        .set({
-          updatedAt: new Date(),
-          keys: updatedKeys,
-        })
-        .where(eq(forms.id, formId));
-    });
-
-    if (form.enableEmailNotifications) {
-      const userId = form.userId;
-
-      const user = await db.query.users.findFirst({
-        where: (table, { eq }) => eq(table.id, userId),
-      });
-
-      sendMail({
-        to: user!.email,
-        subject: `New Submission for ${form.title}`,
-        body: renderNewSubmissionEmail({
-          link: `http://localhost:3000/form/${formId}`,
-          formTitle: form.title,
-        }),
-      });
-    }
-
     if (!browser.name) {
-      return Response.json({
-        formId,
-        message: "Submission successful",
-        data: formData,
-      });
+      return new Response(
+        JSON.stringify({
+          formId,
+          message: 'Submission successful',
+          data: formData,
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
     }
 
-    return Response.redirect(`http://localhost:3000/s/${formId}`, 303);
+    return new Response(null, {
+      status: 303,
+      headers: { Location: `http://localhost:3000/s/${formId}` },
+    });
   } catch (error) {
     console.error(error);
-    return new Response("There was an issue processing your form", {
+    return new Response('There was an issue processing your form', {
       status: 500,
     });
   }

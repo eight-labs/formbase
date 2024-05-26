@@ -1,9 +1,13 @@
-"use client";
+'use client';
 
-import { logout } from "@formbase/lib/auth/actions";
-import { APP_TITLE } from "@formbase/lib/constants";
-import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
-import { LoadingButton } from "@formbase/ui/components/loading-button";
+import { useState } from 'react';
+import { useTheme } from 'next-themes';
+import Link from 'next/link';
+
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
+
+import { logout } from '@formbase/auth/actions/logout';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -11,8 +15,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@formbase/ui/primitives/alert-dialog";
-import { Button } from "@formbase/ui/primitives/button";
+} from '@formbase/ui/primitives/alert-dialog';
+import { Button } from '@formbase/ui/primitives/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,11 +29,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@formbase/ui/primitives/dropdown-menu";
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import { useState } from "react";
-import { toast } from "sonner";
+} from '@formbase/ui/primitives/dropdown-menu';
+
+import { LoadingButton } from '~/components/loading-button';
 
 export const UserDropdown = ({
   email,
@@ -47,7 +49,7 @@ export const UserDropdown = ({
       <DropdownMenuTrigger className={className}>
         {/* eslint @next/next/no-img-element:off */}
         <img
-          src={avatar ?? "https://source.boringavatars.com/marble/60/" + email}
+          src={avatar ?? 'https://source.boringavatars.com/marble/60/' + email}
           alt="Avatar"
           className="block h-8 w-8 rounded-full leading-none"
           width={64}
@@ -86,13 +88,25 @@ export const UserDropdown = ({
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
-              <DropdownMenuItem onClick={() => setTheme("light")}>
+              <DropdownMenuItem
+                onClick={() => {
+                  setTheme('light');
+                }}
+              >
                 Light
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setTheme("dark")}>
+              <DropdownMenuItem
+                onClick={() => {
+                  setTheme('dark');
+                }}
+              >
                 Dark
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setTheme("system")}>
+              <DropdownMenuItem
+                onClick={() => {
+                  setTheme('system');
+                }}
+              >
                 System
               </DropdownMenuItem>
             </DropdownMenuSubContent>
@@ -116,7 +130,7 @@ const SignoutConfirmation = () => {
     setIsLoading(true);
     try {
       await logout();
-      toast("Signed out successfully");
+      toast('Signed out successfully');
     } catch (error) {
       if (error instanceof Error) {
         toast(error.message, {
@@ -142,14 +156,19 @@ const SignoutConfirmation = () => {
       <AlertDialogContent className="max-w-xs">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-center">
-            Sign out from {APP_TITLE}?
+            Sign out from Formbase?
           </AlertDialogTitle>
           <AlertDialogDescription>
             You will be redirected to the home page.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-center">
-          <Button variant="outline" onClick={() => setOpen(false)}>
+          <Button
+            variant="outline"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
             Cancel
           </Button>
           <LoadingButton loading={isLoading} onClick={handleSignout}>

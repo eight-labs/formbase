@@ -1,5 +1,12 @@
 {
-  "extends": "@formbase/typescript-config/react-library.json",
-  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "**/*.json"],
-  "exclude": ["dist", "build", "node_modules"]
+  "extends": ["@formbase/tsconfig/react.json"],
+  "compilerOptions": {
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.cjs", "**/*.cjs"],
+  "exclude": ["dist", "node_modules"]
 }

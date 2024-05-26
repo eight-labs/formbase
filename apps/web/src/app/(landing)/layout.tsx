@@ -1,8 +1,9 @@
-import { validateRequest } from "@formbase/lib/auth/validate-request";
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react';
 
-import { Header } from "./_components/header";
-import { SiteFooter } from "./_components/site-footer";
+import { validateRequest } from '@formbase/auth';
+
+import { Header } from './_components/header';
+import { SiteFooter } from './_components/site-footer';
 
 async function LandingPageLayout({ children }: { children: ReactNode }) {
   const { user } = await validateRequest();

@@ -1,22 +1,24 @@
-import { api } from "@formbase/trpc/server";
-import { CopyButton } from "@formbase/ui/components/copy-button";
+import { type FormData } from '@formbase/db/schema';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@formbase/ui/primitives/tabs";
+} from '@formbase/ui/primitives/tabs';
 
-import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
-import { FormSettings } from "./form-settings";
-import { SubmissionsTable } from "./submissions-table";
-import { EmptyFormState } from "../../dashboard/_components/empty-state";
+import { CopyButton } from '~/components/copy-button';
+import { api } from '~/lib/trpc/server';
+
+import { EmptyFormState } from '../../dashboard/_components/empty-state';
+import { ExportSubmissionsDropDownButton } from './export-submissions-button';
+import { FormSettings } from './form-settings';
+import { SubmissionsTable } from './submissions-table';
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
   const [form, formSubmissions] = await Promise.all([
-    api.form.get.query({ formId }),
-    api.formData.all.query({ formId }),
+    api.form.get({ formId }),
+    api.formData.all({ formId }),
   ]);
 
   return (
@@ -49,15 +51,14 @@ export default async function FormPage({ params }: { params: { id: string } }) {
                   Total Submissions: {formSubmissions.length}
                 </span>
                 <ExportSubmissionsDropDownButton
-                  submissions={formSubmissions}
-                  formKeys={form?.keys || []}
-                  formTitle={form?.title || ""}
+                  submissions={formSubmissions as FormData[]}
+                  formKeys={form?.keys ?? []}
+                  formTitle={form?.title ?? ''}
                 />
               </div>
               <SubmissionsTable
-                formKeys={form?.keys || []}
-                formId={formId}
-                submissions={formSubmissions}
+                formKeys={form?.keys ?? []}
+                submissions={formSubmissions as FormData[]}
               />
             </>
           )}

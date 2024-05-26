@@ -1,25 +1,27 @@
-import { validateRequest } from "@formbase/lib/auth/validate-request";
-import { redirects } from "@formbase/lib/constants";
+import { redirect } from 'next/navigation';
+
+import { validateRequest } from '@formbase/auth';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@formbase/ui/primitives/card";
-import { redirect } from "next/navigation";
+} from '@formbase/ui/primitives/card';
 
-import { SendResetEmail } from "./send-reset-email";
+import { SendResetEmail } from './send-reset-email';
 
 export const metadata = {
-  title: "Forgot Password",
-  description: "Forgot Password Page",
+  title: 'Forgot Password',
+  description: 'Forgot Password Page',
 };
 
 export default async function ForgotPasswordPage() {
   const { user } = await validateRequest();
 
-  if (user) redirect(redirects.afterLogin);
+  if (user) {
+    redirect('/dashboard');
+  }
 
   return (
     <Card className="w-full max-w-md">

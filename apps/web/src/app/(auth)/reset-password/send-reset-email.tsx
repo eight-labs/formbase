@@ -1,17 +1,18 @@
-"use client";
+'use client';
 
-import { sendPasswordResetLink } from "@formbase/lib/auth/actions";
-import { redirects } from "@formbase/lib/constants";
-import { ExclamationTriangleIcon } from "@formbase/ui/components/icons";
-import { SubmitButton } from "@formbase/ui/components/submit-button";
-import { Button } from "@formbase/ui/primitives/button";
-import { Input } from "@formbase/ui/primitives/input";
-import { Label } from "@formbase/ui/primitives/label";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
-import { toast } from "sonner";
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
+
+import { sendPasswordResetLink } from '@formbase/auth/actions';
+import { Button } from '@formbase/ui/primitives/button';
+import { Input } from '@formbase/ui/primitives/input';
+import { Label } from '@formbase/ui/primitives/label';
+
+import { SubmitButton } from '~/components/submit-button';
 
 export function SendResetEmail() {
   const [state, formAction] = useFormState(sendPasswordResetLink, null);
@@ -19,18 +20,17 @@ export function SendResetEmail() {
 
   useEffect(() => {
     if (state?.success) {
-      toast("A password reset link has been sent to your email.");
-      router.push(redirects.toLogin);
+      toast('A password reset link has been sent to your email.');
+      router.push('/login');
     }
     if (state?.error) {
-      toast(state.error, {
-        icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
-      });
+      toast(state.error);
+      router.push('/reset-password');
     }
   }, [state?.error, state?.success]);
 
   return (
-    <form className="space-y-4" action={formAction}>
+    <form className="space-y-4 -mt-4" action={formAction}>
       <div className="space-y-2">
         <Label>Your Email</Label>
         <Input
@@ -43,8 +43,8 @@ export function SendResetEmail() {
       </div>
 
       <div className="flex flex-wrap justify-between">
-        <Link href={redirects.toSignup}>
-          <Button variant={"link"} size={"sm"} className="p-0">
+        <Link href="/signup">
+          <Button variant={'link'} size={'sm'} className="p-0">
             Not signed up? Sign up now
           </Button>
         </Link>

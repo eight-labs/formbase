@@ -1,33 +1,36 @@
-import "../styles/globals.css";
+import '../styles/globals.css';
 
-import { env } from "@formbase/env";
-import { APP_TITLE } from "@formbase/lib/constants";
-import { cn } from "@formbase/lib/utils";
-import { TRPCReactProvider } from "@formbase/trpc/react";
-import { ThemeProvider } from "@formbase/ui/components/theme-provider";
-import { Toaster } from "@formbase/ui/primitives/sonner";
-import type { Metadata, Viewport } from "next";
-import { Inter as FontSans } from "next/font/google";
-import Script from "next/script";
+import { Inter as FontSans } from 'next/font/google';
+import Script from 'next/script';
+
+import type { Metadata, Viewport } from 'next';
+
+import { Toaster } from 'sonner';
+
+import { env } from '@formbase/env';
+import { cn } from '@formbase/ui/utils/cn';
+
+import { ThemeProvider } from '~/components/theme-provider';
+import { TRPCReactProvider } from '~/lib/trpc/react';
 
 const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+  subsets: ['latin'],
+  variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
   title: {
-    default: APP_TITLE,
-    template: `%s | ${APP_TITLE}`,
+    default: 'Formbase',
+    template: `%s | Formbase`,
   },
-  description: "Manage forms with ease",
-  icons: [{ rel: "icon", url: "/icon.png" }],
+  description: 'Manage forms with ease',
+  icons: [{ rel: 'icon', url: '/icon.png' }],
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
 };
 
@@ -40,7 +43,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
         )}
       >

@@ -59,11 +59,11 @@ To submit the form data using an `onsubmit` handler, follow these steps:
 
 ```html
 <script>
-  document.getElementById("formbase-form").onsubmit = async function (event) {
+  document.getElementById('formbase-form').onsubmit = async function (event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const response = await fetch("https://formbase.dev/s/YOUR_FORM_ID", {
-      method: "POST",
+    const response = await fetch('https://formbase.dev/s/YOUR_FORM_ID', {
+      method: 'POST',
       body: formData,
     });
     const data = await response.json();

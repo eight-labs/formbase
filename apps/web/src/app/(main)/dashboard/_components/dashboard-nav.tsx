@@ -1,29 +1,28 @@
-"use client";
+'use client';
 
-import { cn } from "@formbase/lib/utils";
-import {
-  CreditCard,
-  FileTextIcon,
-  GearIcon,
-} from "@formbase/ui/components/icons";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { GearIcon } from '@radix-ui/react-icons';
+import { CreditCard, FileTextIcon } from 'lucide-react';
+
+import { cn } from '@formbase/ui/utils/cn';
 
 const items = [
   {
-    title: "Posts",
-    href: "/dashboard",
+    title: 'Posts',
+    href: '/dashboard',
     icon: FileTextIcon,
   },
 
   {
-    title: "Billing",
-    href: "/dashboard/billing",
+    title: 'Billing',
+    href: '/dashboard/billing',
     icon: CreditCard,
   },
   {
-    title: "Settings",
-    href: "/dashboard/settings",
+    title: 'Settings',
+    href: '/dashboard/settings',
     icon: GearIcon,
   },
 ];
@@ -41,8 +40,8 @@ export function DashboardNav({ className }: Props) {
         <Link href={item.href} key={item.href}>
           <span
             className={cn(
-              "group flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground",
-              path === item.href ? "bg-accent" : "transparent",
+              'group flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground',
+              path === item.href ? 'bg-accent' : 'transparent',
             )}
           >
             <item.icon className="mr-2 h-4 w-4" />

@@ -1,29 +1,34 @@
 {
   "name": "formbase",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "d": "dotenvx run -- pnpm docker:start && pnpm db:generate && pnpm db:push && pnpm dev",
-    "dev": "dotenvx run -- turbo dev",
-    "db:push": "dotenvx run -- pnpm --filter @formbase/db run db:push",
-    "db:studio": " dotenvx run -- pnpm --filter @formbase/db run db:studio",
-    "db:generate": "dotenvx run -- pnpm --filter @formbase/db run db:generate",
-    "lint": "turbo lint",
     "build": "turbo build",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "typecheck": "tsc --noEmit",
-    "docker:start": "docker-compose -f ./docker/docker-compose.yml up -d"
+    "clean": "rimraf --glob **/node_modules **/dist **/.turbo **/.next **/.astro **/.eslintcache pnpm-lock.yaml **/.tsbuildinfo **/test-results",
+    "d": "pnpm install && pnpm docker:start && pnpm run dev",
+    "dev": "turbo dev",
+    "docker:start": "docker-compose  -p formbase -f ./docker/docker-compose.yml up -d",
+    "format": "prettier \"**/*\" --ignore-unknown --list-different --write",
+    "format:check": "prettier \"**/*\" --ignore-unknown --list-different",
+    "lint": "eslint . --cache --max-warnings 0",
+    "reset:changelog": "rimraf --glob **/*.mdx",
+    "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "devDependencies": {
-    "@formbase/eslint-config": "workspace:*",
-    "@formbase/typescript-config": "workspace:*",
+    "@formbase/tsconfig": "workspace:^",
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "@types/eslint": "^8.56.10",
+    "eslint": "^8.57.0",
+    "eslint-config-formbase": "workspace:^",
     "prettier": "^3.2.5",
-    "turbo": "^1.13.3"
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-curly": "^0.2.1",
+    "prettier-plugin-jsdoc": "^1.3.0",
+    "prettier-plugin-packagejson": "^2.5.0",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "rimraf": "^5.0.7",
+    "turbo": "^1.13.3",
+    "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@9.0.4",
-  "engines": {
-    "node": ">=20"
-  },
-  "dependencies": {
-    "@dotenvx/dotenvx": "^0.37.0"
-  }
+  "packageManager": "pnpm@9.0.6"
 }

@@ -1,8 +1,9 @@
-import type { User } from "@formbase/db/schema";
-import { logout } from "@formbase/lib/auth/actions";
-import { validateRequest } from "@formbase/lib/auth/validate-request";
-import { redirects } from "@formbase/lib/constants";
-import { SubmitButton } from "@formbase/ui/components/submit-button";
+import { redirect } from 'next/navigation';
+
+import type { LuciaUser } from '@formbase/auth';
+
+import { validateRequest } from '@formbase/auth';
+import { logout } from '@formbase/auth/actions/logout';
 import {
   Card,
   CardContent,
@@ -10,19 +11,22 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@formbase/ui/primitives/card";
-import { redirect } from "next/navigation";
+} from '@formbase/ui/primitives/card';
+
+import { SubmitButton } from '~/components/submit-button';
 
 export default async function AccountPage() {
-  const { user } = (await validateRequest()) as { user: User | null };
-  if (!user) redirect(redirects.toLogin);
+  const { user } = (await validateRequest()) as { user: LuciaUser | null };
+  if (!user) {
+    redirect('/login');
+  }
 
   return (
     <main className="container mx-auto min-h-screen p-4">
       <Card className="max-w-sm">
         <CardHeader>
           <CardTitle> {user.email}!</CardTitle>
-          <CardDescription>You've successfully logged in!</CardDescription>
+          <CardDescription>You&apos;ve successfully logged in!</CardDescription>
         </CardHeader>
         <CardContent>This is a private page.</CardContent>
         <CardFooter>
