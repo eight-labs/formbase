@@ -4,6 +4,7 @@ import React, { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -20,13 +21,17 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@formbase/ui/primitives/form';
 import { Input } from '@formbase/ui/primitives/input';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@formbase/ui/primitives/tooltip';
 
 import { api } from '~/lib/trpc/react';
 
@@ -102,7 +107,7 @@ export function CreateFormDialog() {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem className="space-y-0.5">
+                <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -116,7 +121,7 @@ export function CreateFormDialog() {
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem className="space-y-0.5">
+                <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -130,11 +135,18 @@ export function CreateFormDialog() {
               control={form.control}
               name="returnUrl"
               render={({ field }) => (
-                <FormItem className="space-y-0.5">
-                  <FormLabel>Return URL</FormLabel>
-                  {/* <FormDescription className="text-[11px]">
-                    Where should users be redirected after form submission?
-                  </FormDescription> */}
+                <FormItem>
+                  <FormLabel className="flex items-end gap-1">
+                    Return URL
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <InfoCircledIcon width={13} />
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-white dark:bg-black">
+                        Where should users be redirected after form submission?
+                      </TooltipContent>
+                    </Tooltip>
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="http://..." {...field} />
                   </FormControl>
