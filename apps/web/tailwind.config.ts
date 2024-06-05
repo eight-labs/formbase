@@ -1,7 +1,4 @@
 import type { Config } from 'tailwindcss';
-
-import { themer } from '@tailus/themer';
-
 import { tailwindPreset } from '@formbase/tailwind';
 
 const config: Config = {
@@ -19,22 +16,7 @@ const config: Config = {
       },
     },
   },
-
-  plugins: [
-    themer({
-      radius: 'smoothest',
-      background: 'lighter',
-      border: 'light',
-      padding: 'large',
-      components: {
-        button: {
-          rounded: '2xl',
-        },
-      },
-    }),
-  ],
-
-  presets: [tailwindPreset],
+presets: [tailwindPreset],
 };
 
 export default config;

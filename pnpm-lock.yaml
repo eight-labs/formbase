@@ -101,9 +101,6 @@ importers:
       '@react-email/render':
         specifier: ^0.0.15
         version: 0.0.15
-      '@tailus/themer':
-        specifier: ^0.0.4
-        version: 0.0.4
       '@tailwindcss/typography':
         specifier: ^0.5.13
         version: 0.5.13(tailwindcss@3.4.3)
@@ -347,6 +344,9 @@ importers:
       '@radix-ui/colors':
         specifier: ^3.0.0
         version: 3.0.0
+      '@tailus/themer':
+        specifier: 0.0.5
+        version: 0.0.5
       '@tailwindcss/aspect-ratio':
         specifier: ^0.4.2
         version: 0.4.2(tailwindcss@3.4.3)
@@ -365,12 +365,6 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.3)
-      windy-radix-palette:
-        specifier: 2.0.0-beta.7
-        version: 2.0.0-beta.7(@radix-ui/colors@3.0.0)(tailwindcss@3.4.3)
-      windy-radix-typography:
-        specifier: 1.0.0-beta.0
-        version: 1.0.0-beta.0(@radix-ui/colors@3.0.0)(@tailwindcss/typography@0.5.13(tailwindcss@3.4.3))(tailwindcss@3.4.3)(windy-radix-palette@2.0.0-beta.7(@radix-ui/colors@3.0.0)(tailwindcss@3.4.3))
     devDependencies:
       '@formbase/tsconfig':
         specifier: workspace:^
@@ -1431,10 +1425,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@noble/hashes@1.4.0':
-    resolution: {integrity: sha512-V1JJ1WTRUqHHrOSh597hURcMqVKVGL/ea3kv0gSnEdsEZ0/+VyPghM1lMNGc00z7CIQorSvbKpuJkxvuHbvdbg==}
-    engines: {node: '>= 16'}
-
   '@node-rs/argon2-android-arm-eabi@1.7.0':
     resolution: {integrity: sha512-udDqkr5P9E+wYX1SZwAVPdyfYvaF4ry9Tm+R9LkfSHbzWH0uhU6zjIwNRp7m+n4gx691rk+lqqDAIP8RLKwbhg==}
     engines: {node: '>= 10'}
@@ -1623,9 +1613,6 @@ packages:
 
   '@one-ini/wasm@0.1.1':
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
-
-  '@paralleldrive/cuid2@2.2.2':
-    resolution: {integrity: sha512-ZOBkgDwEdoYVlSeRbYYXs0S9MejQofiVYoTbKzy/6GQa39/q5tQU2IX46+shYnUkpEl3wc+J6wRlar7r2EK2xA==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -2507,8 +2494,8 @@ packages:
       typescript:
         optional: true
 
-  '@tailus/themer@0.0.4':
-    resolution: {integrity: sha512-hQOf/qRgSzWqsEtU9I94eQcpvLYyR70NPcsLMY21aIq+GNc09G9X4Iu+rYYBa+QXFC/SYesZi3i31+HSvgvESw==}
+  '@tailus/themer@0.0.5':
+    resolution: {integrity: sha512-ekqpqn5YaRZ6scGDu8yXOsMjMoxyBTwUo/jmYhB49gNJKCOtX3hMUmO0FvZXg2KfLDD0JL9jRt3ePWoGOt6atg==}
 
   '@tailwindcss/aspect-ratio@0.4.2':
     resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
@@ -6248,20 +6235,6 @@ packages:
     engines: {node: '>= 8'}
     hasBin: true
 
-  windy-radix-palette@2.0.0-beta.7:
-    resolution: {integrity: sha512-hkPZFp3efEjvSlrMqmqseaDnAJpAK16No9tvPL2k/AUZTvTCps5kATOKatQG+Z8lewNqx2JVwa9f7eSqicrP6w==}
-    peerDependencies:
-      '@radix-ui/colors': '>=3.0.0'
-      tailwindcss: '>=3.0.0'
-
-  windy-radix-typography@1.0.0-beta.0:
-    resolution: {integrity: sha512-7lvJj3TMXQ2yeuUgn2vPId9zIUyzH+ZBhAfXQlORbq3I33kVFGjz0EaLsriDZwIl/HafaW+mG1hv4QB/Xr3NMQ==}
-    peerDependencies:
-      '@radix-ui/colors': '>=3.0.0'
-      '@tailwindcss/typography': '>=0.1.0'
-      tailwindcss: '>=3.0.0'
-      windy-radix-palette: '>=2.0.0-beta.2'
-
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
@@ -6935,8 +6908,6 @@ snapshots:
   '@next/swc-win32-x64-msvc@14.2.3':
     optional: true
 
-  '@noble/hashes@1.4.0': {}
-
   '@node-rs/argon2-android-arm-eabi@1.7.0':
     optional: true
 
@@ -7078,10 +7049,6 @@ snapshots:
       fastq: 1.17.1
 
   '@one-ini/wasm@0.1.1': {}
-
-  '@paralleldrive/cuid2@2.2.2':
-    dependencies:
-      '@noble/hashes': 1.4.0
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -8032,7 +7999,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.4.5
 
-  '@tailus/themer@0.0.4':
+  '@tailus/themer@0.0.5':
     dependencies:
       lodash.merge: 4.6.2
 
@@ -9373,6 +9340,16 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
+  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint@8.57.0):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 7.12.0(eslint@8.57.0)(typescript@5.4.5)
+      eslint: 8.57.0
+      eslint-import-resolver-node: 0.3.9
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       debug: 3.2.7
@@ -9400,7 +9377,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint@8.57.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
@@ -12613,19 +12590,6 @@ snapshots:
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
-
-  windy-radix-palette@2.0.0-beta.7(@radix-ui/colors@3.0.0)(tailwindcss@3.4.3):
-    dependencies:
-      '@paralleldrive/cuid2': 2.2.2
-      '@radix-ui/colors': 3.0.0
-      tailwindcss: 3.4.3
-
-  windy-radix-typography@1.0.0-beta.0(@radix-ui/colors@3.0.0)(@tailwindcss/typography@0.5.13(tailwindcss@3.4.3))(tailwindcss@3.4.3)(windy-radix-palette@2.0.0-beta.7(@radix-ui/colors@3.0.0)(tailwindcss@3.4.3)):
-    dependencies:
-      '@radix-ui/colors': 3.0.0
-      '@tailwindcss/typography': 0.5.13(tailwindcss@3.4.3)
-      tailwindcss: 3.4.3
-      windy-radix-palette: 2.0.0-beta.7(@radix-ui/colors@3.0.0)(tailwindcss@3.4.3)
 
   word-wrap@1.2.5: {}
 

@@ -14,10 +14,13 @@ const nextConfig = {
     ],
   },
   transpilePackages: [
-    '@formbase/db',
-    '@formbase/auth',
-    '@formbase/env',
     '@formbase/api',
+    '@formbase/auth',
+    '@formbase/db',
+    '@formbase/env',
+    '@formbase/ui',
+    '@formbase/utils',
+    "@formbase/tailwind",
   ],
   eslint: {
     ignoreDuringBuilds: true,

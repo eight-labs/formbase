@@ -6,6 +6,7 @@ import animate from 'tailwindcss-animate';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
 import { type Config } from 'tailwindcss';
+import themer from '@tailus/themer';
 
 export const tailwindPreset: Config = {
   content: ['./src/**/*.{js,jsx,ts,tsx,mdx}'],
@@ -95,5 +96,16 @@ export const tailwindPreset: Config = {
       config: containerQueries.config ?? {},
       handler: containerQueries.handler,
     },
+    themer({
+        radius: 'smoothest',
+        background: 'lighter',
+        border: 'light',
+        padding: 'large',
+        components: {
+          button: {
+            rounded: '2xl',
+          },
+        },
+      }),
   ],
 };
