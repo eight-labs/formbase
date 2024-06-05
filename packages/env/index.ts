@@ -33,6 +33,9 @@ export const env = createEnv({
     MINIO_ACCESSKEY: z.string().trim().min(1),
     MINIO_SECRETKEY: z.string().trim().min(1),
     MINIO_BUCKET: z.string().trim().min(1),
+
+    RESEND_API_KEY: z.string().trim(),
+    SMTP_TRANSPORT: z.string().trim(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().url(),
