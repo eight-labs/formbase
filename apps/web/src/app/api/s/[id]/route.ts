@@ -59,7 +59,7 @@ async function handleEmailNotifications(form: Form, formId: string) {
 
     await sendMail({
       to: user.email,
-      subject: `New Submission for ${form.title}`,
+      subject: `New Submission for "${form.title}"`,
       body: renderNewSubmissionEmail({
         link: `http://localhost:3000/form/${formId}`,
         formTitle: form.title,

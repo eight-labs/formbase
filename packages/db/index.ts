@@ -1,4 +1,4 @@
-import { and, count, eq } from 'drizzle-orm';
+import { and, count, eq, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
@@ -16,4 +16,5 @@ export const drizzlePrimitives = {
   eq,
   and,
   count,
+  sql,
 };
