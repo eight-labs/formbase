@@ -15,11 +15,11 @@ const items = [
     icon: FileTextIcon,
   },
 
-  {
-    title: 'Billing',
-    href: '/dashboard/billing',
-    icon: CreditCard,
-  },
+  //   {
+  //     title: 'Billing',
+  //     href: '/dashboard/billing',
+  //     icon: CreditCard,
+  //   },
   {
     title: 'Settings',
     href: '/dashboard/settings',

@@ -72,12 +72,6 @@ export const UserDropdown = ({
             className="cursor-pointer text-muted-foreground"
             asChild
           >
-            <Link href="/dashboard/billing">Billing</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="cursor-pointer text-muted-foreground"
-            asChild
-          >
             <Link href="/dashboard/settings">Settings</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
