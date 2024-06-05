@@ -133,6 +133,7 @@ export async function validateGithubCallback(
       email: primaryEmail.email,
       name: githubUser.name,
       avatar: githubUser.avatar_url,
+      emailVerified: true,
     });
 
     await db.insert(oauth).values({
