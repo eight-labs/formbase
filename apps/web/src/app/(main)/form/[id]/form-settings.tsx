@@ -65,7 +65,7 @@ export function FormSettings({ form }: FormSettingsProps) {
   }
 
   const redirectToDashboard = () => {
-    refreshDashboardAfterDeletion();
+    void refreshDashboardAfterDeletion();
     router.push('/dashboard');
   };
 
@@ -263,14 +263,14 @@ const EnableFormSubmissions = ({
     },
   });
 
-  const { mutateAsync: updateForm, isPending: isUpdatingForm } =
+  const { mutateAsync: updateFormSubmissions, isPending: isUpdatingForm } =
     api.form.update.useMutation();
 
   async function handleEnableSubmissionsRetentionSubmit(
     data: EnableFormSubmissionsSchema,
   ) {
     try {
-      await updateForm({
+      await updateFormSubmissions({
         id: formId,
         enableSubmissions: data.enableFormSubmissions,
       });
@@ -343,16 +343,16 @@ const EnableFormNotifications = ({
     },
   });
 
-  const { mutateAsync: updateForm, isPending: isUpdatingForm } =
+  const { mutateAsync: updateFormNotifications, isPending: isUpdatingForm } =
     api.form.update.useMutation();
 
   async function handleEnableSubmissionsNotifications(
     data: EnableFormNotificationsSchema,
   ) {
     try {
-      await updateForm({
+      await updateFormNotifications({
         id: formId,
-        enableNotifications: data.enableNotifications,
+        enableEmailNotifications: data.enableNotifications,
       });
 
       toast(

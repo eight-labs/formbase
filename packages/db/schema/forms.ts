@@ -1,7 +1,6 @@
 import { type InferSelectModel } from 'drizzle-orm';
 import { boolean, index, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
-import { type z } from 'zod';
 
 export const forms = pgTable(
   'forms',

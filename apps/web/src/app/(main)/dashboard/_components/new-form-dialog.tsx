@@ -61,8 +61,7 @@ export function CreateFormDialog() {
         {
           title: data.name,
           description: data.description,
-          returningUrl: data.returnUrl,
-          keys: [],
+          returnUrl: data.returnUrl,
         },
         {
           onSuccess: ({ id }) => {
@@ -105,9 +104,6 @@ export function CreateFormDialog() {
               render={({ field }) => (
                 <FormItem className="space-y-0.5">
                   <FormLabel>Name</FormLabel>
-                  <FormDescription className="text-[11px]">
-                    How you want to call your form?
-                  </FormDescription>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -122,9 +118,6 @@ export function CreateFormDialog() {
               render={({ field }) => (
                 <FormItem className="space-y-0.5">
                   <FormLabel>Description</FormLabel>
-                  <FormDescription className="text-[11px]">
-                    Describe your form
-                  </FormDescription>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -139,9 +132,9 @@ export function CreateFormDialog() {
               render={({ field }) => (
                 <FormItem className="space-y-0.5">
                   <FormLabel>Return URL</FormLabel>
-                  <FormDescription className="text-[11px]">
+                  {/* <FormDescription className="text-[11px]">
                     Where should users be redirected after form submission?
-                  </FormDescription>
+                  </FormDescription> */}
                   <FormControl>
                     <Input placeholder="http://..." {...field} />
                   </FormControl>

@@ -47,7 +47,13 @@ export const formRouter = createTRPCRouter({
     ),
 
   create: protectedProcedure
-    .input(ZInsertFormSchema)
+    .input(
+      z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        returnUrl: z.string().optional(),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
       const id = generateId(15);
 
@@ -59,25 +65,43 @@ export const formRouter = createTRPCRouter({
         updatedAt: new Date(),
         returnUrl: input.returnUrl ?? null,
         keys: [''],
-        enableEmailNotifications: input.enableEmailNotifications ?? true,
-        enableSubmissions: input.enableSubmissions ?? true,
+        enableEmailNotifications: true,
+        enableSubmissions: true,
       });
 
       return { id };
     }),
 
   update: protectedProcedure
-    .input(ZUpdateFormSchema)
+    .input(
+      z.object({
+        id: z.string(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        enableSubmissions: z.boolean().optional(),
+        enableEmailNotifications: z.boolean().optional(),
+        returnUrl: z.string().optional(),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
+      const form = await ctx.db.query.forms.findFirst({
+        where: (table, { eq }) => eq(table.id, input.id),
+      });
+
+      if (!form) {
+        throw new Error('Form not found');
+      }
+
       await ctx.db
         .update(forms)
         .set({
-          title: input.title,
-          description: input.description ?? null,
+          title: input.title ?? form.title,
+          description: input.description ?? form.description,
           updatedAt: new Date(),
-          enableSubmissions: input.enableSubmissions ?? true,
-          enableEmailNotifications: input.enableEmailNotifications ?? true,
-          returnUrl: input.returnUrl ?? null,
+          enableSubmissions: input.enableSubmissions ?? form.enableSubmissions,
+          enableEmailNotifications:
+            input.enableEmailNotifications ?? form.enableEmailNotifications,
+          returnUrl: input.returnUrl ?? form.returnUrl,
         })
         .where(eq(forms.id, input.id));
     }),
