@@ -7,6 +7,7 @@ import { env } from '@formbase/env';
 const smtpConfig = {
   host: env.SMTP_HOST,
   port: env.SMTP_PORT,
+  secure: env.NODE_ENV === 'production',
   auth: {
     user: env.SMTP_USER,
     pass: env.SMTP_PASSWORD,
