@@ -8,6 +8,7 @@ import type { Metadata, Viewport } from 'next';
 import { Toaster } from 'sonner';
 
 import { env } from '@formbase/env';
+import { TooltipProvider } from '@formbase/ui/primitives/tooltip';
 import { cn } from '@formbase/ui/utils/cn';
 
 import { ThemeProvider } from '~/components/theme-provider';
@@ -53,7 +54,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+          </TRPCReactProvider>
           <Toaster />
         </ThemeProvider>
         {env.UMAMI_TRACKING_ID && (
