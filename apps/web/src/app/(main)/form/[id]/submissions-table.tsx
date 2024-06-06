@@ -40,6 +40,7 @@ import {
   TableHeader,
   TableRow,
 } from '@formbase/ui/primitives/table';
+import { cn } from '@formbase/ui/utils/cn';
 import { formatFileName } from '@formbase/utils';
 
 import { api } from '~/lib/trpc/react';
@@ -314,6 +315,10 @@ export function SubmissionsTable({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  className={cn({
+                    'bg-red-100 hover:bg-red-200 dark:bg-red-800 dark:hover:bg-red-700':
+                      row.original.isSpam,
+                  })}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

@@ -1,4 +1,11 @@
-import { index, json, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  index,
+  json,
+  pgTable,
+  text,
+  timestamp,
+} from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { type z } from 'zod';
 
@@ -9,6 +16,7 @@ export const formDatas = pgTable(
     formId: text('form_id').notNull(),
     data: json('data').notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
+    isSpam: boolean('is_spam').default(false).notNull(),
   },
   (t) => ({
     formIdx: index('form_idx').on(t.formId),
@@ -21,6 +29,7 @@ export const ZInsertFormDataSchema = createInsertSchema(formDatas);
 export const ZUpdateFormDataSchema = createInsertSchema(formDatas).pick({
   formId: true,
   data: true,
+  isSpam: true,
 });
 
 export type FormData = z.infer<typeof ZSelectFormDataSchema>;

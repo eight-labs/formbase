@@ -10,7 +10,7 @@ import { assignFileOrImage, uploadFileFromBlob } from '~/lib/upload-file';
 type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 async function getFormData(request: Request): Promise<{
-  data: Record<string, Blob | string | undefined>;
+  data: Record<string, Blob | string | undefined> & { _gotcha?: string };
   source: 'formData' | 'json';
 }> {
   try {
@@ -88,14 +88,22 @@ export async function POST(
     if (source === 'formData')
       await processFileUploads(formData, formData as unknown as FormData);
 
-    const formDataKeys = Object.keys(formData);
+    const formDataKeys = Object.keys(formData).filter(
+      (key) => key !== '_gotcha',
+    );
     const formKeys = form.keys;
     const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
+
+    const submissionIsSpam = !!formData._gotcha;
+    if (submissionIsSpam) delete formData._gotcha;
+
+    console.log('Submission is spam: ', submissionIsSpam);
 
     await api.formData.setFormData({
       data: formData as Json,
       formId,
       keys: updatedKeys,
+      isSpam: submissionIsSpam,
     });
 
     void handleEmailNotifications(form, formId);

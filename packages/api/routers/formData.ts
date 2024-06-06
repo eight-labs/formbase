@@ -104,6 +104,7 @@ export const formDataRouter = createTRPCRouter({
           data: input.data,
           formId: input.formId,
           id: generateId(15),
+          isSpam: input.isSpam ?? false,
           createdAt: new Date(),
         });
 

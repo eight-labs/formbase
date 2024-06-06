@@ -48,7 +48,12 @@ export default async function FormPage({ params }: { params: { id: string } }) {
             <>
               <div className="flex w-full items-center justify-between">
                 <span className="text-muted-foreground">
-                  Total Submissions: {formSubmissions.length}
+                  {formSubmissions.length} Submissions with{' '}
+                  {
+                    formSubmissions.filter((submission) => submission.isSpam)
+                      .length
+                  }{' '}
+                  Spam
                 </span>
                 <ExportSubmissionsDropDownButton
                   submissions={formSubmissions as FormData[]}
