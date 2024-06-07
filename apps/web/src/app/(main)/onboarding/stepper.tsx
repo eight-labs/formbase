@@ -1,42 +1,23 @@
-import React from 'react';
+import { api } from '~/lib/trpc/server';
 
-// Custom components for each step
-const StepOneContent = () => (
-  <div>
-    <p>This is custom content for step 1. Add your instructions here.</p>
-    <code>npm install some-package</code>
-  </div>
-);
+import { CodeExampleStep } from './form/code-example-step';
+import { CreateFormStep } from './form/create-form-step';
 
-const StepTwoContent = () => (
-  <div>
-    <p>This is custom content for step 2. Add your code snippet here.</p>
-    <pre>
-      {`const example = 'Hello World';
-console.log(example);`}
-    </pre>
-  </div>
-);
+const Stepper = async () => {
+  const onboardingForm = await api.form.getOnboardingForm();
+  const form = onboardingForm[0];
 
-const StepThreeContent = () => (
-  <div>
-    <p>This is custom content for step 3. Explain what to do next.</p>
-  </div>
-);
+  const steps = [
+    {
+      title: 'Add a new form endpoint',
+      content: <CreateFormStep formId={form?.id ?? null} />,
+    },
+    {
+      title: 'Send a submission.',
+      content: <CodeExampleStep formId={form?.id ?? null} />,
+    },
+  ];
 
-const steps = [
-  { title: 'Add a new form endpoint', content: <StepOneContent /> },
-  {
-    title: 'Send a submission.',
-    content: <StepTwoContent />,
-  },
-  {
-    title: 'Waiting for submissions.',
-    content: <StepThreeContent />,
-  },
-];
-
-const Stepper = () => {
   return (
     <div>
       {steps.map((step, index) => (
@@ -47,7 +28,9 @@ const Stepper = () => {
 
           <div className="-mt-0.5">
             <h2 className="text-xl font-semibold">{step.title}</h2>
-            <div className="text-gray-600 mt-2">{step.content}</div>
+            <div className="text-gray-600 dark:text-muted-foreground mt-2">
+              {step.content}
+            </div>
           </div>
         </div>
       ))}

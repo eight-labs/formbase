@@ -6,7 +6,10 @@ import { type LuciaUser } from '@formbase/auth';
 
 import { UserDropdown } from './user-dropdown';
 
-const routes = [{ name: 'Dashboard', href: '/dashboard' }] as const;
+const routes = [
+  { name: 'Dashboard', href: '/dashboard' },
+  { name: 'Onboarding', href: '/onboarding' },
+] as const;
 
 export const Header = ({ user }: { user: LuciaUser }) => {
   return (
