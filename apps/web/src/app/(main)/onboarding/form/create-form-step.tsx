@@ -1,9 +1,4 @@
-'use client';
-
-import { useState } from 'react';
-
-import { CheckCircle2, Copy } from 'lucide-react';
-import { toast } from 'sonner';
+import { CopyButton } from '~/components/copy-button';
 
 import { CreateFormDialog } from './create-form-dialog';
 
@@ -12,8 +7,6 @@ type CreateFormStepProps = {
 };
 
 export const CreateFormStep = ({ formId }: CreateFormStepProps) => {
-  const [copied, setCopied] = useState(false);
-
   return (
     <div className="-mt-0.5">
       <h2 className="text-xl font-semibold">Add a new form endpoint</h2>
@@ -27,26 +20,7 @@ export const CreateFormStep = ({ formId }: CreateFormStepProps) => {
           <div>
             <pre className="rounded-lg border flex justify-between items-center text-white/90 dark:text-white bg-black p-4 w-[500px]">
               <>{`https://formbase.dev/s/${formId}`}</>
-              {copied ? (
-                <CheckCircle2 size={16} />
-              ) : (
-                <button
-                  onClick={async () => {
-                    setCopied(true);
-                    await navigator.clipboard.writeText(
-                      `https://formbase.dev/s/${formId}`,
-                    );
-
-                    setTimeout(() => {
-                      setCopied(false);
-                    }, 2000);
-
-                    toast.success('Copied to clipboard');
-                  }}
-                >
-                  <Copy size={16} />
-                </button>
-              )}
+              <CopyButton text={formId} className="text-white" />
             </pre>
           </div>
         )}

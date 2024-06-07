@@ -29,7 +29,9 @@ export default function SendFormSubmissionButton({
 
       toast.success('Form submission sent!');
 
-      router.push(`/form/${formId}`);
+      //   router.push(`/form/${formId}`);
+      //   'TODO: redirec to form page after we figure out how to refetch the submissions')
+      router.push('dasbhoard');
     });
   };
   return (

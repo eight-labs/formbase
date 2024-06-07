@@ -6,6 +6,7 @@ import {
 } from '@formbase/ui/primitives/tabs';
 import { cn } from '@formbase/ui/utils/cn';
 
+import { CopyButton } from '~/components/copy-button';
 import { highlightCode } from '~/lib/highlight-code';
 
 import SendFormSubmissionButton from './send-submission-button';
@@ -26,7 +27,7 @@ export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
     <button type="submit">Submit</button>
 </form>`);
 
-  const reactcode =
+  const reactCode =
     await highlightCode(`export default function FormbaseForm() {
     return (
       <form
@@ -59,20 +60,28 @@ export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
               <TabsTrigger value="html">HTML</TabsTrigger>
               <TabsTrigger value="react">React</TabsTrigger>
             </TabsList>
-            <TabsContent value="html">
+            <TabsContent value="html" className="relative">
               <div
                 className="mt-4 rounded-md"
                 dangerouslySetInnerHTML={{
                   __html: htmlCode,
                 }}
               />
+              <CopyButton
+                text={htmlCode}
+                className="absolute top-4 text-white right-4"
+              />
             </TabsContent>
-            <TabsContent value="react">
+            <TabsContent value="react" className="relative">
               <div
                 className="mt-4 rounded-md"
                 dangerouslySetInnerHTML={{
-                  __html: reactcode,
+                  __html: reactCode,
                 }}
+              />
+              <CopyButton
+                text={reactCode}
+                className="absolute top-4 text-white right-4"
               />
             </TabsContent>
           </Tabs>
