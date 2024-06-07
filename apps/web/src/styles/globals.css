@@ -123,3 +123,13 @@
     transform: rotate(360deg);
   }
 }
+
+.steps-gradient {
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    var(--primary) 10%,
+    var(--primary) 90%,
+    transparent 100%
+  );
+}
