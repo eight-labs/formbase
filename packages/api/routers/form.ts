@@ -82,10 +82,10 @@ export const formRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const id = generateId(15);
+      const formId = generateId(15);
 
       await ctx.db.insert(forms).values({
-        id,
+        id: formId,
         userId: ctx.user.id,
         title: input.title,
         description: input.description ?? null,
@@ -98,11 +98,11 @@ export const formRouter = createTRPCRouter({
 
       await ctx.db.insert(onboardingForms).values({
         id: generateId(15),
-        formId: id,
+        formId: formId,
         userId: ctx.user.id,
       });
 
-      return { id };
+      return { formId };
     }),
 
   update: protectedProcedure

@@ -7,6 +7,8 @@ import {
 
 import { highlightCode } from '~/lib/highlight-code';
 
+import SendFormSubmissionButton from './send-submission-button';
+
 type CodeExampleStepProps = {
   formId: string | null;
 };
@@ -66,6 +68,8 @@ export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
           />
         </TabsContent>
       </Tabs>
+
+      <SendFormSubmissionButton formId={formId} />
     </div>
   );
 };

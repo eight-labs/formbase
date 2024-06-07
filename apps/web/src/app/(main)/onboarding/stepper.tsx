@@ -5,16 +5,16 @@ import { CreateFormStep } from './form/create-form-step';
 
 const Stepper = async () => {
   const onboardingForm = await api.form.getOnboardingForm();
-  const form = onboardingForm[0];
+  const form = onboardingForm[0]?.formId;
 
   const steps = [
     {
       title: 'Add a new form endpoint',
-      content: <CreateFormStep formId={form?.id ?? null} />,
+      content: <CreateFormStep formId={form ?? null} />,
     },
     {
       title: 'Send a submission.',
-      content: <CodeExampleStep formId={form?.id ?? null} />,
+      content: <CodeExampleStep formId={form ?? null} />,
     },
   ];
 
