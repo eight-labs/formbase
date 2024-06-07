@@ -56,6 +56,8 @@ export async function signup(
 
   const verificationCode = await generateEmailVerificationCode(userId, email);
 
+  console.log('Signup Verification', verificationCode);
+
   void fetch(`${env.NEXT_PUBLIC_APP_URL}/api/mail`, {
     method: 'POST',
     headers: {

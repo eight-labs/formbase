@@ -9,11 +9,9 @@ const Stepper = async () => {
 
   const steps = [
     {
-      title: 'Add a new form endpoint',
       content: <CreateFormStep formId={form ?? null} />,
     },
     {
-      title: 'Send a submission.',
       content: <CodeExampleStep formId={form ?? null} />,
     },
   ];
@@ -26,12 +24,7 @@ const Stepper = async () => {
             {index + 1}
           </span>
 
-          <div className="-mt-0.5">
-            <h2 className="text-xl font-semibold">{step.title}</h2>
-            <div className="text-gray-600 dark:text-muted-foreground mt-2">
-              {step.content}
-            </div>
-          </div>
+          {step.content}
         </div>
       ))}
     </div>
