@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -15,6 +16,7 @@ export default function SendFormSubmissionButton({
   formId,
 }: SendFormSubmissionButton) {
   const [isSubmittingForm, startFormSubmitTransition] = useTransition();
+  const router = useRouter();
 
   const handleFormSubmission = () => {
     startFormSubmitTransition(async () => {
@@ -26,6 +28,8 @@ export default function SendFormSubmissionButton({
       });
 
       toast.success('Form submission sent!');
+
+      router.push(`/form/${formId}`);
     });
   };
   return (
