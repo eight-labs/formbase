@@ -1,12 +1,7 @@
 import { z } from 'zod';
 
 import { drizzlePrimitives } from '@formbase/db';
-import {
-  formDatas,
-  forms,
-  ZInsertFormSchema,
-  ZUpdateFormSchema,
-} from '@formbase/db/schema';
+import { formDatas, forms, onboardingForms } from '@formbase/db/schema';
 import { generateId } from '@formbase/utils/generate-id';
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
@@ -46,6 +41,12 @@ export const formRouter = createTRPCRouter({
       }),
     ),
 
+  getOnboardingForm: protectedProcedure.query(async ({ ctx }) =>
+    ctx.db.query.onboardingForms.findMany({
+      where: (table) => eq(table.userId, ctx.user.id),
+    }),
+  ),
+
   create: protectedProcedure
     .input(
       z.object({
@@ -70,6 +71,38 @@ export const formRouter = createTRPCRouter({
       });
 
       return { id };
+    }),
+
+  createOnboardingForm: protectedProcedure
+    .input(
+      z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        returnUrl: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const formId = generateId(15);
+
+      await ctx.db.insert(forms).values({
+        id: formId,
+        userId: ctx.user.id,
+        title: input.title,
+        description: input.description ?? null,
+        updatedAt: new Date(),
+        returnUrl: input.returnUrl ?? null,
+        keys: [''],
+        enableEmailNotifications: true,
+        enableSubmissions: true,
+      });
+
+      await ctx.db.insert(onboardingForms).values({
+        id: generateId(15),
+        formId: formId,
+        userId: ctx.user.id,
+      });
+
+      return { formId };
     }),
 
   update: protectedProcedure

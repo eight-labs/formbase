@@ -74,6 +74,12 @@ export const UserDropdown = ({
           >
             <Link href="/dashboard/settings">Settings</Link>
           </DropdownMenuItem>
+          <DropdownMenuItem
+            className="cursor-pointer text-muted-foreground"
+            asChild
+          >
+            <Link href="/onboarding">Onboarding</Link>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSub>

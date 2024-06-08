@@ -1,12 +1,17 @@
-import { type InferSelectModel } from 'drizzle-orm';
+import type { InferSelectModel } from 'drizzle-orm';
+
 import { boolean, index, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+
+import { users } from './users';
 
 export const forms = pgTable(
   'forms',
   {
     id: text('id').primaryKey(),
-    userId: text('user_id').notNull(),
+    userId: text('user_id')
+      .references(() => users.id, { onDelete: 'cascade' })
+      .notNull(),
     title: text('title').notNull(),
     description: text('description'),
     createdAt: timestamp('created_at').defaultNow().notNull(),

@@ -50,9 +50,10 @@ export function CreateFormDialog() {
     resolver: zodResolver(FormSchema),
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
-  const [isCreatePending, startCreateTransaction] = useTransition();
+  const [isCreatingForm, startCreateTransaction] = useTransition();
 
-  const { mutateAsync: createNewForm } = api.form.create.useMutation();
+  const { mutateAsync: createNewForm } =
+    api.form.createOnboardingForm.useMutation();
 
   const createForm = (data: z.infer<typeof FormSchema>) => {
     startCreateTransaction(async () => {
@@ -63,16 +64,12 @@ export function CreateFormDialog() {
           returnUrl: data.returnUrl,
         },
         {
-          onSuccess: ({ id }) => {
-            toast.success('New form created');
+          onSuccess: () => {
+            toast.success('New form endpoint created');
             router.refresh();
-
-            setTimeout(() => {
-              router.push(`/form/${id}`);
-            }, 100);
           },
           onError: () => {
-            toast.error('Failed to create form');
+            toast.error('Failed to create form, try again');
           },
         },
       );
@@ -90,11 +87,11 @@ export function CreateFormDialog() {
       <div className="space-y-6">
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
-            <Button variant="outline">New Form</Button>
+            <Button>New Form Endpoint</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Create New Form</DialogTitle>
+              <DialogTitle>New Form Endpoint</DialogTitle>
             </DialogHeader>
 
             <FormField
@@ -153,9 +150,9 @@ export function CreateFormDialog() {
               <Button
                 onClick={form.handleSubmit(onSubmit)}
                 className="mt-2 w-full"
-                loading={isCreatePending}
+                loading={isCreatingForm}
               >
-                Create Form
+                Create Form Endpoint
               </Button>
             </DialogFooter>
           </DialogContent>

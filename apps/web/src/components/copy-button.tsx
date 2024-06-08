@@ -1,27 +1,53 @@
 'use client';
 
-import { Copy } from 'lucide-react';
+import { useState } from 'react';
+
+import { CheckIcon, ClipboardIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
-import { useCopyToClipboard } from '../lib/hooks/use-copy-to-clipboard';
+import { cn } from '@formbase/ui/utils/cn';
+
+import { useCopyToClipboard } from '~/lib/hooks/use-copy-to-clipboard';
 
 type CopyButtonProps = {
   text: string;
+  className?: string;
 };
 
-export const CopyButton = ({ text }: CopyButtonProps) => {
+export const CopyButton = ({ text, className }: CopyButtonProps) => {
   const [_, copy] = useCopyToClipboard();
+  const [hasCopied, setHasCopied] = useState(false);
 
   return (
-    <Copy
-      className="h-4 w-4 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform"
-      onClick={async (e) => {
-        e.preventDefault();
-        await copy(text);
-        toast('Copied to clipboard', {
-          icon: <Copy className="h-4 w-4" />,
-        });
-      }}
-    />
+    <>
+      {hasCopied ? (
+        <CheckIcon
+          className={cn(
+            'h-4 w-4 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform',
+            className,
+          )}
+        />
+      ) : (
+        <ClipboardIcon
+          className={cn(
+            'h-4 w-4 cursor-pointer text-muted-foreground transition-transform hover:scale-110 hover:transform',
+            className,
+          )}
+          onClick={async (e) => {
+            e.preventDefault();
+            await copy(text);
+            toast('Copied to clipboard', {
+              icon: <ClipboardIcon className="h-4 w-4" />,
+            });
+
+            setHasCopied(true);
+
+            setTimeout(() => {
+              setHasCopied(false);
+            }, 2000);
+          }}
+        />
+      )}
+    </>
   );
 };

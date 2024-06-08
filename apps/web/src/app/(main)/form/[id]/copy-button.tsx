@@ -1,6 +1,6 @@
 'use client';
 
-import { Copy } from 'lucide-react';
+import { ClipboardIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { useCopyToClipboard } from '~/lib/hooks/use-copy-to-clipboard';
@@ -17,11 +17,11 @@ export default function CopyFormId({ formId }: CopyFormIdProps) {
       <span className="inline-flex items-center rounded-lg bg-muted px-2 py-0.5 text-sm font-medium">
         {formId}
       </span>
-      <Copy
+      <ClipboardIcon
         onClick={() =>
           copy(formId).then(() => {
             toast('Copied to Clipboard', {
-              icon: <Copy className="h-4 w-4" />,
+              icon: <ClipboardIcon className="h-4 w-4" />,
             });
           })
         }

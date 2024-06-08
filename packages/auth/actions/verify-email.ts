@@ -58,5 +58,5 @@ export async function verifyEmail(
     sessionCookie.value,
     sessionCookie.attributes,
   );
-  redirect('/dashboard');
+  redirect('/onboarding');
 }
