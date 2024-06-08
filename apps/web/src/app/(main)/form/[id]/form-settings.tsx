@@ -24,7 +24,7 @@ import { Switch } from '@formbase/ui/primitives/switch';
 
 import { api } from '~/lib/trpc/react';
 
-import { refreshDashboardAfterDeletion } from '../_actions/refresh-dashboard-after-deletion';
+import { revalidateDashboard } from '../../_actions/revalidateDashboard';
 import { DeleteFormDialog } from './delete-form-dialog';
 
 const formNameSchema = z.object({
@@ -65,7 +65,7 @@ export function FormSettings({ form }: FormSettingsProps) {
   }
 
   const redirectToDashboard = () => {
-    void refreshDashboardAfterDeletion();
+    void revalidateDashboard();
     router.push('/dashboard');
   };
 

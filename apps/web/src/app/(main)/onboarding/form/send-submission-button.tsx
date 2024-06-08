@@ -8,6 +8,8 @@ import { toast } from 'sonner';
 
 import { Button } from '@formbase/ui/primitives/button';
 
+import { revalidateFromClient } from '../../_actions/revalidateDashboard';
+
 type SendFormSubmissionButton = {
   formId: string | null;
 };
@@ -29,9 +31,8 @@ export default function SendFormSubmissionButton({
 
       toast.success('Form submission sent!');
 
-      //   router.push(`/form/${formId}`);
-      //   'TODO: redirec to form page after we figure out how to refetch the submissions')
-      router.push('dasbhoard');
+      void revalidateFromClient(`/form/${formId}`);
+      router.push(`/form/${formId}`);
     });
   };
   return (
@@ -39,7 +40,7 @@ export default function SendFormSubmissionButton({
       onClick={handleFormSubmission}
       className="flex items-center gap-1"
       loading={isSubmittingForm}
-      disabled={!formId}
+      disabled={!formId || isSubmittingForm}
     >
       {!isSubmittingForm && <Send className="w-4 h-4" />}
       <span>Send a submission</span>

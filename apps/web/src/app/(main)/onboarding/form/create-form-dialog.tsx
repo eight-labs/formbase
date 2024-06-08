@@ -48,21 +48,14 @@ export function CreateFormDialog() {
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      name: '',
-      description: '',
-      returnUrl: '',
-      keys: [''],
-    },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, startCreateTransaction] = useTransition();
+  const [isCreatingForm, startCreateTransaction] = useTransition();
 
   const { mutateAsync: createNewForm } =
     api.form.createOnboardingForm.useMutation();
 
-  const createPost = (data: z.infer<typeof FormSchema>) => {
+  const createForm = (data: z.infer<typeof FormSchema>) => {
     startCreateTransaction(async () => {
       await createNewForm(
         {
@@ -84,7 +77,7 @@ export function CreateFormDialog() {
   };
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    createPost(data);
+    createForm(data);
 
     setShowDialog(false);
   }
@@ -157,6 +150,7 @@ export function CreateFormDialog() {
               <Button
                 onClick={form.handleSubmit(onSubmit)}
                 className="mt-2 w-full"
+                loading={isCreatingForm}
               >
                 Create Form Endpoint
               </Button>
