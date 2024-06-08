@@ -2,11 +2,15 @@ import { index, json, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { type z } from 'zod';
 
+import { forms } from './forms';
+
 export const formDatas = pgTable(
   'form_datas',
   {
     id: text('id').primaryKey(),
-    formId: text('form_id').notNull(),
+    formId: text('form_id')
+      .references(() => forms.id, { onDelete: 'cascade' })
+      .notNull(),
     data: json('data').notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
   },
