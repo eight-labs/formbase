@@ -19,7 +19,7 @@ Formbase is an open-source form backend for handling forms, notifications, secur
 
 ## Tech Stack
 
-- [Next.js](https://nextjs.org/) – Franework
+- [Next.js](https://nextjs.org/) – Framework
 - [TypeScript](https://www.typescriptlang.org/) – Language
 - [Tailwind](https://tailwindcss.com/) – Styling
 - [PostgresSQL](https://postgresql.org/) – Database
