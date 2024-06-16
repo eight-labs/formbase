@@ -1,6 +1,6 @@
-import Image from 'next/image';
-
 import { Code, ListPlus, MousePointer, Server } from 'lucide-react';
+
+import Image from 'next/image';
 
 const githubUrl = 'https://github.com/eight-labs/formbase';
 
@@ -370,7 +370,7 @@ const HomePage = () => {
                         <div className="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
                           <Image
                             className="size-full  rounded-full border border-gray-950/5 dark:border-white/5"
-                            src="https://pbs.twimg.com/profile_images/1762988905081479168/KCAnOoLb_400x400.jpg"
+                            src="https://pbs.twimg.com/profile_images/1802081326528376832/UtjTBWgU_400x400.jpg"
                             alt="Aikins"
                             width={28}
                             height={28}
