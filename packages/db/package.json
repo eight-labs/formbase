@@ -6,7 +6,7 @@
   "scripts": {
     "db:check": "dotenv -e ../../apps/web/.env.local drizzle-kit check",
     "db:generate": "dotenv -e ../../apps/web/.env.local drizzle-kit generate",
-    "db:migrate": "dotenv -e ../../apps/web/.env.local drizzle-kit migrate",
+    "db:migrate": "dotenv -e ../../apps/web/.env.local pnpm tsx migrate.ts",
     "db:migrate:drop": "dotenv -e ../../apps/web/.env.local drizzle-kit drop",
     "db:pull": "dotenv -e ../../apps/web/.env.local drizzle-kit introspect",
     "db:push": "dotenv -e ../../apps/web/.env.local drizzle-kit push",
@@ -16,7 +16,7 @@
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "dependencies": {
-    "@formbase/env": "workspace:^",
+    "@formbase/env": "workspace:*",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
     "pg": "^8.11.5",
@@ -25,8 +25,10 @@
   },
   "devDependencies": {
     "@formbase/tsconfig": "workspace:*",
+    "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",
     "drizzle-kit": "^0.21.4",
-    "eslint-config-formbase": "workspace:*"
+    "eslint-config-formbase": "workspace:*",
+    "tsx": "^4.15.5"
   }
 }
