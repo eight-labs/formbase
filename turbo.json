@@ -34,7 +34,7 @@
     },
     "db:generate": {
       "outputs": ["drizzle/**"],
-      "inputs": ["src/schema/**", "drizzle.config.ts"]
+      "inputs": ["schema/**", "drizzle.config.ts"]
     },
     "lint": {
       "dependsOn": ["^build"],
