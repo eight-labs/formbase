@@ -1,6 +1,7 @@
 import { userAgent } from 'next/server';
 
 import { type Form } from '@formbase/db/schema';
+import { env } from '@formbase/env';
 
 import { sendMail } from '~/lib/email/mailer';
 import { renderNewSubmissionEmail } from '~/lib/email/templates/new-submission';
@@ -8,6 +9,12 @@ import { api } from '~/lib/trpc/server';
 import { assignFileOrImage, uploadFileFromBlob } from '~/lib/upload-file';
 
 type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
+
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
 
 async function getFormData(request: Request): Promise<{
   data: Record<string, Blob | string | undefined>;
@@ -80,7 +87,12 @@ export async function POST(
     const formId = params.id;
     const form = await api.form.getFormById({ formId });
     if (!form) {
-      return new Response('Form not found', { status: 404 });
+      return new Response('Form not found', {
+        status: 404,
+        headers: {
+          ...CORS_HEADERS,
+        },
+      });
     }
 
     const { data: formData, source } = await getFormData(request);
@@ -111,19 +123,37 @@ export async function POST(
         }),
         {
           status: 200,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
         },
       );
     }
 
     return new Response(null, {
       status: 303,
-      headers: { Location: `http://localhost:3000/s/${formId}` },
+      headers: {
+        Location: `${env.NEXT_PUBLIC_APP_URL}/s/${formId}`,
+        ...CORS_HEADERS,
+      },
     });
   } catch (error) {
     console.error(error);
     return new Response('There was an issue processing your form', {
       status: 500,
+      headers: {
+        ...CORS_HEADERS,
+      },
     });
   }
+}
+
+// eslint-disable-next-line @typescript-eslint/require-await
+export async function OPTIONS() {
+  return new Response('', {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  });
 }
