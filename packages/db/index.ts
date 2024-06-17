@@ -6,11 +6,6 @@ import * as schema from './schema';
 
 export const queryClient = postgres(process.env['DATABASE_URL']!);
 
-console.log(
-  'queryClientqueryClientqueryClientqueryClientqueryClient',
-  queryClient,
-);
-
 export const db = drizzle(queryClient, {
   schema: schema,
 });
