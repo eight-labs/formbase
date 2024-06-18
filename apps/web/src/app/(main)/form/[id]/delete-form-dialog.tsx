@@ -39,7 +39,7 @@ export function DeleteFormDialog({
       {
         onSuccess: () => {
           router.refresh();
-          toast.success('Your form has been deleted', {
+          toast.success('Your form endpoint has been deleted', {
             icon: <TrashIcon className="h-4 w-4" />,
           });
           onSuccessfulDelete?.();
@@ -51,14 +51,14 @@ export function DeleteFormDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="destructive">Delete Form</Button>
+        <Button variant="destructive">Delete Form Endpoint</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Delete Form</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete this form? This action cannot be
-            undone.
+            Are you sure you want to delete this form endpoint? This action
+            cannot be undone.
           </DialogDescription>
         </DialogHeader>
         <div className="flex w-full gap-4">

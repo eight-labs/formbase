@@ -1,6 +1,6 @@
-import { Code, ListPlus, MousePointer, Server } from 'lucide-react';
-
 import Image from 'next/image';
+
+import { Code, ListPlus, MousePointer, Server } from 'lucide-react';
 
 const githubUrl = 'https://github.com/eight-labs/formbase';
 
@@ -245,7 +245,7 @@ const HomePage = () => {
                       </h2>
                       <p className=" text-gray-700 dark:text-gray-300 ">
                         Receive real-time notifications whenever your form
-                        receives a new entry.
+                        endpoint receives a new entry.
                       </p>
                     </div>
                   </div>
@@ -571,17 +571,13 @@ const HomePage = () => {
               <ul className="mt-8 divide-y divide-[--ui-light-border-color] border-y border-[--ui-light-border-color] text-gray-700 *:flex *:items-center *:gap-3 *:py-3 dark:divide-[--ui-dark-border-color] dark:border-[--ui-dark-border-color] dark:text-gray-300">
                 <li key="1">
                   <ListPlus strokeWidth={1.5} className="size-5" />
-                  Create your form
+                  Create your form endpoint
                 </li>
                 <li key="2">
-                  <Server strokeWidth={1.5} className="size-5" />
-                  Get your form endpoint
+                  <Code strokeWidth={1.5} className="size-5" />
+                  Add the form endpoint to your website
                 </li>
                 <li key="3">
-                  <Code strokeWidth={1.5} className="size-5" />
-                  Add the form to your website
-                </li>
-                <li key="4">
                   <MousePointer strokeWidth={1.5} className="size-5" />
                   Start receiving submissions
                 </li>

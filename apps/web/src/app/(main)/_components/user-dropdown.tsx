@@ -56,7 +56,7 @@ export const UserDropdown = ({
           height={64}
         ></img>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="w-[250px]">
         <DropdownMenuLabel className="text-muted-foreground">
           {email}
         </DropdownMenuLabel>

@@ -64,7 +64,7 @@ export function CreateFormDialog() {
         },
         {
           onSuccess: ({ id }) => {
-            toast.success('New form created');
+            toast.success('New form endpoint created');
             router.refresh();
 
             setTimeout(() => {
@@ -90,11 +90,11 @@ export function CreateFormDialog() {
       <div className="space-y-6">
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
-            <Button variant="outline">New Form</Button>
+            <Button variant="outline">New Form Endpoint</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Create New Form</DialogTitle>
+              <DialogTitle>Create New Form Endpoint</DialogTitle>
             </DialogHeader>
 
             <FormField

@@ -1,8 +1,7 @@
 import { redirect } from 'next/navigation';
 
-import type { User } from '../../../../../../packages/db/schema';
-
 import { validateRequest } from '@formbase/auth';
+import { type User } from '@formbase/db/schema';
 import {
   Card,
   CardContent,
@@ -15,7 +14,7 @@ import { VerifyCode } from './verify-code';
 
 export const metadata = {
   title: 'Verify Email',
-  description: 'Verify Email Page',
+  description: 'Verify your email address to continue.',
 };
 
 export default async function ForgotPasswordPage() {
