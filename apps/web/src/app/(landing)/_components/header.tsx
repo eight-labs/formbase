@@ -7,7 +7,7 @@ import { env } from '@formbase/env';
 
 import { MobileNavigation } from './mobile-navigation';
 
-const routes = [{ name: 'Docs', href: '/docs' }] as const;
+const routes = [{ name: 'Docs', href: 'https://docs.formbase.dev' }] as const;
 
 type LandingHeaderProps = {
   user: LuciaUser | null;

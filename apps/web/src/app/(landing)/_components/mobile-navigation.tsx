@@ -25,10 +25,10 @@ const MobileNavigationSheet = ({
 
   const menuNavigationLinks = [
     {
-      href: `/docs`,
-      text: 'Docs',
+      name: 'Docs',
+      href: 'https://docs.formbase.dev',
     },
-  ];
+  ] as const;
 
   return (
     <Sheet open={isMenuOpen} onOpenChange={onMenuOpenChange}>
@@ -42,7 +42,7 @@ const MobileNavigationSheet = ({
         </Link>
 
         <div className="mt-8 flex w-full flex-col items-start gap-y-4">
-          {menuNavigationLinks.map(({ href, text }) => (
+          {menuNavigationLinks.map(({ href, name }) => (
             <Link
               key={href}
               className="text-2xl font-semibold text-foreground hover:text-foreground/80"
@@ -51,7 +51,7 @@ const MobileNavigationSheet = ({
                 handleMenuItemClick();
               }}
             >
-              {text}
+              {name}
             </Link>
           ))}
         </div>
