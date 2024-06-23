@@ -16,7 +16,7 @@ type CodeExampleStepProps = {
 };
 
 export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
-  const htmlCode = await highlightCode(`<form
+  const rawHtmlCode = `<form
     action="https://formbase.dev/s/${formId ?? 'abcdefghijkl'}" method="POST"
     enctype="multipart/form-data"
   >
@@ -25,10 +25,9 @@ export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
     <textarea name="message"></textarea>
 
     <button type="submit">Submit</button>
-</form>`);
+</form>`;
 
-  const reactCode =
-    await highlightCode(`export default function FormbaseForm() {
+  const rawReactCode = `export default function FormbaseForm() {
     return (
       <form
         action="https://formbase.dev/s/${formId ?? 'abcdefghijkl'}"
@@ -42,7 +41,10 @@ export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
         <button type="submit">Submit</button>
       </form>
     );
-  }`);
+  }`;
+
+  const htmlCode = await highlightCode(rawHtmlCode);
+  const reactCode = await highlightCode(rawReactCode);
 
   return (
     <div
@@ -68,7 +70,7 @@ export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
                 }}
               />
               <CopyButton
-                text={htmlCode}
+                text={rawHtmlCode}
                 className="absolute top-4 text-white right-4"
               />
             </TabsContent>
@@ -80,7 +82,7 @@ export const CodeExampleStep = async ({ formId }: CodeExampleStepProps) => {
                 }}
               />
               <CopyButton
-                text={reactCode}
+                text={rawReactCode}
                 className="absolute top-4 text-white right-4"
               />
             </TabsContent>
