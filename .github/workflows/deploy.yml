@@ -1,15 +1,12 @@
 name: Deploy to Production
 on:
   push:
-    branches: ['main']
+    branches: ['release']
 env:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - name: Deploy to Coolify
         run: |
