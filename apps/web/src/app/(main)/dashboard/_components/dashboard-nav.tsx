@@ -25,6 +25,11 @@ const items = [
     href: '/dashboard/settings',
     icon: GearIcon,
   },
+  {
+    title: 'Docs',
+    href: 'https://docs.formbase.dev/',
+    icon: BookOpenIcon,
+  },
 ];
 
 interface Props {
