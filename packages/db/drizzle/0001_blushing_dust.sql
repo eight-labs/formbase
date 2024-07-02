@@ -1,0 +1,1 @@
+ALTER TABLE "form_datas" ADD COLUMN "is_spam" boolean DEFAULT false NOT NULL;
