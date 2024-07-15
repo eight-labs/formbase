@@ -1,21 +1,34 @@
 import {
   Body,
-  Button,
+  Column,
   Container,
   Head,
   Html,
   Preview,
+  Row,
   Section,
   Text,
 } from '@react-email/components';
 import { render } from '@react-email/render';
 
 interface Props {
-  link: string;
   formTitle: string;
+  submissionData: Record<string, unknown>;
 }
 
-export const NewSubmissionEmail = ({ link, formTitle }: Props) => {
+const formatKey = (key: string): string => {
+  if (key.includes('_')) {
+    return key
+      .split('_')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  }
+
+  const result = key.replace(/([A-Z])/g, ' $1');
+  return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
+export const NewSubmissionEmail = ({ formTitle, submissionData }: Props) => {
   return (
     <Html>
       <Head />
@@ -26,12 +39,17 @@ export const NewSubmissionEmail = ({ link, formTitle }: Props) => {
             <Text style={title}>Formbase</Text>
             <Text style={text}>Hi,</Text>
             <Text style={text}>
-              Your form <strong>{formTitle}</strong> has a new submission. You
-              can view it by clicking the button below:
+              Your form <strong>{formTitle}</strong> has a new submission. Here
+              are the details:
             </Text>
-            <Button style={button} href={link}>
-              View Submission
-            </Button>
+            <Section style={submissionContainer}>
+              {Object.entries(submissionData).map(([key, value]) => (
+                <Row key={key} style={submissionRow}>
+                  <Column style={submissionLabel}>{formatKey(key)}:</Column>
+                  <Column style={submissionValue}>{String(value)}</Column>
+                </Row>
+              ))}
+            </Section>
             <Text style={text}>Have a nice day!</Text>
           </Section>
         </Container>
@@ -40,8 +58,16 @@ export const NewSubmissionEmail = ({ link, formTitle }: Props) => {
   );
 };
 
-export const renderNewSubmissionEmail = ({ link, formTitle }: Props) =>
-  render(<NewSubmissionEmail link={link} formTitle={formTitle} />);
+export const renderNewSubmissionEmail = ({
+  formTitle,
+  submissionData,
+}: Props) =>
+  render(
+    <NewSubmissionEmail
+      formTitle={formTitle}
+      submissionData={submissionData}
+    />,
+  );
 
 const main = {
   backgroundColor: '#f6f9fc',
@@ -70,19 +96,25 @@ const title = {
   lineHeight: '32px',
 };
 
-const button = {
-  backgroundColor: '#09090b',
-  borderRadius: '4px',
-  color: '#fafafa',
-  fontFamily: "'Open Sans', 'Helvetica Neue', Arial",
-  fontSize: '15px',
-  textDecoration: 'none',
-  textAlign: 'center' as const,
-  display: 'block',
-  width: '210px',
-  padding: '14px 7px',
+const submissionContainer = {
+  marginTop: '20px',
+  marginBottom: '20px',
+  borderTop: '1px solid #f0f0f0',
+  borderBottom: '1px solid #f0f0f0',
+  padding: '20px 0',
 };
 
-// const anchor = {
-//   textDecoration: "underline",
-// };
+const submissionRow = {
+  marginBottom: '10px',
+};
+
+const submissionLabel = {
+  ...text,
+  fontWeight: '700',
+  width: '30%',
+};
+
+const submissionValue = {
+  ...text,
+  width: '70%',
+};
