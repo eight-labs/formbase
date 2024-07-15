@@ -59,7 +59,10 @@ async function processFileUploads(
   }
 }
 
-async function handleEmailNotifications(form: Form, formId: string) {
+async function handleEmailNotifications(
+  form: Form,
+  submissionData: Record<string, unknown>,
+) {
   if (form.enableEmailNotifications) {
     const user = await api.user.getUserById({ userId: form.userId });
     if (!user) throw new Error('User not found');
@@ -68,8 +71,8 @@ async function handleEmailNotifications(form: Form, formId: string) {
       to: user.email,
       subject: `New Submission for "${form.title}"`,
       body: renderNewSubmissionEmail({
-        link: `http://localhost:3000/form/${formId}`,
         formTitle: form.title,
+        submissionData,
       }),
     });
   }
@@ -110,8 +113,7 @@ export async function POST(
       keys: updatedKeys,
     });
 
-    void handleEmailNotifications(form, formId);
-
+    void handleEmailNotifications(form, formData as Record<string, unknown>);
     const { browser } = userAgent(request);
 
     if (!browser.name) {

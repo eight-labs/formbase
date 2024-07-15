@@ -8,7 +8,7 @@ import { env } from '@formbase/env';
 const smtpConfig = {
   host: env.SMTP_HOST,
   port: env.SMTP_PORT,
-  secure: true,
+  secure: env.NODE_ENV === 'production',
   auth: {
     user: env.SMTP_USER,
     pass: env.SMTP_PASSWORD,
@@ -16,12 +16,6 @@ const smtpConfig = {
 };
 
 const nodeMailerTransporter = createTransport(smtpConfig as TransportOptions);
-const resendTransporter = createTransport(
-  ResendTransport.makeTransport({
-    apiKey: env.RESEND_API_KEY || '',
-  }),
-);
-
 export type MessageInfo = {
   to: string;
   subject: string;
@@ -29,7 +23,13 @@ export type MessageInfo = {
 };
 
 const transporter =
-  env.SMTP_TRANSPORT === 'resend' ? resendTransporter : nodeMailerTransporter;
+  env.SMTP_TRANSPORT === 'resend'
+    ? createTransport(
+        ResendTransport.makeTransport({
+          apiKey: env.RESEND_API_KEY,
+        }),
+      )
+    : nodeMailerTransporter;
 
 export const sendMail = async (message: MessageInfo) => {
   const { to, subject, body } = message;
