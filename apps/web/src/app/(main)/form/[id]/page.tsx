@@ -1,18 +1,14 @@
-import { type FormData } from '@formbase/db/schema';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@formbase/ui/primitives/tabs';
+import { validateRequest } from "@formbase/auth";
+import { FormData } from "@formbase/db/schema";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@formbase/ui/primitives/tabs";
 
-import { CopyButton } from '~/components/copy-button';
-import { api } from '~/lib/trpc/server';
+import { CopyButton } from "~/components/copy-button";
+import { api } from "~/lib/trpc/server";
 
-import { EmptyFormState } from '../../dashboard/_components/empty-state';
-import { ExportSubmissionsDropDownButton } from './export-submissions-button';
-import { FormSettings } from './form-settings';
-import { SubmissionsTable } from './submissions-table';
+import { EmptyFormState } from "../../dashboard/_components/empty-state";
+import { ExportSubmissionsDropDownButton } from "./export-submissions-button";
+import { FormSettings } from "./form-settings";
+import { SubmissionsTable } from "./submissions-table";
 
 export default async function FormPage({ params }: { params: { id: string } }) {
   const formId = params.id;
@@ -20,6 +16,8 @@ export default async function FormPage({ params }: { params: { id: string } }) {
     api.form.get({ formId }),
     api.formData.all({ formId }),
   ]);
+
+  const { user } = await validateRequest();
 
   return (
     <div className="space-y-6">
@@ -66,7 +64,7 @@ export default async function FormPage({ params }: { params: { id: string } }) {
         {/* <TabsContent value="setup">Change your password here.</TabsContent> */}
         {/* <TabsContent value="analytics">Look at your analytics here</TabsContent> */}
         <TabsContent value="settings" className="my-6">
-          <FormSettings form={form} />
+          <FormSettings form={form} user={user} />
         </TabsContent>
       </Tabs>
     </div>

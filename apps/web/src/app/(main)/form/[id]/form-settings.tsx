@@ -1,15 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { BellRing, ExternalLink, FolderPen, FolderX } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
-
-import { type RouterOutputs } from '@formbase/api';
-import { Button } from '@formbase/ui/primitives/button';
+import { RouterOutputs } from "@formbase/api";
+import { UserInstance } from "@formbase/auth";
+import { Button } from "@formbase/ui/primitives/button";
 import {
   Form,
   FormControl,
@@ -17,15 +10,21 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from '@formbase/ui/primitives/form';
-import { Input } from '@formbase/ui/primitives/input';
-import { Label } from '@formbase/ui/primitives/label';
-import { Switch } from '@formbase/ui/primitives/switch';
+} from "@formbase/ui/primitives/form";
+import { Input } from "@formbase/ui/primitives/input";
+import { Label } from "@formbase/ui/primitives/label";
+import { Switch } from "@formbase/ui/primitives/switch";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BellRing, ExternalLink, FolderPen, FolderX } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
-import { api } from '~/lib/trpc/react';
+import { api } from "~/lib/trpc/react";
 
-import { revalidateDashboard } from '../../_actions/revalidateDashboard';
-import { DeleteFormDialog } from './delete-form-dialog';
+import { revalidateDashboard } from "../../_actions/revalidateDashboard";
+import { DeleteFormDialog } from "./delete-form-dialog";
 
 const formNameSchema = z.object({
   name: z.string().min(1).optional(),
@@ -47,17 +46,24 @@ const enableNotificationsSchema = z.object({
   enableNotifications: z.boolean().default(true).optional(),
 });
 
+const defaultSubmissionEmailSchema = z.object({
+  defaultSubmissionEmail: z.string().email().optional(),
+});
+
 type FormNameSchema = z.infer<typeof formNameSchema>;
 type EnableFormSubmissionsSchema = z.infer<typeof enableFormSubmissionsSchema>;
 type _EnableSubmissionsRetentionSchema = z.infer<typeof enableRetentionSchema>;
 type EnableFormNotificationsSchema = z.infer<typeof enableNotificationsSchema>;
 type FormReturnUrlSchema = z.infer<typeof formReturnUrlSchema>;
 
+type DefaultSubmissionEmailSchema = z.infer<typeof defaultSubmissionEmailSchema>;
+
 type FormSettingsProps = {
   form: RouterOutputs['form']['get'];
+  user: UserInstance | null;
 };
 
-export function FormSettings({ form }: FormSettingsProps) {
+export function FormSettings({ form, user }: FormSettingsProps) {
   const router = useRouter();
 
   if (!form) {
@@ -84,6 +90,14 @@ export function FormSettings({ form }: FormSettingsProps) {
         formId={form.id}
         enableNotifications={form.enableEmailNotifications}
       />
+
+      {/* only show the if the user has enabled email notifications */}
+      {form.enableEmailNotifications && (
+        <FormDefaultSubmissionEmailRecipient
+          formId={form.id}
+          email={form.defaultSubmissionEmail ?? user?.email ?? ''}
+        />
+      )}
 
       <div className="flex flex-row items-center justify-between rounded-lg border p-4">
         <div className="space-y-0.5">
@@ -232,6 +246,73 @@ const ReturnUrlForm = ({
                   />
                   <Button
                     loading={isUpdatingFormReturnURL}
+                    type="submit"
+                    variant="default"
+                  >
+                    Save
+                  </Button>
+                </div>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+      </form>
+    </Form>
+  );
+};
+
+const FormDefaultSubmissionEmailRecipient = ({ formId, email }: { formId: string; email: string }) => {
+  const router = useRouter();
+
+  const formDefaultSubmissionEmail = useForm<DefaultSubmissionEmailSchema>({
+    resolver: zodResolver(defaultSubmissionEmailSchema),
+    defaultValues: {
+      defaultSubmissionEmail: email,
+    },
+  });
+
+  const { mutateAsync: updateFormDefaultSubmissionEmail, isPending: isUpdatingFormDefaultSubmissionEmail } =
+    api.form.update.useMutation();
+
+  async function handleFormDefaultSubmissionEmailSubmit(data: DefaultSubmissionEmailSchema) {
+    try {
+      await updateFormDefaultSubmissionEmail({
+        id: formId,
+        defaultSubmissionEmail: data.defaultSubmissionEmail,
+      });
+
+      toast('Your form default submission email has been updated', {
+        icon: <FolderPen className="h-4 w-4" />,
+      });
+
+      router.refresh();
+    } catch {
+      toast('Failed to update form', {
+        description: 'Please try again later',
+        icon: <FolderX className="h-4 w-4" />,
+      });
+    }
+  }
+
+  return (
+    <Form {...formDefaultSubmissionEmail}>
+      <form onSubmit={formDefaultSubmissionEmail.handleSubmit(handleFormDefaultSubmissionEmailSubmit)}>
+        <FormField
+          control={formDefaultSubmissionEmail.control}
+          name="defaultSubmissionEmail"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+              <div className="space-y-0.5">
+                <FormLabel className="text-base">
+                  Default Submission Email
+                </FormLabel>
+                <FormDescription>This is the email address that submission emails will be sent to</FormDescription>
+              </div>
+              <FormControl>
+                <div className="flex gap-2">
+                  <Input className="w-[250px]" {...field} min={1} />
+                  <Button
+                    loading={isUpdatingFormDefaultSubmissionEmail}
                     type="submit"
                     variant="default"
                   >

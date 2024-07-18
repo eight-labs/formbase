@@ -1,12 +1,11 @@
-import { userAgent } from 'next/server';
+import { Form } from "@formbase/db/schema";
+import { env } from "@formbase/env";
+import { userAgent } from "next/server";
 
-import { type Form } from '@formbase/db/schema';
-import { env } from '@formbase/env';
-
-import { sendMail } from '~/lib/email/mailer';
-import { renderNewSubmissionEmail } from '~/lib/email/templates/new-submission';
-import { api } from '~/lib/trpc/server';
-import { assignFileOrImage, uploadFileFromBlob } from '~/lib/upload-file';
+import { sendMail } from "~/lib/email/mailer";
+import { renderNewSubmissionEmail } from "~/lib/email/templates/new-submission";
+import { api } from "~/lib/trpc/server";
+import { assignFileOrImage, uploadFileFromBlob } from "~/lib/upload-file";
 
 type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
@@ -68,7 +67,7 @@ async function handleEmailNotifications(
     if (!user) throw new Error('User not found');
 
     await sendMail({
-      to: user.email,
+      to: form.defaultSubmissionEmail ?? user.email,
       subject: `New Submission for "${form.title}"`,
       body: renderNewSubmissionEmail({
         formTitle: form.title,

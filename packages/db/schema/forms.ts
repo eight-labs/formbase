@@ -1,9 +1,9 @@
 import type { InferSelectModel } from 'drizzle-orm';
 
-import { boolean, index, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
-import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { boolean, index, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
-import { users } from './users';
+import { users } from "./users";
 
 export const forms = pgTable(
   'forms',
@@ -23,6 +23,7 @@ export const forms = pgTable(
     keys: text('keys').array().notNull(),
     enableSubmissions: boolean('enable_submissions').default(true).notNull(),
     enableRetention: boolean('enable_retention').default(true).notNull(),
+    defaultSubmissionEmail: varchar('default_submission_email', { length: 255 }),
   },
   (t) => ({
     userIdx: index('form_user_idx').on(t.userId),
