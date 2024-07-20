@@ -1,10 +1,9 @@
-import { z } from 'zod';
+import { drizzlePrimitives } from "@formbase/db";
+import { formDatas, forms, onboardingForms } from "@formbase/db/schema";
+import { generateId } from "@formbase/utils/generate-id";
+import { z } from "zod";
 
-import { drizzlePrimitives } from '@formbase/db';
-import { formDatas, forms, onboardingForms } from '@formbase/db/schema';
-import { generateId } from '@formbase/utils/generate-id';
-
-import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 const { and, count, eq } = drizzlePrimitives;
 
@@ -57,6 +56,7 @@ export const formRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const id = generateId(15);
+      const userEmail = ctx.user.email;
 
       await ctx.db.insert(forms).values({
         id,
@@ -68,6 +68,7 @@ export const formRouter = createTRPCRouter({
         keys: [''],
         enableEmailNotifications: true,
         enableSubmissions: true,
+        defaultSubmissionEmail: userEmail,
       });
 
       return { id };
@@ -114,6 +115,7 @@ export const formRouter = createTRPCRouter({
         enableSubmissions: z.boolean().optional(),
         enableEmailNotifications: z.boolean().optional(),
         returnUrl: z.string().optional(),
+        defaultSubmissionEmail: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -135,6 +137,8 @@ export const formRouter = createTRPCRouter({
           enableEmailNotifications:
             input.enableEmailNotifications ?? form.enableEmailNotifications,
           returnUrl: input.returnUrl ?? form.returnUrl,
+          defaultSubmissionEmail:
+            input.defaultSubmissionEmail ?? form.defaultSubmissionEmail,
         })
         .where(eq(forms.id, input.id));
     }),

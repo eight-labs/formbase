@@ -1,11 +1,12 @@
 import type { User } from '@formbase/db/schema';
 
-import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
-import { Lucia } from 'lucia';
+import { db } from "@formbase/db";
+import { sessions, users } from "@formbase/db/schema";
+import { env } from "@formbase/env";
+import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
+import { Lucia } from "lucia";
 
-import { db } from '@formbase/db';
-import { sessions, users } from '@formbase/db/schema';
-import { env } from '@formbase/env';
+import type { User as LuciaUser } from 'lucia';
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 
@@ -36,3 +37,7 @@ declare module 'lucia' {
     DatabaseUserAttributes: DatabaseUserAttributes;
   }
 }
+
+
+// export lucia user type
+export type UserInstance = LuciaUser;
