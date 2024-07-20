@@ -1,8 +1,16 @@
 'use client';
 
-import { RouterOutputs } from "@formbase/api";
-import { UserInstance } from "@formbase/auth";
-import { Button } from "@formbase/ui/primitives/button";
+import { useRouter } from 'next/navigation';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { BellRing, ExternalLink, FolderPen, FolderX } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+import { type RouterOutputs } from '@formbase/api';
+import { type UserInstance } from '@formbase/auth';
+import { Button } from '@formbase/ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -10,21 +18,15 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "@formbase/ui/primitives/form";
-import { Input } from "@formbase/ui/primitives/input";
-import { Label } from "@formbase/ui/primitives/label";
-import { Switch } from "@formbase/ui/primitives/switch";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { BellRing, ExternalLink, FolderPen, FolderX } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
+} from '@formbase/ui/primitives/form';
+import { Input } from '@formbase/ui/primitives/input';
+import { Label } from '@formbase/ui/primitives/label';
+import { Switch } from '@formbase/ui/primitives/switch';
 
-import { api } from "~/lib/trpc/react";
+import { api } from '~/lib/trpc/react';
 
-import { revalidateDashboard } from "../../_actions/revalidateDashboard";
-import { DeleteFormDialog } from "./delete-form-dialog";
+import { revalidateDashboard } from '../../_actions/revalidateDashboard';
+import { DeleteFormDialog } from './delete-form-dialog';
 
 const formNameSchema = z.object({
   name: z.string().min(1).optional(),
@@ -56,7 +58,9 @@ type _EnableSubmissionsRetentionSchema = z.infer<typeof enableRetentionSchema>;
 type EnableFormNotificationsSchema = z.infer<typeof enableNotificationsSchema>;
 type FormReturnUrlSchema = z.infer<typeof formReturnUrlSchema>;
 
-type DefaultSubmissionEmailSchema = z.infer<typeof defaultSubmissionEmailSchema>;
+type DefaultSubmissionEmailSchema = z.infer<
+  typeof defaultSubmissionEmailSchema
+>;
 
 type FormSettingsProps = {
   form: RouterOutputs['form']['get'];
@@ -261,7 +265,13 @@ const ReturnUrlForm = ({
   );
 };
 
-const FormDefaultSubmissionEmailRecipient = ({ formId, email }: { formId: string; email: string }) => {
+const FormDefaultSubmissionEmailRecipient = ({
+  formId,
+  email,
+}: {
+  formId: string;
+  email: string;
+}) => {
   const router = useRouter();
 
   const formDefaultSubmissionEmail = useForm<DefaultSubmissionEmailSchema>({
@@ -271,10 +281,14 @@ const FormDefaultSubmissionEmailRecipient = ({ formId, email }: { formId: string
     },
   });
 
-  const { mutateAsync: updateFormDefaultSubmissionEmail, isPending: isUpdatingFormDefaultSubmissionEmail } =
-    api.form.update.useMutation();
+  const {
+    mutateAsync: updateFormDefaultSubmissionEmail,
+    isPending: isUpdatingFormDefaultSubmissionEmail,
+  } = api.form.update.useMutation();
 
-  async function handleFormDefaultSubmissionEmailSubmit(data: DefaultSubmissionEmailSchema) {
+  async function handleFormDefaultSubmissionEmailSubmit(
+    data: DefaultSubmissionEmailSchema,
+  ) {
     try {
       await updateFormDefaultSubmissionEmail({
         id: formId,
@@ -296,7 +310,11 @@ const FormDefaultSubmissionEmailRecipient = ({ formId, email }: { formId: string
 
   return (
     <Form {...formDefaultSubmissionEmail}>
-      <form onSubmit={formDefaultSubmissionEmail.handleSubmit(handleFormDefaultSubmissionEmailSubmit)}>
+      <form
+        onSubmit={formDefaultSubmissionEmail.handleSubmit(
+          handleFormDefaultSubmissionEmailSubmit,
+        )}
+      >
         <FormField
           control={formDefaultSubmissionEmail.control}
           name="defaultSubmissionEmail"
@@ -306,7 +324,10 @@ const FormDefaultSubmissionEmailRecipient = ({ formId, email }: { formId: string
                 <FormLabel className="text-base">
                   Default Submission Email
                 </FormLabel>
-                <FormDescription>This is the email address that submission emails will be sent to</FormDescription>
+                <FormDescription>
+                  This is the email address that submission emails will be sent
+                  to
+                </FormDescription>
               </div>
               <FormControl>
                 <div className="flex gap-2">
@@ -392,7 +413,7 @@ const EnableFormSubmissions = ({
             </div>
             <FormControl>
               <Switch
-                checked={field.value}
+                checked={field.value ?? false}
                 onCheckedChange={async (isChecked) => {
                   field.onChange(isChecked);
                   await handleEnableSubmissionsRetentionSubmit({
@@ -472,7 +493,7 @@ const EnableFormNotifications = ({
             </div>
             <FormControl>
               <Switch
-                checked={field.value}
+                checked={field.value ?? false}
                 onCheckedChange={async (isChecked) => {
                   field.onChange(isChecked);
                   await handleEnableSubmissionsNotifications({
