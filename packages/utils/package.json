@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "nanoid": "^5.0.7",
+    "nanoid": "^5.0.9",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
