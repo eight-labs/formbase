@@ -1,33 +1,27 @@
-import {
-  boolean,
-  index,
-  integer,
-  pgTable,
-  text,
-  timestamp,
-} from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-export const users = pgTable(
-  'users',
+export const users = sqliteTable(
+  'user',
   {
     id: text('id').primaryKey(),
-    githubId: integer('github_id').unique(),
     name: text('name'),
-    email: text('email').unique().notNull(),
-    emailVerified: boolean('email_verified').default(false).notNull(),
-    hashedPassword: text('hashed_password'),
-    avatar: text('avatar'),
-    stripeSubscriptionId: text('stripe_subscription_id'),
-    stripePriceId: text('stripe_price_id'),
-    stripeCustomerId: text('stripe_customer_id'),
-    stripeCurrentPeriodEnd: timestamp('stripe_current_period_end'),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at'),
+    email: text('email').notNull().unique(),
+    emailVerified: integer('email_verified', { mode: 'boolean' })
+      .default(false)
+      .notNull(),
+    image: text('image'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .$onUpdate(() => new Date())
+      .notNull(),
   },
   (t) => ({
-    emailIdx: index('email_idx').on(t.email),
-    githubIdx: index('github_idx').on(t.githubId),
+    emailIdx: index('user_email_idx').on(t.email),
   }),
 );
 

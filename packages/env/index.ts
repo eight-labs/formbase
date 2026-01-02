@@ -10,19 +10,23 @@ export const env = createEnv({
   server: {
     PORT: z.coerce.number().default(3000),
 
-    DATABASE_URL: z.string().url().startsWith('postgres'),
+    DATABASE_URL: z
+      .string()
+      .refine(
+        (url) => url.startsWith('libsql://') || url.startsWith('file:'),
+        'Must be libsql:// or file: URL',
+      ),
+    TURSO_AUTH_TOKEN: z.string().optional(),
 
     AUTH_GITHUB_ID: z.string().optional(),
     AUTH_GITHUB_SECRET: z.string().optional(),
+    AUTH_GOOGLE_ID: z.string().optional(),
+    AUTH_GOOGLE_SECRET: z.string().optional(),
 
-    SMTP_HOST: z.string().trim().min(1),
-    SMTP_PORT: z.coerce.number().int().min(1),
-    SMTP_USER: z.string().trim().min(1),
-    SMTP_PASSWORD: z.string().trim().min(1),
-    STRIPE_API_KEY: z.string().trim().min(1),
-
-    STRIPE_WEBHOOK_SECRET: z.string().trim().min(1),
-    STRIPE_PRO_MONTHLY_PLAN_ID: z.string().trim().min(1),
+    SMTP_HOST: z.string().trim().min(1).optional(),
+    SMTP_PORT: z.coerce.number().int().min(1).optional(),
+    SMTP_USER: z.string().trim().min(1).optional(),
+    SMTP_PASS: z.string().trim().min(1).optional(),
 
     ALLOW_SIGNIN_SIGNUP: z.string().trim().min(1),
 
@@ -34,8 +38,8 @@ export const env = createEnv({
     MINIO_SECRETKEY: z.string().trim().min(1),
     MINIO_BUCKET: z.string().trim().min(1),
 
-    RESEND_API_KEY: z.string().trim(),
-    SMTP_TRANSPORT: z.string().trim(),
+    RESEND_API_KEY: z.string().trim().optional(),
+    SMTP_TRANSPORT: z.enum(['smtp', 'resend']).optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().url(),

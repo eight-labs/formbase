@@ -1,13 +1,14 @@
 import { type ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 
-import { validateRequest } from '@formbase/auth';
+import { getSession } from '@formbase/auth/server';
 
 import { Header } from './_components/header';
 import { SiteFooter } from './_components/site-footer';
 
 async function LandingPageLayout({ children }: { children: ReactNode }) {
-  const { user } = await validateRequest();
+  const session = await getSession();
+  const user = session?.user ?? null;
 
   if (user) {
     redirect('/dashboard');

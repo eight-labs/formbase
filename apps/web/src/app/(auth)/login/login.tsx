@@ -1,11 +1,12 @@
 'use client';
 
+import { type FormEvent, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import { useFormState } from 'react-dom';
 
-import { login } from '@formbase/auth/actions';
+import { signIn } from '@formbase/auth/client';
 import { Button } from '@formbase/ui/primitives/button';
 import {
   Card,
@@ -17,11 +18,66 @@ import {
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
 
+import { LoadingButton } from '~/components/loading-button';
 import { PasswordInput } from '~/components/password-input';
-import { SubmitButton } from '~/components/submit-button';
 
 export function Login() {
-  const [state, formAction] = useFormState(login, null);
+  const router = useRouter();
+  const [formError, setFormError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [socialLoading, setSocialLoading] = useState<
+    'github' | 'google' | null
+  >(null);
+
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormError(null);
+    setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get('email') ?? '');
+    const password = String(formData.get('password') ?? '');
+
+    try {
+      const { error } = await signIn.email({
+        email,
+        password,
+        callbackURL: '/dashboard',
+      });
+
+      if (error) {
+        setFormError(error.message);
+        return;
+      }
+
+      router.push('/dashboard');
+    } catch {
+      setFormError('Unable to sign in. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleSocialSignIn = async (provider: 'github' | 'google') => {
+    setFormError(null);
+    setSocialLoading(provider);
+
+    try {
+      const { error } = await signIn.social({
+        provider,
+        callbackURL: '/dashboard',
+        newUserCallbackURL: '/onboarding',
+      });
+
+      if (error) {
+        setFormError(error.message);
+        setSocialLoading(null);
+      }
+    } catch {
+      setFormError('Unable to sign in. Please try again.');
+      setSocialLoading(null);
+    }
+  };
 
   return (
     <Card className="w-full max-w-md">
@@ -32,18 +88,35 @@ export function Login() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Button variant="outline" className="w-full" asChild>
-          <Link href="/login/github">
+        <div className="grid gap-2">
+          <Button
+            variant="outline"
+            className="w-full"
+            disabled={!!socialLoading}
+            onClick={() => {
+              void handleSocialSignIn('github');
+            }}
+          >
             <GitHubLogoIcon className="mr-2 h-5 w-5" />
             Log in with GitHub
-          </Link>
-        </Button>
+          </Button>
+          <Button
+            variant="outline"
+            className="w-full"
+            disabled={!!socialLoading}
+            onClick={() => {
+              void handleSocialSignIn('google');
+            }}
+          >
+            Log in with Google
+          </Button>
+        </div>
         <div className="my-2 flex items-center">
           <div className="flex-grow border-t border-muted" />
           <div className="mx-2 text-muted-foreground">or</div>
           <div className="flex-grow border-t border-muted" />
         </div>
-        <form action={formAction} className="grid gap-4">
+        <form onSubmit={handleLogin} className="grid gap-4">
           <div className="space-y-2">
             <Label>Email</Label>
             <Input
@@ -74,20 +147,14 @@ export function Login() {
             </Button>
           </div>
 
-          {state?.fieldError ? (
-            <ul className="list-disc space-y-1 rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive">
-              {Object.values(state.fieldError).map((err) => (
-                <li className="ml-4" key={err}>
-                  {err}
-                </li>
-              ))}
-            </ul>
-          ) : state?.formError ? (
+          {formError ? (
             <p className="rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive">
-              {state.formError}
+              {formError}
             </p>
           ) : null}
-          <SubmitButton className="w-full">Log In</SubmitButton>
+          <LoadingButton className="w-full" loading={isSubmitting}>
+            Log In
+          </LoadingButton>
           <Button variant="outline" className="w-full" asChild>
             <Link href="/">Cancel</Link>
           </Button>

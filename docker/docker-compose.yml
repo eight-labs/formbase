@@ -2,18 +2,6 @@ version: '3.8'
 
 name: formbase
 services:
-  database:
-    image: postgres:15
-    container_name: formbase-database
-    environment:
-      - POSTGRES_USER=formbase
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=formbase
-    ports:
-      - '5432:5432'
-    volumes:
-      - formbase-db:/var/lib/postgresql/data
-
   inbucket:
     image: inbucket/inbucket
     container_name: formbase-mailserver
@@ -39,6 +27,5 @@ services:
     command: -c 'mkdir -p /data/formbase && minio server /data --console-address ":9001" --address ":9002"'
 
 volumes:
-  formbase-db:
   formbase-mail:
   minio:

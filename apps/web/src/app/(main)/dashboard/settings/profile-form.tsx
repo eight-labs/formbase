@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-import { type LuciaUser } from '@formbase/auth';
+import { type User } from '@formbase/auth';
 import { Button } from '@formbase/ui/primitives/button';
 import {
   Form,
@@ -34,7 +34,7 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 type ProfileFormProps = {
-  user: LuciaUser;
+  user: User;
 };
 
 export function ProfileForm({ user }: ProfileFormProps) {

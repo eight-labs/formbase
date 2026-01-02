@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import type { Metadata } from 'next';
 
-import { validateRequest } from '@formbase/auth';
+import { getSession } from '@formbase/auth/server';
 import { env } from '@formbase/env';
 import { Separator } from '@formbase/ui/primitives/separator';
 
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 };
 
 export default async function SettingsPage() {
-  const { user } = await validateRequest();
+  const session = await getSession();
 
-  if (!user) {
-    redirect('/signin');
+  if (!session) {
+    redirect('/login');
   }
 
   return (
@@ -30,7 +30,7 @@ export default async function SettingsPage() {
         </p>
       </div>
       <Separator />
-      <ProfileForm user={user} />
+      <ProfileForm user={session.user} />
     </div>
   );
 }

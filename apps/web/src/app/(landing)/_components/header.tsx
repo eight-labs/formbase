@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { FunctionSquare } from 'lucide-react';
 
-import { type LuciaUser } from '@formbase/auth';
+import { type User } from '@formbase/auth';
 import { env } from '@formbase/env';
 
 import { MobileNavigation } from './mobile-navigation';
@@ -10,7 +10,7 @@ import { MobileNavigation } from './mobile-navigation';
 const routes = [{ name: 'Docs', href: 'https://docs.formbase.dev' }] as const;
 
 type LandingHeaderProps = {
-  user: LuciaUser | null;
+  user: User | null;
 };
 
 export const Header = ({ user }: LandingHeaderProps) => {

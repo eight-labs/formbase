@@ -9,7 +9,6 @@ import { FormCard } from './form-card';
 
 interface FormsProps {
   promises: Promise<
-    // [RouterOutputs['form']['userForms'], RouterOutputs['stripe']['getPlan']]
     [RouterOutputs['form']['userForms']]
   >;
 }

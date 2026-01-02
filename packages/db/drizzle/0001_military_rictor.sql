@@ -1,1 +1,0 @@
-ALTER TABLE "forms" ADD COLUMN "default_submission_email" varchar(255);

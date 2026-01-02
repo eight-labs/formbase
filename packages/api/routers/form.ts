@@ -7,6 +7,17 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 const { and, count, eq } = drizzlePrimitives;
 
+const parseKeys = (rawKeys: string) => {
+  try {
+    const parsed = JSON.parse(rawKeys) as unknown;
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+const serializeKeys = (keys: string[]) => JSON.stringify(keys);
+
 export const formRouter = createTRPCRouter({
   list: protectedProcedure
     .input(
@@ -32,13 +43,20 @@ export const formRouter = createTRPCRouter({
 
   get: protectedProcedure
     .input(z.object({ formId: z.string() }))
-    .query(({ ctx, input }) =>
-      ctx.db.query.forms.findFirst({
+    .query(async ({ ctx, input }) => {
+      const form = await ctx.db.query.forms.findFirst({
         where: (table) =>
           and(eq(table.id, input.formId), eq(table.userId, ctx.user.id)),
         with: { user: { columns: { email: true } } },
-      }),
-    ),
+      });
+
+      if (!form) return null;
+
+      return {
+        ...form,
+        keys: parseKeys(form.keys),
+      };
+    }),
 
   getOnboardingForm: protectedProcedure.query(async ({ ctx }) =>
     ctx.db.query.onboardingForms.findMany({
@@ -65,7 +83,7 @@ export const formRouter = createTRPCRouter({
         description: input.description ?? null,
         updatedAt: new Date(),
         returnUrl: input.returnUrl ?? null,
-        keys: [''],
+        keys: serializeKeys(['']),
         enableEmailNotifications: true,
         enableSubmissions: true,
         defaultSubmissionEmail: userEmail,
@@ -92,7 +110,7 @@ export const formRouter = createTRPCRouter({
         description: input.description ?? null,
         updatedAt: new Date(),
         returnUrl: input.returnUrl ?? null,
-        keys: [''],
+        keys: serializeKeys(['']),
         enableEmailNotifications: true,
         enableSubmissions: true,
       });
@@ -213,9 +231,16 @@ export const formRouter = createTRPCRouter({
         formId: z.string(),
       }),
     )
-    .query(({ ctx, input }) =>
-      ctx.db.query.forms.findFirst({
+    .query(async ({ ctx, input }) => {
+      const form = await ctx.db.query.forms.findFirst({
         where: (table) => eq(table.id, input.formId),
-      }),
-    ),
+      });
+
+      if (!form) return null;
+
+      return {
+        ...form,
+        keys: parseKeys(form.keys),
+      };
+    }),
 });

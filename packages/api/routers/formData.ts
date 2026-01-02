@@ -1,13 +1,24 @@
 import { z } from 'zod';
 
 import { drizzlePrimitives } from '@formbase/db';
-import { formDatas, forms, ZUpdateFormDataSchema } from '@formbase/db/schema';
+import { formDatas, forms } from '@formbase/db/schema';
 import { flattenObject } from '@formbase/utils/flatten-object';
 import { generateId } from '@formbase/utils/generate-id';
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
 
 const { eq } = drizzlePrimitives;
+
+const parseJson = (value: string) => {
+  try {
+    return JSON.parse(value) as Record<string, unknown>;
+  } catch {
+    return null;
+  }
+};
+
+const serializeJson = (value: unknown) =>
+  typeof value === 'string' ? value : JSON.stringify(value);
 
 export const formDataRouter = createTRPCRouter({
   get: protectedProcedure
@@ -16,16 +27,23 @@ export const formDataRouter = createTRPCRouter({
         id: z.string(),
       }),
     )
-    .query(({ ctx, input }) =>
-      ctx.db.query.formDatas.findFirst({
+    .query(async ({ ctx, input }) => {
+      const row = await ctx.db.query.formDatas.findFirst({
         where: (table, { eq }) => eq(table.id, input.id),
-      }),
-    ),
+      });
+
+      if (!row) return null;
+
+      return {
+        ...row,
+        data: parseJson(row.data),
+      };
+    }),
 
   create: protectedProcedure
     .input(
       z.object({
-        data: z.string().min(1),
+        data: z.unknown(),
         formId: z.string(),
       }),
     )
@@ -36,7 +54,7 @@ export const formDataRouter = createTRPCRouter({
         .insert(formDatas)
         .values({
           id,
-          data: input.data,
+          data: serializeJson(input.data),
           formId: input.formId,
         })
         .returning();
@@ -54,14 +72,14 @@ export const formDataRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
-        data: z.string(),
+        data: z.unknown(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.db
         .update(formDatas)
         .set({
-          data: input.data,
+          data: serializeJson(input.data),
         })
         .where(eq(formDatas.id, input.id));
     }),
@@ -87,21 +105,35 @@ export const formDataRouter = createTRPCRouter({
         where: (table, { eq }) => eq(table.formId, input.formId),
       });
 
-      return formData.map((data) => ({ ...flattenObject(data), ...data }));
+      return formData.map((data) => {
+        const parsed = parseJson(data.data);
+        const normalized = {
+          ...data,
+          data: parsed,
+        };
+
+        return {
+          ...flattenObject({
+            ...data,
+            data: parsed ?? {},
+          } as Record<string, unknown>),
+          ...normalized,
+        };
+      });
     }),
 
   setFormData: publicProcedure
     .input(
-      ZUpdateFormDataSchema.merge(
-        z.object({
-          keys: z.array(z.string()),
-        }),
-      ),
+      z.object({
+        formId: z.string(),
+        data: z.unknown(),
+        keys: z.array(z.string()),
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.transaction(async (tx) => {
         const formdata = await tx.insert(formDatas).values({
-          data: input.data,
+          data: serializeJson(input.data),
           formId: input.formId,
           id: generateId(15),
           createdAt: new Date(),
@@ -111,7 +143,7 @@ export const formDataRouter = createTRPCRouter({
           .update(forms)
           .set({
             updatedAt: new Date(),
-            keys: input.keys,
+            keys: JSON.stringify(input.keys),
           })
           .where(eq(forms.id, input.formId));
 

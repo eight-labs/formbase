@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
-import { logout } from '@formbase/auth/actions/logout';
+import { signOut, useSession } from '@formbase/auth/client';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -33,23 +33,23 @@ import {
 
 import { LoadingButton } from '~/components/loading-button';
 
-export const UserDropdown = ({
-  email,
-  avatar,
-  className,
-}: {
-  email: string;
-  avatar?: string | null;
-  className?: string;
-}) => {
+export const UserDropdown = ({ className }: { className?: string }) => {
+  const { data: session } = useSession();
+  const user = session?.user;
   const { setTheme } = useTheme();
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={className}>
         {/* eslint @next/next/no-img-element:off */}
         <img
-          src={avatar ?? 'https://source.boringavatars.com/marble/60/' + email}
+          src={
+            user.image ?? 'https://source.boringavatars.com/marble/60/' + user.email
+          }
           alt="Avatar"
           className="block h-8 w-8 rounded-full leading-none"
           width={64}
@@ -58,7 +58,7 @@ export const UserDropdown = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[250px]">
         <DropdownMenuLabel className="text-muted-foreground">
-          {email}
+          {user.email}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -129,8 +129,12 @@ const SignoutConfirmation = () => {
   const handleSignout = async () => {
     setIsLoading(true);
     try {
-      await logout();
+      const { error } = await signOut();
+      if (error) {
+        throw new Error(error.message);
+      }
       toast('Signed out successfully');
+      window.location.href = '/';
     } catch (error) {
       if (error instanceof Error) {
         toast(error.message, {

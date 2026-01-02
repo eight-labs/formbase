@@ -1,4 +1,3 @@
-import { Form } from "@formbase/db/schema";
 import { env } from "@formbase/env";
 import { userAgent } from "next/server";
 
@@ -6,6 +5,7 @@ import { sendMail } from "~/lib/email/mailer";
 import { renderNewSubmissionEmail } from "~/lib/email/templates/new-submission";
 import { api } from "~/lib/trpc/server";
 import { assignFileOrImage, uploadFileFromBlob } from "~/lib/upload-file";
+import { type RouterOutputs } from "@formbase/api";
 
 type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
@@ -59,7 +59,7 @@ async function processFileUploads(
 }
 
 async function handleEmailNotifications(
-  form: Form,
+  form: NonNullable<RouterOutputs['form']['getFormById']>,
   submissionData: Record<string, unknown>,
 ) {
   if (form.enableEmailNotifications) {

@@ -17,10 +17,9 @@
   },
   "dependencies": {
     "@formbase/env": "workspace:*",
+    "@libsql/client": "^0.14.0",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
-    "pg": "^8.11.5",
-    "postgres": "^3.4.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {

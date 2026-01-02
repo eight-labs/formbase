@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { validateRequest } from '@formbase/auth';
-import { type User } from '@formbase/db/schema';
+import { getSession } from '@formbase/auth/server';
 import {
   Card,
   CardContent,
@@ -10,21 +9,26 @@ import {
   CardTitle,
 } from '@formbase/ui/primitives/card';
 
-import { VerifyCode } from './verify-code';
+import { VerifyEmail } from './verify-code';
 
 export const metadata = {
   title: 'Verify Email',
   description: 'Verify your email address to continue.',
 };
 
-export default async function ForgotPasswordPage() {
-  const { user } = (await validateRequest()) as { user: User | null };
+export default async function VerifyEmailPage({
+  searchParams,
+}: {
+  searchParams?: { token?: string };
+}) {
+  const session = await getSession();
+  const token = searchParams?.token;
 
-  if (!user) {
+  if (!session && !token) {
     redirect('/login');
   }
 
-  if (user.emailVerified) {
+  if (session?.user.emailVerified) {
     redirect('/dashboard');
   }
 
@@ -33,12 +37,19 @@ export default async function ForgotPasswordPage() {
       <CardHeader>
         <CardTitle>Verify Email</CardTitle>
         <CardDescription>
-          Verification code was sent to <strong>{user.email}</strong>. Check
-          your spam folder if you can&apos;t find the email.
+          {session?.user.email ? (
+            <>
+              Verification email was sent to{' '}
+              <strong>{session.user.email}</strong>. Check your spam folder if
+              you can&apos;t find the email.
+            </>
+          ) : (
+            <>Use the verification link from your email to continue.</>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <VerifyCode />
+        <VerifyEmail email={session?.user.email} />
       </CardContent>
     </Card>
   );

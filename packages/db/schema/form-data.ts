@@ -1,18 +1,21 @@
-import { index, json, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { type z } from 'zod';
 
 import { forms } from './forms';
 
-export const formDatas = pgTable(
+export const formDatas = sqliteTable(
   'form_datas',
   {
     id: text('id').primaryKey(),
     formId: text('form_id')
       .references(() => forms.id, { onDelete: 'cascade' })
       .notNull(),
-    data: json('data').notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
+    data: text('data').$type<unknown>().notNull(),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
   },
   (t) => ({
     formIdx: index('form_idx').on(t.formId),
