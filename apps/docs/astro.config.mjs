@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel/serverless";
 import tailwind from "@astrojs/tailwind";
 import {
   transformerNotationDiff,
@@ -42,5 +42,5 @@ export default defineConfig({
     },
   },
   integrations: [tailwind(), mdx()],
-  adapter: cloudflare(),
+  adapter: vercel(),
 });
