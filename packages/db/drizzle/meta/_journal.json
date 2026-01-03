@@ -8,6 +8,13 @@
       "when": 1767401398682,
       "tag": "0000_narrow_kingpin",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1767406890186,
+      "tag": "0001_exotic_tag",
+      "breakpoints": true
     }
   ]
 }

@@ -6,19 +6,13 @@ import { flattenObject } from '@formbase/utils/flatten-object';
 import { generateId } from '@formbase/utils/generate-id';
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
+import { parseJsonObject, serializeJson } from '../utils/json';
+import {
+  assertFormDataOwnership,
+  assertFormOwnership,
+} from './form-ownership';
 
 const { eq } = drizzlePrimitives;
-
-const parseJson = (value: string) => {
-  try {
-    return JSON.parse(value) as Record<string, unknown>;
-  } catch {
-    return null;
-  }
-};
-
-const serializeJson = (value: unknown) =>
-  typeof value === 'string' ? value : JSON.stringify(value);
 
 export const formDataRouter = createTRPCRouter({
   get: protectedProcedure
@@ -28,15 +22,11 @@ export const formDataRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
-      const row = await ctx.db.query.formDatas.findFirst({
-        where: (table, { eq }) => eq(table.id, input.id),
-      });
-
-      if (!row) return null;
+      const row = await assertFormDataOwnership(ctx, input.id);
 
       return {
         ...row,
-        data: parseJson(row.data),
+        data: parseJsonObject(row.data),
       };
     }),
 
@@ -48,22 +38,19 @@ export const formDataRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      await assertFormOwnership(ctx, input.formId);
       const id = generateId(15);
 
-      await ctx.db
-        .insert(formDatas)
-        .values({
-          id,
-          data: serializeJson(input.data),
-          formId: input.formId,
-        })
-        .returning();
+      await ctx.db.insert(formDatas).values({
+        id,
+        data: serializeJson(input.data),
+        formId: input.formId,
+      });
 
       await ctx.db
         .update(forms)
         .set({ updatedAt: new Date() })
-        .where(eq(forms.id, input.formId))
-        .returning();
+        .where(eq(forms.id, input.formId));
 
       return { id };
     }),
@@ -76,6 +63,7 @@ export const formDataRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      await assertFormDataOwnership(ctx, input.id);
       await ctx.db
         .update(formDatas)
         .set({
@@ -91,6 +79,7 @@ export const formDataRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      await assertFormDataOwnership(ctx, input.id);
       await ctx.db.delete(formDatas).where(eq(formDatas.id, input.id));
     }),
 
@@ -101,12 +90,13 @@ export const formDataRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
+      await assertFormOwnership(ctx, input.formId);
       const formData = await ctx.db.query.formDatas.findMany({
         where: (table, { eq }) => eq(table.formId, input.formId),
       });
 
       return formData.map((data) => {
-        const parsed = parseJson(data.data);
+        const parsed = parseJsonObject(data.data);
         const normalized = {
           ...data,
           data: parsed,
@@ -143,7 +133,7 @@ export const formDataRouter = createTRPCRouter({
           .update(forms)
           .set({
             updatedAt: new Date(),
-            keys: JSON.stringify(input.keys),
+            keys: serializeJson(input.keys),
           })
           .where(eq(forms.id, input.formId));
 

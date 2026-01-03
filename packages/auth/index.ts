@@ -43,7 +43,7 @@ export const auth = betterAuth({
     disableSignUp: env.ALLOW_SIGNIN_SIGNUP === 'false',
     sendResetPassword: async ({ user, token }) => {
       const resetUrl = `${env.NEXT_PUBLIC_APP_URL}/reset-password/${token}`;
-      void sendResetPasswordEmail({
+      await sendResetPasswordEmail({
         email: user.email,
         url: resetUrl,
       });
@@ -54,7 +54,7 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, token }) => {
       const verifyUrl = `${env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`;
-      void sendVerificationEmail({
+      await sendVerificationEmail({
         email: user.email,
         url: verifyUrl,
       });

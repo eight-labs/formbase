@@ -12,7 +12,7 @@ export const formDatas = sqliteTable(
     formId: text('form_id')
       .references(() => forms.id, { onDelete: 'cascade' })
       .notNull(),
-    data: text('data').$type<unknown>().notNull(),
+    data: text('data').notNull(),
     createdAt: integer('created_at', { mode: 'timestamp_ms' })
       .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
       .notNull(),

@@ -53,6 +53,7 @@ export const ZUpdateFormSchema = createInsertSchema(forms).pick({
   returnUrl: true,
   enableSubmissions: true,
   enableEmailNotifications: true,
+  enableRetention: true,
 });
 
 export type Form = InferSelectModel<typeof forms>;

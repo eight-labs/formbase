@@ -2,10 +2,13 @@ import { sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { forms } from './forms';
+import { users } from './users';
 
 export const onboardingForms = sqliteTable('onboarding_forms', {
   id: text('id').primaryKey(),
-  userId: text('user_id').notNull(),
+  userId: text('user_id')
+    .references(() => users.id, { onDelete: 'cascade' })
+    .notNull(),
   formId: text('form_id')
     .references(() => forms.id, { onDelete: 'cascade' })
     .notNull(),

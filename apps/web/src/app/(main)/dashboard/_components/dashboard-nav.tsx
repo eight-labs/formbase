@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { GearIcon } from '@radix-ui/react-icons';
-import { CreditCard, FileTextIcon } from 'lucide-react';
+import { FileTextIcon } from 'lucide-react';
 
 import { cn } from '@formbase/ui/utils/cn';
 
@@ -15,11 +15,6 @@ const items = [
     icon: FileTextIcon,
   },
 
-  //   {
-  //     title: 'Billing',
-  //     href: '/dashboard/billing',
-  //     icon: CreditCard,
-  //   },
   {
     title: 'Settings',
     href: '/dashboard/settings',

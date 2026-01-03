@@ -15,16 +15,12 @@ export const VerifyEmail = ({ email }: { email?: string | null }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
-  const [isVerifying, setIsVerifying] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [attemptedToken, setAttemptedToken] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!token || token === attemptedToken) return;
+    if (!token) return;
 
-    setAttemptedToken(token);
-    setIsVerifying(true);
     authClient
       .verifyEmail({ query: { token } })
       .then(({ error }) => {
@@ -44,16 +40,11 @@ export const VerifyEmail = ({ email }: { email?: string | null }) => {
         toast('Unable to verify email. Please try again.', {
           icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
         });
-      })
-      .finally(() => setIsVerifying(false));
-  }, [token, attemptedToken, router]);
+      });
+  }, [token, router]);
 
   const handleResend = async () => {
-    if (!email) {
-      toast('Sign in to resend the verification email.');
-      return;
-    }
-
+    if (!email) return;
     setIsResending(true);
     try {
       const { error } = await authClient.sendVerificationEmail({
