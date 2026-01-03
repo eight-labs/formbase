@@ -43,7 +43,13 @@
         "BETTER_AUTH_SECRET",
         "ALLOW_SIGNIN_SIGNUP",
         "SMTP_TRANSPORT",
-        "RESEND_API_KEY"
+        "RESEND_API_KEY",
+        "STORAGE_ENDPOINT",
+        "STORAGE_PORT",
+        "STORAGE_USESSL",
+        "STORAGE_ACCESS_KEY",
+        "STORAGE_SECRET_KEY",
+        "STORAGE_BUCKET"
       ]
     },
     "db:generate": {
@@ -55,7 +61,13 @@
         "BETTER_AUTH_SECRET",
         "ALLOW_SIGNIN_SIGNUP",
         "SMTP_TRANSPORT",
-        "RESEND_API_KEY"
+        "RESEND_API_KEY",
+        "STORAGE_ENDPOINT",
+        "STORAGE_PORT",
+        "STORAGE_USESSL",
+        "STORAGE_ACCESS_KEY",
+        "STORAGE_SECRET_KEY",
+        "STORAGE_BUCKET"
       ]
     },
     "lint": {
