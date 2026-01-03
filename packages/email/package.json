@@ -1,0 +1,25 @@
+{
+  "name": "@formbase/email",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --cache --max-warnings 0",
+    "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
+  },
+  "dependencies": {
+    "@documenso/nodemailer-resend": "^3.0.0",
+    "@formbase/env": "workspace:*",
+    "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "@formbase/tsconfig": "workspace:*",
+    "@types/node": "^20.12.12",
+    "@types/nodemailer": "^6.4.17",
+    "eslint-config-formbase": "workspace:*"
+  }
+}
+

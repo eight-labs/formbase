@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { type RouterOutputs } from '@formbase/api';
-import { type UserInstance } from '@formbase/auth';
+import { type User } from '@formbase/auth';
 import { Button } from '@formbase/ui/primitives/button';
 import {
   Form,
@@ -64,7 +64,7 @@ type DefaultSubmissionEmailSchema = z.infer<
 
 type FormSettingsProps = {
   form: RouterOutputs['form']['get'];
-  user: UserInstance | null;
+  user: User | null;
 };
 
 export function FormSettings({ form, user }: FormSettingsProps) {

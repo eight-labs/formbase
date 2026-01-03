@@ -1,62 +1,127 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
-import { useFormState } from 'react-dom';
 import { toast } from 'sonner';
 
-import {
-  logout,
-  resendVerificationEmail as resendEmail,
-  verifyEmail,
-} from '@formbase/auth/actions';
-import { Input } from '@formbase/ui/primitives/input';
-import { Label } from '@formbase/ui/primitives/label';
+import { authClient, signOut } from '@formbase/auth/client';
+import { Button } from '@formbase/ui/primitives/button';
 
-import { SubmitButton } from '~/components/submit-button';
+import { LoadingButton } from '~/components/loading-button';
 
-export const VerifyCode = () => {
-  const [verifyEmailState, verifyEmailAction] = useFormState(verifyEmail, null);
-  const [resendState, resendAction] = useFormState(resendEmail, null);
-  const codeFormRef = useRef<HTMLFormElement>(null);
+export const VerifyEmail = ({ email }: { email?: string | null }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+  const [isResending, setIsResending] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   useEffect(() => {
-    if (resendState?.success) {
-      toast('Email sent!');
-    }
-    if (resendState?.error) {
-      toast(resendState.error, {
-        icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
-      });
-    }
-  }, [resendState?.error, resendState?.success]);
+    if (!token) return;
 
-  useEffect(() => {
-    if (verifyEmailState?.error) {
-      toast(verifyEmailState.error, {
+    authClient
+      .verifyEmail({ query: { token } })
+      .then(({ error }) => {
+        if (error) {
+          toast(error.message, {
+            icon: (
+              <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />
+            ),
+          });
+          return;
+        }
+
+        toast('Email verified');
+        router.push('/onboarding');
+      })
+      .catch(() => {
+        toast('Unable to verify email. Please try again.', {
+          icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
+        });
+      });
+  }, [token, router]);
+
+  const handleResend = async () => {
+    if (!email) return;
+    setIsResending(true);
+    try {
+      const { error } = await authClient.sendVerificationEmail({
+        email,
+        callbackURL: '/onboarding',
+      });
+
+      if (error) {
+        toast(error.message, {
+          icon: (
+            <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />
+          ),
+        });
+        return;
+      }
+
+      toast('Verification email sent.');
+    } catch {
+      toast('Unable to resend verification email.', {
         icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
       });
+    } finally {
+      setIsResending(false);
     }
-  }, [verifyEmailState?.error]);
+  };
+
+  const handleSignOut = async () => {
+    setIsSigningOut(true);
+    try {
+      const { error } = await signOut();
+      if (error) {
+        toast(error.message, {
+          icon: (
+            <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />
+          ),
+        });
+        return;
+      }
+
+      window.location.href = '/';
+    } catch {
+      toast('Unable to sign out. Please try again.', {
+        icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
+      });
+    } finally {
+      setIsSigningOut(false);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-2">
-      <form ref={codeFormRef} action={verifyEmailAction}>
-        <Label htmlFor="code">Verification code</Label>
-        <Input className="mt-2" type="text" id="code" name="code" required />
-        <SubmitButton className="mt-4 w-full">Verify</SubmitButton>
-      </form>
-      <form action={resendAction}>
-        <SubmitButton className="w-full" variant="secondary">
-          Resend Code
-        </SubmitButton>
-      </form>
-      <form action={logout}>
-        <SubmitButton variant="link" className="p-0 mt-2 font-normal">
-          Want to use another email? Log out now.
-        </SubmitButton>
-      </form>
+      <p className="text-sm text-muted-foreground">
+        {token
+          ? 'Verifying your email...'
+          : 'Check your email for a verification link.'}
+      </p>
+      <LoadingButton
+        className="w-full"
+        variant="secondary"
+        loading={isResending}
+        disabled={!email}
+        onClick={() => {
+          void handleResend();
+        }}
+      >
+        Resend Email
+      </LoadingButton>
+      <Button
+        variant="link"
+        className="p-0 mt-2 font-normal"
+        disabled={isSigningOut}
+        onClick={() => {
+          void handleSignOut();
+        }}
+      >
+        Want to use another email? Log out now.
+      </Button>
     </div>
   );
 };

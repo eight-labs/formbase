@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { redirect } from 'next/navigation';
 
-import { validateRequest } from '@formbase/auth';
+import { getSession } from '@formbase/auth/server';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export default async function FormLayout({ children }: Props) {
-  const { user } = await validateRequest();
+  const session = await getSession();
 
-  if (!user) {
+  if (!session) {
     redirect('/login');
   }
 

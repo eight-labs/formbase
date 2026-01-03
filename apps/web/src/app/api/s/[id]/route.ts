@@ -1,4 +1,3 @@
-import { Form } from "@formbase/db/schema";
 import { env } from "@formbase/env";
 import { userAgent } from "next/server";
 
@@ -6,8 +5,20 @@ import { sendMail } from "~/lib/email/mailer";
 import { renderNewSubmissionEmail } from "~/lib/email/templates/new-submission";
 import { api } from "~/lib/trpc/server";
 import { assignFileOrImage, uploadFileFromBlob } from "~/lib/upload-file";
+import { type RouterOutputs } from "@formbase/api";
 
 type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
+
+type FormDataResult =
+  | {
+      data: Record<string, Blob | string | undefined>;
+      source: 'formData';
+      rawFormData: FormData;
+    }
+  | {
+      data: Record<string, Blob | string | undefined>;
+      source: 'json';
+    };
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -15,17 +26,14 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
 
-async function getFormData(request: Request): Promise<{
-  data: Record<string, Blob | string | undefined>;
-  source: 'formData' | 'json';
-}> {
+async function getFormData(request: Request): Promise<FormDataResult> {
   try {
-    const formData = await request.formData();
+    const rawFormData = await request.formData();
     const data: Record<string, Blob | string | undefined> = {};
-    formData.forEach((value, key) => {
+    rawFormData.forEach((value, key) => {
       data[key] = value as Blob | string;
     });
-    return { data, source: 'formData' };
+    return { data, source: 'formData', rawFormData };
   } catch (error) {
     if (error instanceof TypeError && error.message.includes('FormData')) {
       const jsonData = (await request.json()) as Record<string, unknown>;
@@ -59,7 +67,7 @@ async function processFileUploads(
 }
 
 async function handleEmailNotifications(
-  form: Form,
+  form: NonNullable<RouterOutputs['form']['getFormById']>,
   submissionData: Record<string, unknown>,
 ) {
   if (form.enableEmailNotifications) {
@@ -97,10 +105,12 @@ export async function POST(
       });
     }
 
-    const { data: formData, source } = await getFormData(request);
+    const formDataResult = await getFormData(request);
+    const { data: formData } = formDataResult;
 
-    if (source === 'formData')
-      await processFileUploads(formData, formData as unknown as FormData);
+    if (formDataResult.source === 'formData') {
+      await processFileUploads(formData, formDataResult.rawFormData);
+    }
 
     const formDataKeys = Object.keys(formData);
     const formKeys = form.keys;

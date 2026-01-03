@@ -54,15 +54,15 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@formbase/tailwind": "workspace:^",
-    "@formbase/tsconfig": "workspace:^",
-    "@formbase/utils": "workspace:^",
+    "@formbase/tailwind": "workspace:*",
+    "@formbase/tsconfig": "workspace:*",
+    "@formbase/utils": "workspace:*",
     "@microsoft/api-extractor": "^7.43.7",
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
-    "eslint-config-formbase": "workspace:^",
+    "eslint-config-formbase": "workspace:*",
     "pkg-types": "^1.1.1",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3"

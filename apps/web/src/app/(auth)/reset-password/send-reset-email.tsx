@@ -1,36 +1,52 @@
 'use client';
 
-import { useEffect } from 'react';
+import { type FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { useFormState } from 'react-dom';
 import { toast } from 'sonner';
 
-import { sendPasswordResetLink } from '@formbase/auth/actions';
+import { authClient } from '@formbase/auth/client';
 import { Button } from '@formbase/ui/primitives/button';
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
 
-import { SubmitButton } from '~/components/submit-button';
+import { LoadingButton } from '~/components/loading-button';
 
 export function SendResetEmail() {
-  const [state, formAction] = useFormState(sendPasswordResetLink, null);
   const router = useRouter();
+  const [formError, setFormError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (state?.success) {
+  const handleResetRequest = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormError(null);
+    setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get('email') ?? '');
+
+    try {
+      const { error } = await authClient.requestPasswordReset({
+        email,
+      });
+
+      if (error) {
+        setFormError(error.message);
+        return;
+      }
+
       toast('A password reset link has been sent to your email.');
       router.push('/login');
+    } catch {
+      setFormError('Unable to send reset email. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
-    if (state?.error) {
-      toast(state.error);
-      router.push('/reset-password');
-    }
-  }, [state?.error, state?.success]);
+  };
 
   return (
-    <form className="space-y-4 -mt-4" action={formAction}>
+    <form className="space-y-4 -mt-4" onSubmit={handleResetRequest}>
       <div className="space-y-2">
         <Label>Your Email</Label>
         <Input
@@ -50,7 +66,14 @@ export function SendResetEmail() {
         </Link>
       </div>
 
-      <SubmitButton className="w-full">Reset Password</SubmitButton>
+      {formError ? (
+        <p className="rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive">
+          {formError}
+        </p>
+      ) : null}
+      <LoadingButton className="w-full" loading={isSubmitting}>
+        Reset Password
+      </LoadingButton>
       <Button variant="outline" className="w-full" asChild>
         <Link href="/">Cancel</Link>
       </Button>

@@ -13,19 +13,20 @@ export const metadata = {
   description: 'Reset Password Page',
 };
 
-export default function ResetPasswordPage({
+export default async function ResetPasswordPage({
   params,
 }: {
-  params: { token: string };
+  params: Promise<{ token: string }>;
 }) {
+  const { token } = await params;
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="space-y-1">
         <CardTitle>Reset password</CardTitle>
-        <CardDescription>Enter your email to get reset link.</CardDescription>
+        <CardDescription>Enter a new password to continue.</CardDescription>
       </CardHeader>
       <CardContent>
-        <ResetPassword token={params.token} />
+        <ResetPassword token={token} />
       </CardContent>
     </Card>
   );

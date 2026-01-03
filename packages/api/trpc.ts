@@ -6,7 +6,8 @@ import { auth } from '@formbase/auth';
 import { db } from '@formbase/db';
 
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const { session, user } = await auth();
+  const session = await auth.api.getSession({ headers: opts.headers });
+  const user = session?.user ?? null;
 
   return {
     db,

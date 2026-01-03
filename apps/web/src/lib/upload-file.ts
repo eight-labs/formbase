@@ -5,46 +5,43 @@ import { generateId } from '@formbase/utils/generate-id';
 
 type FormData = Record<string, Blob | string | undefined>;
 
-const minio = new Client({
-  endPoint: env.MINIO_ENDPOINT,
-  port: env.MINIO_PORT,
-  useSSL: env.MINIO_USESSL,
-  accessKey: env.MINIO_ACCESSKEY,
-  secretKey: env.MINIO_SECRETKEY,
-});
+let client: Client | null = null;
 
-export async function createBucket(bucketName: string) {
-  try {
-    const bucketExists = await minio.bucketExists(bucketName);
-    if (!bucketExists) {
-      await minio.makeBucket(bucketName);
-      console.info('Bucket created successfully:', bucketName);
-    } else {
-      console.info('Bucket already exists:', bucketName);
-    }
-  } catch (error) {
-    console.error('Failed to create bucket:', error);
-    throw new Error('Failed to create bucket');
+const getClient = () => {
+  if (client) return client;
+  if (
+    !env.STORAGE_ENDPOINT ||
+    !env.STORAGE_ACCESS_KEY ||
+    !env.STORAGE_SECRET_KEY
+  ) {
+    throw new Error('Storage is not configured');
+  }
+  client = new Client({
+    endPoint: env.STORAGE_ENDPOINT,
+    port: env.STORAGE_PORT!,
+    useSSL: env.STORAGE_USESSL!,
+    accessKey: env.STORAGE_ACCESS_KEY,
+    secretKey: env.STORAGE_SECRET_KEY,
+  });
+  return client;
+};
+
+async function ensureBucket(bucketName: string) {
+  const c = getClient();
+  if (!(await c.bucketExists(bucketName))) {
+    await c.makeBucket(bucketName);
   }
 }
 
 export async function uploadFile(fileBuffer: Buffer, mimetype: string) {
-  try {
-    const imageName = `${generateId(15)}.${mimetype.split('/')[1]}`;
-    const bucketName = env.MINIO_BUCKET;
-    console.info('Uploading file:', imageName);
+  const c = getClient();
+  const bucket = env.STORAGE_BUCKET!;
+  const name = `${generateId(15)}.${mimetype.split('/')[1]}`;
 
-    await createBucket(bucketName);
-    await minio.putObject(bucketName, imageName, fileBuffer);
+  await ensureBucket(bucket);
+  await c.putObject(bucket, name, fileBuffer);
 
-    const imageUrl = await minio.presignedUrl('GET', bucketName, imageName);
-    console.info('File uploaded successfully:', imageUrl);
-
-    return imageUrl;
-  } catch (error) {
-    console.error('Failed to upload file:', error);
-    throw new Error('Failed to upload file');
-  }
+  return c.presignedUrl('GET', bucket, name);
 }
 
 export async function uploadFileFromBlob({

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { validateRequest } from '@formbase/auth';
+import { getSession } from '@formbase/auth/server';
 
 import { Signup } from './signup';
 
@@ -10,9 +10,9 @@ export const metadata = {
 };
 
 export default async function SignupPage() {
-  const { user } = await validateRequest();
+  const session = await getSession();
 
-  if (user) {
+  if (session) {
     redirect('/dashboard');
   }
 

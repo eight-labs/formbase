@@ -7,9 +7,10 @@ import { api } from '~/lib/trpc/server';
 export default async function FormCompletedPage({
   params,
 }: {
-  params: { formId: string };
+  params: Promise<{ formId: string }>;
 }) {
-  const form = await api.form.hasReturiningUrl({ formId: params.formId });
+  const { formId } = await params;
+  const form = await api.form.hasReturningUrl({ formId });
 
   if (!form) {
     return (

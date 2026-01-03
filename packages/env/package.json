@@ -13,8 +13,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@formbase/tsconfig": "workspace:^",
+    "@formbase/tsconfig": "workspace:*",
     "@types/node": "^20.12.12",
-    "eslint-config-formbase": "workspace:^"
+    "eslint-config-formbase": "workspace:*"
   }
 }

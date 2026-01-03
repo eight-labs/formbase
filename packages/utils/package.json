@@ -13,9 +13,9 @@
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
-    "@formbase/env": "workspace:^",
-    "@formbase/tsconfig": "workspace:^",
+    "@formbase/env": "workspace:*",
+    "@formbase/tsconfig": "workspace:*",
     "@types/node": "^20.12.12",
-    "eslint-config-formbase": "workspace:^"
+    "eslint-config-formbase": "workspace:*"
   }
 }

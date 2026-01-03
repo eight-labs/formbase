@@ -4,6 +4,8 @@ import { generateId } from "@formbase/utils/generate-id";
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { parseJsonArray, serializeJson } from "../utils/json";
+import { assertFormOwnership } from "./form-ownership";
 
 const { and, count, eq } = drizzlePrimitives;
 
@@ -17,6 +19,7 @@ export const formRouter = createTRPCRouter({
     )
     .query(({ ctx, input }) =>
       ctx.db.query.forms.findMany({
+        where: (table) => eq(table.userId, ctx.user.id),
         offset: (input.page - 1) * input.perPage,
         limit: input.perPage,
         orderBy: (table, { desc }) => desc(table.createdAt),
@@ -32,13 +35,20 @@ export const formRouter = createTRPCRouter({
 
   get: protectedProcedure
     .input(z.object({ formId: z.string() }))
-    .query(({ ctx, input }) =>
-      ctx.db.query.forms.findFirst({
+    .query(async ({ ctx, input }) => {
+      const form = await ctx.db.query.forms.findFirst({
         where: (table) =>
           and(eq(table.id, input.formId), eq(table.userId, ctx.user.id)),
         with: { user: { columns: { email: true } } },
-      }),
-    ),
+      });
+
+      if (!form) return null;
+
+      return {
+        ...form,
+        keys: parseJsonArray(form.keys),
+      };
+    }),
 
   getOnboardingForm: protectedProcedure.query(async ({ ctx }) =>
     ctx.db.query.onboardingForms.findMany({
@@ -65,7 +75,7 @@ export const formRouter = createTRPCRouter({
         description: input.description ?? null,
         updatedAt: new Date(),
         returnUrl: input.returnUrl ?? null,
-        keys: [''],
+        keys: serializeJson(['']),
         enableEmailNotifications: true,
         enableSubmissions: true,
         defaultSubmissionEmail: userEmail,
@@ -92,7 +102,7 @@ export const formRouter = createTRPCRouter({
         description: input.description ?? null,
         updatedAt: new Date(),
         returnUrl: input.returnUrl ?? null,
-        keys: [''],
+        keys: serializeJson(['']),
         enableEmailNotifications: true,
         enableSubmissions: true,
       });
@@ -119,13 +129,7 @@ export const formRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const form = await ctx.db.query.forms.findFirst({
-        where: (table, { eq }) => eq(table.id, input.id),
-      });
-
-      if (!form) {
-        throw new Error('Form not found');
-      }
+      const form = await assertFormOwnership(ctx, input.id);
 
       await ctx.db
         .update(forms)
@@ -150,6 +154,7 @@ export const formRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      await assertFormOwnership(ctx, input.id);
       await ctx.db.delete(forms).where(eq(forms.id, input.id));
     }),
 
@@ -165,7 +170,6 @@ export const formRouter = createTRPCRouter({
         where: (table) => eq(table.userId, ctx.user.id),
         offset: (input.page - 1) * input.perPage,
         limit: input.perPage,
-        // orderBy: (table, { desc }) => desc(table.createdAt),
         columns: {
           id: true,
           title: true,
@@ -179,20 +183,16 @@ export const formRouter = createTRPCRouter({
       }),
     ),
 
-  hasReturiningUrl: protectedProcedure
+  hasReturningUrl: protectedProcedure
     .input(
       z.object({
         formId: z.string(),
       }),
     )
-    .query(({ ctx, input }) =>
-      ctx.db.query.forms.findFirst({
-        where: (table) => eq(table.id, input.formId),
-        columns: {
-          returnUrl: true,
-        },
-      }),
-    ),
+    .query(async ({ ctx, input }) => {
+      const form = await assertFormOwnership(ctx, input.formId);
+      return { returnUrl: form.returnUrl };
+    }),
 
   formSubmissions: protectedProcedure
     .input(
@@ -200,12 +200,13 @@ export const formRouter = createTRPCRouter({
         formId: z.string(),
       }),
     )
-    .query(({ ctx, input }) =>
-      ctx.db
+    .query(async ({ ctx, input }) => {
+      await assertFormOwnership(ctx, input.formId);
+      return ctx.db
         .select({ count: count(formDatas.data) })
         .from(formDatas)
-        .where(eq(formDatas.formId, input.formId)),
-    ),
+        .where(eq(formDatas.formId, input.formId));
+    }),
 
   getFormById: publicProcedure
     .input(
@@ -213,9 +214,16 @@ export const formRouter = createTRPCRouter({
         formId: z.string(),
       }),
     )
-    .query(({ ctx, input }) =>
-      ctx.db.query.forms.findFirst({
+    .query(async ({ ctx, input }) => {
+      const form = await ctx.db.query.forms.findFirst({
         where: (table) => eq(table.id, input.formId),
-      }),
-    ),
+      });
+
+      if (!form) return null;
+
+      return {
+        ...form,
+        keys: parseJsonArray(form.keys),
+      };
+    }),
 });

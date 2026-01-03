@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Inter } from 'next/font/google';
 import { redirect } from 'next/navigation';
 
-import { validateRequest } from '@formbase/auth';
+import { getSession } from '@formbase/auth/server';
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
@@ -16,9 +16,9 @@ const inter = Inter({
 export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
-  const { user } = await validateRequest();
+  const session = await getSession();
 
-  if (!user) redirect('/login');
+  if (!session) redirect('/login');
 
   return (
     <div

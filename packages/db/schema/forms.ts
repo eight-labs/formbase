@@ -1,11 +1,12 @@
 import type { InferSelectModel } from 'drizzle-orm';
 
-import { boolean, index, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { sql } from 'drizzle-orm';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-import { users } from "./users";
+import { users } from './users';
 
-export const forms = pgTable(
+export const forms = sqliteTable(
   'forms',
   {
     id: text('id').primaryKey(),
@@ -14,16 +15,28 @@ export const forms = pgTable(
       .notNull(),
     title: text('title').notNull(),
     description: text('description'),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }),
     returnUrl: text('return_url'),
-    enableEmailNotifications: boolean('send_email_for_new_submissions')
+    enableEmailNotifications: integer('send_email_for_new_submissions', {
+      mode: 'boolean',
+    })
       .default(true)
       .notNull(),
-    keys: text('keys').array().notNull(),
-    enableSubmissions: boolean('enable_submissions').default(true).notNull(),
-    enableRetention: boolean('enable_retention').default(true).notNull(),
-    defaultSubmissionEmail: varchar('default_submission_email', { length: 255 }),
+    keys: text('keys').notNull(),
+    enableSubmissions: integer('enable_submissions', {
+      mode: 'boolean',
+    })
+      .default(true)
+      .notNull(),
+    enableRetention: integer('enable_retention', {
+      mode: 'boolean',
+    })
+      .default(true)
+      .notNull(),
+    defaultSubmissionEmail: text('default_submission_email'),
   },
   (t) => ({
     userIdx: index('form_user_idx').on(t.userId),
@@ -40,6 +53,7 @@ export const ZUpdateFormSchema = createInsertSchema(forms).pick({
   returnUrl: true,
   enableSubmissions: true,
   enableEmailNotifications: true,
+  enableRetention: true,
 });
 
 export type Form = InferSelectModel<typeof forms>;

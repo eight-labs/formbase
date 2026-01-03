@@ -2,13 +2,13 @@ import Link from 'next/link';
 
 import { FunctionSquare } from 'lucide-react';
 
-import { type LuciaUser } from '@formbase/auth';
+import { type User } from '@formbase/auth';
 
 import { UserDropdown } from './user-dropdown';
 
 const routes = [{ name: 'Dashboard', href: '/dashboard' }] as const;
 
-export const Header = ({ user }: { user: LuciaUser }) => {
+export const Header = ({ user }: { user: User }) => {
   return (
     <header className="top-0 border-b py-2">
       <div className="container flex items-center gap-2 px-2 py-2 lg:px-4">
@@ -31,11 +31,7 @@ export const Header = ({ user }: { user: LuciaUser }) => {
           ))}
         </nav>
 
-        <UserDropdown
-          email={user.email}
-          avatar={user.avatar}
-          className="ml-auto"
-        />
+        <UserDropdown className="ml-auto" />
       </div>
     </header>
   );

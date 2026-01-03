@@ -166,3 +166,5 @@ public/dist
 .ideas
 formbase-new
 *.dmp
+bun.lockb
+*.db
