@@ -12,14 +12,14 @@
   },
   "dependencies": {
     "@documenso/nodemailer-resend": "^3.0.0",
-    "@formbase/env": "workspace:^",
+    "@formbase/env": "workspace:*",
     "nodemailer": "^6.9.13"
   },
   "devDependencies": {
-    "@formbase/tsconfig": "workspace:^",
+    "@formbase/tsconfig": "workspace:*",
     "@types/node": "^20.12.12",
     "@types/nodemailer": "^6.4.17",
-    "eslint-config-formbase": "workspace:^"
+    "eslint-config-formbase": "workspace:*"
   }
 }
 

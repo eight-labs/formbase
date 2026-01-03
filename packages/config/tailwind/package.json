@@ -21,8 +21,8 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@formbase/tsconfig": "workspace:^",
+    "@formbase/tsconfig": "workspace:*",
     "@types/node": "^20.12.12",
-    "eslint-config-formbase": "workspace:^"
+    "eslint-config-formbase": "workspace:*"
   }
 }

@@ -8,17 +8,17 @@
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "dependencies": {
-    "@formbase/auth": "workspace:^",
-    "@formbase/db": "workspace:^",
-    "@formbase/env": "workspace:^",
-    "@formbase/utils": "workspace:^",
+    "@formbase/auth": "workspace:*",
+    "@formbase/db": "workspace:*",
+    "@formbase/env": "workspace:*",
+    "@formbase/utils": "workspace:*",
     "@trpc/server": "next",
     "superjson": "^2.2.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@formbase/tsconfig": "workspace:^",
+    "@formbase/tsconfig": "workspace:*",
     "@types/node": "^20.12.12",
-    "eslint-config-formbase": "workspace:^"
+    "eslint-config-formbase": "workspace:*"
   }
 }

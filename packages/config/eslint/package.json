@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "devDependencies": {
-    "@formbase/tsconfig": "workspace:^",
+    "@formbase/tsconfig": "workspace:*",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "@typescript-eslint/parser": "^7.10.0",
     "astro-eslint-parser": "^1.0.2",

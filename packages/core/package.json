@@ -20,10 +20,10 @@
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "devDependencies": {
-    "@formbase/tsconfig": "workspace:^",
+    "@formbase/tsconfig": "workspace:*",
     "@microsoft/api-extractor": "^7.47.8",
     "@types/node": "^20.12.12",
-    "eslint-config-formbase": "workspace:^",
+    "eslint-config-formbase": "workspace:*",
     "tsup": "^8.0.2"
   }
 }
