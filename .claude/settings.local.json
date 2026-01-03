@@ -3,7 +3,8 @@
     "allow": [
       "mcp__context7__query-docs",
       "Skill(pr-review-toolkit:review-pr)",
-      "Bash(git ls-tree:*)"
+      "Bash(git ls-tree:*)",
+      "Skill(commit)"
     ]
   }
 }
