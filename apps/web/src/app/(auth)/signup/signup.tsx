@@ -35,11 +35,13 @@ export function Signup() {
     setIsSubmitting(true);
 
     const formData = new FormData(event.currentTarget);
+    const name = String(formData.get('name') ?? '');
     const email = String(formData.get('email') ?? '');
     const password = String(formData.get('password') ?? '');
 
     try {
       const { error } = await signUp.email({
+        name,
         email,
         password,
         callbackURL: '/onboarding',
@@ -116,6 +118,16 @@ export function Signup() {
         </div>
 
         <form onSubmit={handleSignup} className="space-y-4">
+          <div className="space-y-2">
+            <Label>Name</Label>
+            <Input
+              required
+              placeholder="Jane Doe"
+              autoComplete="name"
+              name="name"
+              type="text"
+            />
+          </div>
           <div className="space-y-2">
             <Label>Email</Label>
             <Input

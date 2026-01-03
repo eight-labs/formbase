@@ -6,7 +6,7 @@ import { headers } from 'next/headers';
 import { createCaller, createTRPCContext } from '@formbase/api';
 
 const createContext = cache(async () => {
-  const heads = new Headers(headers());
+  const heads = new Headers(await headers());
   heads.set('x-trpc-source', 'rsc');
 
   return createTRPCContext({

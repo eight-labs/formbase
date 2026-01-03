@@ -41,15 +41,20 @@ export const UserDropdown = ({ className }: { className?: string }) => {
   if (!user) {
     return null;
   }
+  const avatarSeed = user.email ?? user.id;
+  const avatarSrc =
+    user.image && user.image.trim().length > 0
+      ? user.image
+      : `https://source.boringavatars.com/marble/60/${encodeURIComponent(
+          avatarSeed,
+        )}`;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={className}>
         {/* eslint @next/next/no-img-element:off */}
         <img
-          src={
-            user.image ?? 'https://source.boringavatars.com/marble/60/' + user.email
-          }
+          src={avatarSrc}
           alt="Avatar"
           className="block h-8 w-8 rounded-full leading-none"
           width={64}

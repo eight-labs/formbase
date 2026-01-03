@@ -22,6 +22,7 @@ const nextConfig = {
     '@formbase/utils',
     "@formbase/tailwind",
   ],
+  serverExternalPackages: ['libsql', '@libsql/client'],
   eslint: {
     ignoreDuringBuilds: true,
   },

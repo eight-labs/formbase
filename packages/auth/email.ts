@@ -10,18 +10,25 @@ type MessageInfo = {
 };
 
 const createSmtpTransport = () => {
-  if (!env.SMTP_HOST || !env.SMTP_PORT || !env.SMTP_USER || !env.SMTP_PASS) {
+  if (!env.SMTP_HOST || !env.SMTP_PORT) {
     throw new Error('Missing SMTP configuration for auth emails.');
+  }
+  if ((env.SMTP_USER && !env.SMTP_PASS) || (!env.SMTP_USER && env.SMTP_PASS)) {
+    throw new Error('SMTP_USER and SMTP_PASS must be set together.');
   }
 
   return createTransport({
     host: env.SMTP_HOST,
     port: env.SMTP_PORT,
     secure: env.NODE_ENV === 'production',
-    auth: {
-      user: env.SMTP_USER,
-      pass: env.SMTP_PASS,
-    },
+    ...(env.SMTP_USER && env.SMTP_PASS
+      ? {
+          auth: {
+            user: env.SMTP_USER,
+            pass: env.SMTP_PASS,
+          },
+        }
+      : {}),
   });
 };
 

@@ -10,8 +10,12 @@ import { ExportSubmissionsDropDownButton } from './export-submissions-button';
 import { FormSettings } from './form-settings';
 import { SubmissionsTable } from './submissions-table';
 
-export default async function FormPage({ params }: { params: { id: string } }) {
-  const formId = params.id;
+export default async function FormPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id: formId } = await params;
   const [form, formSubmissions] = await Promise.all([
     api.form.get({ formId }),
     api.formData.all({ formId }),

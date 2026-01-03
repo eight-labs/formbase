@@ -7,7 +7,7 @@ import { env } from '@formbase/env';
 import { verifyRequestOrigin } from './lib/verify-request';
 
 // eslint-disable-next-line @typescript-eslint/require-await
-export async function middleware(request: NextRequest): Promise<NextResponse> {
+export async function proxy(request: NextRequest): Promise<NextResponse> {
   if (request.method === 'GET') {
     if (
       env.ALLOW_SIGNIN_SIGNUP === 'false' &&

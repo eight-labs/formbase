@@ -19,10 +19,12 @@ export const metadata = {
 export default async function VerifyEmailPage({
   searchParams,
 }: {
-  searchParams?: { token?: string };
+  searchParams: Promise<{ token?: string | string[] }>;
 }) {
   const session = await getSession();
-  const token = searchParams?.token;
+  const resolvedSearchParams = await searchParams;
+  const tokenParam = resolvedSearchParams?.token;
+  const token = Array.isArray(tokenParam) ? tokenParam[0] : tokenParam;
 
   if (!session && !token) {
     redirect('/login');
