@@ -44,6 +44,7 @@ CREATE TABLE `onboarding_forms` (
 	`user_id` text NOT NULL,
 	`form_id` text NOT NULL,
 	`created_at` integer DEFAULT (cast(unixepoch('subsecond') * 1000 as integer)) NOT NULL,
+	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade,
 	FOREIGN KEY (`form_id`) REFERENCES `forms`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
@@ -79,6 +80,7 @@ CREATE TABLE `verification` (
 );
 --> statement-breakpoint
 CREATE INDEX `account_userId_idx` ON `account` (`user_id`);--> statement-breakpoint
+CREATE UNIQUE INDEX `account_provider_account_idx` ON `account` (`provider_id`,`account_id`);--> statement-breakpoint
 CREATE INDEX `form_idx` ON `form_datas` (`form_id`);--> statement-breakpoint
 CREATE INDEX `form_data_created_at_idx` ON `form_datas` (`created_at`);--> statement-breakpoint
 CREATE INDEX `form_user_idx` ON `forms` (`user_id`);--> statement-breakpoint

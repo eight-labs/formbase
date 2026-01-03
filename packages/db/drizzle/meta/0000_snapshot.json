@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "970541d8-b923-4408-8680-849718646025",
+  "id": "83f1e5b4-b198-480a-bf1e-da595e4f6955",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "account": {
@@ -108,6 +108,14 @@
             "user_id"
           ],
           "isUnique": false
+        },
+        "account_provider_account_idx": {
+          "name": "account_provider_account_idx",
+          "columns": [
+            "provider_id",
+            "account_id"
+          ],
+          "isUnique": true
         }
       },
       "foreignKeys": {
@@ -356,6 +364,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "onboarding_forms_user_id_user_id_fk": {
+          "name": "onboarding_forms_user_id_user_id_fk",
+          "tableFrom": "onboarding_forms",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
         "onboarding_forms_form_id_forms_id_fk": {
           "name": "onboarding_forms_form_id_forms_id_fk",
           "tableFrom": "onboarding_forms",
