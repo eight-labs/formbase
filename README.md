@@ -20,11 +20,18 @@ Formbase is an open-source form backend for handling forms, notifications, secur
 ## Tech Stack
 
 - [Next.js](https://nextjs.org/) – Framework
-- [TypeScript](https://www.typescriptlang.org/) – Language
-- [Tailwind](https://tailwindcss.com/) – Styling
-- [PostgresSQL](https://postgresql.org/) – Database
-- [Lucia Auth](https://lucia-auth.com/) – Authentication
-- [Turborepo](https://turbo.build) - Monorepo
+- [TypeScript](https://www.typescriptlang.org/) – Language
+- [React](https://react.dev/) – UI Library
+- [SQLite](https://turso.tech/) (Turso/libSQL) – Database
+- [Drizzle ORM](https://orm.drizzle.team/) – ORM
+- [Better Auth](https://www.better-auth.com/) – Authentication
+- [Tailwind CSS](https://tailwindcss.com/) – Styling
+- [shadcn/ui](https://ui.shadcn.com/) – Component Library
+- [tRPC](https://trpc.io/) – Type-safe API
+- [TanStack Query](https://tanstack.com/query) – Data Fetching
+- [Zod](https://zod.dev/) – Schema Validation
+- [Turborepo](https://turbo.build/) – Monorepo
+- [Bun](https://bun.sh/) – Package Manager & Runtime
 
 ## Contributing
 
