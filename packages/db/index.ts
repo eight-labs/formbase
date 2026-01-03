@@ -12,10 +12,7 @@ const authToken = databaseUrl.startsWith('libsql://')
   : undefined;
 
 if (databaseUrl.startsWith('libsql://') && !authToken) {
-  throw new Error(
-    'TURSO_AUTH_TOKEN is required when using libsql:// URLs. ' +
-      'Get your token from the Turso dashboard.',
-  );
+  throw new Error('TURSO_AUTH_TOKEN is required for libsql:// URLs');
 }
 
 export const queryClient = createClient({

@@ -11,10 +11,10 @@
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "dependencies": {
-    "@documenso/nodemailer-resend": "^3.0.0",
     "@formbase/api": "workspace:^",
     "@formbase/auth": "workspace:^",
     "@formbase/db": "workspace:^",
+    "@formbase/email": "workspace:^",
     "@formbase/env": "workspace:^",
     "@formbase/ui": "workspace:^",
     "@formbase/utils": "workspace:^",
@@ -36,7 +36,6 @@
     "minio": "^8.0.0",
     "next": "16.1.1",
     "next-themes": "^0.3.0",
-    "nodemailer": "^6.9.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.5",
@@ -50,7 +49,6 @@
     "@formbase/tailwind": "workspace:^",
     "@formbase/tsconfig": "workspace:^",
     "@types/node": "^20.12.12",
-    "@types/nodemailer": "^6.4.15",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",

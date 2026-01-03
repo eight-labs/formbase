@@ -15,16 +15,17 @@
       ],
       "env": [
         "DATABASE_URL",
+        "BETTER_AUTH_SECRET",
         "AUTH_GITHUB_ID",
         "AUTH_GITHUB_SECRET",
         "ALLOW_SIGNIN_SIGNUP",
         "UMAMI_TRACKING_ID",
-        "MINIO_ENDPOINT",
-        "MINIO_PORT",
-        "MINIO_USESSL",
-        "MINIO_ACCESSKEY",
-        "MINIO_SECRETKEY",
-        "MINIO_BUCKET"
+        "STORAGE_ENDPOINT",
+        "STORAGE_PORT",
+        "STORAGE_USESSL",
+        "STORAGE_ACCESS_KEY",
+        "STORAGE_SECRET_KEY",
+        "STORAGE_BUCKET"
       ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

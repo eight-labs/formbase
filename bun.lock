@@ -45,10 +45,10 @@
       "name": "@formbase/web",
       "version": "0.1.0",
       "dependencies": {
-        "@documenso/nodemailer-resend": "^3.0.0",
         "@formbase/api": "workspace:^",
         "@formbase/auth": "workspace:^",
         "@formbase/db": "workspace:^",
+        "@formbase/email": "workspace:^",
         "@formbase/env": "workspace:^",
         "@formbase/ui": "workspace:^",
         "@formbase/utils": "workspace:^",
@@ -70,7 +70,6 @@
         "minio": "^8.0.0",
         "next": "16.1.1",
         "next-themes": "^0.3.0",
-        "nodemailer": "^6.9.13",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "^7.51.5",
@@ -84,7 +83,6 @@
         "@formbase/tailwind": "workspace:^",
         "@formbase/tsconfig": "workspace:^",
         "@types/node": "^20.12.12",
-        "@types/nodemailer": "^6.4.15",
         "@types/react": "^18.3.2",
         "@types/react-dom": "^18.3.0",
         "autoprefixer": "^10.4.19",
@@ -117,13 +115,12 @@
       "name": "@formbase/auth",
       "version": "0.1.0",
       "dependencies": {
-        "@documenso/nodemailer-resend": "^3.0.0",
         "@formbase/db": "workspace:^",
+        "@formbase/email": "workspace:^",
         "@formbase/env": "workspace:^",
         "@formbase/utils": "workspace:^",
         "better-auth": "^1.2.0",
         "next": "16.1.1",
-        "nodemailer": "^6.9.13",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "zod": "^3.23.8",
@@ -203,6 +200,21 @@
         "drizzle-kit": "^0.21.4",
         "eslint-config-formbase": "workspace:*",
         "tsx": "^4.15.5",
+      },
+    },
+    "packages/email": {
+      "name": "@formbase/email",
+      "version": "0.1.0",
+      "dependencies": {
+        "@documenso/nodemailer-resend": "^3.0.0",
+        "@formbase/env": "workspace:^",
+        "nodemailer": "^6.9.13",
+      },
+      "devDependencies": {
+        "@formbase/tsconfig": "workspace:^",
+        "@types/node": "^20.12.12",
+        "@types/nodemailer": "^6.4.17",
+        "eslint-config-formbase": "workspace:^",
       },
     },
     "packages/env": {
@@ -559,6 +571,8 @@
     "@formbase/db": ["@formbase/db@workspace:packages/db"],
 
     "@formbase/docs": ["@formbase/docs@workspace:apps/docs"],
+
+    "@formbase/email": ["@formbase/email@workspace:packages/email"],
 
     "@formbase/env": ["@formbase/env@workspace:packages/env"],
 

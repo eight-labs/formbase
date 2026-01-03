@@ -21,8 +21,8 @@ services:
     volumes:
       - minio:/data
     environment:
-      MINIO_ROOT_USER: formbase
-      MINIO_ROOT_PASSWORD: password
+      MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY:-formbase}
+      MINIO_ROOT_PASSWORD: ${STORAGE_SECRET_KEY:-password}
     entrypoint: sh
     command: -c 'mkdir -p /data/formbase && minio server /data --console-address ":9001" --address ":9002"'
 
