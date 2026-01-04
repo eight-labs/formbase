@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 import { type RouterOutputs } from '@formbase/api';
 import { type User } from '@formbase/auth';
-import { Button } from '@formbase/ui/primitives/button';
+import { LoadingButton } from '~/components/loading-button';
 import {
   Form,
   FormControl,
@@ -169,13 +169,13 @@ const FormName = ({ formId, name }: { formId: string; name: string }) => {
               <FormControl>
                 <div className="flex gap-2">
                   <Input className="w-[250px]" {...field} min={1} />
-                  <Button
+                  <LoadingButton
                     loading={isUpdatingFormName}
                     type="submit"
                     variant="default"
                   >
                     Save
-                  </Button>
+                  </LoadingButton>
                 </div>
               </FormControl>
             </FormItem>
@@ -248,13 +248,13 @@ const ReturnUrlForm = ({
                     placeholder="Enter return url here"
                     type="url"
                   />
-                  <Button
+                  <LoadingButton
                     loading={isUpdatingFormReturnURL}
                     type="submit"
                     variant="default"
                   >
                     Save
-                  </Button>
+                  </LoadingButton>
                 </div>
               </FormControl>
             </FormItem>
@@ -332,13 +332,13 @@ const FormDefaultSubmissionEmailRecipient = ({
               <FormControl>
                 <div className="flex gap-2">
                   <Input className="w-[250px]" {...field} min={1} />
-                  <Button
+                  <LoadingButton
                     loading={isUpdatingFormDefaultSubmissionEmail}
                     type="submit"
                     variant="default"
                   >
                     Save
-                  </Button>
+                  </LoadingButton>
                 </div>
               </FormControl>
             </FormItem>

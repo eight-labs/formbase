@@ -78,9 +78,9 @@ export function Login() {
           variant="login"
         />
         <div className="my-2 flex items-center">
-          <div className="flex-grow border-t border-muted" />
+          <div className="grow border-t border-muted" />
           <div className="mx-2 text-muted-foreground">or</div>
-          <div className="flex-grow border-t border-muted" />
+          <div className="grow border-t border-muted" />
         </div>
         <form onSubmit={handleLogin} className="grid gap-4">
           <div className="space-y-2">
@@ -118,7 +118,7 @@ export function Login() {
               {displayError}
             </p>
           ) : null}
-          <LoadingButton className="w-full" loading={isSubmitting}>
+          <LoadingButton type="submit" className="w-full" loading={isSubmitting}>
             Log In
           </LoadingButton>
           <Button variant="outline" className="w-full" asChild>

@@ -85,9 +85,9 @@ export function Signup() {
           variant="signup"
         />
         <div className="my-2 flex items-center">
-          <div className="flex-grow border-t border-muted" />
+          <div className="grow border-t border-muted" />
           <div className="mx-2 text-muted-foreground">or</div>
-          <div className="flex-grow border-t border-muted" />
+          <div className="grow border-t border-muted" />
         </div>
 
         <form onSubmit={handleSignup} className="space-y-4">
@@ -134,7 +134,7 @@ export function Signup() {
             </Link>
           </div>
 
-          <LoadingButton className="w-full" loading={isSubmitting}>
+          <LoadingButton type="submit" className="w-full" loading={isSubmitting}>
             Sign Up
           </LoadingButton>
           <Button variant="outline" className="w-full" asChild>

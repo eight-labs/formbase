@@ -51,7 +51,7 @@ export const UserDropdown = ({ className }: { className?: string }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={className}>
+      <DropdownMenuTrigger className={className ?? ""}>
         {/* eslint @next/next/no-img-element:off */}
         <img
           src={avatarSrc}
@@ -157,7 +157,7 @@ const SignoutConfirmation = () => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger
-        className="px-2 py-1.5 text-sm text-muted-foreground outline-none"
+        className="px-2 py-1.5 text-sm text-muted-foreground outline-hidden"
         asChild
       >
         <button>Sign out</button>

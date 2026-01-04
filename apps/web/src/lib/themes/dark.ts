@@ -9,7 +9,7 @@ export const blackoutTheme = {
     'button.hoverBackground': '#fffb',
     'list.highlightForeground': '#fff',
     'textLink.foreground': '#fff',
-    'scrollbar.shadow': '#000',
+    'scrollbar.shadow-sm': '#000',
     'textLink.activeForeground': '#fff8',
     'editor.lineHighlightBackground': '#8881',
     'editor.lineHighlightBorder': '#8882',

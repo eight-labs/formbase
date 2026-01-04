@@ -9,7 +9,8 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { type User } from '@formbase/auth';
-import { Button } from '@formbase/ui/primitives/button';
+
+import { LoadingButton } from '~/components/loading-button';
 import {
   Form,
   FormControl,
@@ -107,9 +108,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
           )}
         />
 
-        <Button type="submit" loading={isUpdatingUser}>
+        <LoadingButton type="submit" loading={isUpdatingUser}>
           Update Profile
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

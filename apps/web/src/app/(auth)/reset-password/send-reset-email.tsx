@@ -71,7 +71,7 @@ export function SendResetEmail() {
           {formError}
         </p>
       ) : null}
-      <LoadingButton className="w-full" loading={isSubmitting}>
+      <LoadingButton type="submit" className="w-full" loading={isSubmitting}>
         Reset Password
       </LoadingButton>
       <Button variant="outline" className="w-full" asChild>

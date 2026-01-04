@@ -27,27 +27,35 @@ const CORS_HEADERS = {
 };
 
 async function getFormData(request: Request): Promise<FormDataResult> {
-  try {
-    const rawFormData = await request.formData();
-    const data: Record<string, Blob | string | undefined> = {};
-    rawFormData.forEach((value, key) => {
-      data[key] = value as Blob | string;
-    });
-    return { data, source: 'formData', rawFormData };
-  } catch (error) {
-    if (error instanceof TypeError && error.message.includes('FormData')) {
-      const jsonData = (await request.json()) as Record<string, unknown>;
-      if (typeof jsonData !== 'object') {
-        throw new Error('Invalid form data');
-      }
+  const contentType = request.headers.get('content-type') ?? '';
+
+  // Try FormData if content-type suggests it
+  if (contentType.includes('multipart/form-data') || contentType.includes('application/x-www-form-urlencoded')) {
+    try {
+      const rawFormData = await request.formData();
       const data: Record<string, Blob | string | undefined> = {};
-      Object.keys(jsonData).forEach((key) => {
-        data[key] = jsonData[key] as Blob | string | undefined;
+      rawFormData.forEach((value, key) => {
+        data[key] = value as Blob | string;
       });
-      return { data, source: 'json' };
-    } else {
+      return { data, source: 'formData', rawFormData };
+    } catch {
       throw new Error('Invalid form data');
     }
+  }
+
+  // Try JSON
+  try {
+    const jsonData = (await request.json()) as Record<string, unknown>;
+    if (typeof jsonData !== 'object' || jsonData === null) {
+      throw new Error('Invalid form data');
+    }
+    const data: Record<string, Blob | string | undefined> = {};
+    Object.keys(jsonData).forEach((key) => {
+      data[key] = jsonData[key] as Blob | string | undefined;
+    });
+    return { data, source: 'json' };
+  } catch {
+    throw new Error('Invalid form data');
   }
 }
 
@@ -87,14 +95,16 @@ async function handleEmailNotifications(
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    if (!params.id) {
+    const { id } = await params;
+
+    if (!id) {
       return new Response('Form ID is required', { status: 400 });
     }
 
-    const formId = params.id;
+    const formId = id;
     const form = await api.form.getFormById({ formId });
     if (!form) {
       return new Response('Form not found', {

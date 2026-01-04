@@ -58,7 +58,7 @@ export function ResetPassword({ token }: { token: string }) {
           placeholder="********"
         />
       </div>
-      <LoadingButton className="w-full" loading={isSubmitting}>
+      <LoadingButton type="submit" className="w-full" loading={isSubmitting}>
         Reset Password
       </LoadingButton>
     </form>
