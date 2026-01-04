@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
@@ -37,8 +37,13 @@ export const UserDropdown = ({ className }: { className?: string }) => {
   const { data: session } = useSession();
   const user = session?.user;
   const { setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  if (!user) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !user) {
     return null;
   }
   const avatarSeed = user.email ?? user.id;
@@ -62,9 +67,11 @@ export const UserDropdown = ({ className }: { className?: string }) => {
         ></img>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[250px]">
-        <DropdownMenuLabel className="text-muted-foreground">
-          {user.email}
-        </DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="text-muted-foreground">
+            {user.email}
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
@@ -119,9 +126,11 @@ export const UserDropdown = ({ className }: { className?: string }) => {
         </DropdownMenuSub>
         <DropdownMenuSeparator />
 
-        <DropdownMenuLabel className="p-0">
-          <SignoutConfirmation />
-        </DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="p-0">
+            <SignoutConfirmation />
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
