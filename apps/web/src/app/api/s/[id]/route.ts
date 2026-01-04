@@ -29,7 +29,6 @@ const CORS_HEADERS = {
 async function getFormData(request: Request): Promise<FormDataResult> {
   const contentType = request.headers.get('content-type') ?? '';
 
-  // Try FormData if content-type suggests it
   if (contentType.includes('multipart/form-data') || contentType.includes('application/x-www-form-urlencoded')) {
     try {
       const rawFormData = await request.formData();
@@ -43,7 +42,6 @@ async function getFormData(request: Request): Promise<FormDataResult> {
     }
   }
 
-  // Try JSON
   try {
     const jsonData = (await request.json()) as Record<string, unknown>;
     if (typeof jsonData !== 'object' || jsonData === null) {

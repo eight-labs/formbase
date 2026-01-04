@@ -56,7 +56,7 @@ export const UserDropdown = ({ className }: { className?: string }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={className ?? ""}>
+      <DropdownMenuTrigger className={className}>
         {/* eslint @next/next/no-img-element:off */}
         <img
           src={avatarSrc}
@@ -67,11 +67,9 @@ export const UserDropdown = ({ className }: { className?: string }) => {
         ></img>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[250px]">
-        <DropdownMenuGroup>
-          <DropdownMenuLabel className="text-muted-foreground">
-            {user.email}
-          </DropdownMenuLabel>
-        </DropdownMenuGroup>
+        <DropdownMenuLabel className="text-muted-foreground">
+          {user.email}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
@@ -126,11 +124,9 @@ export const UserDropdown = ({ className }: { className?: string }) => {
         </DropdownMenuSub>
         <DropdownMenuSeparator />
 
-        <DropdownMenuGroup>
-          <DropdownMenuLabel className="p-0">
-            <SignoutConfirmation />
-          </DropdownMenuLabel>
-        </DropdownMenuGroup>
+        <DropdownMenuLabel className="p-0">
+          <SignoutConfirmation />
+        </DropdownMenuLabel>
       </DropdownMenuContent>
     </DropdownMenu>
   );
