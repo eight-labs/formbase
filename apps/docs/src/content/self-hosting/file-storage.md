@@ -13,7 +13,7 @@ Formbase stores uploaded files in an S3-compatible bucket. MinIO is the easiest 
 
 ## Example 1: MinIO local configuration
 
-```env
+```ini
 STORAGE_ENDPOINT=minio
 STORAGE_PORT=9002
 STORAGE_USESSL=false
@@ -24,7 +24,7 @@ STORAGE_BUCKET=formbase
 
 ## Example 2: S3-compatible provider
 
-```env
+```ini
 STORAGE_ENDPOINT=s3.us-east-1.amazonaws.com
 STORAGE_PORT=443
 STORAGE_USESSL=true

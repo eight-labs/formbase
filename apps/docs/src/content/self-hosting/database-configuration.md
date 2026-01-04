@@ -13,13 +13,13 @@ Formbase uses a libSQL-compatible database. You can run SQLite locally or use Tu
 
 ## Example 1: Local SQLite (file)
 
-```env
+```ini
 DATABASE_URL=file:/data/formbase.db
 ```
 
 ## Example 2: Turso (libsql)
 
-```env
+```ini
 DATABASE_URL=libsql://your-db.turso.io
 TURSO_AUTH_TOKEN=your-token
 ```

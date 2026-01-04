@@ -13,7 +13,7 @@ Formbase supports SMTP and Resend for sending submission notifications.
 
 ## Example 1: SMTP configuration
 
-```env
+```ini
 SMTP_TRANSPORT=smtp
 SMTP_HOST=smtp.mailgun.org
 SMTP_PORT=587
@@ -23,7 +23,7 @@ SMTP_PASS=your-password
 
 ## Example 2: Resend configuration
 
-```env
+```ini
 SMTP_TRANSPORT=resend
 RESEND_API_KEY=re_xxx
 ```
