@@ -170,3 +170,4 @@ bun.lockb
 *.db
 
 .claude/
+.vscode/
