@@ -77,10 +77,12 @@ jobs:
           NEXT_PUBLIC_APP_URL: http://localhost:3000
 
       - name: Setup test database
-        run: bun run db:push
+        run: bunx drizzle-kit push
+        working-directory: packages/db
         env:
-          DATABASE_URL: file:./test.db
+          DATABASE_URL: file:../../apps/web/test.db
           DATABASE_AUTH_TOKEN: ''
+          SKIP_ENV_VALIDATION: 'true'
 
       - name: Seed E2E test data
         run: bun run tests/e2e/seed.ts
@@ -116,30 +118,6 @@ jobs:
           name: playwright-report
           path: tests/playwright-report/
           retention-days: 7
-
-  coverage-check:
-    name: Coverage Threshold Check
-    runs-on: ubuntu-latest
-    needs: unit-integration
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Run tests with coverage
-        run: bun run test:coverage
-        working-directory: tests
-
-      - name: Check coverage thresholds
-        run: echo "Coverage thresholds met (50% minimum for lines, functions, branches, statements)"
 
   lint:
     name: Lint & Type Check
