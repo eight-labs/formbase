@@ -31,6 +31,7 @@
     "@types/eslint": "^8.56.10",
     "eslint": "^8.57.0",
     "eslint-config-formbase": "workspace:*",
+    "eslint-plugin-eslint-comments": "^3.2.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-curly": "^0.2.1",

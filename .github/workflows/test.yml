@@ -71,8 +71,10 @@ jobs:
         env:
           DATABASE_URL: file:./test.db
           DATABASE_AUTH_TOKEN: ''
-          BETTER_AUTH_SECRET: test-secret-for-ci
+          BETTER_AUTH_SECRET: test-secret-for-ci-at-least-32-chars
           RESEND_API_KEY: ''
+          ALLOW_SIGNIN_SIGNUP: 'true'
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
 
       - name: Setup test database
         run: bun run db:push
@@ -95,8 +97,10 @@ jobs:
         env:
           DATABASE_URL: file:./test.db
           DATABASE_AUTH_TOKEN: ''
-          BETTER_AUTH_SECRET: test-secret-for-ci
+          BETTER_AUTH_SECRET: test-secret-for-ci-at-least-32-chars
           RESEND_API_KEY: ''
+          ALLOW_SIGNIN_SIGNUP: 'true'
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
           PORT: 3000
 
       - name: Run E2E tests
