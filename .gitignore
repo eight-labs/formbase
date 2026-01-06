@@ -168,3 +168,5 @@ formbase-new
 *.dmp
 bun.lockb
 *.db
+
+.claude/

@@ -1,0 +1,27 @@
+{
+  "name": "@formbase/tests",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:seed": "bun run --env-file=../apps/web/.env.local ./e2e/seed.ts",
+    "test:e2e:cleanup": "bun run --env-file=../apps/web/.env.local ./e2e/cleanup.ts"
+  },
+  "devDependencies": {
+    "@formbase/api": "workspace:*",
+    "@formbase/db": "workspace:*",
+    "@formbase/utils": "workspace:*",
+    "@libsql/client": "^0.14.0",
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^20.17.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "drizzle-orm": "^0.30.10",
+    "typescript": "5.8.2",
+    "vitest": "^2.1.8"
+  }
+}
