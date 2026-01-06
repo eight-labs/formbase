@@ -40,7 +40,7 @@ test.describe('Authentication', () => {
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
 
       // Should redirect to dashboard
-      await expect(page).toHaveURL(/.*dashboard/, { timeout: 15000 });
+      await page.waitForURL(/.*dashboard/, { timeout: 15000 });
     });
 
     test('redirects authenticated user from login to dashboard', async ({
@@ -51,7 +51,7 @@ test.describe('Authentication', () => {
       await page.getByPlaceholder('email@example.com').fill(E2E_TEST_USER.email);
       await page.getByPlaceholder('********').fill(E2E_TEST_USER.password);
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
-      await expect(page).toHaveURL(/.*dashboard/, { timeout: 15000 });
+      await page.waitForURL(/.*dashboard/, { timeout: 15000 });
 
       // Now try to visit login page again
       await page.goto('/login');
@@ -68,7 +68,7 @@ test.describe('Authentication', () => {
       await page.getByPlaceholder('email@example.com').fill(E2E_TEST_USER.email);
       await page.getByPlaceholder('********').fill(E2E_TEST_USER.password);
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
-      await expect(page).toHaveURL(/.*dashboard/, { timeout: 15000 });
+      await page.waitForURL(/.*dashboard/, { timeout: 15000 });
 
       // Open user menu dropdown (avatar button in header showing user initials)
       const userMenuButton = page.locator('header button').last();
@@ -103,7 +103,7 @@ test.describe('Authentication', () => {
       await page.getByPlaceholder('email@example.com').fill(E2E_TEST_USER.email);
       await page.getByPlaceholder('********').fill(E2E_TEST_USER.password);
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
-      await expect(page).toHaveURL(/.*dashboard/, { timeout: 15000 });
+      await page.waitForURL(/.*dashboard/, { timeout: 15000 });
 
       // Dashboard should show the main heading
       await expect(page.getByRole('heading', { name: 'Form Endpoints' })).toBeVisible();
