@@ -1,8 +1,6 @@
 import { users } from '@formbase/db/schema';
 import { generateId } from '@formbase/utils/generate-id';
 
-import { getTestDb } from './db';
-
 export interface TestUser {
   id: string;
   email: string;
@@ -27,7 +25,7 @@ export async function createTestUser(
   } = {},
 ): Promise<TestUser> {
   const { auth } = await import('@formbase/auth');
-  const db = getTestDb();
+  const { db, drizzlePrimitives } = await import('@formbase/db');
 
   const email = options.email ?? `test-${generateId(15)}@example.com`;
   const name = options.name ?? 'Test User';
@@ -49,10 +47,10 @@ export async function createTestUser(
 
   // Mark email as verified if needed
   if (emailVerified) {
-    db.update(users)
+    await db
+      .update(users)
       .set({ emailVerified: true })
-      .where((await import('@formbase/db')).drizzlePrimitives.eq(users.id, response.user.id))
-      .run();
+      .where(drizzlePrimitives.eq(users.id, response.user.id));
   }
 
   return {
@@ -80,12 +78,12 @@ export async function createTestSession(
     },
   });
 
-  if (!response.session || !response.user) {
+  if (!response.token || !response.user) {
     throw new Error(`Failed to create session for: ${email}`);
   }
 
   return {
-    token: response.session.token,
+    token: response.token,
     userId: response.user.id,
   };
 }

@@ -1,7 +1,3 @@
-import { existsSync, unlinkSync } from 'fs';
-import { tmpdir } from 'os';
-import { join } from 'path';
-
 import { createClient, type Client } from '@libsql/client';
 import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 
@@ -9,9 +5,6 @@ import * as schema from '@formbase/db/schema';
 
 let client: Client;
 let testDb: LibSQLDatabase<typeof schema>;
-
-// Use a fixed temp file path so all tests share the same database
-const TEST_DB_PATH = join(tmpdir(), 'formbase-test.db');
 
 /**
  * SQL schema for test database.
@@ -120,14 +113,9 @@ DELETE FROM user;
 `;
 
 export async function setupTestDatabase(): Promise<void> {
-  // Delete existing test database if it exists
-  if (existsSync(TEST_DB_PATH)) {
-    unlinkSync(TEST_DB_PATH);
-  }
-
-  // Use file-based database for tests to ensure shared state
+  // Use shared in-memory database - matches DATABASE_URL env var set in vitest.setup.ts
   client = createClient({
-    url: `file:${TEST_DB_PATH}`,
+    url: 'file::memory:?cache=shared',
   });
   testDb = drizzle(client, { schema });
 
@@ -154,10 +142,6 @@ export async function resetDatabase(): Promise<void> {
 
 export async function teardownTestDatabase(): Promise<void> {
   client.close();
-  // Clean up the test database file
-  if (existsSync(TEST_DB_PATH)) {
-    unlinkSync(TEST_DB_PATH);
-  }
 }
 
 export function getTestDb(): LibSQLDatabase<typeof schema> {
