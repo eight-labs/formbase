@@ -89,6 +89,9 @@ jobs:
         env:
           DATABASE_URL: file:../apps/web/test.db
           DATABASE_AUTH_TOKEN: ''
+          BETTER_AUTH_SECRET: test-secret-for-ci-at-least-32-chars
+          ALLOW_SIGNIN_SIGNUP: 'true'
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
 
       - name: Start application
         run: |
