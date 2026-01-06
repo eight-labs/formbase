@@ -3,68 +3,65 @@ import { createCaller } from '@formbase/api';
 import { type TestSession, type TestUser } from './auth';
 import { getTestDb } from './db';
 
-/**
- * Creates a tRPC caller with optional authenticated user/session.
- *
- * For authenticated tests, pass both user and session.
- * For unauthenticated tests, call without options.
- */
 export async function createTestCaller(options?: {
   user?: TestUser;
   session?: TestSession;
 }) {
   const db = getTestDb();
+  const { user, session } = options ?? {};
 
-  // Build session object matching better-auth's structure
-  const sessionData = options?.session
-    ? {
-        session: {
-          id: options.session.id,
-          token: options.session.token,
-          userId: options.session.userId,
-          expiresAt: options.session.expiresAt,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          ipAddress: null,
-          userAgent: null,
-        },
-        user: options.user
-          ? {
-              id: options.user.id,
-              email: options.user.email,
-              name: options.user.name,
-              emailVerified: options.user.emailVerified,
-              image: null,
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            }
-          : null,
-      }
-    : null;
+  if (!session || !user) {
+    return createCaller(() => ({
+      db,
+      session: null,
+      user: null,
+      headers: new Headers(),
+    }));
+  }
 
-  // Create context matching createTRPCContext structure
-  const ctx = {
+  const now = new Date();
+  const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+  return createCaller(() => ({
     db,
-    session: sessionData,
-    user: sessionData?.user ?? null,
+    session: {
+      session: {
+        id: `test-session-${session.userId}`,
+        token: session.token,
+        userId: session.userId,
+        expiresAt,
+        createdAt: now,
+        updatedAt: now,
+        ipAddress: null,
+        userAgent: null,
+      },
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        emailVerified: user.emailVerified,
+        image: null,
+        createdAt: now,
+        updatedAt: now,
+      },
+    },
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      emailVerified: user.emailVerified,
+      image: null,
+      createdAt: now,
+      updatedAt: now,
+    },
     headers: new Headers(),
-  };
-
-  // Create caller with the test context
-  // The createCaller function accepts a context factory function
-  return createCaller(() => ctx as never);
+  }));
 }
 
-/**
- * Creates an unauthenticated tRPC caller.
- */
 export async function createUnauthenticatedCaller() {
   return createTestCaller();
 }
 
-/**
- * Creates an authenticated tRPC caller for the given user and session.
- */
 export async function createAuthenticatedCaller(
   user: TestUser,
   session: TestSession,

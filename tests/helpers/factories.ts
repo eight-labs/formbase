@@ -16,9 +16,6 @@ export interface TestFormData {
   data: Record<string, unknown>;
 }
 
-/**
- * Creates a test form in the database.
- */
 export async function createTestForm(options: {
   userId: string;
   title?: string;
@@ -55,9 +52,6 @@ export async function createTestForm(options: {
   };
 }
 
-/**
- * Creates a test form submission in the database.
- */
 export async function createTestFormData(options: {
   formId: string;
   data?: Record<string, unknown>;

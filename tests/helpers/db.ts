@@ -6,10 +6,6 @@ import * as schema from '@formbase/db/schema';
 let client: Client;
 let testDb: LibSQLDatabase<typeof schema>;
 
-/**
- * SQL schema for test database.
- * This matches the Drizzle migrations in packages/db/drizzle/
- */
 const SCHEMA_SQL = `
 CREATE TABLE IF NOT EXISTS user (
   id TEXT PRIMARY KEY NOT NULL,

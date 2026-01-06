@@ -9,13 +9,6 @@ import {
   getTestDb,
 } from '../helpers';
 
-/**
- * Tests for JSON parsing edge cases in form submissions.
- *
- * These tests verify that the submission system handles various edge cases in
- * JSON data including Unicode, special characters, nested structures, and
- * malformed data.
- */
 describe('JSON Parsing Edge Cases', () => {
   let user: TestUser;
   let testForm: TestForm;

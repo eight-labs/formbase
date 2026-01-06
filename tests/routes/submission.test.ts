@@ -9,12 +9,6 @@ import {
   type TestUser,
 } from '../helpers';
 
-/**
- * Tests for the public form submission functionality.
- *
- * The submission endpoint uses formData.setFormData which is a public procedure.
- * We test it via tRPC caller since we want integration with the real database.
- */
 describe('Public Submission (formData.setFormData)', () => {
   let user: TestUser;
   let testForm: TestForm;

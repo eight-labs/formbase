@@ -13,9 +13,6 @@ export interface TestSession {
   userId: string;
 }
 
-/**
- * Creates a test user using better-auth's API (properly hashes password).
- */
 export async function createTestUser(
   options: {
     email?: string;
@@ -61,9 +58,6 @@ export async function createTestUser(
   };
 }
 
-/**
- * Creates a test session for a user using better-auth's API.
- */
 export async function createTestSession(
   email: string,
   password: string,
@@ -88,9 +82,6 @@ export async function createTestSession(
   };
 }
 
-/**
- * Creates HTTP headers with a session cookie for authenticated requests.
- */
 export function createAuthHeaders(sessionToken: string): Headers {
   const headers = new Headers();
   headers.set('Cookie', `better-auth.session_token=${sessionToken}`);

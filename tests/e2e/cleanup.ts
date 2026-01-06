@@ -1,10 +1,3 @@
-/**
- * E2E Test Data Cleanup
- *
- * Removes all E2E test data from the database.
- * Run before seeding to ensure a clean state.
- */
-
 import { cleanupE2EData } from './seed';
 
 cleanupE2EData()

@@ -1,15 +1,3 @@
-/**
- * E2E Test Data Seeding
- *
- * This script seeds the database with test data for E2E tests. Run before E2E
- * tests: bun run seed:e2e
- *
- * Requirements:
- *
- * - Database must be running and accessible
- * - Environment variables must be configured
- */
-
 async function loadDbDeps() {
   const [{ db, drizzlePrimitives }, schema] = await Promise.all([
     import('@formbase/db'),
