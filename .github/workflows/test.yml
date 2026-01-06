@@ -47,7 +47,6 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
-    needs: unit-integration
 
     steps:
       - name: Checkout
@@ -85,7 +84,7 @@ jobs:
           SKIP_ENV_VALIDATION: 'true'
 
       - name: Seed E2E test data
-        run: bun run tests/e2e/seed.ts
+        run: bun run e2e/seed.ts
         working-directory: tests
         env:
           DATABASE_URL: file:../apps/web/test.db
