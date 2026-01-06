@@ -14,33 +14,44 @@ test.describe('Forms', () => {
 
   test.describe('Form Creation', () => {
     test('displays create form dialog', async ({ page }) => {
+      // Wait for page to be fully loaded before interacting
+      await page.waitForLoadState('networkidle');
+
       // Click create form button
       await page.getByRole('button', { name: 'New Form Endpoint' }).click();
 
-      // Dialog should appear
-      const dialog = page.getByRole('dialog');
-      await expect(dialog).toBeVisible({ timeout: 5000 });
+      // Dialog should appear - wait for the dialog title (more reliable with portals)
+      await expect(
+        page.getByRole('heading', { name: 'Create New Form Endpoint' }),
+      ).toBeVisible({ timeout: 5000 });
 
       // Dialog should have the Name input field
-      await expect(dialog.getByRole('textbox', { name: 'Name' })).toBeVisible();
+      await expect(page.getByRole('textbox', { name: 'Name' })).toBeVisible();
     });
 
     test('creates a new form', async ({ page }) => {
+      // Wait for page to be fully loaded before interacting
+      await page.waitForLoadState('networkidle');
+
       // Click create button
       await page.getByRole('button', { name: 'New Form Endpoint' }).click();
 
-      // Wait for dialog to appear
-      const dialog = page.getByRole('dialog');
-      await expect(dialog).toBeVisible({ timeout: 5000 });
+      // Wait for dialog title to appear (more reliable with portals)
+      await expect(
+        page.getByRole('heading', { name: 'Create New Form Endpoint' }),
+      ).toBeVisible({ timeout: 5000 });
+
+      // Use unique form name to avoid strict mode violation from previous test runs
+      const uniqueFormName = `E2E Test ${Date.now()}`;
 
       // Fill in form name
-      await dialog.getByRole('textbox', { name: 'Name' }).fill('E2E Created Form');
+      await page.getByRole('textbox', { name: 'Name' }).fill(uniqueFormName);
 
       // Submit the dialog
-      await dialog.getByRole('button', { name: 'Create Form' }).click();
+      await page.getByRole('button', { name: 'Create Form' }).click();
 
       // Should see the new form in the list or be redirected to it
-      await expect(page.getByText('E2E Created Form')).toBeVisible({
+      await expect(page.getByText(uniqueFormName)).toBeVisible({
         timeout: 10000,
       });
     });
