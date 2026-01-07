@@ -4,7 +4,16 @@
       "mcp__context7__query-docs",
       "Skill(pr-review-toolkit:review-pr)",
       "Bash(git ls-tree:*)",
-      "Skill(commit)"
+      "Skill(commit)",
+      "Bash(test:*)",
+      "Bash(git -C /Users/duncan/dev/formbase log --oneline --all)",
+      "Bash(git -C /Users/duncan/dev/formbase branch -a)",
+      "Bash(git -C /Users/duncan/dev/formbase log --oneline main)",
+      "Bash(git -C /Users/duncan/dev/formbase show 4f1db38:.github/workflows/test.yml)",
+      "Bash(git -C /Users/duncan/dev/formbase show 4f1db38:tests/vitest.config.ts)",
+      "Bash(git -C /Users/duncan/dev/formbase show 4f1db38:tests/vitest.setup.ts)",
+      "Bash(git -C /Users/duncan/dev/formbase show 4f1db38:tests/package.json)",
+      "Bash(git -C /Users/duncan/dev/formbase show 4f1db38:tests/api/user.test.ts)"
     ]
   }
 }
