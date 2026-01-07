@@ -140,10 +140,12 @@ export function CreateFormDialog() {
                   <FormLabel className="flex items-end gap-1">
                     Return URL
                     <Tooltip>
-                      <TooltipTrigger>
-                        <InfoCircledIcon width={13} />
+                      <TooltipTrigger asChild>
+                        <button type="button" className="inline-flex">
+                          <InfoCircledIcon width={13} />
+                        </button>
                       </TooltipTrigger>
-                      <TooltipContent className="bg-white dark:bg-black">
+                      <TooltipContent>
                         Where should users be redirected after form submission?
                       </TooltipContent>
                     </Tooltip>

@@ -25,6 +25,7 @@ function AlertDialogTrigger({
   return (
     <AlertDialogPrimitive.Trigger
       data-slot="alert-dialog-trigger"
+      nativeButton={!asChild}
       render={renderProp}
       {...props}
     >

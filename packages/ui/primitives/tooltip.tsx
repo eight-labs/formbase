@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 
 import { cn } from "@formbase/ui/utils/cn"
@@ -25,8 +26,27 @@ function Tooltip({ ...props }: TooltipPrimitive.Root.Props) {
   )
 }
 
-function TooltipTrigger({ ...props }: TooltipPrimitive.Trigger.Props) {
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
+type TooltipTriggerProps = TooltipPrimitive.Trigger.Props & {
+  asChild?: boolean
+}
+
+function TooltipTrigger({
+  asChild = false,
+  children,
+  ...props
+}: TooltipTriggerProps) {
+  const renderProp =
+    asChild && React.isValidElement(children) ? children : undefined
+
+  return (
+    <TooltipPrimitive.Trigger
+      data-slot="tooltip-trigger"
+      render={renderProp}
+      {...props}
+    >
+      {asChild ? undefined : children}
+    </TooltipPrimitive.Trigger>
+  )
 }
 
 function TooltipContent({
