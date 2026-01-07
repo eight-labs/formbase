@@ -1,17 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import {
+  BookOpenIcon,
+  ChevronDownIcon,
+  LayoutDashboardIcon,
+  LogOutIcon,
+  PaletteIcon,
+  SettingsIcon,
+} from 'lucide-react';
 import { toast } from 'sonner';
 
 import { signOut, useSession } from '@formbase/auth/client';
 import {
   AlertDialog,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -32,64 +42,86 @@ import {
 } from '@formbase/ui/primitives/dropdown-menu';
 
 import { LoadingButton } from '~/components/loading-button';
+import { UserAvatar } from '~/components/user-avatar';
 
 export const UserDropdown = ({ className }: { className?: string }) => {
   const { data: session } = useSession();
   const user = session?.user;
   const { setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  if (!user) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !user) {
     return null;
   }
-  const avatarSeed = user.email ?? user.id;
-  const avatarSrc =
-    user.image && user.image.trim().length > 0
-      ? user.image
-      : `https://source.boringavatars.com/marble/60/${encodeURIComponent(
-          avatarSeed,
-        )}`;
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={className}>
-        {/* eslint @next/next/no-img-element:off */}
-        <img
-          src={avatarSrc}
-          alt="Avatar"
-          className="block h-8 w-8 rounded-full leading-none"
-          width={64}
-          height={64}
-        ></img>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          className={`h-auto p-0 hover:bg-transparent ${className ?? ''}`}
+        >
+          <UserAvatar src={user.image ?? null} seed={user.email ?? user.id} />
+          <ChevronDownIcon
+            aria-hidden="true"
+            className="opacity-60"
+            size={16}
+          />
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[250px]">
-        <DropdownMenuLabel className="text-muted-foreground">
-          {user.email}
-        </DropdownMenuLabel>
+      <DropdownMenuContent align="end" className="w-48">
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="flex min-w-0 flex-col">
+            <span className="truncate text-sm font-medium text-foreground">
+              {user.name ?? 'User'}
+            </span>
+            <span className="truncate text-xs font-normal text-muted-foreground">
+              {user.email}
+            </span>
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem
-            className="cursor-pointer text-muted-foreground"
-            asChild
-          >
-            <Link href="/dashboard">Dashboard</Link>
+          <DropdownMenuItem className="cursor-pointer" asChild>
+            <Link href="/dashboard">
+              <LayoutDashboardIcon
+                aria-hidden="true"
+                className="opacity-60"
+                size={16}
+              />
+              <span>Dashboard</span>
+            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            className="cursor-pointer text-muted-foreground"
-            asChild
-          >
-            <Link href="/dashboard/settings">Settings</Link>
+          <DropdownMenuItem className="cursor-pointer" asChild>
+            <Link href="/dashboard/settings">
+              <SettingsIcon
+                aria-hidden="true"
+                className="opacity-60"
+                size={16}
+              />
+              <span>Settings</span>
+            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            className="cursor-pointer text-muted-foreground"
-            asChild
-          >
-            <Link href="/onboarding">Onboarding</Link>
+          <DropdownMenuItem className="cursor-pointer" asChild>
+            <Link href="/onboarding">
+              <BookOpenIcon
+                aria-hidden="true"
+                className="opacity-60"
+                size={16}
+              />
+              <span>Onboarding</span>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="cursor-pointer text-muted-foreground">
-            Theme
+          <DropdownMenuSubTrigger className="cursor-pointer">
+            <PaletteIcon aria-hidden="true" className="opacity-60" size={16} />
+            <span>Theme</span>
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
@@ -118,10 +150,7 @@ export const UserDropdown = ({ className }: { className?: string }) => {
           </DropdownMenuPortal>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-
-        <DropdownMenuLabel className="p-0">
-          <SignoutConfirmation />
-        </DropdownMenuLabel>
+        <SignoutConfirmation />
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -156,11 +185,14 @@ const SignoutConfirmation = () => {
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger
-        className="px-2 py-1.5 text-sm text-muted-foreground outline-none"
-        asChild
-      >
-        <button>Sign out</button>
+      <AlertDialogTrigger asChild>
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onSelect={(e) => e.preventDefault()}
+        >
+          <LogOutIcon aria-hidden="true" className="opacity-60" size={16} />
+          <span>Sign out</span>
+        </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-xs">
         <AlertDialogHeader>
@@ -171,19 +203,12 @@ const SignoutConfirmation = () => {
             You will be redirected to the home page.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-center">
-          <Button
-            variant="outline"
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            Cancel
-          </Button>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <LoadingButton loading={isLoading} onClick={handleSignout}>
-            Continue
+            Okay
           </LoadingButton>
-        </div>
+        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );

@@ -31,7 +31,7 @@ export function ImagePreviewDialog({
           className="relative h-8 w-8 overflow-hidden rounded-full border"
           style={{ backgroundImage: `url(${imageUrl})` }}
         >
-          <div className="absolute inset-0 flex cursor-pointer items-center justify-center backdrop-blur-sm hover:backdrop-blur-lg">
+          <div className="absolute inset-0 flex cursor-pointer items-center justify-center backdrop-blur-xs hover:backdrop-blur-lg">
             <EyeIcon size={15} />
           </div>
         </div>

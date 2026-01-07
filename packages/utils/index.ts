@@ -1,7 +1,5 @@
 import path from 'path';
 
-import { env } from '@formbase/env';
-
 export const getExceptionType = (error: unknown) => {
   const UnknownException = {
     type: 'UnknownException',
@@ -45,10 +43,6 @@ export function formatPrice(
     notation: options.notation ?? 'compact',
     ...options,
   }).format(Number(price));
-}
-
-export function absoluteUrl(path: string) {
-  return `${env.NEXT_PUBLIC_APP_URL}${path}`;
 }
 
 export function formatFileName(fileUrl: string) {

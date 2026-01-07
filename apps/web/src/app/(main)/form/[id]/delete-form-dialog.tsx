@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from '@formbase/ui/primitives/dialog';
 
+import { LoadingButton } from '~/components/loading-button';
 import { api } from '~/lib/trpc/react';
 
 type DeleteFormDialogProps = {
@@ -71,14 +72,14 @@ export function DeleteFormDialog({
           >
             Cancel
           </Button>
-          <Button
+          <LoadingButton
             variant="destructive"
             className="w-full"
             loading={isFormDeleting}
             onClick={handleDelete}
           >
             Delete
-          </Button>
+          </LoadingButton>
         </div>
       </DialogContent>
     </Dialog>

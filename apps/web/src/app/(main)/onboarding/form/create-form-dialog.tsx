@@ -18,6 +18,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@formbase/ui/primitives/dialog';
+
+import { LoadingButton } from '~/components/loading-button';
 import {
   Form,
   FormControl,
@@ -147,13 +149,13 @@ export function CreateFormDialog() {
             />
 
             <DialogFooter>
-              <Button
+              <LoadingButton
                 onClick={form.handleSubmit(onSubmit)}
                 className="mt-2 w-full"
                 loading={isCreatingForm}
               >
                 Create Form Endpoint
-              </Button>
+              </LoadingButton>
             </DialogFooter>
           </DialogContent>
         </Dialog>

@@ -2,45 +2,41 @@
 
 import * as React from 'react';
 
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+
 import type { InputProps } from '@formbase/ui/primitives/input';
 
-import { Button } from '@formbase/ui/primitives/button';
 import { Input } from '@formbase/ui/primitives/input';
 import { cn } from '@formbase/ui/utils/cn';
 
-import { EyeCloseIcon, EyeOpenIcon } from './icons';
-
 const PasswordInputComponent = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [isVisible, setIsVisible] = React.useState(false);
+
+    const toggleVisibility = () => setIsVisible((prev) => !prev);
 
     return (
       <div className="relative">
         <Input
-          type={showPassword ? 'text' : 'password'}
-          className={cn('pr-10', className)}
+          type={isVisible ? 'text' : 'password'}
+          className={cn('pe-9', className)}
           ref={ref}
           {...props}
         />
-        <Button
+        <button
           type="button"
-          variant="ghost"
-          size="sm"
-          className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-          onClick={() => {
-            setShowPassword((prev) => !prev);
-          }}
-          disabled={props.value === '' || props.disabled}
+          aria-label={isVisible ? 'Hide password' : 'Show password'}
+          aria-pressed={isVisible}
+          className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md text-muted-foreground/80 outline-none transition-[color,box-shadow] hover:text-foreground focus:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+          onClick={toggleVisibility}
+          disabled={props.disabled}
         >
-          {showPassword ? (
-            <EyeCloseIcon className="h-4 w-4" aria-hidden="true" />
+          {isVisible ? (
+            <EyeOffIcon aria-hidden="true" size={16} />
           ) : (
-            <EyeOpenIcon className="h-4 w-4" aria-hidden="true" />
+            <EyeIcon aria-hidden="true" size={16} />
           )}
-          <span className="sr-only">
-            {showPassword ? 'Hide password' : 'Show password'}
-          </span>
-        </Button>
+        </button>
       </div>
     );
   },

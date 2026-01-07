@@ -7,7 +7,6 @@ import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
 import { authClient, signOut } from '@formbase/auth/client';
-import { Button } from '@formbase/ui/primitives/button';
 
 import { LoadingButton } from '~/components/loading-button';
 
@@ -95,33 +94,34 @@ export const VerifyEmail = ({ email }: { email?: string | null }) => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="mt-8 flex flex-col gap-4">
       <p className="text-sm text-muted-foreground">
-        {token
-          ? 'Verifying your email...'
-          : 'Check your email for a verification link.'}
+        {token ? 'Verifying your email...' : null}
       </p>
       <LoadingButton
-        className="w-full"
-        variant="secondary"
+        className="w-full py-2 font-medium"
+        variant="outline"
         loading={isResending}
         disabled={!email}
         onClick={() => {
           void handleResend();
         }}
       >
-        Resend Email
+        Resend verification email
       </LoadingButton>
-      <Button
-        variant="link"
-        className="p-0 mt-2 font-normal"
-        disabled={isSigningOut}
-        onClick={() => {
-          void handleSignOut();
-        }}
-      >
-        Want to use another email? Log out now.
-      </Button>
+      <p className="text-sm text-muted-foreground">
+        Want to use a different email?{' '}
+        <button
+          type="button"
+          className="font-medium text-primary hover:text-primary/90"
+          disabled={isSigningOut}
+          onClick={() => {
+            void handleSignOut();
+          }}
+        >
+          {isSigningOut ? 'Signing out...' : 'Sign out'}
+        </button>
+      </p>
     </div>
   );
 };
