@@ -1,13 +1,11 @@
 'use client';
 
 import { type FormEvent, useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { toast } from 'sonner';
 
 import { authClient } from '@formbase/auth/client';
-import { Button } from '@formbase/ui/primitives/button';
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
 
@@ -46,24 +44,23 @@ export function SendResetEmail() {
   };
 
   return (
-    <form className="space-y-4 -mt-4" onSubmit={handleResetRequest}>
-      <div className="space-y-2">
-        <Label>Your Email</Label>
+    <form className="mt-8 space-y-4" onSubmit={handleResetRequest}>
+      <div>
+        <Label
+          htmlFor="email"
+          className="text-sm font-medium text-foreground"
+        >
+          Email
+        </Label>
         <Input
-          required
-          placeholder="email@example.com"
-          autoComplete="email"
-          name="email"
           type="email"
+          id="email"
+          name="email"
+          autoComplete="email"
+          placeholder="email@example.com"
+          className="mt-2"
+          required
         />
-      </div>
-
-      <div className="flex flex-wrap justify-between">
-        <Link href="/signup">
-          <Button variant={'link'} size={'sm'} className="p-0">
-            Not signed up? Sign up now
-          </Button>
-        </Link>
       </div>
 
       {formError ? (
@@ -71,12 +68,13 @@ export function SendResetEmail() {
           {formError}
         </p>
       ) : null}
-      <LoadingButton type="submit" className="w-full" loading={isSubmitting}>
-        Reset Password
+
+      <LoadingButton
+        className="mt-4 w-full py-2 font-medium"
+        loading={isSubmitting}
+      >
+        Send reset link
       </LoadingButton>
-      <Button variant="outline" className="w-full" asChild>
-        <Link href="/">Cancel</Link>
-      </Button>
     </form>
   );
 }
