@@ -1,7 +1,9 @@
 'use client';
 
-import { type FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+
+import type { FormEvent } from 'react';
 
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
@@ -31,7 +33,9 @@ export function ResetPassword({ token }: { token: string }) {
 
       if (error) {
         toast(error.message, {
-          icon: <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />,
+          icon: (
+            <ExclamationTriangleIcon className="h-5 w-5 text-destructive" />
+          ),
         });
         return;
       }

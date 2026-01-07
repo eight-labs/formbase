@@ -29,6 +29,7 @@
     "@trpc/client": "next",
     "@trpc/react-query": "next",
     "@trpc/server": "next",
+    "avvvatars-react": "^0.4.2",
     "better-auth": "^1.2.0",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.2.10",

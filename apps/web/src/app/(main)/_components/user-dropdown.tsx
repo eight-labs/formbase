@@ -32,6 +32,7 @@ import {
 } from '@formbase/ui/primitives/dropdown-menu';
 
 import { LoadingButton } from '~/components/loading-button';
+import { UserAvatar } from '~/components/user-avatar';
 
 export const UserDropdown = ({ className }: { className?: string }) => {
   const { data: session } = useSession();
@@ -46,25 +47,11 @@ export const UserDropdown = ({ className }: { className?: string }) => {
   if (!mounted || !user) {
     return null;
   }
-  const avatarSeed = user.email ?? user.id;
-  const avatarSrc =
-    user.image && user.image.trim().length > 0
-      ? user.image
-      : `https://source.boringavatars.com/marble/60/${encodeURIComponent(
-          avatarSeed,
-        )}`;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={className}>
-        {/* eslint @next/next/no-img-element:off */}
-        <img
-          src={avatarSrc}
-          alt="Avatar"
-          className="block h-8 w-8 rounded-full leading-none"
-          width={64}
-          height={64}
-        ></img>
+        <UserAvatar src={user.image} seed={user.email ?? user.id} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[250px]">
         <DropdownMenuLabel className="text-muted-foreground">

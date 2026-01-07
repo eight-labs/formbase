@@ -43,19 +43,12 @@ export function Signup() {
     const name = String(formData.get('name') ?? '');
     const email = String(formData.get('email') ?? '');
     const password = String(formData.get('password') ?? '');
-    const avatarSeed = email.trim().toLowerCase() || name.trim();
-    const avatarUrl = avatarSeed
-      ? `https://source.boringavatars.com/marble/120/${encodeURIComponent(
-          avatarSeed,
-        )}`
-      : undefined;
 
     try {
       const { error } = await signUp.email({
         name,
         email,
         password,
-        image: avatarUrl,
         callbackURL: '/onboarding',
       });
 

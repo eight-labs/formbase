@@ -7,7 +7,10 @@
       "Skill(commit)",
       "Skill(feature-dev:feature-dev)",
       "Bash(bunx:*)",
-      "Bash(npx @tailwindcss/upgrade --force)"
+      "Bash(npx @tailwindcss/upgrade --force)",
+      "Bash(xargs:*)",
+      "WebFetch(domain:avvvatars.com)",
+      "Bash(bun add:*)"
     ]
   }
 }
