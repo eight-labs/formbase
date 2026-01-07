@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.6",
-    "@astrojs/cloudflare": "12.6.12",
     "@astrojs/mdx": "4.3.13",
     "@astrojs/tailwind": "6.0.2",
+    "@astrojs/vercel": "8.2.4",
     "@logsnag/astro": "^1.0.0-beta.1",
     "@shikijs/transformers": "^1.6.5",
     "@tailwindcss/typography": "^0.5.13",
