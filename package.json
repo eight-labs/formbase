@@ -5,7 +5,8 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "packages/config/*"
+    "packages/config/*",
+    "tests"
   ],
   "scripts": {
     "app": "bun run dev --filter=web",
@@ -18,14 +19,21 @@
     "format:check": "prettier \"**/*\" --ignore-unknown --list-different",
     "lint": "eslint . --cache --max-warnings 0",
     "reset:changelog": "rimraf --glob **/*.mdx",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "test:e2e": "turbo run test:e2e",
+    "tests:ui": "bun run --cwd=tests test:e2e:ui",
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"
   },
   "devDependencies": {
     "@formbase/tsconfig": "workspace:*",
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@types/eslint": "^8.56.10",
+    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "@typescript-eslint/parser": "^7.10.0",
     "eslint": "^8.57.0",
     "eslint-config-formbase": "workspace:*",
+    "eslint-plugin-eslint-comments": "^3.2.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-curly": "^0.2.1",
