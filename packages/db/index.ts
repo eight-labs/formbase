@@ -1,5 +1,5 @@
 import { createClient } from '@libsql/client';
-import { and, count, eq, sql } from 'drizzle-orm';
+import { and, count, eq, gt, gte, inArray, isNull, lt, lte, or, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/libsql';
 
 import { env } from '@formbase/env';
@@ -27,6 +27,13 @@ export const db = drizzle(queryClient, {
 export const drizzlePrimitives = {
   eq,
   and,
+  or,
   count,
   sql,
+  gt,
+  gte,
+  lt,
+  lte,
+  inArray,
+  isNull,
 };

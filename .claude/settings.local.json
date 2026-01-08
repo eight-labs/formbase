@@ -10,7 +10,9 @@
       "Bash(npx @tailwindcss/upgrade --force)",
       "Bash(xargs:*)",
       "WebFetch(domain:avvvatars.com)",
-      "Bash(bun add:*)"
+      "Bash(bun add:*)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs"
     ]
   }
 }

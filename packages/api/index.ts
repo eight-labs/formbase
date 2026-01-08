@@ -1,5 +1,7 @@
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
 
+import { apiKeysRouter } from './routers/api-keys';
+import { authRouter } from './routers/auth';
 import { formRouter } from './routers/form';
 import { formDataRouter } from './routers/formData';
 import { userRouter } from './routers/user';
@@ -10,6 +12,7 @@ export const appRouter = createRouter({
   user: userRouter,
   form: formRouter,
   formData: formDataRouter,
+  apiKeys: apiKeysRouter,
 });
 
 export type AppRouter = typeof appRouter;
@@ -19,4 +22,4 @@ export type RouterOutputs = inferRouterOutputs<AppRouter>;
 export const createCaller = createCallerFactory(appRouter);
 
 export { createTRPCContext } from './trpc';
-import { authRouter } from './routers/auth';
+export { logApiRequest, cleanupOldAuditLogs } from './lib/audit-log';
