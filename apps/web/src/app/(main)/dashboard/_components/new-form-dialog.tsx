@@ -10,6 +10,8 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { Button } from '@formbase/ui/primitives/button';
+
+import { LoadingButton } from '~/components/loading-button';
 import {
   Dialog,
   DialogContent,
@@ -48,6 +50,11 @@ export function CreateFormDialog() {
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      name: '',
+      description: '',
+      returnUrl: '',
+    },
   });
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [isCreatePending, startCreateTransaction] = useTransition();
@@ -150,13 +157,13 @@ export function CreateFormDialog() {
             />
 
             <DialogFooter>
-              <Button
+              <LoadingButton
                 onClick={form.handleSubmit(onSubmit)}
                 className="mt-2 w-full"
                 loading={isCreatePending}
               >
                 Create Form
-              </Button>
+              </LoadingButton>
             </DialogFooter>
           </DialogContent>
         </Dialog>

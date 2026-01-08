@@ -1,13 +1,8 @@
 import { redirect } from 'next/navigation';
 
 import { getSession } from '@formbase/auth/server';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@formbase/ui/primitives/card';
+
+import { Logo } from '../_components/logo';
 
 import { VerifyEmail } from './verify-code';
 
@@ -35,24 +30,28 @@ export default async function VerifyEmailPage({
   }
 
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader>
-        <CardTitle>Verify Email</CardTitle>
-        <CardDescription>
+    <div className="flex flex-1 flex-col justify-center px-4 py-10 lg:px-6">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="flex items-center space-x-1.5">
+          <Logo className="h-7 w-7 text-foreground" aria-hidden={true} />
+          <p className="font-medium text-lg text-foreground">Formbase</p>
+        </div>
+        <h3 className="mt-6 text-lg font-semibold text-foreground">
+          Verify your email
+        </h3>
+        <p className="mt-2 text-sm text-muted-foreground">
           {session?.user.email ? (
             <>
-              Verification email was sent to{' '}
-              <strong>{session.user.email}</strong>. Check your spam folder if
-              you can&apos;t find the email.
+              We sent a verification email to{' '}
+              <strong className="text-foreground">{session.user.email}</strong>.
+              Check your spam folder if you can&apos;t find the email.
             </>
           ) : (
             <>Use the verification link from your email to continue.</>
           )}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+        </p>
         <VerifyEmail email={session?.user.email} />
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

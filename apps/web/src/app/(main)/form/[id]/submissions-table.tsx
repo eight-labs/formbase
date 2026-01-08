@@ -246,7 +246,7 @@ export function SubmissionsTable({
                 <DotsHorizontalIcon className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="min-w-[1rem] p-0">
+            <DropdownMenuContent className="min-w-4 p-0">
               <DropdownMenuItem
                 className="focus:bg-destructive/5 focus:text-destructive-foreground"
                 onClick={() => handleFormSubmissionDelete({ submissionId })}

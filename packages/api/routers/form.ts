@@ -158,6 +158,32 @@ export const formRouter = createTRPCRouter({
       await ctx.db.delete(forms).where(eq(forms.id, input.id));
     }),
 
+  duplicate: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const existingForm = await assertFormOwnership(ctx, input.id);
+      const newId = generateId(15);
+
+      await ctx.db.insert(forms).values({
+        id: newId,
+        userId: ctx.user.id,
+        title: `${existingForm.title} (Copy)`,
+        description: existingForm.description,
+        updatedAt: new Date(),
+        returnUrl: existingForm.returnUrl,
+        keys: existingForm.keys,
+        enableEmailNotifications: existingForm.enableEmailNotifications,
+        enableSubmissions: existingForm.enableSubmissions,
+        defaultSubmissionEmail: existingForm.defaultSubmissionEmail,
+      });
+
+      return { id: newId };
+    }),
+
   userForms: protectedProcedure
     .input(
       z.object({

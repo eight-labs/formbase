@@ -4,21 +4,18 @@ import { type FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { IconBrandGithub, IconBrandGoogleFilled } from '@tabler/icons-react';
+
 import { signUp } from '@formbase/auth/client';
+
+import { Logo } from '../_components/logo';
 import { Button } from '@formbase/ui/primitives/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@formbase/ui/primitives/card';
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
+import { Separator } from '@formbase/ui/primitives/separator';
 
 import { LoadingButton } from '~/components/loading-button';
 import { PasswordInput } from '~/components/password-input';
-import { SocialLoginButtons } from '~/components/social-login-buttons';
 import { useSocialAuth } from '~/lib/hooks/use-social-auth';
 
 export function Signup() {
@@ -43,19 +40,12 @@ export function Signup() {
     const name = String(formData.get('name') ?? '');
     const email = String(formData.get('email') ?? '');
     const password = String(formData.get('password') ?? '');
-    const avatarSeed = email.trim().toLowerCase() || name.trim();
-    const avatarUrl = avatarSeed
-      ? `https://source.boringavatars.com/marble/120/${encodeURIComponent(
-          avatarSeed,
-        )}`
-      : undefined;
 
     try {
       const { error } = await signUp.email({
         name,
         email,
         password,
-        image: avatarUrl,
         callbackURL: '/onboarding',
       });
 
@@ -72,52 +62,114 @@ export function Signup() {
     }
   };
 
+  const isSocialDisabled = socialLoading !== null;
+
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader className="text-center">
-        <CardTitle>Formbase Sign Up</CardTitle>
-        <CardDescription>Sign up to start using the app</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <SocialLoginButtons
-          onSocialSignIn={handleSocialSignIn}
-          loading={socialLoading}
-          variant="signup"
-        />
-        <div className="my-2 flex items-center">
-          <div className="flex-grow border-t border-muted" />
-          <div className="mx-2 text-muted-foreground">or</div>
-          <div className="flex-grow border-t border-muted" />
+    <div className="flex flex-1 flex-col justify-center px-4 py-10 lg:px-6">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="flex items-center space-x-1.5">
+          <Logo className="h-7 w-7 text-foreground" aria-hidden={true} />
+          <p className="font-medium text-lg text-foreground">Formbase</p>
+        </div>
+        <h3 className="mt-6 text-lg font-semibold text-foreground">
+          Create your account
+        </h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Already have an account?{' '}
+          <Link
+            href="/login"
+            className="font-medium text-primary hover:text-primary/90"
+          >
+            Sign in
+          </Link>
+        </p>
+        <div className="mt-8 flex flex-col items-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
+          <Button
+            variant="outline"
+            className="w-full flex-1 items-center justify-center py-2"
+            onClick={() => handleSocialSignIn('github')}
+            disabled={isSocialDisabled}
+          >
+            <IconBrandGithub className="size-4" aria-hidden={true} />
+            <span className="text-sm font-medium">
+              {socialLoading === 'github'
+                ? 'Signing up...'
+                : 'Sign up with GitHub'}
+            </span>
+          </Button>
+          <Button
+            variant="outline"
+            className="w-full mt-2 flex-1 items-center justify-center py-2 sm:mt-0"
+            onClick={() => handleSocialSignIn('google')}
+            disabled={isSocialDisabled}
+          >
+            <IconBrandGoogleFilled className="size-4" aria-hidden={true} />
+            <span className="text-sm font-medium">
+              {socialLoading === 'google'
+                ? 'Signing up...'
+                : 'Sign up with Google'}
+            </span>
+          </Button>
         </div>
 
-        <form onSubmit={handleSignup} className="space-y-4">
-          <div className="space-y-2">
-            <Label>Name</Label>
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <Separator className="w-full" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">or</span>
+          </div>
+        </div>
+
+        <form onSubmit={handleSignup} className="mt-6 space-y-4">
+          <div>
+            <Label
+              htmlFor="name"
+              className="text-sm font-medium text-foreground"
+            >
+              Name
+            </Label>
             <Input
-              required
-              placeholder="Jane Doe"
-              autoComplete="name"
-              name="name"
               type="text"
+              id="name"
+              name="name"
+              autoComplete="name"
+              placeholder="Jane Doe"
+              className="mt-2"
+              required
             />
           </div>
-          <div className="space-y-2">
-            <Label>Email</Label>
+          <div>
+            <Label
+              htmlFor="email"
+              className="text-sm font-medium text-foreground"
+            >
+              Email
+            </Label>
             <Input
-              required
-              placeholder="email@example.com"
-              autoComplete="email"
-              name="email"
               type="email"
+              id="email"
+              name="email"
+              autoComplete="email"
+              placeholder="email@example.com"
+              className="mt-2"
+              required
             />
           </div>
-          <div className="space-y-2">
-            <Label>Password</Label>
+          <div>
+            <Label
+              htmlFor="password"
+              className="text-sm font-medium text-foreground"
+            >
+              Password
+            </Label>
             <PasswordInput
+              id="password"
               name="password"
-              required
-              autoComplete="current-password"
+              autoComplete="new-password"
               placeholder="********"
+              className="mt-2"
+              required
             />
           </div>
 
@@ -126,22 +178,15 @@ export function Signup() {
               {displayError}
             </p>
           ) : null}
-          <div>
-            <Link href={'/login'}>
-              <Button variant={'link'} size={'sm'} className="p-0">
-                Already signed up? Login instead.
-              </Button>
-            </Link>
-          </div>
 
-          <LoadingButton className="w-full" loading={isSubmitting}>
-            Sign Up
+          <LoadingButton
+            className="mt-4 w-full py-2 font-medium"
+            loading={isSubmitting}
+          >
+            Sign up
           </LoadingButton>
-          <Button variant="outline" className="w-full" asChild>
-            <Link href="/">Cancel</Link>
-          </Button>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

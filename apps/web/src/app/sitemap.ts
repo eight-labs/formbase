@@ -1,6 +1,6 @@
 import { type MetadataRoute } from 'next';
 
-import { absoluteUrl } from '@formbase/utils';
+import { absoluteUrl } from '@formbase/utils/server';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

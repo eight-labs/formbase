@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
 
-import { Button } from '@formbase/ui/primitives/button';
+import { LoadingButton } from '~/components/loading-button';
 
 import { revalidateFromClient } from '../../_actions/revalidateDashboard';
 
@@ -36,7 +36,7 @@ export default function SendFormSubmissionButton({
     });
   };
   return (
-    <Button
+    <LoadingButton
       onClick={handleFormSubmission}
       className="flex items-center gap-1"
       loading={isSubmittingForm}
@@ -44,6 +44,6 @@ export default function SendFormSubmissionButton({
     >
       {!isSubmittingForm && <Send className="w-4 h-4" />}
       <span>Send a submission</span>
-    </Button>
+    </LoadingButton>
   );
 }

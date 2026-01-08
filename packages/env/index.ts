@@ -13,6 +13,7 @@ const booleanFromString = z.preprocess((value) => {
 export const env = createEnv({
   shared: {
     NODE_ENV: z.enum(['development', 'test', 'production']).optional(),
+    NEXT_PUBLIC_APP_URL: z.string().url(),
   },
   server: {
     PORT: z.coerce.number().default(3000),
@@ -53,9 +54,7 @@ export const env = createEnv({
     VERCEL_URL: z.string().optional(),
   },
   clientPrefix: 'NEXT_PUBLIC_',
-  client: {
-    NEXT_PUBLIC_APP_URL: z.string().url(),
-  },
+  client: {},
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
   skipValidation: !!process.env['SKIP_ENV_VALIDATION'],

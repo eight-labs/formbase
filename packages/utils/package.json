@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./server": "./server.ts",
+    "./flatten-object": "./flatten-object.ts",
+    "./generate-id": "./generate-id.ts",
+    "./url": "./url.ts"
+  },
   "scripts": {
     "lint": "eslint . --cache --max-warnings 0",
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo"

@@ -1,83 +1,166 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config.ts';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* Animation utilities for Base UI components */
+@utility animate-in {
+  animation-name: enter;
+  animation-duration: 150ms;
+  --tw-enter-opacity: initial;
+  --tw-enter-scale: initial;
+  --tw-enter-rotate: initial;
+  --tw-enter-translate-x: initial;
+  --tw-enter-translate-y: initial;
+}
+@utility animate-out {
+  animation-name: exit;
+  animation-duration: 150ms;
+  --tw-exit-opacity: initial;
+  --tw-exit-scale: initial;
+  --tw-exit-rotate: initial;
+  --tw-exit-translate-x: initial;
+  --tw-exit-translate-y: initial;
+}
+@utility fade-in-0 {
+  --tw-enter-opacity: 0;
+}
+@utility fade-out-0 {
+  --tw-exit-opacity: 0;
+}
+@utility zoom-in-95 {
+  --tw-enter-scale: 0.95;
+}
+@utility zoom-out-95 {
+  --tw-exit-scale: 0.95;
+}
+@utility slide-in-from-top-2 {
+  --tw-enter-translate-y: -0.5rem;
+}
+@utility slide-in-from-bottom-2 {
+  --tw-enter-translate-y: 0.5rem;
+}
+@utility slide-in-from-left-2 {
+  --tw-enter-translate-x: -0.5rem;
+}
+@utility slide-in-from-right-2 {
+  --tw-enter-translate-x: 0.5rem;
+}
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 240 10% 3.9%;
-
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-
+    --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 12.5%;
+    --primary-foreground: 0 0% 98.5%;
+    --secondary: 0 0% 97%;
+    --secondary-foreground: 0 0% 12.5%;
+    --muted: 0 0% 97%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 97%;
+    --accent-foreground: 0 0% 12.5%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-
-    --radius: 0.5rem;
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+    --ring: 0 0% 55%;
+    --chart-1: 251.8 65% 63%;
+    --chart-2: 259.8 77% 48%;
+    --chart-3: 262.9 84% 43%;
+    --chart-4: 264.4 83% 38%;
+    --chart-5: 265.6 72% 32%;
+    --radius: 0.625rem;
+    --sidebar: 0 0% 98.5%;
+    --sidebar-foreground: 0 0% 9%;
+    --sidebar-primary: 0 0% 12.5%;
+    --sidebar-primary-foreground: 0 0% 98.5%;
+    --sidebar-accent: 0 0% 97%;
+    --sidebar-accent-foreground: 0 0% 12.5%;
+    --sidebar-border: 0 0% 91%;
+    --sidebar-ring: 0 0% 55%;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 40.6%;
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98.5%;
+    --card: 0 0% 12.5%;
+    --card-foreground: 0 0% 98.5%;
+    --popover: 0 0% 12.5%;
+    --popover-foreground: 0 0% 98.5%;
+    --primary: 0 0% 82%;
+    --primary-foreground: 0 0% 12.5%;
+    --secondary: 0 0% 17%;
+    --secondary-foreground: 0 0% 98.5%;
+    --muted: 0 0% 17%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 0 0% 25%;
+    --accent-foreground: 0 0% 98.5%;
+    --destructive: 22 85% 55%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 0 0% 100% / 10%;
+    --input: 0 0% 100% / 15%;
+    --ring: 0 0% 40%;
+    --chart-1: 251.8 65% 63%;
+    --chart-2: 259.8 77% 48%;
+    --chart-3: 262.9 84% 43%;
+    --chart-4: 264.4 83% 38%;
+    --chart-5: 265.6 72% 32%;
+    --sidebar: 0 0% 12.5%;
+    --sidebar-foreground: 0 0% 98.5%;
+    --sidebar-primary: 264.4 83% 38%;
+    --sidebar-primary-foreground: 0 0% 98.5%;
+    --sidebar-accent: 0 0% 17%;
+    --sidebar-accent-foreground: 0 0% 98.5%;
+    --sidebar-border: 0 0% 100% / 10%;
+    --sidebar-ring: 0 0% 40%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));
+  }
+}
+
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));
   }
 }
 
@@ -85,51 +168,28 @@
   transform-origin: center;
   animation: loader-spin 0.75s step-end infinite;
 }
+
 @keyframes loader-spin {
-  8.3% {
-    transform: rotate(30deg);
-  }
-  16.6% {
-    transform: rotate(60deg);
-  }
-  25% {
-    transform: rotate(90deg);
-  }
-  33.3% {
-    transform: rotate(120deg);
-  }
-  41.6% {
-    transform: rotate(150deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  58.3% {
-    transform: rotate(210deg);
-  }
-  66.6% {
-    transform: rotate(240deg);
-  }
-  75% {
-    transform: rotate(270deg);
-  }
-  83.3% {
-    transform: rotate(300deg);
-  }
-  91.6% {
-    transform: rotate(330deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  8.3% { transform: rotate(30deg); }
+  16.6% { transform: rotate(60deg); }
+  25% { transform: rotate(90deg); }
+  33.3% { transform: rotate(120deg); }
+  41.6% { transform: rotate(150deg); }
+  50% { transform: rotate(180deg); }
+  58.3% { transform: rotate(210deg); }
+  66.6% { transform: rotate(240deg); }
+  75% { transform: rotate(270deg); }
+  83.3% { transform: rotate(300deg); }
+  91.6% { transform: rotate(330deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .steps-gradient {
   background: linear-gradient(
     180deg,
     transparent 0,
-    var(--primary) 10%,
-    var(--primary) 90%,
+    hsl(var(--primary)) 10%,
+    hsl(var(--primary)) 90%,
     transparent 100%
   );
 }
