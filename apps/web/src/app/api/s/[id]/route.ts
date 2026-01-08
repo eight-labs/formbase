@@ -87,14 +87,15 @@ async function handleEmailNotifications(
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    if (!params.id) {
+    const { id } = await params;
+    if (!id) {
       return new Response('Form ID is required', { status: 400 });
     }
 
-    const formId = params.id;
+    const formId = id;
     const form = await api.form.getFormById({ formId });
     if (!form) {
       return new Response('Form not found', {

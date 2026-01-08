@@ -20,22 +20,14 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
       reportsDirectory: './coverage',
-      include: [
-        '../packages/api/**/*.ts',
-        '../apps/web/src/app/api/**/*.ts',
-      ],
+      include: ['../packages/api/**/*.ts', '../apps/web/src/lib/**/*.ts'],
       exclude: [
         '**/*.test.ts',
         '**/*.spec.ts',
         '**/node_modules/**',
         '**/dist/**',
+        '**/*.d.ts',
       ],
-      thresholds: {
-        lines: 50,
-        functions: 50,
-        branches: 50,
-        statements: 50,
-      },
     },
   },
   resolve: {

@@ -133,4 +133,242 @@ describe('Public Submission (formData.setFormData)', () => {
       expect(after?.updatedAt).not.toEqual(before?.updatedAt);
     });
   });
+
+  describe('Content type handling', () => {
+    it('accepts empty object submission', async () => {
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: {},
+        keys: [],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      expect(submissions).toHaveLength(1);
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data).toEqual({});
+    });
+
+    it('accepts large payload (10KB+)', async () => {
+      const largeValue = 'x'.repeat(12000);
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: { largeField: largeValue },
+        keys: ['largeField'],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      expect(submissions).toHaveLength(1);
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data.largeField.length).toBe(12000);
+    });
+
+    it('handles special characters in keys', async () => {
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: {
+          'field.with.dots': 'value1',
+          'field[with][brackets]': 'value2',
+          'field-with-dashes': 'value3',
+        },
+        keys: ['field.with.dots', 'field[with][brackets]', 'field-with-dashes'],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      expect(submissions).toHaveLength(1);
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data['field.with.dots']).toBe('value1');
+      expect(data['field[with][brackets]']).toBe('value2');
+      expect(data['field-with-dashes']).toBe('value3');
+    });
+
+    it('handles special characters in values', async () => {
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: {
+          html: '<script>alert("xss")</script>',
+          sql: "'; DROP TABLE users; --",
+          newlines: 'Line1\nLine2\rLine3',
+          tabs: 'Col1\tCol2\tCol3',
+        },
+        keys: ['html', 'sql', 'newlines', 'tabs'],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data.html).toBe('<script>alert("xss")</script>');
+      expect(data.sql).toBe("'; DROP TABLE users; --");
+      expect(data.newlines).toContain('\n');
+    });
+
+    it('handles unicode characters in data', async () => {
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: {
+          japanese: 'こんにちは',
+          chinese: '你好',
+          arabic: 'مرحبا',
+          emoji: '👋🎉🚀',
+        },
+        keys: ['japanese', 'chinese', 'arabic', 'emoji'],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data.japanese).toBe('こんにちは');
+      expect(data.emoji).toBe('👋🎉🚀');
+    });
+
+    it('handles deeply nested objects', async () => {
+      const nestedData = {
+        level1: {
+          level2: {
+            level3: {
+              level4: {
+                value: 'deep',
+              },
+            },
+          },
+        },
+      };
+
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: nestedData,
+        keys: ['level1'],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data.level1.level2.level3.level4.value).toBe('deep');
+    });
+
+    it('handles arrays in submission data', async () => {
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: {
+          tags: ['javascript', 'typescript', 'react'],
+          numbers: [1, 2, 3, 4, 5],
+          mixed: [1, 'two', true, null],
+        },
+        keys: ['tags', 'numbers', 'mixed'],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data.tags).toEqual(['javascript', 'typescript', 'react']);
+      expect(data.numbers).toEqual([1, 2, 3, 4, 5]);
+      expect(data.mixed).toEqual([1, 'two', true, null]);
+    });
+
+    it('handles null and undefined values', async () => {
+      const result = await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: {
+          nullValue: null,
+          undefinedValue: undefined,
+          emptyString: '',
+        },
+        keys: ['nullValue', 'undefinedValue', 'emptyString'],
+      });
+
+      expect(result).toBeDefined();
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      const data = JSON.parse(submissions[0]?.data ?? '{}');
+      expect(data.nullValue).toBeNull();
+      expect(data.emptyString).toBe('');
+    });
+  });
+
+  describe('Multiple submissions', () => {
+    it('stores multiple submissions independently', async () => {
+      for (let i = 0; i < 5; i++) {
+        await publicCaller.formData.setFormData({
+          formId: testForm.id,
+          data: { index: i, name: `User ${i}` },
+          keys: ['index', 'name'],
+        });
+      }
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      expect(submissions).toHaveLength(5);
+
+      const indices = submissions
+        .map((s) => JSON.parse(s.data).index)
+        .sort((a, b) => a - b);
+      expect(indices).toEqual([0, 1, 2, 3, 4]);
+    });
+
+    it('each submission has unique ID', async () => {
+      await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: { name: 'First' },
+        keys: ['name'],
+      });
+
+      await publicCaller.formData.setFormData({
+        formId: testForm.id,
+        data: { name: 'Second' },
+        keys: ['name'],
+      });
+
+      const db = getTestDb();
+      const submissions = await db.query.formDatas.findMany({
+        where: (table, { eq }) => eq(table.formId, testForm.id),
+      });
+
+      expect(submissions).toHaveLength(2);
+      expect(submissions[0]?.id).not.toBe(submissions[1]?.id);
+    });
+  });
 });

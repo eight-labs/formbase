@@ -23,7 +23,7 @@ export default defineConfig({
   webServer: process.env.CI
     ? undefined
     : {
-        command: 'bun run dev --filter=web',
+        command: 'bun run dev --filter=@formbase/web',
         url: 'http://localhost:3000',
         reuseExistingServer: !process.env.CI,
         timeout: 120000,

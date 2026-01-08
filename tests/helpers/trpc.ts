@@ -1,5 +1,3 @@
-import { createCaller } from '@formbase/api';
-
 import { type TestSession, type TestUser } from './auth';
 import { getTestDb } from './db';
 
@@ -7,6 +5,7 @@ export async function createTestCaller(options?: {
   user?: TestUser;
   session?: TestSession;
 }) {
+  const { createCaller } = await import('@formbase/api');
   const db = getTestDb();
   const { user, session } = options ?? {};
 

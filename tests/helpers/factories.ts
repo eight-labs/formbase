@@ -22,6 +22,7 @@ export async function createTestForm(options: {
   description?: string;
   enableSubmissions?: boolean;
   enableEmailNotifications?: boolean;
+  defaultSubmissionEmail?: string;
   returnUrl?: string;
   keys?: string[];
 }): Promise<TestForm> {
@@ -39,6 +40,7 @@ export async function createTestForm(options: {
       keys: JSON.stringify(options.keys ?? ['']),
       enableSubmissions: options.enableSubmissions ?? true,
       enableEmailNotifications: options.enableEmailNotifications ?? false,
+      defaultSubmissionEmail: options.defaultSubmissionEmail ?? null,
       returnUrl: options.returnUrl ?? null,
       updatedAt: new Date(),
     })
