@@ -170,4 +170,5 @@ bun.lockb
 *.db
 
 .claude/
-.vscode/
+.vscode
+formbase-docs
