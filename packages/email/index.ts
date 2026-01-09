@@ -41,6 +41,18 @@ let cachedTransporter: ReturnType<typeof createTransport> | null = null;
 const getTransporter = () => {
   if (cachedTransporter) return cachedTransporter;
 
+  // Use noop transport in test environment
+  if (env.NODE_ENV === 'test') {
+    cachedTransporter = createTransport({
+      name: 'noop',
+      version: '1.0.0',
+      send: (_mail, callback) => {
+        callback(null, { messageId: 'test-message-id' });
+      },
+    });
+    return cachedTransporter;
+  }
+
   if (env.SMTP_TRANSPORT === 'resend') {
     if (!env.RESEND_API_KEY) {
       throw new Error('Missing RESEND_API_KEY');

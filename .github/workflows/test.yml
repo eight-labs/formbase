@@ -1,0 +1,144 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-integration:
+    name: Unit & Integration Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run tests
+        run: bun run test
+        working-directory: tests
+
+      - name: Run tests with coverage
+        run: bun run test:coverage
+        working-directory: tests
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        with:
+          directory: tests/coverage
+          fail_ci_if_error: false
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  e2e:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps chromium
+        working-directory: tests
+
+      - name: Build application
+        run: bun run build
+        working-directory: apps/web
+        env:
+          DATABASE_URL: file:./test.db
+          DATABASE_AUTH_TOKEN: ''
+          BETTER_AUTH_SECRET: test-secret-for-ci-at-least-32-chars
+          RESEND_API_KEY: ''
+          ALLOW_SIGNIN_SIGNUP: 'true'
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
+
+      - name: Setup test database
+        run: bunx drizzle-kit push
+        working-directory: packages/db
+        env:
+          DATABASE_URL: file:../../apps/web/test.db
+          DATABASE_AUTH_TOKEN: ''
+          SKIP_ENV_VALIDATION: 'true'
+
+      - name: Seed E2E test data
+        run: bun run e2e/seed.ts
+        working-directory: tests
+        env:
+          DATABASE_URL: file:../apps/web/test.db
+          DATABASE_AUTH_TOKEN: ''
+          BETTER_AUTH_SECRET: test-secret-for-ci-at-least-32-chars
+          ALLOW_SIGNIN_SIGNUP: 'true'
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
+
+      - name: Start application
+        run: |
+          bun run start &
+          sleep 10
+        working-directory: apps/web
+        env:
+          DATABASE_URL: file:./test.db
+          DATABASE_AUTH_TOKEN: ''
+          BETTER_AUTH_SECRET: test-secret-for-ci-at-least-32-chars
+          RESEND_API_KEY: ''
+          ALLOW_SIGNIN_SIGNUP: 'true'
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
+          PORT: 3000
+
+      - name: Run E2E tests
+        run: bun run test:e2e
+        working-directory: tests
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: tests/playwright-report/
+          retention-days: 7
+
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run lint
+        run: bun run lint
+
+      - name: Run type check
+        run: bun run typecheck

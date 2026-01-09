@@ -1,0 +1,29 @@
+{
+  "extends": "../packages/config/tsconfig/base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@formbase/api": ["../packages/api"],
+      "@formbase/api/*": ["../packages/api/*"],
+      "@formbase/db": ["../packages/db"],
+      "@formbase/db/*": ["../packages/db/*"],
+      "@formbase/auth": ["../packages/auth"],
+      "@formbase/auth/*": ["../packages/auth/*"],
+      "@formbase/env": ["../packages/env"],
+      "@formbase/utils": ["../packages/utils"],
+      "@formbase/utils/*": ["../packages/utils/*"],
+      "~/*": ["../apps/web/src/*"]
+    },
+    "types": ["vitest/globals", "node"]
+  },
+  "include": ["**/*.ts", "**/*.test.ts"],
+  "exclude": ["node_modules"]
+}

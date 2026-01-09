@@ -103,6 +103,24 @@
       "dependsOn": ["^build", "build"],
       "cache": false,
       "persistent": true
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["tests/**/*.ts", "packages/**/*.ts"],
+      "outputs": ["tests/coverage/**"],
+      "cache": false
+    },
+    "test:coverage": {
+      "dependsOn": ["^build"],
+      "inputs": ["tests/**/*.ts", "packages/**/*.ts"],
+      "outputs": ["tests/coverage/**"],
+      "cache": false
+    },
+    "test:e2e": {
+      "dependsOn": ["build"],
+      "inputs": ["tests/e2e/**/*.ts"],
+      "outputs": ["tests/playwright-report/**", "tests/test-results/**"],
+      "cache": false
     }
   }
 }
