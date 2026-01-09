@@ -6,7 +6,6 @@ import {
   teardownTestDatabase,
 } from './helpers/db';
 
-// Set test environment variables before any imports
 process.env['SKIP_ENV_VALIDATION'] = 'true';
 process.env['NODE_ENV'] = 'test';
 process.env['DATABASE_URL'] = 'file::memory:?cache=shared';

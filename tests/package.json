@@ -23,8 +23,5 @@
     "test:e2e:seed": "bun run --env-file=../apps/web/.env.local ./e2e/seed.ts",
     "test:e2e:cleanup": "bun run --env-file=../apps/web/.env.local ./e2e/cleanup.ts"
   },
-  "type": "module",
-  "dependencies": {
-    "zod": "3.23.8"
-  }
+  "type": "module"
 }

@@ -192,7 +192,7 @@ describe('API v1', () => {
       });
 
       it('throws NOT_FOUND for form owned by another user', async () => {
-        const otherUser = await createTestUser({ email: 'other2@example.com' });
+        const otherUser = await createTestUser({ email: 'other@example.com' });
         const otherForm = await createTestForm({
           userId: otherUser.id,
           title: 'Other Form',
@@ -221,7 +221,7 @@ describe('API v1', () => {
       });
 
       it('throws NOT_FOUND for form owned by another user', async () => {
-        const otherUser = await createTestUser({ email: 'other3@example.com' });
+        const otherUser = await createTestUser({ email: 'other@example.com' });
         const otherForm = await createTestForm({
           userId: otherUser.id,
           title: 'Protected',
@@ -296,7 +296,7 @@ describe('API v1', () => {
 
       it('fails if any form not owned by user', async () => {
         const form1 = await createTestForm({ userId: user.id, title: 'Mine' });
-        const otherUser = await createTestUser({ email: 'other4@example.com' });
+        const otherUser = await createTestUser({ email: 'other@example.com' });
         const form2 = await createTestForm({
           userId: otherUser.id,
           title: 'Not Mine',
@@ -334,7 +334,7 @@ describe('API v1', () => {
 
       it('fails with mixed ownership', async () => {
         const myForm = await createTestForm({ userId: user.id, title: 'Mine' });
-        const otherUser = await createTestUser({ email: 'other5@example.com' });
+        const otherUser = await createTestUser({ email: 'other@example.com' });
         const otherForm = await createTestForm({
           userId: otherUser.id,
           title: 'Not Mine',
@@ -389,7 +389,7 @@ describe('API v1', () => {
       });
 
       it('throws NOT_FOUND for form not owned by user', async () => {
-        const otherUser = await createTestUser({ email: 'other6@example.com' });
+        const otherUser = await createTestUser({ email: 'other@example.com' });
         const otherForm = await createTestForm({
           userId: otherUser.id,
           title: 'Other',
