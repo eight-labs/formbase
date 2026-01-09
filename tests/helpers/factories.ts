@@ -1,5 +1,6 @@
-import { formDatas, forms } from '@formbase/db/schema';
+import { apiKeys, formDatas, forms } from '@formbase/db/schema';
 import { generateId } from '@formbase/utils/generate-id';
+import { generateApiKey, hashApiKey } from '@formbase/api/lib/api-key';
 
 import { getTestDb } from './db';
 
@@ -73,4 +74,56 @@ export async function createTestFormData(options: {
     formId: options.formId,
     data,
   };
+}
+
+export interface TestApiKey {
+  id: string;
+  userId: string;
+  name: string;
+  key: string;
+  keyPrefix: string;
+  expiresAt: Date | null;
+}
+
+export async function createTestApiKey(options: {
+  userId: string;
+  name?: string;
+  expiresAt?: Date | null;
+}): Promise<TestApiKey> {
+  const db = getTestDb();
+  const id = generateId(15);
+  const name = options.name ?? 'Test API Key';
+  const { key, prefix, hash } = generateApiKey();
+
+  db.insert(apiKeys)
+    .values({
+      id,
+      userId: options.userId,
+      name,
+      keyHash: hash,
+      keyPrefix: prefix,
+      expiresAt: options.expiresAt ?? null,
+    })
+    .run();
+
+  return {
+    id,
+    userId: options.userId,
+    name,
+    key,
+    keyPrefix: prefix,
+    expiresAt: options.expiresAt ?? null,
+  };
+}
+
+export async function createExpiredApiKey(options: {
+  userId: string;
+  name?: string;
+}): Promise<TestApiKey> {
+  const expiredDate = new Date(Date.now() - 1000 * 60 * 60);
+  return createTestApiKey({
+    userId: options.userId,
+    name: options.name ?? 'Expired API Key',
+    expiresAt: expiredDate,
+  });
 }

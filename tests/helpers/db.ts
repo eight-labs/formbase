@@ -88,6 +88,18 @@ CREATE TABLE IF NOT EXISTS verification (
   updated_at INTEGER DEFAULT (cast(unixepoch('subsec') * 1000 as integer)) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS api_keys (
+  id TEXT PRIMARY KEY NOT NULL,
+  user_id TEXT NOT NULL,
+  name TEXT NOT NULL,
+  key_hash TEXT NOT NULL UNIQUE,
+  key_prefix TEXT NOT NULL,
+  expires_at INTEGER,
+  last_used_at INTEGER,
+  created_at INTEGER DEFAULT (cast(unixepoch('subsec') * 1000 as integer)) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+);
+
 CREATE INDEX IF NOT EXISTS user_email_idx ON user(email);
 CREATE INDEX IF NOT EXISTS session_userId_idx ON session(user_id);
 CREATE INDEX IF NOT EXISTS account_userId_idx ON account(user_id);
@@ -96,9 +108,12 @@ CREATE INDEX IF NOT EXISTS form_created_at_idx ON forms(created_at);
 CREATE INDEX IF NOT EXISTS form_idx ON form_datas(form_id);
 CREATE INDEX IF NOT EXISTS form_data_created_at_idx ON form_datas(created_at);
 CREATE INDEX IF NOT EXISTS verification_identifier_idx ON verification(identifier);
+CREATE INDEX IF NOT EXISTS api_key_user_idx ON api_keys(user_id);
+CREATE INDEX IF NOT EXISTS api_key_hash_idx ON api_keys(key_hash);
 `;
 
 const RESET_SQL = `
+DELETE FROM api_keys;
 DELETE FROM form_datas;
 DELETE FROM onboarding_forms;
 DELETE FROM forms;
