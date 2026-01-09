@@ -8,6 +8,13 @@
       "when": 1767470022316,
       "tag": "0000_normal_moon_knight",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1767830295183,
+      "tag": "0001_right_menace",
+      "breakpoints": true
     }
   ]
 }

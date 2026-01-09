@@ -169,6 +169,7 @@ formbase-new
 bun.lockb
 *.db
 
+/.vscode
 .claude/
 .vscode
 formbase-docs
