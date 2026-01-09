@@ -30,13 +30,6 @@ export const submissionSchema = z.object({
   createdAt: z.string(),
 });
 
-export const errorSchema = z.object({
-  error: z.object({
-    code: z.string(),
-    message: z.string(),
-  }),
-});
-
 export const createFormInputSchema = z.object({
   title: z.string().min(1).max(255),
   description: z.string().max(1000).optional(),
@@ -73,7 +66,3 @@ export const dateRangeInputSchema = z.object({
   startDate: z.string().optional(),
   endDate: z.string().optional(),
 });
-
-export type PaginationInput = z.infer<typeof paginationInputSchema>;
-export type FormOutput = z.infer<typeof formSchema>;
-export type SubmissionOutput = z.infer<typeof submissionSchema>;

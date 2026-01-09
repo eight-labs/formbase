@@ -4,57 +4,21 @@ import { z } from 'zod';
 import { drizzlePrimitives } from '@formbase/db';
 import { formDatas } from '@formbase/db/schema';
 
-const { and, eq, gte, inArray, lte } = drizzlePrimitives;
-
 import { parseJsonObject } from '../../utils/json';
+import {
+  assertApiFormOwnership,
+  assertApiSubmissionOwnership,
+} from './ownership';
 import {
   bulkDeleteInputSchema,
   dateRangeInputSchema,
   paginationInputSchema,
   paginationOutputSchema,
+  submissionSchema,
 } from './schemas';
 import { apiKeyProcedure, createApiV1Router } from './trpc';
 
-async function assertApiFormOwnership(
-  ctx: { db: any; user: { id: string } },
-  formId: string,
-) {
-  const form = await ctx.db.query.forms.findFirst({
-    where: (table: any) =>
-      and(eq(table.id, formId), eq(table.userId, ctx.user.id)),
-  });
-
-  if (!form) {
-    throw new TRPCError({
-      code: 'NOT_FOUND',
-      message: 'Form not found',
-    });
-  }
-
-  return form;
-}
-
-async function assertApiSubmissionOwnership(
-  ctx: { db: any; user: { id: string } },
-  formId: string,
-  submissionId: string,
-) {
-  await assertApiFormOwnership(ctx, formId);
-
-  const submission = await ctx.db.query.formDatas.findFirst({
-    where: (table: any) =>
-      and(eq(table.id, submissionId), eq(table.formId, formId)),
-  });
-
-  if (!submission) {
-    throw new TRPCError({
-      code: 'NOT_FOUND',
-      message: 'Submission not found',
-    });
-  }
-
-  return submission;
-}
+const { and, count, eq, gte, inArray, lte } = drizzlePrimitives;
 
 export const submissionsRouter = createApiV1Router({
   list: apiKeyProcedure
@@ -74,14 +38,7 @@ export const submissionsRouter = createApiV1Router({
     )
     .output(
       z.object({
-        submissions: z.array(
-          z.object({
-            id: z.string(),
-            formId: z.string(),
-            data: z.record(z.unknown()),
-            createdAt: z.string(),
-          }),
-        ),
+        submissions: z.array(submissionSchema),
         pagination: paginationOutputSchema,
       }),
     )
@@ -90,7 +47,7 @@ export const submissionsRouter = createApiV1Router({
 
       const offset = (input.page - 1) * input.perPage;
 
-      const whereConditions: any[] = [eq(formDatas.formId, input.formId)];
+      const whereConditions = [eq(formDatas.formId, input.formId)];
 
       if (input.startDate) {
         whereConditions.push(gte(formDatas.createdAt, new Date(input.startDate)));
@@ -108,18 +65,18 @@ export const submissionsRouter = createApiV1Router({
           where: () => whereClause,
           offset,
           limit: input.perPage,
-          orderBy: (table: any, { desc }: any) => desc(table.createdAt),
+          orderBy: (table, { desc }) => desc(table.createdAt),
         }),
         ctx.db
-          .select({ count: formDatas.id })
+          .select({ count: count() })
           .from(formDatas)
           .where(whereClause),
       ]);
 
-      const total = totalResult.length;
+      const total = totalResult[0]?.count ?? 0;
 
       return {
-        submissions: submissionsList.map((submission: any) => ({
+        submissions: submissionsList.map((submission) => ({
           id: submission.id,
           formId: submission.formId,
           data: parseJsonObject(submission.data) ?? {},
@@ -149,14 +106,7 @@ export const submissionsRouter = createApiV1Router({
         submissionId: z.string(),
       }),
     )
-    .output(
-      z.object({
-        id: z.string(),
-        formId: z.string(),
-        data: z.record(z.unknown()),
-        createdAt: z.string(),
-      }),
-    )
+    .output(submissionSchema)
     .query(async ({ ctx, input }) => {
       const submission = await assertApiSubmissionOwnership(
         ctx,
@@ -217,14 +167,14 @@ export const submissionsRouter = createApiV1Router({
       await assertApiFormOwnership(ctx, input.formId);
 
       const submissions = await ctx.db.query.formDatas.findMany({
-        where: (table: any) =>
+        where: (table) =>
           and(
             inArray(table.id, input.ids),
             eq(table.formId, input.formId),
           ),
       });
 
-      const foundIds = submissions.map((s: any) => s.id);
+      const foundIds = submissions.map((s) => s.id);
       const notFound = input.ids.filter((id) => !foundIds.includes(id));
 
       if (notFound.length > 0) {

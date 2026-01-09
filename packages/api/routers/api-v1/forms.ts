@@ -3,40 +3,23 @@ import { z } from 'zod';
 
 import { drizzlePrimitives } from '@formbase/db';
 import { forms } from '@formbase/db/schema';
-
-const { and, count, eq, inArray } = drizzlePrimitives;
 import { generateId } from '@formbase/utils/generate-id';
 
 import { parseJsonArray, serializeJson } from '../../utils/json';
+import { assertApiFormOwnership } from './ownership';
 import {
   bulkCreateFormInputSchema,
   bulkDeleteInputSchema,
   bulkUpdateFormInputSchema,
   createFormInputSchema,
+  formSchema,
   paginationInputSchema,
   paginationOutputSchema,
   updateFormInputSchema,
 } from './schemas';
 import { apiKeyProcedure, createApiV1Router } from './trpc';
 
-async function assertApiFormOwnership(
-  ctx: { db: any; user: { id: string } },
-  formId: string,
-) {
-  const form = await ctx.db.query.forms.findFirst({
-    where: (table: any) =>
-      and(eq(table.id, formId), eq(table.userId, ctx.user.id)),
-  });
-
-  if (!form) {
-    throw new TRPCError({
-      code: 'NOT_FOUND',
-      message: 'Form not found',
-    });
-  }
-
-  return form;
-}
+const { and, count, eq, inArray } = drizzlePrimitives;
 
 export const formsRouter = createApiV1Router({
   list: apiKeyProcedure
@@ -53,18 +36,7 @@ export const formsRouter = createApiV1Router({
     .input(paginationInputSchema)
     .output(
       z.object({
-        forms: z.array(
-          z.object({
-            id: z.string(),
-            title: z.string(),
-            description: z.string().nullable(),
-            returnUrl: z.string().nullable(),
-            keys: z.array(z.string()),
-            submissionCount: z.number(),
-            createdAt: z.string(),
-            updatedAt: z.string().nullable(),
-          }),
-        ),
+        forms: z.array(formSchema),
         pagination: paginationOutputSchema,
       }),
     )
@@ -74,10 +46,10 @@ export const formsRouter = createApiV1Router({
 
       const [formsList, totalResult] = await Promise.all([
         ctx.db.query.forms.findMany({
-          where: (table: any) => eq(table.userId, userId),
+          where: (table) => eq(table.userId, userId),
           offset,
           limit: input.perPage,
-          orderBy: (table: any, { desc }: any) => desc(table.createdAt),
+          orderBy: (table, { desc }) => desc(table.createdAt),
           with: {
             formData: true,
           },
@@ -91,7 +63,7 @@ export const formsRouter = createApiV1Router({
       const total = totalResult[0]?.count ?? 0;
 
       return {
-        forms: formsList.map((form: any) => ({
+        forms: formsList.map((form) => ({
           id: form.id,
           title: form.title,
           description: form.description,
@@ -151,21 +123,10 @@ export const formsRouter = createApiV1Router({
       },
     })
     .input(z.object({ formId: z.string() }))
-    .output(
-      z.object({
-        id: z.string(),
-        title: z.string(),
-        description: z.string().nullable(),
-        returnUrl: z.string().nullable(),
-        keys: z.array(z.string()),
-        submissionCount: z.number(),
-        createdAt: z.string(),
-        updatedAt: z.string().nullable(),
-      }),
-    )
+    .output(formSchema)
     .query(async ({ ctx, input }) => {
       const form = await ctx.db.query.forms.findFirst({
-        where: (table: any) =>
+        where: (table) =>
           and(eq(table.id, input.formId), eq(table.userId, ctx.user.id)),
         with: { formData: true },
       });
@@ -344,11 +305,11 @@ export const formsRouter = createApiV1Router({
     .output(z.object({ success: z.boolean() }))
     .mutation(async ({ ctx, input }) => {
       const userForms = await ctx.db.query.forms.findMany({
-        where: (table: any) =>
+        where: (table) =>
           and(inArray(table.id, input.ids), eq(table.userId, ctx.user.id)),
       });
 
-      const ownedIds = userForms.map((f: any) => f.id);
+      const ownedIds = userForms.map((f) => f.id);
       const notFound = input.ids.filter((id) => !ownedIds.includes(id));
 
       if (notFound.length > 0) {

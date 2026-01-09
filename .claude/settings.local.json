@@ -12,7 +12,11 @@
       "WebFetch(domain:avvvatars.com)",
       "Bash(bun add:*)",
       "mcp__plugin_context7_context7__resolve-library-id",
-      "mcp__plugin_context7_context7__query-docs"
+      "mcp__plugin_context7_context7__query-docs",
+      "Bash(git -C /Users/duncan/dev/formbase rm:*)",
+      "Bash(git -C /Users/duncan/dev/formbase diff --stat)",
+      "Bash(git -C /Users/duncan/dev/formbase status)",
+      "Bash(git -C /Users/duncan/dev/formbase add packages/api/routers/api-v1/forms.ts packages/api/routers/api-v1/submissions.ts)"
     ]
   }
 }
