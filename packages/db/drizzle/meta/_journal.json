@@ -15,6 +15,13 @@
       "when": 1767830295183,
       "tag": "0001_right_menace",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1768165812454,
+      "tag": "0002_majestic_the_hood",
+      "breakpoints": true
     }
   ]
 }

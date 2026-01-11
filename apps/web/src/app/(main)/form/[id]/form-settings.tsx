@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BellRing, ExternalLink, FolderPen, FolderX } from 'lucide-react';
+import { BellRing, ExternalLink, FolderPen, FolderX, Shield } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -50,6 +50,10 @@ const enableNotificationsSchema = z.object({
 
 const defaultSubmissionEmailSchema = z.object({
   defaultSubmissionEmail: z.string().email().optional(),
+});
+
+const honeypotFieldSchema = z.object({
+  honeypotField: z.string().min(1).optional(),
 });
 
 type FormNameSchema = z.infer<typeof formNameSchema>;
@@ -102,6 +106,11 @@ export function FormSettings({ form, user }: FormSettingsProps) {
           email={form.defaultSubmissionEmail ?? user?.email ?? ''}
         />
       )}
+
+      <HoneypotFieldSetting
+        formId={form.id}
+        honeypotField={form.honeypotField}
+      />
 
       <div className="flex flex-row items-center justify-between rounded-lg border p-4">
         <div className="space-y-0.5">
@@ -506,6 +515,82 @@ const EnableFormNotifications = ({
           </FormItem>
         )}
       />
+    </Form>
+  );
+};
+
+type HoneypotFieldSchema = z.infer<typeof honeypotFieldSchema>;
+
+const HoneypotFieldSetting = ({
+  formId,
+  honeypotField,
+}: {
+  formId: string;
+  honeypotField: string;
+}) => {
+  const router = useRouter();
+
+  const honeypotFieldForm = useForm<HoneypotFieldSchema>({
+    resolver: zodResolver(honeypotFieldSchema),
+    defaultValues: {
+      honeypotField,
+    },
+  });
+
+  const { mutateAsync: updateHoneypotField, isPending: isUpdating } =
+    api.form.update.useMutation();
+
+  async function handleHoneypotFieldSubmit(data: HoneypotFieldSchema) {
+    try {
+      await updateHoneypotField({
+        id: formId,
+        honeypotField: data.honeypotField,
+      });
+
+      toast('Honeypot field name has been updated', {
+        icon: <Shield className="h-4 w-4" />,
+      });
+
+      router.refresh();
+    } catch {
+      toast('Failed to update honeypot field', {
+        description: 'Please try again later',
+        icon: <FolderX className="h-4 w-4" />,
+      });
+    }
+  }
+
+  return (
+    <Form {...honeypotFieldForm}>
+      <form onSubmit={honeypotFieldForm.handleSubmit(handleHoneypotFieldSubmit)}>
+        <FormField
+          control={honeypotFieldForm.control}
+          name="honeypotField"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+              <div className="space-y-0.5">
+                <FormLabel className="text-base">Honeypot Field Name</FormLabel>
+                <FormDescription>
+                  Hidden field used for spam detection. Bots fill this field,
+                  humans don&apos;t.
+                </FormDescription>
+              </div>
+              <FormControl>
+                <div className="flex gap-2">
+                  <Input className="w-[250px]" {...field} min={1} />
+                  <LoadingButton
+                    loading={isUpdating}
+                    type="submit"
+                    variant="default"
+                  >
+                    Save
+                  </LoadingButton>
+                </div>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+      </form>
     </Form>
   );
 };

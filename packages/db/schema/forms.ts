@@ -37,6 +37,7 @@ export const forms = sqliteTable(
       .default(true)
       .notNull(),
     defaultSubmissionEmail: text('default_submission_email'),
+    honeypotField: text('honeypot_field').default('_gotcha').notNull(),
   },
   (t) => ({
     userIdx: index('form_user_idx').on(t.userId),
@@ -54,6 +55,7 @@ export const ZUpdateFormSchema = createInsertSchema(forms).pick({
   enableSubmissions: true,
   enableEmailNotifications: true,
   enableRetention: true,
+  honeypotField: true,
 });
 
 export type Form = InferSelectModel<typeof forms>;
