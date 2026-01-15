@@ -1,14 +1,14 @@
 'use client';
 
-import { type FormEvent, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+
+import type { FormEvent } from 'react';
 
 import { IconBrandGithub, IconBrandGoogleFilled } from '@tabler/icons-react';
 
 import { signUp } from '@formbase/auth/client';
-
-import { Logo } from '../_components/logo';
 import { Button } from '@formbase/ui/primitives/button';
 import { Input } from '@formbase/ui/primitives/input';
 import { Label } from '@formbase/ui/primitives/label';
@@ -17,6 +17,8 @@ import { Separator } from '@formbase/ui/primitives/separator';
 import { LoadingButton } from '~/components/loading-button';
 import { PasswordInput } from '~/components/password-input';
 import { useSocialAuth } from '~/lib/hooks/use-social-auth';
+
+import { Logo } from '../_components/logo';
 
 export function Signup() {
   const router = useRouter();
@@ -50,7 +52,7 @@ export function Signup() {
       });
 
       if (error) {
-        setFormError(error.message);
+        setFormError(error.message ?? 'An error occurred');
         return;
       }
 
@@ -180,6 +182,7 @@ export function Signup() {
           ) : null}
 
           <LoadingButton
+            type="submit"
             className="mt-4 w-full py-2 font-medium"
             loading={isSubmitting}
           >

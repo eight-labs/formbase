@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
 
 import { getSession } from '@formbase/auth/server';
+import { env } from '@formbase/env';
 
 import { Logo } from '../_components/logo';
-
 import { VerifyEmail } from './verify-code';
 
 export const metadata = {
@@ -25,7 +25,7 @@ export default async function VerifyEmailPage({
     redirect('/login');
   }
 
-  if (session?.user.emailVerified) {
+  if (session?.user.emailVerified || env.SKIP_EMAIL_VERIFICATION) {
     redirect('/dashboard');
   }
 
@@ -50,7 +50,7 @@ export default async function VerifyEmailPage({
             <>Use the verification link from your email to continue.</>
           )}
         </p>
-        <VerifyEmail email={session?.user.email} />
+        <VerifyEmail email={session?.user.email ?? null} />
       </div>
     </div>
   );
