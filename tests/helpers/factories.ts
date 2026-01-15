@@ -1,6 +1,6 @@
 import { apiKeys, formDatas, forms } from '@formbase/db/schema';
 import { generateId } from '@formbase/utils/generate-id';
-import { generateApiKey, hashApiKey } from '@formbase/api/lib/api-key';
+import { generateApiKey } from '@formbase/api/lib/api-key';
 
 import { getTestDb } from './db';
 

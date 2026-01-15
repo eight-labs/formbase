@@ -7,7 +7,7 @@ import {
 } from './helpers/db';
 
 process.env['SKIP_ENV_VALIDATION'] = 'true';
-process.env['NODE_ENV'] = 'test';
+process.env.NODE_ENV = 'test';
 process.env['DATABASE_URL'] = 'file::memory:?cache=shared';
 process.env['BETTER_AUTH_SECRET'] =
   'test-secret-minimum-32-characters-long-for-testing';
