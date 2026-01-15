@@ -3,10 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import { FunctionSquare } from 'lucide-react';
-
 import { Sheet, SheetContent } from '@formbase/ui/primitives/sheet';
 
+import { Logo } from '../../(auth)/_components/logo';
 import { HamburgerMenu } from './mobile-hamburger';
 import { ThemeToggle } from './theme-toggle';
 
@@ -36,9 +35,9 @@ const MobileNavigationSheet = ({
         <Link
           href="/"
           onClick={handleMenuItemClick}
-          className="flex items-center font-medium"
+          className="flex items-center font-semibold"
         >
-          <FunctionSquare className="mr-2 h-5 w-5" /> Formbase
+          <Logo className="h-6 w-6" /> Formbase
         </Link>
 
         <div className="mt-8 flex w-full flex-col items-start gap-y-4">

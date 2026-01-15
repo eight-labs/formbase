@@ -16,13 +16,17 @@ test.describe('Authentication', () => {
       // Check form elements
       await expect(page.getByPlaceholder('email@example.com')).toBeVisible();
       await expect(page.getByPlaceholder('********')).toBeVisible();
-      await expect(page.getByRole('button', { name: 'Log In', exact: true })).toBeVisible();
+      await expect(
+        page.getByRole('button', { name: 'Log In', exact: true }),
+      ).toBeVisible();
     });
 
     test('shows error for invalid credentials', async ({ page }) => {
       await page.goto('/login');
 
-      await page.getByPlaceholder('email@example.com').fill('invalid@example.com');
+      await page
+        .getByPlaceholder('email@example.com')
+        .fill('invalid@example.com');
       await page.getByPlaceholder('********').fill('wrongpassword');
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
 
@@ -35,7 +39,9 @@ test.describe('Authentication', () => {
     test('successfully logs in with valid credentials', async ({ page }) => {
       await page.goto('/login');
 
-      await page.getByPlaceholder('email@example.com').fill(E2E_TEST_USER.email);
+      await page
+        .getByPlaceholder('email@example.com')
+        .fill(E2E_TEST_USER.email);
       await page.getByPlaceholder('********').fill(E2E_TEST_USER.password);
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
 
@@ -48,7 +54,9 @@ test.describe('Authentication', () => {
     }) => {
       // First, log in
       await page.goto('/login');
-      await page.getByPlaceholder('email@example.com').fill(E2E_TEST_USER.email);
+      await page
+        .getByPlaceholder('email@example.com')
+        .fill(E2E_TEST_USER.email);
       await page.getByPlaceholder('********').fill(E2E_TEST_USER.password);
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
       await page.waitForURL(/.*dashboard/, { timeout: 15000 });
@@ -65,7 +73,9 @@ test.describe('Authentication', () => {
     test('successfully logs out', async ({ page }) => {
       // First, log in
       await page.goto('/login');
-      await page.getByPlaceholder('email@example.com').fill(E2E_TEST_USER.email);
+      await page
+        .getByPlaceholder('email@example.com')
+        .fill(E2E_TEST_USER.email);
       await page.getByPlaceholder('********').fill(E2E_TEST_USER.password);
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
       await page.waitForURL(/.*dashboard/, { timeout: 15000 });
@@ -78,7 +88,7 @@ test.describe('Authentication', () => {
       await page.getByRole('button', { name: /sign\s*out/i }).click();
 
       // Confirm the sign out dialog
-      await page.getByRole('button', { name: 'Continue' }).click();
+      await page.getByRole('button', { name: 'Okay' }).click();
 
       // After logout, should be on home or login page (root URL ends with port/)
       await expect(page).toHaveURL(/:\d+\/?$|\/login/, { timeout: 10000 });
@@ -100,13 +110,17 @@ test.describe('Authentication', () => {
     test('allows authenticated user to access dashboard', async ({ page }) => {
       // Log in first
       await page.goto('/login');
-      await page.getByPlaceholder('email@example.com').fill(E2E_TEST_USER.email);
+      await page
+        .getByPlaceholder('email@example.com')
+        .fill(E2E_TEST_USER.email);
       await page.getByPlaceholder('********').fill(E2E_TEST_USER.password);
       await page.getByRole('button', { name: 'Log In', exact: true }).click();
       await page.waitForURL(/.*dashboard/, { timeout: 15000 });
 
       // Dashboard should show the main heading
-      await expect(page.getByRole('heading', { name: 'Form Endpoints' })).toBeVisible();
+      await expect(
+        page.getByRole('heading', { name: 'Form Endpoints' }),
+      ).toBeVisible();
     });
   });
 });

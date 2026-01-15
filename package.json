@@ -44,5 +44,8 @@
     "turbo": "^2.0.0",
     "typescript": "5.8.2"
   },
-  "packageManager": "bun@1.3.2"
+  "packageManager": "bun@1.3.2",
+  "dependencies": {
+    "disposable-email-domains": "^1.0.62"
+  }
 }

@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS forms (
   enable_submissions INTEGER DEFAULT 1 NOT NULL,
   enable_retention INTEGER DEFAULT 1 NOT NULL,
   default_submission_email TEXT,
+  honeypot_field TEXT DEFAULT '_gotcha' NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
@@ -67,6 +68,9 @@ CREATE TABLE IF NOT EXISTS form_datas (
   form_id TEXT NOT NULL,
   data TEXT NOT NULL,
   created_at INTEGER DEFAULT (cast(unixepoch('subsec') * 1000 as integer)) NOT NULL,
+  is_spam INTEGER DEFAULT 0 NOT NULL,
+  spam_reason TEXT,
+  manual_override INTEGER DEFAULT 0 NOT NULL,
   FOREIGN KEY (form_id) REFERENCES forms(id) ON DELETE CASCADE
 );
 

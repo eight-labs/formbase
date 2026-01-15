@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 
 import { getSession } from '@formbase/auth/server';
+import { env } from '@formbase/env';
 
 import { Header } from './_components/header';
 
@@ -13,7 +14,7 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
     redirect('/login');
   }
 
-  if (!user.emailVerified) {
+  if (!user.emailVerified && !env.SKIP_EMAIL_VERIFICATION) {
     redirect('/verify-email');
   }
 

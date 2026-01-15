@@ -1,9 +1,8 @@
 import Link from 'next/link';
 
-import { FunctionSquare } from 'lucide-react';
-
 import { type User } from '@formbase/auth';
 
+import { Logo } from '../../(auth)/_components/logo';
 import { UserDropdown } from './user-dropdown';
 
 const routes = [{ name: 'Dashboard', href: '/dashboard' }] as const;
@@ -13,10 +12,10 @@ export const Header = ({ user }: { user: User }) => {
     <header className="top-0 border-b py-2">
       <div className="container flex items-center gap-2 px-2 py-2 lg:px-4">
         <Link
-          className="text flex items-center justify-center font-medium"
+          className="text flex items-center justify-center font-semibold"
           href={user.id ? '/dashboard' : '/'}
         >
-          <FunctionSquare className="mr-2 h-5 w-5" /> Formbase
+          <Logo className="h-6 w-6" /> Formbase
         </Link>
 
         <nav className="ml-8 hidden gap-4 sm:gap-6 md:flex">

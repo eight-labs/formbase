@@ -118,6 +118,8 @@ export const formDataRouter = createTRPCRouter({
         formId: z.string(),
         data: z.unknown(),
         keys: z.array(z.string()),
+        isSpam: z.boolean().optional().default(false),
+        spamReason: z.string().nullable().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -127,6 +129,8 @@ export const formDataRouter = createTRPCRouter({
           formId: input.formId,
           id: generateId(15),
           createdAt: new Date(),
+          isSpam: input.isSpam,
+          spamReason: input.spamReason ?? null,
         });
 
         await tx
@@ -139,5 +143,23 @@ export const formDataRouter = createTRPCRouter({
 
         return formdata;
       });
+    }),
+
+  markAsSpam: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        isSpam: z.boolean(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      await assertFormDataOwnership(ctx, input.id);
+      await ctx.db
+        .update(formDatas)
+        .set({
+          isSpam: input.isSpam,
+          manualOverride: true,
+        })
+        .where(eq(formDatas.id, input.id));
     }),
 });

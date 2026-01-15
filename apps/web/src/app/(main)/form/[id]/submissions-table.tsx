@@ -20,10 +20,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { Trash2, TrashIcon } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Trash2, TrashIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { type FormData } from '@formbase/db/schema';
+import { Badge } from '@formbase/ui/primitives/badge';
 import { Button } from '@formbase/ui/primitives/button';
 import { Checkbox } from '@formbase/ui/primitives/checkbox';
 import {
@@ -69,6 +70,8 @@ export function SubmissionsTable({
   const { mutateAsync: deleteFormSubmission } =
     api.formData.delete.useMutation();
 
+  const { mutateAsync: markAsSpam } = api.formData.markAsSpam.useMutation();
+
   const handleFormSubmissionDelete = async ({
     submissionId,
   }: {
@@ -85,6 +88,36 @@ export function SubmissionsTable({
           toast.success('Submission has been deleted', {
             icon: <TrashIcon className="h-4 w-4" />,
           });
+        },
+      },
+    );
+  };
+
+  const handleToggleSpam = async ({
+    submissionId,
+    isSpam,
+  }: {
+    submissionId: string;
+    isSpam: boolean;
+  }) => {
+    await markAsSpam(
+      {
+        id: submissionId,
+        isSpam,
+      },
+      {
+        onSuccess: () => {
+          router.refresh();
+          toast.success(
+            isSpam ? 'Marked as spam' : 'Marked as not spam',
+            {
+              icon: isSpam ? (
+                <AlertTriangle className="h-4 w-4" />
+              ) : (
+                <CheckCircle className="h-4 w-4" />
+              ),
+            },
+          );
         },
       },
     );
@@ -228,11 +261,37 @@ export function SubmissionsTable({
     },
 
     {
+      accessorKey: 'isSpam',
+      header: () => {
+        return (
+          <Button
+            variant="ghost"
+            className="px-0 py-0 hover:bg-transparent"
+          >
+            Status
+          </Button>
+        );
+      },
+      cell: ({ row }: { row: Row<FormData> }) => {
+        const isSpam = row.original.isSpam;
+        if (!isSpam) {
+          return null;
+        }
+        return (
+          <Badge variant="destructive" className="text-xs">
+            Spam
+          </Badge>
+        );
+      },
+    },
+
+    {
       id: 'actions',
       enableHiding: false,
       size: 20,
       cell: ({ row }: { row: Row<FormData> }) => {
         const submissionId = row.original.id;
+        const isSpam = row.original.isSpam;
 
         if (!submissionId) {
           return null;
@@ -247,6 +306,25 @@ export function SubmissionsTable({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-4 p-0">
+              <DropdownMenuItem
+                onClick={() =>
+                  handleToggleSpam({ submissionId, isSpam: !isSpam })
+                }
+              >
+                <span className="flex items-center gap-2 p-1 py-0.5">
+                  {isSpam ? (
+                    <>
+                      <CheckCircle className="size-4" />
+                      Mark as not spam
+                    </>
+                  ) : (
+                    <>
+                      <AlertTriangle className="size-4" />
+                      Mark as spam
+                    </>
+                  )}
+                </span>
+              </DropdownMenuItem>
               <DropdownMenuItem
                 className="focus:bg-destructive/5 focus:text-destructive-foreground"
                 onClick={() => handleFormSubmissionDelete({ submissionId })}
