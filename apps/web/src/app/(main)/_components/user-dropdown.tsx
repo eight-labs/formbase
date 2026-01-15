@@ -24,7 +24,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@formbase/ui/primitives/alert-dialog';
 import { Button } from '@formbase/ui/primitives/button';
 import {
@@ -49,6 +48,7 @@ export const UserDropdown = ({ className }: { className?: string }) => {
   const user = session?.user;
   const { setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [signoutDialogOpen, setSignoutDialogOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -59,105 +59,129 @@ export const UserDropdown = ({ className }: { className?: string }) => {
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className={`h-auto p-0 hover:bg-transparent ${className ?? ''}`}
-        >
-          <UserAvatar src={user.image ?? null} seed={user.email ?? user.id} />
-          <ChevronDownIcon
-            aria-hidden="true"
-            className="opacity-60"
-            size={16}
-          />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuGroup>
-          <DropdownMenuLabel className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-medium text-foreground">
-              {user.name ?? 'User'}
-            </span>
-            <span className="truncate text-xs font-normal text-muted-foreground">
-              {user.email}
-            </span>
-          </DropdownMenuLabel>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem className="cursor-pointer" asChild>
-            <Link href="/dashboard">
-              <LayoutDashboardIcon
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            className={`h-auto p-0 hover:bg-transparent ${className ?? ''}`}
+          >
+            <UserAvatar src={user.image ?? null} seed={user.email ?? user.id} />
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="opacity-60"
+              size={16}
+            />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48">
+          <DropdownMenuGroup>
+            <DropdownMenuLabel className="flex min-w-0 flex-col">
+              <span className="truncate text-sm font-medium text-foreground">
+                {user.name ?? 'User'}
+              </span>
+              <span className="truncate text-xs font-normal text-muted-foreground">
+                {user.email}
+              </span>
+            </DropdownMenuLabel>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem className="cursor-pointer" asChild>
+              <Link href="/dashboard">
+                <LayoutDashboardIcon
+                  aria-hidden="true"
+                  className="opacity-60"
+                  size={16}
+                />
+                <span>Dashboard</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer" asChild>
+              <Link href="/dashboard/settings">
+                <SettingsIcon
+                  aria-hidden="true"
+                  className="opacity-60"
+                  size={16}
+                />
+                <span>Settings</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer" asChild>
+              <Link href="/onboarding">
+                <BookOpenIcon
+                  aria-hidden="true"
+                  className="opacity-60"
+                  size={16}
+                />
+                <span>Onboarding</span>
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger className="cursor-pointer">
+              <PaletteIcon
                 aria-hidden="true"
                 className="opacity-60"
                 size={16}
               />
-              <span>Dashboard</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer" asChild>
-            <Link href="/dashboard/settings">
-              <SettingsIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>Settings</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer" asChild>
-            <Link href="/onboarding">
-              <BookOpenIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>Onboarding</span>
-            </Link>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="cursor-pointer">
-            <PaletteIcon aria-hidden="true" className="opacity-60" size={16} />
-            <span>Theme</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem
-                onClick={() => {
-                  setTheme('light');
-                }}
-              >
-                Light
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setTheme('dark');
-                }}
-              >
-                Dark
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setTheme('system');
-                }}
-              >
-                System
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <SignoutConfirmation />
-      </DropdownMenuContent>
-    </DropdownMenu>
+              <span>Theme</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem
+                  onClick={() => {
+                    setTheme('light');
+                  }}
+                >
+                  Light
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    setTheme('dark');
+                  }}
+                >
+                  Dark
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    setTheme('system');
+                  }}
+                >
+                  System
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          <DropdownMenuSeparator />
+          <SignoutMenuItem onClick={() => setSignoutDialogOpen(true)} />
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <SignoutDialog
+        open={signoutDialogOpen}
+        onOpenChange={setSignoutDialogOpen}
+      />
+    </>
   );
 };
 
-const SignoutConfirmation = () => {
-  const [open, setOpen] = useState(false);
+const SignoutMenuItem = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <DropdownMenuItem className="cursor-pointer" onClick={onClick}>
+      <LogOutIcon aria-hidden="true" className="opacity-60" size={16} />
+      <span>Sign out</span>
+    </DropdownMenuItem>
+  );
+};
+
+const SignoutDialog = ({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignout = async () => {
@@ -178,22 +202,13 @@ const SignoutConfirmation = () => {
         });
       }
     } finally {
-      setOpen(false);
+      onOpenChange(false);
       setIsLoading(false);
     }
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onSelect={(e) => e.preventDefault()}
-        >
-          <LogOutIcon aria-hidden="true" className="opacity-60" size={16} />
-          <span>Sign out</span>
-        </DropdownMenuItem>
-      </AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent className="max-w-xs">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-center">

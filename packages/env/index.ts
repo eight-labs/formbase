@@ -39,6 +39,7 @@ export const env = createEnv({
     SMTP_PASS: z.string().trim().min(1).optional(),
 
     ALLOW_SIGNIN_SIGNUP: z.string().trim().min(1),
+    SKIP_EMAIL_VERIFICATION: booleanFromString.optional(),
 
     UMAMI_TRACKING_ID: z.string().optional(),
     STORAGE_ENDPOINT: z.string().trim().min(1).optional(),

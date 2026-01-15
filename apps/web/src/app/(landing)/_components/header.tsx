@@ -1,10 +1,9 @@
 import Link from 'next/link';
 
-import { FunctionSquare } from 'lucide-react';
-
 import { type User } from '@formbase/auth';
 import { env } from '@formbase/env';
 
+import { Logo } from '../../(auth)/_components/logo';
 import { MobileNavigation } from './mobile-navigation';
 
 const routes = [{ name: 'Docs', href: 'https://docs.formbase.dev' }] as const;
@@ -18,19 +17,19 @@ export const Header = ({ user }: LandingHeaderProps) => {
 
   return (
     <header>
-      <nav className="z-20 w-full overflow-hidden border-b border-(--ui-light-border-color) bg-white/80 backdrop-blur-sm dark:border-(--ui-dark-border-color) dark:bg-gray-950/75 dark:shadow-md dark:shadow-gray-950/10">
+      <nav className="z-20 w-full border-b border-(--ui-light-border-color) bg-white/80 backdrop-blur-sm dark:border-(--ui-dark-border-color) dark:bg-gray-950/75 dark:shadow-md dark:shadow-gray-950/10">
         <div className="m-auto max-w-5xl px-6 2xl:px-0">
           <div className="flex justify-between py-2 sm:py-4">
             <div className="flex w-full items-center justify-between lg:w-auto">
               <Link
-                className="text flex items-center justify-center gap-2 font-medium"
+                className="text flex items-center justify-center gap-2 font-semibold"
                 href={isLoggedIn ? '/dashboard' : '/'}
               >
-                <FunctionSquare className="mr-2 h-5 w-5" /> Formbase
+                <Logo className="h-6 w-6" /> Formbase
               </Link>
             </div>
             <div className="flex">
-              <div className="mdw-fit hidden h-0 w-full flex-wrap items-center justify-end space-y-8 md:flex md:h-fit md:flex-nowrap md:space-y-0">
+              <div className="hidden w-full flex-wrap items-center justify-end space-y-8 md:flex md:w-fit md:h-fit md:flex-nowrap md:space-y-0">
                 <div className="mt-6 text-gray-600 dark:text-gray-300 md:-ml-4 md:mt-0 lg:pr-4">
                   <ul className="space-y-6 text-base tracking-wide md:flex md:space-y-0 md:text-sm">
                     {routes.map(({ name, href }) => (

@@ -50,9 +50,10 @@ export const auth = betterAuth({
     },
   },
   emailVerification: {
-    sendOnSignUp: true,
+    sendOnSignUp: !env.SKIP_EMAIL_VERIFICATION,
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, token }) => {
+      if (env.SKIP_EMAIL_VERIFICATION) return;
       const verifyUrl = `${env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`;
       await sendVerificationEmail({
         email: user.email,
@@ -67,4 +68,4 @@ export const auth = betterAuth({
 });
 
 export type Session = typeof auth.$Infer.Session;
-export type User = typeof auth.$Infer.User;
+export type User = Session['user'];
