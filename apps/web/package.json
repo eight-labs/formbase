@@ -33,6 +33,7 @@
     "avvvatars-react": "^0.4.2",
     "better-auth": "^1.2.0",
     "date-fns": "^3.6.0",
+    "disposable-email-domains": "^1.0.62",
     "framer-motion": "^11.2.10",
     "lucide-react": "^0.379.0",
     "minio": "^8.0.0",

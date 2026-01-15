@@ -15,7 +15,7 @@ export const Header = ({ user }: { user: User }) => {
           className="text flex items-center justify-center font-semibold"
           href={user.id ? '/dashboard' : '/'}
         >
-          <Logo className="h-6 w-6" /> Formbase
+          <Logo className="mr-1.5 h-6 w-6" /> Formbase
         </Link>
 
         <nav className="ml-8 hidden gap-4 sm:gap-6 md:flex">

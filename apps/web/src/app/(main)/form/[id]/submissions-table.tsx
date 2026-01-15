@@ -305,34 +305,30 @@ export function SubmissionsTable({
                 <DotsHorizontalIcon className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="min-w-4 p-0">
+            <DropdownMenuContent align="end" className="w-auto">
               <DropdownMenuItem
                 onClick={() =>
                   handleToggleSpam({ submissionId, isSpam: !isSpam })
                 }
               >
-                <span className="flex items-center gap-2 p-1 py-0.5">
-                  {isSpam ? (
-                    <>
-                      <CheckCircle className="size-4" />
-                      Mark as not spam
-                    </>
-                  ) : (
-                    <>
-                      <AlertTriangle className="size-4" />
-                      Mark as spam
-                    </>
-                  )}
-                </span>
+                {isSpam ? (
+                  <>
+                    <CheckCircle className="h-4 w-4" />
+                    Mark as not spam
+                  </>
+                ) : (
+                  <>
+                    <AlertTriangle className="h-4 w-4" />
+                    Mark as spam
+                  </>
+                )}
               </DropdownMenuItem>
               <DropdownMenuItem
-                className="focus:bg-destructive/5 focus:text-destructive-foreground"
                 onClick={() => handleFormSubmissionDelete({ submissionId })}
+                className="text-destructive focus:text-destructive"
               >
-                <span className="flex items-center gap-2 p-1 py-0.5 text-destructive">
-                  <Trash2 className="size-4 " />
-                  Delete
-                </span>
+                <Trash2 className="h-4 w-4" />
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -425,6 +421,7 @@ export function SubmissionsTable({
           <Button
             variant="outline"
             size="sm"
+            className="rounded-md"
             onClick={() => {
               table.previousPage();
             }}
@@ -435,6 +432,7 @@ export function SubmissionsTable({
           <Button
             variant="outline"
             size="sm"
+            className="rounded-md"
             onClick={() => {
               table.nextPage();
             }}

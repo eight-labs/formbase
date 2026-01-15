@@ -139,9 +139,6 @@ const HomePage = () => {
               </div>
               <div className="relative col-span-full overflow-hidden rounded-(--card-border-radius) border border-(--ui-light-border-color) bg-white p-(--card-padding) dark:border-(--ui-dark-border-color) dark:bg-(--card-dark-bg) sm:col-span-3 lg:col-span-2">
                 <div>
-                  <div className="absolute right-3 top-3 mx-auto mb-2 w-fit cursor-pointer rounded-(--annonce-border-radius) border border-(--ui-light-border-color) px-3 py-px text-sm font-medium text-gray-700 transition duration-200 hover:border-(--ui-light-border-hover-color) dark:border-(--ui-dark-border-color) dark:text-gray-300 dark:hover:border-(--ui-dark-border-hover-color)">
-                    Soon
-                  </div>
                   <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
                     <svg
                       className="m-auto  w-20"

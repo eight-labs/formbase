@@ -107,7 +107,7 @@ export function ExportSubmissionsDropDownButton({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
-          <ArrowDownToLine className="mr-2 h-4 w-4" />
+          <ArrowDownToLine className="h-4 w-4" />
           Export
         </Button>
       </DropdownMenuTrigger>
