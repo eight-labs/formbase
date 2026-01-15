@@ -28,12 +28,13 @@ export const submissionsRouter = createApiV1Router({
         path: '/forms/{formId}/submissions',
         tags: ['Submissions'],
         summary: 'List submissions for a form',
-        description: 'Returns a paginated list of submissions with optional date filtering.',
+        description: 'Returns a paginated list of submissions with optional date and spam filtering.',
       },
     })
     .input(
       paginationInputSchema.merge(dateRangeInputSchema).extend({
         formId: z.string(),
+        spam: z.enum(['true', 'false']).optional(),
       }),
     )
     .output(
@@ -56,6 +57,9 @@ export const submissionsRouter = createApiV1Router({
         const endDate = new Date(input.endDate);
         endDate.setHours(23, 59, 59, 999);
         whereConditions.push(lte(formDatas.createdAt, endDate));
+      }
+      if (input.spam !== undefined) {
+        whereConditions.push(eq(formDatas.isSpam, input.spam === 'true'));
       }
 
       const whereClause = and(...whereConditions);
@@ -81,6 +85,9 @@ export const submissionsRouter = createApiV1Router({
           formId: submission.formId,
           data: parseJsonObject(submission.data) ?? {},
           createdAt: submission.createdAt.toISOString(),
+          isSpam: submission.isSpam,
+          spamReason: submission.spamReason,
+          manualOverride: submission.manualOverride,
         })),
         pagination: {
           page: input.page,
@@ -119,6 +126,9 @@ export const submissionsRouter = createApiV1Router({
         formId: submission.formId,
         data: parseJsonObject(submission.data) ?? {},
         createdAt: submission.createdAt.toISOString(),
+        isSpam: submission.isSpam,
+        spamReason: submission.spamReason,
+        manualOverride: submission.manualOverride,
       };
     }),
 

@@ -3,6 +3,7 @@ import { userAgent } from "next/server";
 
 import { sendMail } from "~/lib/email/mailer";
 import { renderNewSubmissionEmail } from "~/lib/email/templates/new-submission";
+import { checkForSpam, stripHoneypotField } from "~/lib/spam-detection";
 import { api } from "~/lib/trpc/server";
 import { assignFileOrImage, uploadFileFromBlob } from "~/lib/upload-file";
 import { type RouterOutputs } from "@formbase/api";
@@ -120,17 +121,25 @@ export async function POST(
       await processFileUploads(formData, formDataResult.rawFormData);
     }
 
-    const formDataKeys = Object.keys(formData);
+    const honeypotField = form.honeypotField;
+    const spamResult = checkForSpam(formData as Record<string, unknown>, honeypotField);
+    const cleanedFormData = stripHoneypotField(formData as Record<string, unknown>, honeypotField);
+
+    const formDataKeys = Object.keys(cleanedFormData);
     const formKeys = form.keys;
     const updatedKeys = [...new Set([...formKeys, ...formDataKeys])];
 
     await api.formData.setFormData({
-      data: formData as Json,
+      data: cleanedFormData as Json,
       formId,
       keys: updatedKeys,
+      isSpam: spamResult.isSpam,
+      spamReason: spamResult.spamReason,
     });
 
-    void handleEmailNotifications(form, formData as Record<string, unknown>);
+    if (!spamResult.isSpam) {
+      void handleEmailNotifications(form, cleanedFormData);
+    }
     const { browser } = userAgent(request);
 
     if (!browser.name) {

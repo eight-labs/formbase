@@ -16,6 +16,11 @@ export const formDatas = sqliteTable(
     createdAt: integer('created_at', { mode: 'timestamp_ms' })
       .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
       .notNull(),
+    isSpam: integer('is_spam', { mode: 'boolean' }).default(false).notNull(),
+    spamReason: text('spam_reason'),
+    manualOverride: integer('manual_override', { mode: 'boolean' })
+      .default(false)
+      .notNull(),
   },
   (t) => ({
     formIdx: index('form_idx').on(t.formId),

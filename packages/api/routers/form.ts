@@ -126,6 +126,7 @@ export const formRouter = createTRPCRouter({
         enableEmailNotifications: z.boolean().optional(),
         returnUrl: z.string().optional(),
         defaultSubmissionEmail: z.string().optional(),
+        honeypotField: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -143,6 +144,7 @@ export const formRouter = createTRPCRouter({
           returnUrl: input.returnUrl ?? form.returnUrl,
           defaultSubmissionEmail:
             input.defaultSubmissionEmail ?? form.defaultSubmissionEmail,
+          honeypotField: input.honeypotField ?? form.honeypotField,
         })
         .where(eq(forms.id, input.id));
     }),
@@ -179,6 +181,7 @@ export const formRouter = createTRPCRouter({
         enableEmailNotifications: existingForm.enableEmailNotifications,
         enableSubmissions: existingForm.enableSubmissions,
         defaultSubmissionEmail: existingForm.defaultSubmissionEmail,
+        honeypotField: existingForm.honeypotField,
       });
 
       return { id: newId };

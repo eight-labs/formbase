@@ -28,6 +28,9 @@ export const submissionSchema = z.object({
   formId: z.string(),
   data: z.record(z.unknown()),
   createdAt: z.string(),
+  isSpam: z.boolean(),
+  spamReason: z.string().nullable(),
+  manualOverride: z.boolean(),
 });
 
 export const createFormInputSchema = z.object({

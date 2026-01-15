@@ -56,6 +56,7 @@ export default async function FormPage({
                   submissions={formSubmissions as FormData[]}
                   formKeys={form?.keys ?? []}
                   formTitle={form?.title ?? ''}
+                  honeypotField={form?.honeypotField ?? '_gotcha'}
                 />
               </div>
               <SubmissionsTable
